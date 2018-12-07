@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "htmltowxml": "plugin://htmltowxml/view",
+        "nodata": "/components/nodata/nodata"
+    }
+}

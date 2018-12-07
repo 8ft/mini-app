@@ -1,0 +1,33 @@
+<view class="title">{{detail.articleTitle}}</view>
+
+<view class="author">
+    <image src="{{detail.userAvatar}}"></image> 
+    <view class="info">
+        <text class="name">{{detail.nickName}}</text>
+        <view class="other"><text>{{detail.articleSourceTypeName}}</text>{{detail.createTime+' · 阅读'+detail.viewNum}}</view>
+    </view>
+    <button hover-class="none">+关注</button>
+</view>
+
+<view class="html">
+    <htmltowxml text="{{detail.content}}"></htmltowxml>
+    <view class="tags">
+        <view wx:for="{{detail.articleTags}}">{{item}}</view>
+    </view>
+</view>
+
+<view class="comments">
+    <view class="title">评论</view>
+    <block wx:if="{{comments.length>0}}">
+        <view class="comment" wx:for="{{comments}}">
+            <image src="{{item.userAvatar}}"></image>
+            <view class="name">{{item.createUserName}}</view>
+            <text class="con">{{item.content}}</text>
+            <view class="other">{{item.createTime}}
+                <view>{{item.replies.length}}条回复</view>
+                <text>回复</text>
+            </view>
+        </view>
+    </block>
+    <nodata wx:else name='projects'></nodata>
+</view>
