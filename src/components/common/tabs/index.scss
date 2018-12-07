@@ -1,0 +1,10 @@
+@import '../../../assets/scss/var.scss'; 
+
+.yt-tabs{position:relative;display:flex;align-items:center;border-bottom:$border;height:100rpx;padding:10rpx;line-height:80rpx;background:#fff;box-sizing:border-box;font-size:$xxl;color:$lightBlack;
+    &.fixed{position:fixed;top:0;left:0;right:0;z-index:$topFloor;}}
+
+.yt-tab{padding:0 53rpx;text-align:center;
+    text{display:inline-block;height:100%;font-weight:400;
+        &.active{color:$darkBlue;font-weight:bold;}}}
+
+.yt-tab-underline{position:absolute;left:0;bottom:0rpx;border-bottom:6rpx solid #0083ff;}

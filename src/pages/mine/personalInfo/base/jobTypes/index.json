@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "职位类型",
+  "usingComponents": {
+    "list-item": "/components/common/listItem/index"
+  }
+}

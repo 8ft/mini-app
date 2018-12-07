@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "所在城市",
+  "usingComponents": {
+    "list-item": "/components/common/listItem/index"
+  }
+}

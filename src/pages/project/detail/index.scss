@@ -1,0 +1,64 @@
+@import '../../../assets/scss/var.scss';  
+
+.part{padding:0 40rpx 37rpx;position:relative;background:#fff;margin-bottom:$s;}
+
+.name,.price{display:block;font-size:40rpx;font-weight:500;}
+.name{color:$black;padding:34rpx 0 0;line-height:60rpx;}
+.part view[class^='status']{display:inline-block;line-height:$xl;padding:0 10rpx;text-align:center;font-size:$s;color:#fff;border-radius:99rpx;margin-left:10rpx;vertical-align:middle;}
+
+.status1,.status10,.status14{background:$blue;}
+.status2,.status5,.status6,.status7{background:$green;}
+.status3,.status9,.status13{background:#fc7561;}  
+.status4{background:#ffb54c;}
+.status8{background:$lightGreen;}
+.status11,.status12{background:#ccc;}
+
+.price{color:#fc5b32;line-height:38rpx;padding:18rpx 0 $l;}
+
+.others{display:flex;padding-bottom:37rpx;line-height:26rpx;}
+.lead-times{display:block;font-size:$l;color:#666;}
+.hot{flex:1;text-align:right;font-size:$m;color:$gray;}
+
+.applied{margin-right:20rpx;padding-right:20rpx;display:inline-block;line-height:17rpx;border-right:1px solid rgba(204,204,204,1);}
+
+.applyUsers{margin-top:20rpx;display:flex;align-items:center;font-size:$xl;color:#333;height:110rpx;
+    view{flex:1;text-align:right;}
+    image{width:60rpx;height:60rpx;margin-right:20rpx;border-radius:50%;}}
+
+.apply-info{.offer{margin-top:15rpx;color:$black;font-size:24rp;margin-bottom:20rpx;}
+    text{color:$gray;font-size:$l;line-height:48rpx;}}
+
+.final-price{font-size:$xl;color:$lightBlack;font-weight:500;margin:25rpx 0 26rpx;
+    text{color:#fc5b32;}
+    &.paid::after{content:'资金担保';display:inline-block;margin-left:9rpx;width:100rpx;height:30rpx;line-height:30rpx;background:rgba(2,177,142,.1);color:#02b18e;font-size:20rpx;text-align:center;border-radius:15rpx;vertical-align:middle;}}
+
+.cooperation-info{height:110rpx;display:flex;align-items:center;
+    .avatar{width:80rpx;height:80rpx;border-radius:50%;margin-right:12rpx;}
+    .name{font-size:$l;color:$black;line-height:$l;margin-bottom:10rpx;padding:0;}
+    .icon{width:84rpx;height:33rpx;}
+    .right{flex:1;text-align:right;line-height:110rpx;}
+    .icon-phone{width:20rpx;height:$s;margin-right:6rpx;display:inline-block;}}
+
+
+.title{line-height:78rpx;color:$black;border-bottom:$border;margin-bottom:30rpx;}
+
+.base{view{display:flex;align-items:center;}
+    view:not(.title){font-size:$l;color:$gray;margin-top:26rpx;}
+    .iconfont{margin-right:$s;}}
+
+.desc{text{color:$lightBlack;}
+    .iconfont{margin-right:10rpx;}
+    view:not(.title){color:$black;font-size:$l;margin-top:37rpx;}}
+.desc-img{display:block;width:100%;margin-top:20rpx;}
+
+button[class^='btn-']{box-sizing:border-box;height:96rpx;background:$darkBlue;border:1px solid $darkBlue;border-radius:4rpx;color:#fff;font-size:$xl;line-height:96rpx;text-align:center;
+    &.white{color:$darkBlue;background:#fff;}
+    .iconfont{font-size:34rpx;margin-right:10rpx;}
+    .pay{line-height:$xl;border-left:1px solid #f8f8f8;margin-left:48rpx;padding-left:48rpx;}}
+
+.btn-one{width:630rpx;}
+.btn-two-third{width:436rpx;}
+.btn-half{width:333rpx;margin-right:$s;}
+.btn-one-third{width:217rpx;margin-right:$l;}
+
+

@@ -1,0 +1,10 @@
+<!--pages/user/wxLogin/index.wxml-->
+<image class='bg' src='/assets/img/login-bg.png'></image>
+<view class='con'>
+  <view class='title'>欢迎登录</view>
+  <view class='sub-title'>免费发布项目在线自由接单</view>
+  <button class='auth' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" withCredentials="true">登录</button>
+  <view class='intro'>海量行业专家和企业都在用的按需雇佣APP</view>
+</view>
+
+

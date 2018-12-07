@@ -1,0 +1,6 @@
+<!--pages/mine/personalInfo/success/index.wxml-->
+<image class='icon' src="/assets/img/icon/success.png"></image>
+
+<text class='txt'>感谢加入巨牛汇，我们会在24小时内\n反馈审核结果</text>
+
+<button class='btn' bindtap='back'>查看个人主页</button>

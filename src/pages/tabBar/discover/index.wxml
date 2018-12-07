@@ -1,0 +1,23 @@
+<view class="switch">
+    <view class="active">博客</view>
+    <view>人才库</view>
+</view>
+
+<swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
+    <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>
+        <image src="{{banner.coverImage}}"></image>
+    </swiper-item>
+</swiper>
+
+<scroll-view class='types' scroll-x="true">
+    <navigator wx:for="{{types}}" url="/pages/discover/list/index?type={{item.id}}" hover-class="none">
+        <image src="{{item.icon}}"></image>
+        <text>{{item.name}}</text>
+    </navigator>
+</scroll-view>
+
+<view class="blogs">
+    <blog-card wx:for="{{blogs}}" data="{{item}}"></blog-card>
+</view>
+
+

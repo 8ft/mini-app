@@ -1,0 +1,20 @@
+@import '../../../assets/scss/var.scss'; 
+
+.applicant{position:relative;background:#fff;padding:58rpx 0 0 136rpx;
+    .avatar{position:absolute;top:58rpx;left:30rpx;width:84rpx;height:84rpx;border-radius:50%;}
+    .info{padding-bottom:58rpx;position:relative;padding-right:30rpx;}
+    
+    .name{display:flex;align-items:center;font-size:$xxl;line-height:$xxl;color:$black;
+        text{display:inline-block;max-width:36%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        image{margin-left:15rpx;width:82rpx;height:33rpx;display:inline-block;}}
+
+    .msg{display:block;font-size:$l;color:$gray;line-height:48rpx;margin:38rpx 0;}
+    .exp{font-size:$m;color:$gray;line-height:52rpx;}
+    .budget{color:#fc5b32;font-size:$l;line-height:$xxl;position:absolute;right:30rpx;top:0;}
+    .btn{position:absolute;bottom:58rpx;right:30rpx;width:140rpx;height:50rpx;line-height:50rpx;color:#fff;background:$darkBlue;border:1rpx solid $darkBlue;font-size:$m;}
+    .connect{color:$darkBlue;background:#fff;right:191rpx;}}
+
+
+
+
+

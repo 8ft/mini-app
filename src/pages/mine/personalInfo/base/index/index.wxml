@@ -1,0 +1,88 @@
+<!--pages/mine/personalInfo/base/index.wxml-->
+<view class='part'>
+  <view class='info need'>
+    <text class='name'>入驻类型</text>
+    <view class='input arrow-right'>
+      <picker bindchange="select" value="{{joinIndex}}" range="{{dicts[1].dictList}}" range-key="dictName" data-type="join">
+          {{userBaseInfo.settleTypeCn||dicts[1].dictList[0].dictName}}
+      </picker>
+    </view>
+  </view>
+
+  <view class='info need'>
+    <text class='name'>昵称</text>
+    <view class='input'>
+      <input placeholder='10字以内' maxlength='10' data-type="nickName" value="{{userBaseInfo.nickName}}" bindinput='input'></input>
+    </view>
+  </view>
+
+  <view class='info need'>
+    <text class='name'>性别</text>
+    <view class='input arrow-right'>
+    <picker bindchange="select" value="{{sexIndex}}" range="{{dicts[0].dictList}}" range-key="dictName" data-type="sex">
+          {{userBaseInfo.sexCn||dicts[0].dictList[sexIndex].dictName}}
+      </picker>
+    </view>
+  </view>
+
+  <view class='info need'>
+    <text class='name'>所在城市</text>
+    <navigator class='input arrow-right' url="/pages/mine/personalInfo/base/city/index" hover-class='none'>{{userBaseInfo.cityCn}}</navigator>
+  </view>
+</view>
+
+<view class='sep'>微信号、QQ、邮箱至少填写一个</view>
+<view class='part' style='margin-bottom:20rpx;'>
+  <view class='info'>
+    <text class='name'>微信</text>
+    <view class='input'>
+      <input placeholder='请输入微信号' maxlength='20' data-type="wechat" value="{{userBaseInfo.wechat}}" bindinput='input'></input>
+    </view>
+  </view>
+  <view class='info'>
+    <text class='name'>QQ</text>
+    <view class='input'>
+      <input type='number' placeholder='请输入QQ号' maxlength='20' data-type="qq" value="{{userBaseInfo.qq}}" bindinput='input'></input>
+    </view>
+  </view>
+  <view class='info'>
+    <text class='name'>邮箱</text>
+    <view class='input'>
+      <input type="email" placeholder='请输入邮箱地址' maxlength='32' data-type="email" value="{{userBaseInfo.email}}" bindinput='input'></input>
+    </view>
+  </view>
+</view>
+
+<view class='part'>
+  <view class='info need'>
+    <text class='name'>职位头衔</text>
+    <view class='input'>
+      <input placeholder='例如：高级Java开发' data-type="positionTitle" value="{{userBaseInfo.positionTitle}}" bindinput='input'></input>
+    </view>
+  </view>
+
+  <view class='info need'>
+    <text class='name'>职位类型</text>
+    <navigator class='input arrow-right' url="/pages/mine/personalInfo/base/jobTypes/index" hover-class='none'>{{userBaseInfo.positionTypeCn}}</navigator>
+  </view>
+
+  <view class='info need'>
+    <text class='name'>工作经验</text>
+    <view class='input arrow-right'>
+      <picker bindchange="select" value="{{expIndex}}" range="{{dicts[3].dictList}}" range-key="dictName" data-type="exp">
+          {{userBaseInfo.workExperienceCn||dicts[3].dictList[expIndex].dictName}}
+      </picker>
+    </view>
+  </view>
+
+  <view class='info need'>
+    <text class='name'>日薪（8小时）</text>
+    <view class='input'>
+      <input type='number' maxlength='4' placeholder='输入金额' data-type="daySalary" value="{{userBaseInfo.daySalary}}" bindinput='input'></input>
+    </view>
+  </view>
+</view>
+
+<cover-view class='action-bar'>
+  <button bindtap='publish' bindtap='save'>保存</button>
+</cover-view>

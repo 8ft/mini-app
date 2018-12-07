@@ -1,0 +1,81 @@
+<!--pages/project/mine/index.wxml-->
+
+<block wx:if="{{props.stores.account.logged_in}}">
+
+  <view class='big-title'>我的工作</view>
+  <tabs tabs="{{['我的项目','申请项目']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+
+  <scroll-view class='types' scroll-x="true">
+    <!--我的项目-->
+    <block wx:if="{{typeIndex===0}}">
+      <view class="type {{myPublish.currentState===index?'active':''}}" wx:for="{{myPublish.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
+    </block>
+
+    <!--申请项目-->
+    <block wx:else>
+      <view class="type {{myApply.currentState===index?'active':''}}" wx:for="{{myApply.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
+    </block>
+  </scroll-view>
+
+
+  <view id="projects" style="height:{{scrollViewHeight}}px">
+    <!--我的项目-->
+      <scroll-view wx:if="{{typeIndex===0&&myPublish.projects.length>0}}"
+        class='projects' 
+        style="height:{{scrollViewHeight}}px" 
+        scroll-y="true" 
+        upper-threshold="-80" 
+        enable-back-to-top="true"
+        bindscrolltoupper='refresh' 
+        bindscrolltolower="getMyPublish"> 
+        <navigator class='project border-b' wx:for="{{myPublish.projects}}" hover-class="none" url="/pages/project/detail/index?no={{item.projectNo}}">
+          <view class='icon {{iconName[item.projectType]}}'>
+            <view class="iconfont icon-{{iconName[item.projectType]}}"></view>
+          </view>
+          <view class='name'>{{item.projectName}}</view>
+          <view class='base-info'>
+            <text>{{item.projectCycle}}完成</text>
+            <text class='publish-time'>{{item.createTime}}发布</text>
+          </view>
+          <text class='price'>{{(item.comfirmPrice&&item.projectInfoState!=2)?item.comfirmPrice+'元':item.projectBudget}}</text>
+          <view class="status{{item.projectState}}">{{item.projectStateCn}}</view>
+        </navigator>
+      </scroll-view>
+
+    <!--申请项目-->
+      <scroll-view wx:elif="{{typeIndex===1&&myApply.projects.length>0}}"
+        class='projects'
+        style="height:{{scrollViewHeight}}px" 
+        scroll-y="true" 
+        scroll-top='0' 
+        upper-threshold="-80" 
+        enable-back-to-top="true"
+        bindscrolltoupper='refresh' 
+        bindscrolltolower="getMyApply"> 
+        <navigator class='project border-b' wx:for="{{myApply.projects}}" hover-class="none" url="/pages/project/detail/index?no={{item.projectNo}}">
+          <view class='icon {{iconName[item.projectType]}}'>
+            <view class="iconfont icon-{{iconName[item.projectType]}}"></view>
+          </view>
+          <view class='name'>{{item.projectName}}</view>
+          <view class='base-info'>
+            <text>{{item.projectCycle}}完成</text>
+            <text class='publish-time'>已申请：{{item.applyNum}}人</text>
+          </view>
+          <text class='price'>{{item.projectBudget}}</text>
+          <view class="status{{item.projectState}}">{{item.projectStateCn}}</view>
+        </navigator>
+      </scroll-view>
+
+      <block wx:elif="{{!loading}}">
+        <nodata name="{{typeIndex===0?'myPublish':'myApply'}}"></nodata>
+      </block>
+
+  </view>
+</block>
+
+<block wx:else>
+  <nodata name='myProjects'></nodata>
+</block>
+
+
+

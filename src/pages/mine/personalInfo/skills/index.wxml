@@ -1,0 +1,26 @@
+<!--pages/mine/personalInfo/skills/index.wxml-->
+<view class='part diy'>
+  <view class='title'>自定义技能</view>
+  <view class='add'>
+    <input placeholder='请输入你擅长的技能' bindinput='input' maxlength='16' value="{{newSkill}}"></input>
+    <button bindtap='add'>添加</button>
+  </view>
+
+  <view class='my-skill' wx:for="{{addedSkills}}">
+    {{item.skillName}}
+    <button data-index="{{index}}" bindtap='del'>X</button>
+  </view>
+
+</view>
+
+<view class='part hot'>
+  <view class='title'>热门技能</view>
+  <block wx:for="{{skills}}">
+    <view class='sub-title'>{{item.dictName}}</view>
+    <view class="skill {{skill.active?'active':''}}" data-type="{{index}}" data-index="{{skillIndex}}" data-skill="{{skill}}" bindtap='select' wx:for="{{item.dictList}}" wx:for-item="skill" wx:for-index="skillIndex">{{skill.dictName}}</view>
+  </block>
+</view>
+
+<view class='action-bar'>
+  <button bindtap='publish' bindtap='save'>保存</button>
+</view>

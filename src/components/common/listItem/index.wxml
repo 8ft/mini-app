@@ -1,0 +1,8 @@
+<!--components/common/listItem/index.wxml-->
+<view class="list-item {{active?'active':''}}">
+  <text class='name'>{{name}}</text>
+  <view class='addones'>
+    <slot></slot>
+    <view class="iconfont icon-dagou" wx:if="{{active}}"></view>
+  </view>
+</view>

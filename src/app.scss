@@ -1,0 +1,27 @@
+@import 'assets/iconfont/icons.wxss';
+@import 'assets/scss/var.scss';
+
+page{font-size:30rpx;font-weight:400;color:$lightBlack;background:#f2f2f2;}
+
+image{height:auto;}
+input{outline:none;border:none;list-style:none;}
+text{word-break:break-all;white-space:pre-wrap;}
+button{-webkit-appearance:none;background:#fff;padding:0;margin:0;border-radius:0;}
+button::after{border:none;}
+
+.input-placeholder,.textarea-placeholder{color:$lightGray;}
+.clearfix{overflow:hidden;zoom:1;}
+
+.arrow-right{position:relative;padding-right:27rpx;}
+.arrow-right::before,.arrow-right::after{position:absolute;content:'';width:0;height:0;top:50%;margin-top:-12rpx;border:12rpx solid transparent;}
+.arrow-right::before{right:0;border-right:0;border-left-color:$lightBlack;}
+.arrow-right::after{right:3rpx;border-right:0;border-left-color:#fff;}
+
+.big-title{font-size:64rpx;color:$black;margin-bottom:43rpx;font-weight:bold;}
+
+.border-b{border-bottom:$border;}
+.border-t{border-top:$border;}
+
+
+
+

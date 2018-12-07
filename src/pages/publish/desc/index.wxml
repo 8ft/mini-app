@@ -1,0 +1,36 @@
+<!--pages/project/publish/desc/index.wxml-->
+<textarea maxlength="{{inputLen}}" disabled="{{demoShow}}" bindinput="input" value="{{content}}" style="height:{{height}}rpx;"></textarea>
+
+<text class='placeholder' wx:if="{{content.length<=0}}">详细描述你的项目需求以及对人员的期望，让专家更全面了解你的需求。\n例如：\n1、项目描述\n2、主要功能点\n3、参考产品\n4、人员要求\n5、如需补充说明可以添加3张图片</text>
+
+<view class='imgs'>
+  <view class='img' wx:for="{{imgs}}">
+    <image mode='aspectFill' src="{{item.url}}" data-url="{{item.url}}" bindtap='preview'></image>
+    <view class='del' data-index="{{index}}" bindtap='delImg'>X</view>
+  </view>
+  <view wx:if="{{imgs.length<3}}" class='add' bindtap='chooseImage'><view>添加</view></view>
+</view>
+
+<view class='demo-switch' bindtap='showDemo'><text class='iconfont icon-fanli'></text>参考范例</view>
+<view class='num'>{{conLen}}/5000</view>
+
+<cover-view class='demo' wx:if="{{demoShow}}">
+  <cover-view class='box'>
+    <cover-view class='con'>
+      <cover-view class='title'>参考范例</cover-view>
+
+      <cover-view class='sub-title'>项目描述</cover-view>
+      <cover-view class='p'>点餐产品的手机App开发，包括iOS和Android两端，为用户寻找美食，快速预约排号到店消费且可通过手机进行点餐，付款，评价，分享等</cover-view>
+      
+      <cover-view class='sub-title'>主要功能点：</cover-view>
+      <cover-view class='p'>登录注册，附近美食，预约排号，叫号，手机点餐，在下支付，评价，分享</cover-view>
+
+      <cover-view class='sub-title'>人员要求：</cover-view>
+      <cover-view class='p'>1、有餐饮App产品的开发经验；</cover-view>
+      <cover-view class='p'>2、精通Java或PHP，熟悉jQuery、Javascript、Maven、Redis等技术，熟练使用MySQL等关系型数据库等；</cover-view>
+      <cover-view class='p'>3、良好的沟通能力和契约精神。</cover-view>
+
+    </cover-view>
+    <button class='hide-demo' bindtap="hideDemo">X</button>
+  </cover-view>
+</cover-view>

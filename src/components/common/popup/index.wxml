@@ -1,0 +1,6 @@
+<!--components/common/popup/index.wxml-->
+<view class="popup {{active?'':'hide'}}" style="top:{{top}};">
+  <slot></slot>
+</view>
+
+<view class="modal {{active?'':'hide'}}" bindtap='hide'></view>

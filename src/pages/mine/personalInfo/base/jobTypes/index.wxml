@@ -1,0 +1,6 @@
+<!--pages/mine/personalInfo/base/jobTypes/index.wxml-->
+<view class='tip border-t'>职位类型最多可选5个</view>
+<view wx:for="{{jobTypes}}" wx:for-item="type" wx:for-index="pIndex">
+  <view class='title'>{{type.dictName}}</view>
+  <list-item wx:for="{{type.dictList}}" data-pindex="{{pIndex}}" data-index="{{index}}" data-code="{{item.dictValue}}" data-name="{{item.dictName}}" bindtap="select" name="{{item.dictName}}" active="{{item.selected}}"></list-item>
+</view>

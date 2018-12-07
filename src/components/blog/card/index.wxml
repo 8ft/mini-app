@@ -1,0 +1,13 @@
+<!--components/project/card/card.wxml-->
+<navigator class='blog' hover-class="none" url="/pages/blog/detail/index?id={{data.id}}">
+  <view class="author">
+    <image src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>{{data.nickName}}
+  </view>
+  <text class="title">{{data.articleTitle}}</text>
+  <text class="pre-view">{{data.articleBrief}}</text>
+  <view class="other-info">
+    <text class="publish-time">{{data.createTime}}</text>
+    <text><text class="iconfont icon-pinglun"></text>{{data.recommended+'  '}}</text>
+    <text><text class="iconfont icon-liulan"></text>{{data.viewNum}}</text>
+  </view>
+</navigator>

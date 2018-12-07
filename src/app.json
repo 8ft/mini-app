@@ -1,0 +1,130 @@
+{
+  "pages": [
+    "pages/tabBar/project/index",
+    "pages/tabBar/work/index",
+    "pages/tabBar/publish/index",
+    "pages/tabBar/mine/index",
+    "pages/user/wxLogin/index",
+    "pages/user/bind/index",
+    "pages/user/signin/index",
+    "pages/tabBar/discover/index"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/project",
+      "pages": [
+        "list/index",
+        "detail/index",
+        "apply/index/index",
+        "apply/agreement/index"
+      ]
+    },
+    {
+      "root": "pages/publish",
+      "pages": [
+        "desc/index",
+        "skills/index",
+        "success/index"
+      ]
+    },
+    {
+      "root": "pages/mine",
+      "pages": [
+        "personalInfo/index/index",
+        "personalInfo/base/index/index",
+        "personalInfo/base/jobTypes/index",
+        "personalInfo/base/city/index",
+        "personalInfo/detail/index",
+        "personalInfo/skills/index",
+        "personalInfo/works/index",
+        "personalInfo/success/index",
+        "wallet/index",
+        "tradeDetail/index"
+      ]
+    },
+    {
+      "root": "pages/expert",
+      "pages": [
+        "index/index",
+        "applicant/index"
+      ]
+    },
+    {
+      "root": "pages/common",
+      "pages": [
+        "webview/index"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/tabBar/project/index": {
+      "network": "all",
+      "packages": [
+        "pages/project"
+      ]
+    },
+    "pages/tabBar/publish/index": {
+      "network": "all",
+      "packages": [
+        "pages/publish"
+      ]
+    },
+    "pages/tabBar/mine/index": {
+      "network": "all",
+      "packages": [
+        "pages/mine"
+      ]
+    },
+    "pages/project/detail/index": {
+      "network": "all",
+      "packages": [
+        "pages/expert"
+      ]
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "list": [
+      {
+        "text": "项目",
+        "pagePath": "pages/tabBar/project/index",
+        "iconPath": "./assets/img/tabbar/projects.png",
+        "selectedIconPath": "./assets/img/tabbar/projects_fill.png"
+      },
+      {
+        "text": "工作",
+        "pagePath": "pages/tabBar/work/index",
+        "iconPath": "./assets/img/tabbar/work.png",
+        "selectedIconPath": "./assets/img/tabbar/work_fill.png"
+      },
+      {
+        "text": "发布",
+        "pagePath": "pages/tabBar/publish/index",
+        "iconPath": "./assets/img/tabbar/publish.png",
+        "selectedIconPath": "./assets/img/tabbar/publish_fill.png"
+      },
+      {
+        "text": "发现",
+        "pagePath": "pages/tabBar/discover/index",
+        "iconPath": "./assets/img/tabbar/discover.png",
+        "selectedIconPath": "./assets/img/tabbar/discover_fill.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/tabBar/mine/index",
+        "iconPath": "./assets/img/tabbar/mine.png",
+        "selectedIconPath": "./assets/img/tabbar/mine_fill.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 60000
+  }
+}

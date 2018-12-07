@@ -1,0 +1,5 @@
+<!--components/common/actionBar/index.wxml-->
+<view class='placeholder'></view>
+<view class='action-bar'>
+  <slot></slot>
+</view>

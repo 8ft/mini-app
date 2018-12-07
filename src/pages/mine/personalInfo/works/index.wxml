@@ -1,0 +1,56 @@
+<!--pages/mine/personalInfo/works/index.wxml-->
+<view class='part'>
+
+  <view class='info need'>
+    <text class='name'>作品名称</text>
+    <view class='input'>
+      <input placeholder='20字以内' maxlength='20' data-type="name" value="{{name}}" bindinput='input'></input>
+    </view>
+  </view>
+
+  <view class='info need'>
+    <text class='name'>所属行业</text>
+    <view class='input arrow-right'>
+    <picker bindchange="select" value="{{industryIndex}}" range="{{dicts}}" range-key="dictName">
+          {{type}}
+      </picker>
+    </view>
+  </view>
+
+  <view class='info'>
+    <text class='name'>作品链接</text>
+    <view class='input'>
+      <input placeholder='以http://或https://开头' data-type="url" value="{{url}}" bindinput='input'></input>
+    </view>
+  </view>
+
+</view>
+
+<view class='part' style='padding-bottom:46rpx;margin-bottom:0;'>
+
+  <view class='info need' style='border-bottom:none;'>
+    <text class='name'>作品描述</text>
+  </view>
+  <view class='desc'>
+    <textarea placeholder='输入作品描述' data-type="desc" value="{{desc}}" bindinput='input' maxlength="{{inputLen}}"></textarea>
+    <view class='conLen'>{{conLen}}/100</view>
+  </view>
+
+  <view class='info' style='border-bottom:none;'>
+    <text class='name'>添加图片</text>
+  </view>
+  <view class='img' bindtap='chooseImage'>
+    <block wx:if="{{image}}">
+      <image mode='aspectFill' src="{{image}}"></image>
+    </block>
+    <block wx:else>
+      <view>点击添加图片</view>
+    </block>
+  </view>
+
+</view>
+
+
+<view class='action-bar'>
+  <button bindtap='publish' bindtap='save'>保存</button>
+</view>

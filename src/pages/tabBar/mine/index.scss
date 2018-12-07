@@ -1,0 +1,33 @@
+@import '../../../assets/scss/var.scss';  
+
+.userinfo{background:#fff;margin-bottom:30rpx;
+    .base{position:relative;padding:46rpx 48rpx;
+        .nickName{display:flex;align-items:center;font-size:60rpx;height:60rpx;line-height:60rpx;color:#333;font-weight:500;
+            text{display:block;max-width:50%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+            .iconfont{margin-left:20rpx;font-size:40rpx;}}
+        .icon-xingbienv{color:$lightRed;}
+        .icon-xingbienan{color:$darkBlue;}
+        navigator{text-align:center;margin-top:20rpx;color:#fff;border-radius:8rpx;background:$darkBlue;width:200rpx;height:60rpx;line-height:60rpx;font-size:28rpx;}
+        .finished{color:#999;font-size:$xl;margin-top:30rpx;}
+        .avatar{position:absolute;top:46rpx;right:48rpx;width:136rpx;height:136rpx;border-radius:50%;}
+    }
+    
+    .blog{display:flex;align-items:center;text-align:center;font-size:44rpx;color:$lightBlack;padding:18rpx 0 28rpx;background:#fff;width:100%;
+        navigator{flex:1;line-height:64rpx;display:block;
+            &:nth-of-type(2){border-left:$border;border-right:$border;}}
+        text{display:block;
+            &:nth-of-type(1){line-height:44rpx;margin-bottom:15rpx;}
+            &:nth-of-type(2){font-size:$m;line-height:$m;line-height:$m;color:$gray;}}}
+}
+
+
+
+.entrances{padding:46rpx 40rpx;background:#fff;display:flex;align-items:center;border-bottom:$border;color:$lightBlack;font-size:$xxl;line-height:$xxl;
+    image{width:48rpx;height:48rpx;margin-right:26rpx;}
+    text{flex:1;text-align:right;color:$lightGray;font-size:30rpx;}}
+
+.arrow-right::before{border-left-color:$lightGray;}
+
+.action-bar{background:#fff;width:100%;height:150rpx;display:flex;align-items:center;
+    button{margin:0 auto;width:630rpx;height:96rpx;background:$lightGray;border-radius:4rpx;color:#fff;font-size:$xl;line-height:96rpx;}}
+

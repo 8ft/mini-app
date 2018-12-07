@@ -1,0 +1,9 @@
+@import '../../../../assets/scss/var.scss';  
+
+page{background:#fff;}
+
+.icon{display:block;width:185rpx;height:233rpx;margin:153rpx auto 80rpx;}
+
+.txt{font-size:$xxl;color:$lightBlack;line-height:48rpx;text-align:center;display:block;margin-bottom:80rpx;}
+
+.btn{display:block;width:630rpx;height:96rpx;line-height:96rpx;background:$darkBlue;border-radius:4rpx;color:#fff;text-align:center;margin:0 auto;font-size:$xl;}

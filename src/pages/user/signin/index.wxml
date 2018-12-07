@@ -1,0 +1,26 @@
+<!--pages/user/signin/index.wxml-->
+<view class='title'>注册</view>
+
+<text class='input-title'>注册手机</text>
+<view class='input'>
+  <input focus="true" type='number' placeholder='在这里输入手机号' data-name="phone" bindinput='input'></input>
+</view>
+
+<text class='input-title'>验证码</text>
+<view class='input'>
+  <input type='number' placeholder='请输入验证码' data-name="code" bindinput='input'></input>
+  <button class='btn-code' bindtap='getCode'>{{getCodeTxt}}</button>
+</view>
+
+<text class='input-title'>密码</text>
+<view class='input'>
+  <input password="true" placeholder='请输入密码' data-name="pwd" bindinput='input'></input>
+</view>
+
+<button class='submit' disabled="{{disagree}}" bindtap='signin'>注册</button>
+
+<view class='agree'>
+  <checkbox color='#fff' checked="true" bindtap="setAgree"/>
+  注册代表你已阅读并同意
+  <navigator url='/pages/common/webview/index?url=https://5100.juniuhui.com/useAgreement'>《用户协议》</navigator>
+</view>

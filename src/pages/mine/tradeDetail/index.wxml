@@ -1,0 +1,30 @@
+<!--pages/mine/tradeDetail/index.wxml-->
+<view class='card'>
+  <view class='time'>{{detail.createTime}}</view>
+
+  <view class='ball'></view>
+  <view class='ball right'></view>
+
+  <view class='money'>
+    <view>交易金额(元)</view>
+    <view class='num'>{{detail.incomeFlag===1?'+':'-'}}{{detail.amount}}</view>
+  </view>
+
+  <view class='info border-b'>
+    <text>交易类型</text>
+    <view>{{detail.orderTypeName}}</view>
+  </view>
+  <view class='info border-b'>
+    <text>交易号</text>
+    <view>{{detail.orderNo}}</view>
+  </view>
+  <view class='info border-b'>
+    <text>状态</text>
+    <view>{{detail.orderStatusName}}</view>
+  </view>
+  <view class='info border-b' wx:if="{{detail.remark}}">
+    <text>备注</text>
+    <view>{{detail.remark}}</view>
+  </view>
+
+</view>

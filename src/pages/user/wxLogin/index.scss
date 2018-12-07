@@ -1,0 +1,9 @@
+@import '../../../assets/scss/var.scss';  
+
+page{color:$gray;text-align:center;background:#fff;}
+.bg{position:absolute;top:0;left:0;width:100%;height:1260rpx;}
+.con{position:absolute;top:700rpx;left:0;width:100%;z-index:$bottomFloor;}
+.title{display:block;font-size:48rpx;color:black;text-align:center;}
+.sub-title{margin-top:20rpx;font-size:$xl;}
+.intro{font-size:26rpx;}
+.auth{width:610rpx;height:100rpx;margin:100rpx auto 40rpx;background:$darkBlue;color:#fff;line-height:100rpx;font-size:$xxl;border-radius:6rpx;}

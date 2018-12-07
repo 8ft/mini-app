@@ -1,0 +1,16 @@
+<!--components/common/navigationBar/index.wxml-->
+<cover-view id='appHeader' class='app-header' style="padding-top:{{top}}px;">
+  <cover-view class="navbar" >
+    <cover-view class='back' catchtap='back' wx:if="{{returnable}}"></cover-view>
+    {{title}}
+  </cover-view>
+
+  <slot></slot>
+</cover-view>
+
+<view class='navbar-placeholder' style="height:{{height}}px;"></view>
+
+
+
+
+

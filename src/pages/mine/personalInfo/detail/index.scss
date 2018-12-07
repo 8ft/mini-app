@@ -1,0 +1,26 @@
+@import '../../../../assets/scss/var.scss';  
+
+page{background:#fff;}
+textarea{width:100%;box-sizing:border-box;padding:$m 40rpx;background:#fff;line-height:48rpx;}
+.placeholder{position:absolute;font-size:$l;font-weight:400;top:34rpx;left:40rpx;right:40rpx;color:#ccc;}
+
+.demo-switch,.num{position:absolute;height:30rpx;line-height:30rpx;bottom:195rpx;font-size:$l;color:$lightBlack;}
+.num{right:40rpx;}
+
+.demo-switch{left:40rpx;
+    .iconfont{font-size:$l;margin-right:8rpx;}}
+
+.demo{position:fixed;width:100%;height:100%;top:0;left:0;z-index:$middleFloor;background:rgba(0,0,0,.5);display:flex;align-items:center;}
+.box{margin:0 auto;}
+
+.con{width:645rpx;box-sizing:border-box;padding:$xl 42rpx;background:#fff;border-radius:16rpx;
+    cover-view{display:block;}}
+    
+.title{text-align:center;font-size:$xl;color:$black;}
+.sub-title{position:relative;margin-top:40rpx;margin-bottom:10rpx;color:$black;line-height:30rpx;}
+.point{display:block;width:16rpx;height:16rpx;position:absolute;left:0;top:7rpx;background:$darkBlue;border-radius:50%;}
+.p{font-size:$l;color:$lightBlack;line-height:40rpx;white-space:pre-line;margin-bottom:20rpx;}
+.hide-demo{border:1px solid #fff;background:transparent;border-radius:50%;width:60rpx;line-height:54rpx;font-size:$xl;margin:42rpx auto 0;color:#fff;}
+
+.action-bar{position:absolute;bottom:0;left:0;background:#fff;width:100%;height:150rpx;display:flex;align-items:center;
+    button{margin:0 auto;width:630rpx;height:96rpx;background:$darkBlue;border-radius:4rpx;color:#fff;font-size:$xl;line-height:96rpx;}}

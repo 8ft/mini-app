@@ -1,0 +1,2 @@
+<!--pages/project/publish/skills/index.wxml-->
+<list-item wx:for="{{skills}}" data-index="{{index}}" data-code="{{item.dictValue}}" data-name="{{item.dictName}}" bindtap="select" name="{{item.dictName}}" active="{{item.selected}}"></list-item>

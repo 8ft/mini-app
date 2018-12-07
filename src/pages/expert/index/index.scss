@@ -1,0 +1,34 @@
+@import '../../../assets/scss/var.scss';  
+
+page{box-sizing:border-box;background:linear-gradient(0deg,rgba(104,196,255,1),$darkBlue) no-repeat;background-size:100% 200rpx;padding:40rpx 30rpx;}
+
+.base-info{position:relative;box-sizing:border-box;width:100%;padding:48rpx 30rpx 30rpx;background:rgba(255,255,255,1);box-shadow:0rpx 3rpx 20rpx 0rpx rgba(0, 0, 0, .15);border-radius:12rpx;margin:0 auto;
+    .iconfont{color:$lightGray;font-size:$s;margin-right:8rpx;}
+    .avatar{position:absolute;width:128rpx;height:128rpx;border-radius:50%;top:48rpx;right:30rpx;}
+    .name{font-size:40rpx;color:$black;font-weight:500;display:flex;align-items:center;}
+    .price,.base-info .p-title{line-height:74rpx;}
+    .price{color:#ff5e2c;font-size:30rpx;margin-right:20rpx;}
+    .p-title{color:#333;font-size:$m;}
+    .info{display:inline-block;font-size:$s;color:$gray;margin-bottom:21rpx;margin-right:$m;}
+    .city{display:block;}}
+
+.name .iconfont{font-size:30rpx;margin-left:16rpx;}
+.iconfont.icon-xingbienv{color:#ff8686;}
+.iconfont.icon-xingbienan{color:$darkBlue;}
+
+.title{display:flex;align-items:center;font-size:58rpx;color:$black;font-family:Georgia;margin:60rpx 0 30rpx;
+    view{font-family:PingFangSC-Regular;font-size:$l;line-height:$l;margin-left:5rpx;}
+    text{font-family:PingFangSC-Regular;display:block;font-size:20rpx;line-height:20rpx;margin-left:5rpx;}}
+
+.intro{font-size:$l;line-height:44rpx;color:#666;}
+.sub-title{font-size:$l;color:#666;margin-bottom:$m;}
+.tag{display:inline-block;padding:0 18rpx;font-size:$m;line-height:50rpx;background:#f5f5f5;color:$gray;margin-right:20rpx;margin-bottom:20rpx;}
+
+.works{position:relative;padding-left:272rpx;padding-bottom:40rpx;margin-bottom:40rpx;
+    image{width:240rpx;height:170rpx;position:absolute;left:0;top:0;}
+    .name{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:$black;font-size:$xl;font-weight:600;}
+    .desc{display:block;color:$lightBlack;font-size:$m;line-height:$xxl;margin:13rpx 0 21rpx;}
+    .type{color:$gray;font-size:$s;}
+    .iconfont{font-size:$s;margin-right:12rpx;}
+    .link{display:inline-block;position:absolute;right:0;bottom:40rpx;background:#e5f2ff;border-radius:20rpx;height:40rpx;line-height:40rpx;text-align:center;color:$darkBlue;font-size:$s;padding:0 20rpx;}}
+

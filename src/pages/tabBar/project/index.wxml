@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
+  <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>
+    <image src="{{banner.iconImageUrl}}"></image>
+  </swiper-item>
+</swiper>
+
+<view class='types clearfix'>
+  <navigator url='/pages/project/list/index?type=-1' hover-class="none">
+    <image src='/assets/img/project/qb.png'></image>
+    <text>全部</text>
+  </navigator>
+  <navigator url='/pages/project/list/index?type=0' hover-class="none">
+    <image src='/assets/img/project/kf.png'></image>
+    <text>开发</text>
+  </navigator>
+  <navigator url='/pages/project/list/index?type=1' hover-class="none">
+    <image src='/assets/img/project/sj.png'></image>
+    <text>设计</text>
+  </navigator>
+  <navigator url='/pages/project/list/index?type=2' hover-class="none">
+    <image src='/assets/img/project/yy.png'></image>
+    <text>市场/运营</text>
+  </navigator>
+  <navigator url='/pages/project/list/index?type=3' hover-class="none">
+    <image src='/assets/img/project/cp.png'></image>
+    <text>产品</text>
+  </navigator>
+</view>
+
+<view class='projects'>
+  <view class='title'>
+    <view class="iconfont icon-xiangmuku"></view>
+    <text>项目库</text>
+    <navigator class='arrow-right' url='/pages/project/list/index' hover-class="none">更多</navigator>
+  </view>
+  <project-card wx:if="{{projects.length>0}}" wx:for="{{projects}}" wx:for-item="project" project="{{project}}"></project-card>
+</view>
+

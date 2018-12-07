@@ -1,0 +1,6 @@
+<!--components/project/status/index.wxml-->
+<view class="status {{status==13?'xiajia':''}}" wx:if="{{content[status][character]}}">
+  <view>{{content[status][character].title}}</view>
+  <text>{{status==13&&remark?remark:content[status][character].desc}}</text> 
+  <image src="/assets/img/project/detail/{{content[status][character].img}}.png"></image>
+</view>

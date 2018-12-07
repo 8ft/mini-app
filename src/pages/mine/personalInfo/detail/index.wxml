@@ -1,0 +1,27 @@
+<!--pages/mine/personalInfo/detail/index.wxml-->
+<textarea style="height:{{height}}rpx;" maxlength="{{inputLen}}" disabled="{{demoShow}}" bindinput="input" value="{{content}}"></textarea>
+
+<text class='placeholder' wx:if="{{content.length<=0}}">描述你在专业领域内的经历、成就，充分展示你的实力，更具个人风格的描述对项目方更有吸引力。
+\n例如：\n【基本介绍】\n综合全面地介绍自己或你的团队/工作室(如果你有)，让别人感受到你的与众不同；你的职业经历带来的经验；你的教育背景；令人骄傲的获奖成绩。\n【擅长的服务】\n你的技能特长；你能提供的服务内容</text>
+
+<view class='demo-switch' bindtap='showDemo'><text class='iconfont icon-fanli'></text><text>参考范例</text></view>
+<view class='num'>{{conLen}}/1000</view>
+
+<view class='action-bar'>
+  <button bindtap='publish' bindtap='save'>保存</button>
+</view>
+
+<cover-view class='demo' wx:if="{{demoShow}}">
+  <cover-view class='box'>
+    <cover-view class='con'>
+      <cover-view class='title'>参考范例</cover-view>
+      <cover-view class='sub-title'>【我的介绍】</cover-view>
+      <cover-view class='p'>我是一名JAVA软件开发工程师，毕业于北京航空航天大学。目前就职于阿里，有8年的工作经验，有丰富的互联网项目设计和开发经验。</cover-view>
+      <cover-view class='p'>曾担任某游戏开发公司服务器端技术负责人，负责公司游戏服务器端架构设计、研发工作，游戏均上线运营，有完整的卡牌与MMO手游开发上线经验。</cover-view>
+      <cover-view class='p'>擅长后端、App、H5，熟练掌握JAVA，了解JVM，了解PHP、python；熟悉netty、spring框架，熟悉基本的数据结构和算法；熟悉mysql、redis，熟悉linux\shell，熟悉SVN\maven，熟悉tomcat\nginx等。</cover-view>
+      <cover-view class='sub-title'>【提供服务】</cover-view>
+      <cover-view class='p'>JAVA软件开发、技术支持，小程序开发，微信开发。</cover-view>
+    </cover-view>
+    <button class='hide-demo' bindtap="hideDemo">X</button>
+  </cover-view>
+</cover-view>

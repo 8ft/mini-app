@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "nodata": "/components/nodata/nodata",
+    "collector": "/components/collector/contactInfo/index"
+  }
+}

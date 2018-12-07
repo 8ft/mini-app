@@ -1,0 +1,17 @@
+@import '../../../assets/scss/var.scss'; 
+@import '../../../assets/iconfont/icons.wxss';
+
+.blog{padding:32rpx 30rpx 36rpx;border-bottom:$border;
+    .author{display:flex;align-items: center; color:$lightBlack;font-size:$m;height: 44rpx;line-height:44rpx;
+        image{width:44rpx;height:44rpx;margin-right:19rpx;border-radius: 50%;}
+    }
+    .title{display:block;color:$black;font-size:$xl;line-height: 48rpx;padding:20rpx 0;font-weight: bold;}
+    .pre-view{color:$gray;font-size: 26rpx;line-height: 40rpx;}
+    .other-info{display:flex;align-items: center;color:$gray;font-size:$m;margin-top:34rpx;
+        .publish-time{flex:1;}
+        .iconfont{color:$lightGray;font-size:26rpx;margin-right:12rpx;}
+    }
+}
+
+
+

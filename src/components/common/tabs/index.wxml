@@ -1,0 +1,5 @@
+<!--components/tabs/tabs.wxml-->
+<view class="yt-tabs {{fixed?'fixed':''}}">
+  <view class='yt-tab' wx:for="{{tabs}}" wx:for-item="tab"><text id="tab{{index}}" bindtap="tabClick" data-index="{{index}}" class="{{active===index?'active':''}}">{{tab}}</text></view>
+  <view id="tabUnderline" class='yt-tab-underline' animation="{{animationData}}"></view>
+</view>

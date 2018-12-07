@@ -1,0 +1,22 @@
+<!--components/project/card/card.wxml-->
+<navigator class='project' hover-class="none" url="/pages/project/detail/index?no={{project.projectNo}}">
+  <view class='info'>
+    <text class='title'>{{project.projectName}}</text>
+    <view class='tags'>
+      <label class='type'>{{project.projectSubtype}}</label>
+      <label wx:if="{{project.projectSkill.length>0}}" wx:for="{{project.projectSkill}}" wx:for-item="skill">{{skill}}</label>
+    </view>
+    <text class='price'>{{project.projectBudget}}</text>
+    <text class='read'>已浏览：{{project.viewNum}}</text>
+  </view>
+  <view class='apply'>
+    <block wx:if="{{project.publisher!=uid}}">
+      <button>马上申请</button>
+      <view class='hot'>已有{{project.applyNum}}人申请</view>
+    </block>
+    <block wx:else>
+      <button class='myself'>{{project.applyNum}}人申请</button>
+      <view class='hot'>我发布的</view>
+    </block>
+  </view>
+</navigator>
