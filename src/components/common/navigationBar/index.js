@@ -1,6 +1,6 @@
 // components/common/navigationBar/index.js
 Component({
-  externalClasses: ['navbar-reset'],
+  externalClasses: ['custom-class'],
 
   properties: {
     title:String,

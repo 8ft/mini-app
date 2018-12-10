@@ -24,10 +24,58 @@
             <view class="name">{{item.createUserName}}</view>
             <text class="con">{{item.content}}</text>
             <view class="other">{{item.createTime}}
-                <view>{{item.replies.length}}条回复</view>
+                <view bindtap="openBox">{{item.replies.length}}条回复</view>
                 <text>回复</text>
             </view>
         </view>
     </block>
     <nodata wx:else name='projects'></nodata>
 </view>
+
+<action-bar id="actionBar" custom-class="action-bar-reset">
+    <view class=".action-bar-con">
+        <input placeholder="我要评论..." disabled="{{true}}"/>
+        <view class="iconfont icon-shoucang1"></view>
+        <view class="iconfont icon-pinglun"></view>
+        <text class="apply-num" bindtap="openBox">{{detail.comments.count}}</text>
+    </view>
+</action-bar>
+
+<popup position="bottom" active="{{boxSwitch}}">
+    <view class="comments-box"> 
+        <view class="header">
+            <view class="iconfont icon-guanbi1" bindtap="closeBox"></view>
+            暂无回复
+        </view>
+
+        <scroll-view style="height:{{scrollViewHeight}}px;" scroll-y="true" scroll-top='0' bindscrolltolower="">
+            <view class="comment">
+                <image src="{{comments[0].userAvatar}}"></image>
+                <view class="name">{{comments[0].createUserName}}</view>
+                <text class="con">{{comments[0].content}}</text>
+                <view class="other">{{comments[0].createTime}}</view>
+            </view>
+
+            <view class="comments">
+                <view class="title">评论</view>
+                <block wx:if="{{comments.length>0}}">
+                    <view class="comment" wx:for="{{comments}}">
+                        <image src="{{item.userAvatar}}"></image>
+                        <view class="name">{{item.createUserName}}</view>
+                        <text class="con">{{item.content}}</text>
+                        <view class="other">{{item.createTime}}
+                            <text>回复</text>
+                        </view>
+                    </view>
+                </block>
+                <nodata wx:else name='projects'></nodata>
+            </view>
+        </scroll-view>
+
+        <action-bar custom-class="action-bar-reset">
+            <view class=".action-bar-con">
+                <input placeholder="我要评论..." disabled="{{true}}"/>
+            </view>
+        </action-bar>
+    </view>
+</popup>

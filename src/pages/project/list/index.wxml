@@ -7,28 +7,28 @@
     <view class="filter-item {{filter==='time'?'on':''}}" data-name="time" bindtap="select">{{timeIndex===0?'时间':time[timeIndex].name}}<view></view></view>
   </view>
 
-  <popup active="{{filter==='type'}}" top="80rpx" bindhide='close'>
+  <popup active="{{filter==='type'}}" margin="80rpx" bindhide='close'>
     <view class='types'>
       <list-item data-index="-1" data-type="type" bindtap="filter" name="全部" active="{{typeIndex===-1}}"></list-item>
       <list-item wx:for="{{dicts[0].dictList}}" data-index="{{index}}" data-type="type" bindtap="filter" name="{{item.dictName}}" active="{{typeIndex===index}}"></list-item>
     </view>
   </popup>
 
-  <popup active="{{filter==='budget'}}" top="80rpx" bindhide='close'>
+  <popup active="{{filter==='budget'}}" margin="80rpx" bindhide='close'>
     <view class='types'>
       <list-item data-index="-1" data-type="budget" bindtap="filter" name="不限" active="{{budgetIndex===-1}}"></list-item>
       <list-item wx:for="{{dicts[1].dictList}}" data-index="{{index}}" data-type="budget" bindtap="filter" name="{{item.dictName}}" active="{{budgetIndex===index}}"></list-item>
     </view>
   </popup>
 
-  <popup active="{{filter==='cycle'}}" top="80rpx" bindhide='close'>
+  <popup active="{{filter==='cycle'}}" margin="80rpx" bindhide='close'>
     <view class='types'>
       <list-item data-index="-1" data-type="cycle" bindtap="filter" name="不限" active="{{cycleIndex===-1}}"></list-item>
       <list-item wx:for="{{dicts[2].dictList}}" data-index="{{index}}" data-type="cycle" bindtap="filter" name="{{item.dictName}}" active="{{cycleIndex===index}}"></list-item>
     </view>
   </popup>
 
-  <popup active="{{filter==='time'}}" top="80rpx" bindhide='close'>
+  <popup active="{{filter==='time'}}" margin="80rpx" bindhide='close'>
     <view class='types'>
       <list-item wx:for="{{time}}" data-index="{{index}}" data-type="time" bindtap="filter" name="{{item.name}}" active="{{timeIndex===index}}"></list-item>
     </view>

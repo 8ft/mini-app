@@ -2,11 +2,15 @@
 Component({
 
   properties: {
+    position:{
+      type:String,
+      value:'top'
+    },
     active:{
       type:Boolean,
       value: false
     },
-    top:{
+    margin:{
       type:String,
       value:'0'
     }

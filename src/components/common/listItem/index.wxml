@@ -1,5 +1,5 @@
 <!--components/common/listItem/index.wxml-->
-<view class="list-item {{active?'active':''}}">
+<view class="list-item custom-class {{active?'active':''}}">
   <text class='name'>{{name}}</text>
   <view class='addones'>
     <slot></slot>

@@ -1,6 +1,6 @@
 // components/common/listItem/index.js
 Component({
-  externalClasses: ['listItem-reset'],
+  externalClasses: ['custom-class'],
 
   properties: {
     name:String,

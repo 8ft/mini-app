@@ -1,5 +1,5 @@
 <!--components/common/popup/index.wxml-->
-<view class="popup {{active?'':'hide'}}" style="top:{{top}};">
+<view class="popup {{position}} {{active?'':'hide'}}" style="{{position+':'+margin}};" catchtouchmove="ture">
   <slot></slot>
 </view>
 

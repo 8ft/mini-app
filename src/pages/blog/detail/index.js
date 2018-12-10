@@ -10,10 +10,23 @@ Page(observer({
   data: {
     id:'',
     detail:null,
-    comments:[]
+    comments:[],
+    boxSwitch:false,
+    scrollViewHeight:0,
   },
 
   onLoad:function(options){
+   
+      wx.getSystemInfo({
+        success: data => {
+          console.log(data)
+          let fixedHeight=wx.getStorageSync('isIPX')?34:0
+          this.setData({
+            scrollViewHeight: data.windowHeight*.98-fixedHeight - (180+fixedHeight)/data.pixelRatio
+          })
+        }
+      })
+
     this.setData({
       id:options.id
     })
@@ -31,6 +44,18 @@ Page(observer({
     }
   },
 
+  openBox:function(){
+    this.setData({
+      boxSwitch:true
+    })
+  },
+
+  closeBox:function(){
+    this.setData({
+      boxSwitch:false
+    })
+  },
+
   getDetail: async function () {
     let detail = await app.request.post('/blog/article/detail',{
       articleId:this.data.id,
@@ -44,7 +69,6 @@ Page(observer({
       detail:detail.data,
       comments:detail.data.comments.list
     })
-    
   }
 
 }))
