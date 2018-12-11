@@ -1,0 +1,4 @@
+  
+ <scroll-view class='types' scroll-x="true">
+        <tabs wx:if="{{typesCn.length>0}}" custom-class="reset-tabs" tabs="{{typesCn}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+  </scroll-view>

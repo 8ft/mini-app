@@ -47,10 +47,8 @@
       <view>点击添加图片</view>
     </block>
   </view>
-
 </view>
 
-
-<view class='action-bar'>
-  <button bindtap='publish' bindtap='save'>保存</button>
-</view>
+<action-bar>
+  <button class="submit" bindtap='publish' bindtap='save'>保存</button>
+</action-bar>

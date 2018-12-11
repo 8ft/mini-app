@@ -8,77 +8,88 @@ Page(observer({
   },
 
   data: {
-    user:null,
-    blogInfo:null,
-    state:''
+   typeIndex:0,
+   types: [],
+   typesCn:[],
+
+   pageIndex: 1,
+   blogs:[],
+   nomore: false,
+   loading:true
   },
 
   onShow:function(){
-    if (this.props.stores.account.logged_in){
-     this.getInfo()
-    }else{
+    this.props.stores.toRefresh.refresh('discover',exist=>{
+      if(this.data.types.length===0){
+        this.getBlogTypes()
+        this.getBlogs()
+      }else if(exist){
+        this.refresh()
+      }
+    })
+  },
+
+  onPullDownRefresh:function(){
+    this.refresh()
+  },
+
+  onReachBottom:function(){
+    this.getBlogs()
+  },
+
+  refresh:function(){
+    this.setData({
+      pageIndex: 1,
+      blogs: [],
+      nomore: false
+    })
+    this.getBlogs()
+  },
+
+  getBlogTypes:async function(){
+    let res = await app.request.post('/blog/category/getAvailableList')
+    if (res.code === 0) {
+      let data=res.data
       this.setData({
-        state:''
+        types: data,
+        typesCn:data.map(item=>{
+          return item.name
+        })
       })
     }
   },
 
-  onShareAppMessage: function () {
-    return {
-      title: '接包发包专业平台',
-      path: 'pages/project/index/index',
-      imageUrl:'/assets/img/share.png'
-    }
-  },
+  getBlogs: async function (){
+    let nomore = this.data.nomore
+    if (nomore)return
 
-  go:function(e){
-    if (!app.checkLogin()) return 
-    wx.navigateTo({
-      url: e.currentTarget.dataset.url
+    let pIndex = this.data.pageIndex
+    let res = await app.request.post('/blog/article/getList',{
+      queryType:3,
+      articleType:1,
+      pageIndex:pIndex,
+      pageSize:10
     })
-  },
 
-  getInfo: async function () {
-    let baseInfo = await app.request.post('/user/userAuth/getUserBaseInfo')
-    if (baseInfo.code !== 0) return
-    let state=''
-    switch(baseInfo.data.userState){
-      case 0:
-        state='请完善'
-        break;
-      case 1:
-        state = '审核中'
-        break;
-      case 2:
-        state = '审核通过'
-        break;
-      case 3:
-        state = '审核未通过'
-        break;
-    }
-
-    let blogInfo=await app.request.post('/blog/attentionInfo/queryBlogUserInfo',{
-      userId:baseInfo.data.userId
-    })
-    if (blogInfo.code !== 0) return
-
-    app.globalData.userInfo = baseInfo.data
-    this.setData({
-      user: baseInfo.data,
-      blogInfo:blogInfo.data,
-      state:state
-    })
-  },
-
-  logout:function(){
-    wx.showModal({
-      title: '提示',
-      content: '确定要退出吗',
-      success: async res => {
-        if (res.confirm) {
-            this.props.stores.account.logout(app)
-        }
+    if (res.code === 0) {
+      if (res.data.page > pIndex){
+        pIndex++
+      }else{
+        nomore=true
       }
-    })
+    
+      this.setData({
+        blogs: this.data.blogs.concat(res.data.list.map(blog=>{
+          if(blog.articleBrief.length>76){
+            blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
+          }
+          return blog
+        })),
+        pageIndex:pIndex,
+        nomore:nomore
+      })
+    }
+    wx.stopPullDownRefresh()
   }
+  
 }))

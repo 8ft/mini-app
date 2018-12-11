@@ -3,4 +3,4 @@
   <slot></slot>
 </view>
 
-<view class="modal {{active?'':'hide'}}" bindtap='hide'></view>
+<view hidden="{{!active}}" class="modal" bindtap='hide'></view>

@@ -75,6 +75,6 @@
   </block>
 </view>
 
-<view class='action-bar' wx:if="{{user.userState!==2&&user.userState!==1}}">
-  <button bindtap='publish' bindtap='submit'>提交审核</button>
-</view>
+<action-bar wx:if="{{user.userState!==2&&user.userState!==1}}">
+   <button class="submit" bindtap='publish' bindtap='submit'>提交审核</button>
+</action-bar>

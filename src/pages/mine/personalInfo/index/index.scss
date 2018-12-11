@@ -1,7 +1,5 @@
 @import '../../../../assets/scss/var.scss';  
 
-page{padding-bottom:150rpx;}
-
 .tip{height:64rpx;line-height:64rpx;font-size:$m;color:$darkBlue;background:rgba(0,131,255,.1);text-indent:40rpx;
     .iconfont{font-size:30rpx;margin-right:11rpx;}}
 
@@ -35,6 +33,3 @@ page{padding-bottom:150rpx;}
     .iconfont{margin-right:18rpx;}
     .btn{width:120rpx;height:54rpx;line-height:54rpx;font-size:$m;background:#fff;border:1rpx solid #f66;color:#f66;position:absolute;bottom:$xl;right:180rpx;text-align:center;}
     .edit{border-color:$darkBlue;background:$darkBlue;color:#fff;right:30rpx;}}
-
-.action-bar{position:fixed;bottom:0;left:0;background:#fff;width:100%;height:150rpx;display:flex;align-items:center;
-    button{margin:0 auto;width:630rpx;height:96rpx;background:$darkBlue;border-radius:4rpx;color:#fff;font-size:$xl;line-height:96rpx;}}

@@ -1,3 +1,8 @@
 {
-    
+    "navigationBarTitleText": "栏目",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance":true,
+    "usingComponents": {
+        "tabs":"/components/common/tabs/index"
+    }
 }

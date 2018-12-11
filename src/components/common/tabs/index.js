@@ -1,5 +1,7 @@
 // components/tabs/tabs.js
 Component({
+  externalClasses:['custom-class'],
+
   properties: {
     active:{
       type:Number,
@@ -16,12 +18,16 @@ Component({
   },
 
   lifetimes: {
-    ready: function () {
+    attached: function () {
       const animation = wx.createAnimation({
         duration: 300,
         timingFunction: 'ease',
       })
       this.animation = animation
+    },
+    ready:function(){
+      if(this.data.animationData)return
+      this.selectTab(this.properties.active)
     }
   },
 
@@ -40,16 +46,21 @@ Component({
       }
     },
     selectTab:function(index){
-      const query = wx.createSelectorQuery().in(this)
-      query.select(`#tab${index}`).fields({
-        size: true,
-        rect:true
-      }, (res) => {
-        let width = res.width / 2
-        this.setData({
-          active: index,
-          animationData: this.animation.width(width).translateX(res.left + width/2).step().export()
-        })
+      wx.createSelectorQuery().in(this).select('#scrollView').fields({
+        scrollOffset:true
+      },sv=>{
+
+        wx.createSelectorQuery().in(this).select(`#tab${index}`).fields({
+          size: true,
+          rect:true
+        }, (res) => {
+          let width = res.width / 2
+          this.setData({
+            active: index,
+            animationData: this.animation.width(width).translateX(sv.scrollLeft+res.left + width/2).step().export()
+          })
+        }).exec()
+
       }).exec()
     }
   }

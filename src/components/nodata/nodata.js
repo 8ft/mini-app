@@ -41,6 +41,10 @@ Component({
       'city': {
         img: '/assets/img/default/no-project.png',
         text: '努力加载中'
+      },
+      'bolgReply':{
+        img: '/assets/img/default/no-project.png',
+        text: '还没有人评论哦~快来抢沙发吧'
       }
     }
   },

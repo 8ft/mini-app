@@ -1,10 +1,14 @@
 @import '../../../assets/scss/var.scss'; 
 
-.yt-tabs{position:relative;display:flex;align-items:center;border-bottom:$border;height:100rpx;padding:10rpx;line-height:80rpx;background:#fff;box-sizing:border-box;font-size:$xxl;color:$lightBlack;
-    &.fixed{position:fixed;top:0;left:0;right:0;z-index:$topFloor;}}
+.tabs{width:100%;border-bottom:$border;background:#fff;
 
-.yt-tab{padding:0 53rpx;text-align:center;
-    text{display:inline-block;height:100%;font-weight:400;
-        &.active{color:$darkBlue;font-weight:bold;}}}
+    &.fixed{position:fixed;top:0;left:0;right:0;z-index:$topFloor;}
 
-.yt-tab-underline{position:absolute;left:0;bottom:0rpx;border-bottom:6rpx solid #0083ff;}
+    scroll-view{width:100%;white-space:nowrap;}
+
+    .tab{display:inline-block;text-align:center;font-weight:400;padding:0 32rpx;font-size:$l;color:$lightBlack;height:84rpx;line-height:84rpx;
+        &.active{color:$darkBlue;font-weight:bold;}
+    }
+
+    .tab-underline{height:6rpx;background:$darkBlue;}
+}

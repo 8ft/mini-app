@@ -7,9 +7,9 @@
 <view class='demo-switch' bindtap='showDemo'><text class='iconfont icon-fanli'></text><text>参考范例</text></view>
 <view class='num'>{{conLen}}/1000</view>
 
-<view class='action-bar'>
-  <button bindtap='publish' bindtap='save'>保存</button>
-</view>
+<action-bar>
+   <button class="submit" bindtap='publish' bindtap='save'>保存</button>
+</action-bar>
 
 <cover-view class='demo' wx:if="{{demoShow}}">
   <cover-view class='box'>

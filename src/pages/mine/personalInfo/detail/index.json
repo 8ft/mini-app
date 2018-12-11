@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "详细介绍"
+  "navigationBarTitleText": "详细介绍",
+  "usingComponents": {
+    "action-bar": "/components/common/actionBar/index"
+  }
 }

@@ -7,7 +7,7 @@
   <text class="pre-view">{{data.articleBrief}}</text>
   <view class="other-info">
     <text class="publish-time">{{data.createTime}}</text>
-    <text><text class="iconfont icon-pinglun"></text>{{data.recommended+'  '}}</text>
+    <text><text class="iconfont icon-pinglun"></text>{{data.commentNum+'  '}}</text>
     <text><text class="iconfont icon-liulan"></text>{{data.viewNum}}</text>
   </view>
 </navigator>
