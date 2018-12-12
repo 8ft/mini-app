@@ -45,6 +45,11 @@ Component({
       'bolgReply':{
         img: '/assets/img/default/no-project.png',
         text: '还没有人评论哦~快来抢沙发吧'
+      },
+      'bolgListMyFollow':{
+        img: '/assets/img/default/no-project.png',
+        text: '登录后可以查看更多内容哦',
+        login: true
       }
     }
   },

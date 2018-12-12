@@ -1,10 +1,8 @@
 {
-    "navigationBarTitleText": "栏目",
+    "navigationBarTitleText": "我的关注",
     "enablePullDownRefresh": true,
     "onReachBottomDistance":true,
     "usingComponents": {
-        "tabs":"/components/common/tabs/index",
-        "blog-card":"/components/blog/card/index",
         "nodata":"/components/nodata/nodata"
     }
 }

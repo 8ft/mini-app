@@ -1,0 +1,13 @@
+@import '../../../assets/scss/var.scss';  
+
+page{background: #fff;padding:0 34rpx;box-sizing: border-box;}
+.expert{display: flex; align-items: center; padding:32rpx 0;border-bottom: $border;
+    image{width:96rpx;height:96rpx;border-radius: 50%;}
+    .info{margin-left:28rpx;flex:1;
+        view{max-width:340rpx;color:$black;font-size: $xl;line-height:$xl;font-weight: 600;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+        text{color:$gray;font-size: $m;line-height: $m;margin-top:20rpx;display:block;}
+    }
+    button{width:110rpx;height: 48rpx;line-height: 48rpx;border:1rpx solid $gray;border-radius: 4rpx;color:$gray;font-size:$s;
+        &.followed{color:$darkBlue;border-color:$darkBlue;}
+    }
+}

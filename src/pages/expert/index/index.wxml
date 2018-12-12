@@ -1,13 +1,31 @@
 <!--pages/expert/index/index.wxml-->
 <view class='base-info'>
-  <image class='avatar' src="{{user.userAvatar}}"></image>
-  <view class='name'>{{user.nickName}}<text class="iconfont icon-xingbie{{user.userBaseInfo.sex===1?'nan':'nv'}}"></text></view>
-  <text class='price'>{{user.userBaseInfo.daySalary}}元/天</text>
-  <text class='p-title'>{{user.userBaseInfo.positionTitle}}</text>
-  <view class='info city'><text class='iconfont icon-weizhi'></text>{{user.userBaseInfo.cityCn}}</view>
-  <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperience}}年经验</view>
-  <view class='info'><text class='iconfont icon-tuandui'></text>{{user.userBaseInfo.settleTypeCn}}</view>
-  <view class='info'><text class='iconfont icon-yiwancheng'></text>已完成{{user.finishOrderNums}}单</view>
+  <view class="base">
+    <image class='avatar' src="{{user.userAvatar}}"></image>
+    <view class='name'>{{user.nickName}}<text class="iconfont icon-xingbie{{user.userBaseInfo.sex===1?'nan':'nv'}}"></text></view>
+    <text class='price'>{{user.userBaseInfo.daySalary}}元/天</text>
+    <text class='p-title'>{{user.userBaseInfo.positionTitle}}</text>
+    <view class='info city'><text class='iconfont icon-weizhi'></text>{{user.userBaseInfo.cityCn}}</view>
+    <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperience}}年经验</view>
+    <view class='info'><text class='iconfont icon-tuandui'></text>{{user.userBaseInfo.settleTypeCn}}</view>
+    <view class='info'><text class='iconfont icon-yiwancheng'></text>已完成{{user.finishOrderNums}}单</view>
+  </view>
+
+  <view class="blog">
+    <navigator hover-class="none" url="/pages/mine/follow/index?id={{user.userId}}">
+        <text>{{blogInfo.attentionNum}}</text>
+        <text>关注</text>
+    </navigator>
+    <navigator hover-class="none" url="/pages/mine/fans/index?id={{user.userId}}">
+        <text>{{blogInfo.fansNum}}</text>
+        <text>粉丝</text>
+    </navigator>
+    <navigator hover-class="none" url="/pages/mine/blogs/index?id={{user.userId}}">
+        <text>{{blogInfo.articleNum}}</text>
+        <text>博文</text>
+    </navigator>
+  </view>
+
 </view>
 
 <view class='title'>

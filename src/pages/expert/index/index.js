@@ -8,7 +8,8 @@ const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 Page({
 
   data: {
-    user:null
+    user:null,
+    blogInfo:null
   },
 
   onLoad: function (options) {
@@ -35,22 +36,29 @@ Page({
     let res = await app.request.post('/user/userAuth/viewUserBaseInfo', {
       userId: id
     })
+    if (res.code !== 0) return
 
     let data=res.data
-    data.userBaseInfo.positionTypeCn = data.userBaseInfo.positionTypeCn.split('|')
-
-    data.userSampleInfos = data.userSampleInfos.map(item=>{
-      if (item.sampleDesc.length >= 30){
-        item.sampleDesc=item.sampleDesc.substring(0,30)+'...'
-      }
-      return item
-    })
-
-    if (res.code === 0) {
-      this.setData({
-        user:data
+    if(data.userState!==0){
+      data.userBaseInfo.positionTypeCn = data.userBaseInfo.positionTypeCn.split('|')
+      data.userSampleInfos = data.userSampleInfos.map(item=>{
+        if (item.sampleDesc.length >= 30){
+          item.sampleDesc=item.sampleDesc.substring(0,30)+'...'
+        }
+        return item
       })
     }
+
+    let blogInfo=await app.request.post('/blog/attentionInfo/queryBlogUserInfo',{
+      userId:data.userId
+    })
+    if (blogInfo.code !== 0) return
+    
+    this.setData({
+      user:data,
+      blogInfo:blogInfo.data
+    })
+    
   }
 
  

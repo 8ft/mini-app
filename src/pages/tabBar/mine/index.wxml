@@ -15,15 +15,15 @@
     <image class='avatar' src="{{user.userAvatar||'/assets/img/default/avatar.png'}}"></image>
   </view>
   <view class="blog">
-    <navigator hover-class="none">
+    <navigator hover-class="none" url="/pages/mine/follow/index?id={{user.userId}}">
         <text>{{blogInfo.attentionNum}}</text>
         <text>关注</text>
     </navigator>
-    <navigator hover-class="none">
+    <navigator hover-class="none" url="/pages/mine/fans/index?id={{user.userId}}">
         <text>{{blogInfo.fansNum}}</text>
         <text>粉丝</text>
     </navigator>
-    <navigator hover-class="none">
+    <navigator hover-class="none" url="/pages/mine/blogs/index?id={{user.userId}}">
         <text>{{blogInfo.articleNum}}</text>
         <text>博文</text>
     </navigator>

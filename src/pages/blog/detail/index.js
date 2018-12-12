@@ -121,6 +121,8 @@ Page(observer({
       detail:detail.data,
       comments:detail.data.comments.list
     })
-  }
+  },
+
+  download:app.download
 
 }))

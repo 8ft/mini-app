@@ -7,6 +7,6 @@
     </view>
     <view id="tabUnderline" class='tab-underline' animation="{{animationData}}"></view>
   </scroll-view>
-
-  <!-- <view wx:if="" id="tabUnderline" class='tab-underline' animation="{{animationData}}"></view> -->
 </view>
+
+<view wx:if="{{fixed}}" class="place-holder custom-class"></view>

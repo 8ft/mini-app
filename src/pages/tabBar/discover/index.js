@@ -61,7 +61,9 @@ Page(observer({
   },
 
   getBlogTypes:async function(){
-    let res = await app.request.post('/blog/category/getAvailableList')
+    let res = await app.request.post('/blog/category/getAvailableList',{
+      scope:1
+    })
     if (res.code === 0) {
       this.setData({
         types: res.data
@@ -75,8 +77,9 @@ Page(observer({
 
     let pIndex = this.data.pageIndex
     let res = await app.request.post('/blog/article/getList',{
-      queryType:3,
+      queryType:1,
       articleType:1,
+      categoryId:1,
       pageIndex:pIndex,
       pageSize:10
     })

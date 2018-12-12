@@ -8,6 +8,7 @@ Page(observer({
   },
 
   data: {
+   typeId:'',
    typeIndex:0,
    types: [],
    typesCn:[],
@@ -16,6 +17,13 @@ Page(observer({
    blogs:[],
    nomore: false,
    loading:true
+  },
+
+  onLoad:function(options){
+    this.setData({
+      typeId:options.id||'',
+      typeIndex:parseInt(options.index)||0
+    })
   },
 
   onShow:function(){
@@ -46,8 +54,19 @@ Page(observer({
     this.getBlogs()
   },
 
+  switchList:function(e){
+    let index=e.detail.index
+    this.setData({
+      typeIndex:index,
+      typeId:this.data.types[index].id
+    })
+    this.refresh()
+  },
+
   getBlogTypes:async function(){
-    let res = await app.request.post('/blog/category/getAvailableList')
+    let res = await app.request.post('/blog/category/getAvailableList',{
+      scope:1
+    })
     if (res.code === 0) {
       let data=res.data
       this.setData({
@@ -65,8 +84,8 @@ Page(observer({
 
     let pIndex = this.data.pageIndex
     let res = await app.request.post('/blog/article/getList',{
-      queryType:3,
-      articleType:1,
+      queryType:1,
+      categoryId:this.data.typeId,
       pageIndex:pIndex,
       pageSize:10
     })

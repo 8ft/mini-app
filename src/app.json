@@ -39,7 +39,9 @@
         "personalInfo/works/index",
         "personalInfo/success/index",
         "wallet/index",
-        "tradeDetail/index"
+        "tradeDetail/index",
+        "follow/index",
+        "fans/index"
       ]
     },
     {

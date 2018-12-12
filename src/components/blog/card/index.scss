@@ -1,7 +1,7 @@
 @import '../../../assets/scss/var.scss'; 
 @import '../../../assets/iconfont/icons.wxss';
 
-.blog{padding:32rpx 30rpx 36rpx;border-bottom:$border;
+.blog{padding:32rpx 30rpx 36rpx;border-bottom:$border;background:#fff;
     .author{display:flex;align-items: center; color:$lightBlack;font-size:$m;height: 44rpx;line-height:44rpx;
         image{width:44rpx;height:44rpx;margin-right:19rpx;border-radius: 50%;}
     }
