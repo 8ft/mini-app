@@ -11,6 +11,12 @@ Page({
   },
 
   onLoad:function(options){
+    let myId=wx.getStorageSync('user').userId
+    let curId=options.id
+
+    wx.setNavigationBarTitle({
+      title: myId==curId?'我的关注':'TA的关注'
+    })
     this.setData({
       id:options.id
     })

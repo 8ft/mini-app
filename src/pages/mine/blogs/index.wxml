@@ -1,0 +1,13 @@
+
+<tabs under-line-ratio="{{.5}}" wx:if="{{blogInfo}}" custom-class="reset-tabs" tabs="{{['文章('+blogInfo.articleNum+')','收藏('+blogInfo.favoriteNum+')']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+
+<block wx:if="{{typeIndex===0}}">
+  <scroll-view class='types' scroll-x="true">
+    <view class="type {{tagIndex===index?'active':''}}" wx:for="{{tags}}" data-index="{{index}}" bindtap='switchTag'>{{item.name+' '+item.articleNum}}</view>
+  </scroll-view>
+  <blog-card wx:for="{{blogs.list}}" data="{{item}}"></blog-card>
+</block>
+
+<block wx:else>
+  <blog-card wx:for="{{collection.list}}" data="{{item}}" show-author="true"></blog-card>
+</block>

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "个人主页",
+  "navigationBarTitleText": "我的博文",
   "onReachBottomDistance":true,
   "usingComponents": {
     "tabs": "/components/common/tabs/index",

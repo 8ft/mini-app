@@ -34,7 +34,7 @@
 
 <action-bar id="actionBar" custom-class="action-bar-reset">
     <view class=".action-bar-con">
-        <input placeholder="我要评论..." disabled="{{true}}" bindtap="download"/>
+        <input placeholder="我要评论..." disabled="true" bindtap="download"/>
         <view class="iconfont {{detail.favoriteState===1?'collected icon-yishoucang':'icon-shoucang1'}}" bindtap="collect"></view>
         <view class="iconfont icon-pinglun" bindtap="scrollToComments"></view>
         <text class="apply-num">{{detail.comments.count}}</text>
@@ -72,7 +72,7 @@
 
         <action-bar custom-class="action-bar-reset">
             <view class=".action-bar-con">
-                <input placeholder="我要评论..." disabled="{{true}}" bindtap="download"/>
+                <input placeholder="我要评论..." disabled="true" bindtap="download"/>
             </view>
         </action-bar>
     </view>

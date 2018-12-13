@@ -11,10 +11,17 @@ Page({
    },
  
    onLoad:function(options){
-     this.setData({
-       id:options.id
-     })
-     this.getExperts();
+    let myId=wx.getStorageSync('user').userId
+    let curId=options.id
+
+    wx.setNavigationBarTitle({
+      title: myId==curId?'我的粉丝':'TA的粉丝'
+    })
+    
+    this.setData({
+      id:curId
+    })
+    this.getExperts();
    },
 
   onPullDownRefresh:function(){

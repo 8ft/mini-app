@@ -6,7 +6,6 @@
     "pages/tabBar/mine/index",
     "pages/user/wxLogin/index",
     "pages/user/bind/index",
-    "pages/user/signin/index",
     "pages/tabBar/discover/index"
   ],
   "subpackages": [

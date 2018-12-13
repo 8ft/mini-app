@@ -1,15 +1,10 @@
 // components/project/card/card.js
 Component({
-  
   properties: {
-    data:Object
-  },
-
-  data: {
-    
-  },
-
-  methods: {
-
+    data:Object,
+    showAuthor:{
+      type:Boolean,
+      value:false
+    }
   }
 })

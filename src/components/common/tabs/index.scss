@@ -3,10 +3,11 @@
 .tabs{width:100%;border-bottom:$border;background:#fff;
     &.fixed{position:fixed;top:0;left:0;right:0;z-index:$topFloor;}
     scroll-view{width:100%;white-space:nowrap;overflow: hidden;}
-    .tab{display:inline-block;text-align:center;font-weight:400;padding:0 32rpx;font-size:$l;color:$lightBlack;height:84rpx;line-height:84rpx;
+    .tab{display:inline-block;text-align:center;font-weight:400;margin:0 32rpx;font-size:$l;color:$lightBlack;height:84rpx;line-height:84rpx;
+        view{display: inline-block;}
         &.active{color:$darkBlue;font-weight:bold;}
     }
-    .tab-underline{height:6rpx;background:$darkBlue;}
+    .tab-underline{width:0;height:6rpx;background:$darkBlue;}
 }
 
 .place-holder{background:#fff;height:84rpx;line-height:84rpx;}

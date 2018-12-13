@@ -2,8 +2,8 @@
 
 <view class="tabs {{fixed?'fixed':''}}">
   <scroll-view id="scrollView" scroll-x="true">
-    <view wx:for="{{tabs}}" id="tab{{index}}" bindtap="tabClick" data-index="{{index}}" class="tab custom-class {{active===index?'active':''}}">
-      {{item}}
+    <view wx:for="{{tabs}}" bindtap="tabClick" data-index="{{index}}" class="tab custom-class {{active===index?'active':''}}">
+      <view id="tab{{index}}">{{item}}</view>
     </view>
     <view id="tabUnderline" class='tab-underline' animation="{{animationData}}"></view>
   </scroll-view>

@@ -23,7 +23,7 @@
         <text>{{blogInfo.fansNum}}</text>
         <text>粉丝</text>
     </navigator>
-    <navigator hover-class="none" url="/pages/mine/blogs/index?id={{user.userId}}">
+    <navigator hover-class="none" url="/pages/mine/blogs/index?id={{user.userId}}&blogNum={{blogInfo.articleNum}}&collectNum={{blogInfo.favoriteNum}}">
         <text>{{blogInfo.articleNum}}</text>
         <text>博文</text>
     </navigator>

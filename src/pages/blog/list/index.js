@@ -82,6 +82,10 @@ Page(observer({
     let nomore = this.data.nomore
     if (nomore)return
 
+    this.setData({
+      loading:true
+    })
+
     let pIndex = this.data.pageIndex
     let res = await app.request.post('/blog/article/getList',{
       queryType:1,
@@ -105,7 +109,8 @@ Page(observer({
           return blog
         })),
         pageIndex:pIndex,
-        nomore:nomore
+        nomore:nomore,
+        loading:false
       })
     }
     wx.stopPullDownRefresh()

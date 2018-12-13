@@ -1,7 +1,9 @@
 // components/tabs/tabs.js
 Component({
   externalClasses:['custom-class'],
-
+  options: {
+    addGlobalClass: true,
+  },
   properties: {
     active:{
       type:Number,
@@ -11,6 +13,10 @@ Component({
     fixed:{
       type:Boolean,
       value:false
+    },
+    underLineRatio:{
+      type:Number,
+      value:1
     }
   },
   data: {
@@ -54,10 +60,13 @@ Component({
           size: true,
           rect:true
         }, (res) => {
-          let width = res.width / 2
+          const ratio=this.properties.underLineRatio
+          const width = res.width *ratio
+          const diff=res.width*(1-ratio)/2
+
           this.setData({
             active: index,
-            animationData: this.animation.width(width).translateX(sv.scrollLeft+res.left + width/2).step().export()
+            animationData: this.animation.width(width).translateX(sv.scrollLeft+res.left + diff).step().export()
           })
         }).exec()
 

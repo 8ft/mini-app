@@ -3,7 +3,7 @@
 <block wx:if="{{props.stores.account.logged_in}}">
 
   <view class='big-title'>我的工作</view>
-  <tabs custom-class="reset-tabs" tabs="{{['我的项目','申请项目']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+  <tabs under-line-ratio="{{.5}}" custom-class="reset-tabs" tabs="{{['我的项目','申请项目']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 
   <scroll-view class='types' scroll-x="true">
     <!--我的项目-->
