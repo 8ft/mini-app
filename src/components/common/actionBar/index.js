@@ -1,5 +1,6 @@
 // components/common/actionBar/index.js
 
+let isIPX=false
 
 Component({
   externalClasses:['custom-class'],
@@ -14,9 +15,18 @@ Component({
     isIPX:false
   },
 
+  created:function(){
+    wx.getSystemInfo({
+      success: function(res) {
+        if(/iPhone X/.test(res.model))
+          isIPX=true
+        }
+     })
+  },
+
   attached:function(){
     this.setData({
-      isIPX:wx.getStorageSync('isIPX')||false
+      isIPX:isIPX
     })
   },
 

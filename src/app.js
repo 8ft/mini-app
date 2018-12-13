@@ -9,12 +9,6 @@ App({
     if(user){
       this.stores.account.logged_in=true
     }
-    wx.getSystemInfo({
-      success: function(res) {
-        if(/iPhone X/.test(res.model))
-          wx.setStorageSync('isIPX',true)
-        }
-     })
   },
 
   stores: stores,
