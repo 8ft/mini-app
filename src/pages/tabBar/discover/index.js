@@ -7,18 +7,38 @@ Page(observer({
     stores: app.stores
   },
 
-  onShareAppMessage: function (res) {
-    return {
-      title: '接包发包专业平台'
-    }
-  },
-
   data: {
+   pageIndex:0,
+
    banners:null,
    types: [],
-   pageIndex: 1,
-   blogs:[],
-   nomore: false
+   blogs:{
+     list:[],
+     pageIndex: 1,
+     nomore: false
+   },
+
+   activeFilter:'',
+   sortWay:{
+     index:0,
+     list:[]
+   },
+   jobTypes:{
+     index:0,
+     list:[]
+   },
+   exp:{
+     index:0,
+     list:[]
+   },
+   selectedCity:{},
+   cities:null,
+
+   experts:{
+      list:[],
+      pageIndex: 1,
+      nomore: false
+    }
   },
 
   onShow:function(){
@@ -34,7 +54,6 @@ Page(observer({
   },
 
   onPullDownRefresh:function(){
-    this.getBanner()
     this.refresh()
   },
 
@@ -42,13 +61,36 @@ Page(observer({
     this.getBlogs()
   },
 
-  refresh:function(){
+  switchPage:function(e){
+    const pageIndex=e.currentTarget.dataset.index
     this.setData({
-      pageIndex: 1,
-      blogs: [],
-      nomore: false
+      pageIndex:pageIndex
     })
-    this.getBlogs()
+    if(pageIndex===1&&!this.data.cities){
+      this.getFilter()
+      // this.getExperts()
+    }
+  },
+
+  refresh:function(){
+    if(this.data.pageIndex===0){
+      this.setData({
+        'blogs.pageIndex': 1,
+        'blogs.list': [],
+        'blogs.nomore': false
+      })
+      this.getBanner()
+      this.getBlogs()
+    }else{
+      if(this.data.experts.list.length>0){
+        this.setData({
+          'experts.pageIndex': 1,
+          'experts.list': [],
+          'experts.nomore': false
+        })
+      }
+      this.getExperts()
+    }
   },
 
   getBanner:async function(){
@@ -72,10 +114,10 @@ Page(observer({
   },
 
   getBlogs: async function (){
-    let nomore = this.data.nomore
+    let nomore = this.data.blogs.nomore
     if (nomore)return
 
-    let pIndex = this.data.pageIndex
+    let pIndex = this.data.blogs.pageIndex
     let res = await app.request.post('/blog/article/getList',{
       queryType:1,
       articleType:1,
@@ -92,14 +134,14 @@ Page(observer({
       }
     
       this.setData({
-        blogs: this.data.blogs.concat(res.data.list.map(blog=>{
+        'blogs.list': this.data.blogs.list.concat(res.data.list.map(blog=>{
           if(blog.articleBrief.length>76){
             blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
           }
           return blog
         })),
-        pageIndex:pIndex,
-        nomore:nomore
+        'blogs.pageIndex':pIndex,
+        'blogs.nomore':nomore
       })
     }
     wx.stopPullDownRefresh()
@@ -116,5 +158,60 @@ Page(observer({
       case 'click':
       break;
     }
+  },
+
+  selectFilter: function (e) {
+    if(this.data.activeFilter){
+      this.setData({
+        activeFilter:''
+      })
+    }else{
+      this.setData({
+        activeFilter: e.currentTarget.dataset.name
+      })
+    }
+  },
+
+  closePopup:function(){
+    this.setData({
+      activeFilter: ''
+    })
+  },
+
+  filter:function(e){
+    let data=e.currentTarget.dataset
+    switch(data.type){
+      case 'sortWay':
+        this.setData({
+          'sortWay.index':data.index
+        })
+      break;
+    }
+
+    this.refresh()
+    this.close()
+  },
+
+  getFilter: async function () {
+    let res = await app.request.post('/user/talent/searchCondition')
+    let cities = await app.request.post('/dict/dictZone/talentAreaList')
+    let jobTypes = await app.request.post('/dict/dictCommon/getDicts', {
+      dictType: 'job_type',
+      resultType: '1'
+    })
+
+    if(res.code===0&&cities.code===0&&jobTypes.code===0){
+     this.setData({
+       'sortWay.list':res.data.sortFieldOptions,
+       'jobTypes.list':jobTypes.data.data[0].dataList,
+       'exp.list':res.data.workExperienceOptions,
+       cities:cities.data.data
+     })
+    }
+  },
+
+  selectCity:function(e){
+    console.log(e.detail.city)
   }
+
 }))

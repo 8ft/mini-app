@@ -58,4 +58,4 @@ gulp.task('watch',()=>{
     gulp.watch('./src/**/*', ['clean:wxss']);
 })
 
-gulp.task('default',['watch'] )
+gulp.task('default',['clean:wxss'] )

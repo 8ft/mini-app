@@ -1,0 +1,20 @@
+
+<view class="cities">
+    <scroll-view scroll-y="true" scroll-into-view="{{scrollTo}}" scroll-with-animation="true"> 
+      <view class='hot'>
+        <view>热门城市</view>
+        <text wx:for="{{cities.hot}}" data-city="{{item}}" bindtap='select'>{{item.zoneName}}</text>
+      </view>
+
+      <view class='sep'>按字母排序</view>
+
+      <view id="{{index}}" class='list' wx:for="{{cities.list}}" wx:if="{{item.length>0}}">
+        <text class='letter'>{{index}}</text>
+        <list-item wx:for="{{item}}" wx:for-item="city" data-city="{{city}}" name="{{city.zoneName}}" bindtap="_select"></list-item>
+      </view>
+    </scroll-view>
+
+    <view class='locate'>
+      <view wx:for="{{cities.existLetters}}" bindtap='_locate' data-letter="{{item}}">{{item}}</view>
+    </view>
+</view>

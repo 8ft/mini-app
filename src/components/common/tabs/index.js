@@ -1,9 +1,6 @@
 // components/tabs/tabs.js
 Component({
   externalClasses:['custom-class'],
-  options: {
-    addGlobalClass: true,
-  },
   properties: {
     active:{
       type:Number,

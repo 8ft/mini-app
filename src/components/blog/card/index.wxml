@@ -1,7 +1,7 @@
 <!--components/project/card/card.wxml-->
 <navigator class='blog' hover-class="none" url="/pages/blog/detail/index?id={{data.id}}">
   <view wx:if="{{showAuthor}}" class="author">
-    <image mode='aspectFill' src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>{{data.nickName}}
+    <image lazy-load="true" mode='aspectFill' src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>{{data.nickName}}
   </view>
   <text class="title">{{data.articleTitle}}</text>
   <text class="pre-view">{{data.articleBrief}}</text>

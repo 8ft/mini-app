@@ -1,16 +1,3 @@
-<!--pages/mine/personalInfo/base/city/index.wxml-->
-<view class='hot'>
-  <view>热门城市</view>
-  <text wx:for="{{cities.hot}}" data-city="{{item}}" bindtap='select'>{{item.zoneName}}</text>
-</view>
-
-<view class='sep'>按字母排序</view>
-
-<view class='list' wx:for="{{cities.list}}">
-  <text id="{{index}}" class='letter'>{{index}}</text>
-  <list-item wx:for="{{item}}" wx:for-item="city" data-city="{{city}}" name="{{city.zoneName}}" bindtap="select"></list-item>
-</view>
-
-<view class='locate'>
-  <view wx:for="{{letters}}" bindtap='locate' data-letter="{{item}}">{{item}}</view>
+<view class="cities">
+  <city wx:if="{{cities}}" data="{{cities}}" bindinit="cacheCityData" bindselect="select"></city>
 </view>

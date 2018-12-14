@@ -1,23 +1,41 @@
 <view class="switch">
-    <view class="active">博客</view>
-    <view>人才库</view>
+    <view class="{{pageIndex===0?'active':''}}" data-index="{{0}}" bindtap="switchPage">博客</view>
+    <view class="{{pageIndex===1?'active':''}}" data-index="{{1}}" bindtap="switchPage">人才库</view>
 </view>
 
-<swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
-    <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>
-        <image src="{{banner.coverImage}}"></image>
-    </swiper-item>
-</swiper>
+<block wx:if="{{pageIndex===0}}">
+    <swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
+        <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>
+            <image src="{{banner.coverImage}}"></image>
+        </swiper-item>
+    </swiper>
+    <scroll-view class='types' scroll-x="true">
+        <navigator wx:for="{{types}}" url="/pages/blog/list/index?id={{item.id}}&index={{index}}" hover-class="none">
+            <image src="{{item.icon}}"></image>
+            <text>{{item.name}}</text>
+        </navigator>
+    </scroll-view>
+    <view class="blogs">
+        <blog-card wx:for="{{blogs.list}}" data="{{item}}" show-author="true"></blog-card>
+    </view>
+</block>
 
-<scroll-view class='types' scroll-x="true">
-    <navigator wx:for="{{types}}" url="/pages/blog/list/index?id={{item.id}}&index={{index}}" hover-class="none">
-        <image src="{{item.icon}}"></image>
-        <text>{{item.name}}</text>
-    </navigator>
-</scroll-view>
+<block wx:else>
+    <view class='filter'>
+        <view class="filter-item {{activeFilter==='sortWay'?'on':''}}" data-name="sortWay" bindtap="selectFilter">{{sortWay[0].text||'默认排序'}}<view></view></view>
+        <view class="filter-item {{activeFilter==='jobTypes'?'on':''}}" data-name="jobTypes" bindtap="selectFilter">{{dicts[1].dictList[budgetIndex].dictName||'职位'}}<view></view></view>
+        <view class="filter-item {{activeFilter==='exp'?'on':''}}" data-name="exp" bindtap="selectFilter">{{exp[0].text||'经验'}}<view></view></view>
+        <view class="filter-item {{activeFilter==='city'?'on':''}}" data-name="city" bindtap="selectFilter">{{selectedCity.zoneName||'地点'}}<view></view></view>
+    </view>
 
-<view class="blogs">
-    <blog-card wx:for="{{blogs}}" data="{{item}}" show-author="true"></blog-card>
-</view>
+    <popup active="{{activeFilter==='sortWay'}}" margin="160rpx" bindhide='closePopup'>
+        <view class='types'>
+            <list-item wx:for="{{sortWay.list}}" data-index="{{index}}" data-type="sortWay" bindtap="filter" name="{{item.text}}" active="{{sortWay.index===index}}"></list-item>
+        </view>
+    </popup>
+
+    <!-- <city wx:if="{{cities}}" data="{{cities}}" bindselect="selectCity"></city> -->
+
+</block>
 
 
