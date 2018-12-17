@@ -32,16 +32,6 @@
     <nodata wx:elif="{{!loading}}" name='bolgReply'></nodata>
 </view>
 
-<action-bar id="actionBar" custom-class="action-bar-reset">
-    <view class=".action-bar-con">
-        <input placeholder="我要评论..." disabled="true" bindtap="download"/>
-        <view class="iconfont {{detail.favoriteState===1?'collected icon-yishoucang':'icon-shoucang1'}}" bindtap="collect"></view>
-        <view class="iconfont icon-pinglun" bindtap="scrollToComments"></view>
-        <text class="apply-num">{{detail.comments.count}}</text>
-    </view>
-</action-bar>
-
-
 <popup position="bottom" active="{{boxSwitch}}">
     <view class="comments-box"> 
         <view class="header">
@@ -77,3 +67,14 @@
         </action-bar>
     </view>
 </popup>
+
+<action-bar id="actionBar" custom-class="action-bar-reset">
+    <view class=".action-bar-con">
+        <input placeholder="我要评论..." disabled="true" bindtap="download"/>
+        <view class="iconfont {{detail.favoriteState===1?'collected icon-yishoucang':'icon-shoucang1'}}" bindtap="collect"></view>
+        <view class="iconfont icon-pinglun" bindtap="scrollToComments"></view>
+        <text class="apply-num">{{detail.comments.count}}</text>
+    </view>
+</action-bar>
+
+

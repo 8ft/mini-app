@@ -3,6 +3,7 @@
 let isIPX=false
 
 Component({
+  externalClasses:['custom-class'],
   properties: {
 
   },
