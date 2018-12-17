@@ -10,6 +10,11 @@ const path = require('path');
 const config = require('./build/config');
 const hasRmCssFiles = new Set();
 
+gulp.task('clear',()=>{
+    return gulp.src('./dist/*')
+    .pipe(clean({ force: true }));
+});
+
 gulp.task('copy', () => gulp.src(['./src/**/*', '!./src/**/*.scss'])
     .pipe(changed('./dist'))
     .pipe(gulp.dest('./dist')));

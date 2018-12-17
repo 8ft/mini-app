@@ -1,15 +1,8 @@
-// components/project/card/card.js
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
     project:Object
   },
 
-  /**
-   * 组件的初始数据
-   */
   data: {
     uid:''
   },
@@ -21,12 +14,5 @@ Component({
         uid: user.userId
       })
     }
-  },
-
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-
   }
 })

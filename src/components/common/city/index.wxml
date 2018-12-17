@@ -1,9 +1,9 @@
 
-<view class="cities">
+<view class="cities" style="height:{{height}}">
     <scroll-view scroll-y="true" scroll-into-view="{{scrollTo}}" scroll-with-animation="true"> 
       <view class='hot'>
         <view>热门城市</view>
-        <text wx:for="{{cities.hot}}" data-city="{{item}}" bindtap='select'>{{item.zoneName}}</text>
+        <text wx:for="{{cities.hot}}" data-city="{{item}}" bindtap='_select'>{{item.zoneName}}</text>
       </view>
 
       <view class='sep'>按字母排序</view>

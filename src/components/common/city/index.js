@@ -3,6 +3,7 @@ const getLetter = require('../../../utils/pinyin.js')
   
 Component({
   properties: {
+    height:String,
     data:{
       type:Object,
       value:null,

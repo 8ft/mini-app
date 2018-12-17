@@ -20,15 +20,16 @@ Page(observer({
 
    activeFilter:'',
    sortWay:{
-     index:0,
+     selected:{},
      list:[]
    },
    jobTypes:{
-     index:0,
+     parent:'',
+     selected:{},
      list:[]
    },
    exp:{
-     index:0,
+    selected:{},
      list:[]
    },
    selectedCity:{},
@@ -58,7 +59,11 @@ Page(observer({
   },
 
   onReachBottom:function(){
-    this.getBlogs()
+    if(this.data.pageIndex===0){
+      this.getBlogs()
+    }else{
+      this.getExperts()
+    }
   },
 
   switchPage:function(e){
@@ -68,7 +73,7 @@ Page(observer({
     })
     if(pageIndex===1&&!this.data.cities){
       this.getFilter()
-      // this.getExperts()
+      this.getExperts()
     }
   },
 
@@ -82,13 +87,11 @@ Page(observer({
       this.getBanner()
       this.getBlogs()
     }else{
-      if(this.data.experts.list.length>0){
-        this.setData({
-          'experts.pageIndex': 1,
-          'experts.list': [],
-          'experts.nomore': false
-        })
-      }
+      this.setData({
+        'experts.pageIndex': 1,
+        'experts.list': [],
+        'experts.nomore': false
+      })
       this.getExperts()
     }
   },
@@ -183,13 +186,31 @@ Page(observer({
     switch(data.type){
       case 'sortWay':
         this.setData({
-          'sortWay.index':data.index
+          'sortWay.selected':data.item
+        })
+      break;
+      case 'exp':
+        this.setData({
+          'exp.selected':data.item
+        })
+      break;
+      case 'jobTypes':
+        this.setData({
+          'jobTypes.selected':data.item
         })
       break;
     }
 
     this.refresh()
-    this.close()
+    this.closePopup()
+  },
+
+  selectCity:function(e){
+    this.setData({
+      selectedCity:e.detail.city
+    })
+    this.refresh()
+    this.closePopup()
   },
 
   getFilter: async function () {
@@ -203,15 +224,48 @@ Page(observer({
     if(res.code===0&&cities.code===0&&jobTypes.code===0){
      this.setData({
        'sortWay.list':res.data.sortFieldOptions,
-       'jobTypes.list':jobTypes.data.data[0].dataList,
+       'sortWay.selected':res.data.sortFieldOptions[0],
+       'jobTypes.list':jobTypes.data.data[0].dictList,
        'exp.list':res.data.workExperienceOptions,
        cities:cities.data.data
      })
     }
   },
 
-  selectCity:function(e){
-    console.log(e.detail.city)
+  scrollToJobTypes:function(e){
+    this.setData({
+      'jobTypes.parent':'job'+e.currentTarget.dataset.code
+    })
+  },
+
+  getExperts:async function(){
+    const data=this.data
+    let nomore = data.experts.nomore
+    if (nomore)return
+
+    let pIndex = data.experts.pageIndex
+    let res = await app.request.post('/user/talent/searchTalents',{
+      positionType:data.jobTypes.selected.dictValue||'',
+      workExperience:data.exp.selected.value||'',
+      city:data.selectedCity.zoneCode||'',
+      sortField:data.sortWay.selected.value||'',
+      pageIndex:pIndex
+    })
+
+    if (res.code === 0) {
+      if (res.data.page > pIndex){
+        pIndex++
+      }else{
+        nomore=true
+      }
+    
+      this.setData({
+        'experts.list': data.experts.list.concat(res.data.list),
+        'experts.pageIndex':pIndex,
+        'experts.nomore':nomore
+      })
+    }
+    wx.stopPullDownRefresh()
   }
 
 }))

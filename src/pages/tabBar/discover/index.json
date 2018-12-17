@@ -4,6 +4,7 @@
   "onReachBottomDistance":true,
   "usingComponents": {
     "blog-card":"/components/blog/card/index",
+    "expert-card":"/components/expert/card/index",
     "city":"/components/common/city/index",
     "popup": "/components/common/popup/index",
     "list-item": "/components/common/listItem/index"

@@ -1,9 +1,9 @@
 <!--components/common/actionBar/index.wxml-->
-<view class="action-bar {{isIPX?'ipx':''}} custom-class">
-  <view class='placeholder'></view>
+<view class="action-bar {{isIPX?'ipx':''}}">
   <view class='bar'>
     <slot></slot>
   </view>
+  <view class='placeholder'></view>
 </view>
 
 

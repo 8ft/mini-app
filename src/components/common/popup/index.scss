@@ -1,7 +1,7 @@
 @import '../../../assets/scss/var.scss'; 
 
 .popup,.modal{transition:all .3s;-webkit-transition:all .3s;}
-.popup{position:fixed;top:0;left:0;width:100%;z-index:$middleFloor;
+.popup{position:fixed;left:0;width:100%;z-index:$middleFloor;
     &.top.hide{transform:translateY(-100%);}
     &.bottom.hide{transform:translateY(100%);}}
 
