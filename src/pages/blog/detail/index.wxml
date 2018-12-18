@@ -33,7 +33,7 @@
 </view>
 
 <popup position="bottom" active="{{boxSwitch}}">
-    <view class="comments-box"> 
+    <view class="comments-box" style="height:{{boxHeight}}px;"> 
         <view class="header">
             <view class="iconfont icon-guanbi1" bindtap="closeBox"></view>
             {{comments[cIndex].replies.length===0?'暂无回复':comments[cIndex].replies.length+'条回复'}}
@@ -60,7 +60,7 @@
             </view>
         </scroll-view>
 
-        <action-bar custom-class="action-bar-reset">
+        <action-bar custom-class="action-bar-reset" position="absolute">
             <view class=".action-bar-con">
                 <input placeholder="我要评论..." disabled="true" bindtap="download"/>
             </view>

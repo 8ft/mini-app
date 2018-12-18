@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "我的人才库",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance":true,
+    "usingComponents": {
+        "expert-card":"/components/expert/card/index",
+        "nodata":"/components/nodata/nodata"
+    }
+}

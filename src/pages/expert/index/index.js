@@ -22,7 +22,11 @@ Page({
     this.setData({
       uid:options.id
     })
-    this.getUserInfo(options.id)
+    this.getUserInfo()
+  },
+
+  onPullDownRefresh:function(){
+    this.getUserInfo()
   },
 
   onReachBottom:function(){
@@ -72,9 +76,9 @@ Page({
     }
   },
 
-  getUserInfo: async function (id) {
+  getUserInfo: async function () {
     let res = await app.request.post('/user/userAuth/viewUserBaseInfo', {
-      userId: id
+      userId: this.data.uid
     })
     if (res.code !== 0) return
 

@@ -1,14 +1,8 @@
-// components/collector/contactInfo/index.js
 
-//获取应用实例
 const app = getApp()
-//引入async await依赖库
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
     show:{
       type:Boolean,
@@ -16,18 +10,12 @@ Component({
     }
   },
 
-  /**
-   * 组件的初始数据
-   */
   data: {
     qq:'',
     wechat:'',
     disable:true
   },
 
-  /**
-   * 组件的方法列表
-   */
   methods: {
     input: function (e) {
       let inputType = e.currentTarget.dataset.type

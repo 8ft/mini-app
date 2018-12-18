@@ -40,7 +40,8 @@
         "wallet/index",
         "tradeDetail/index",
         "follow/index",
-        "fans/index"
+        "fans/index",
+        "experts/index"
       ]
     },
     {

@@ -1,6 +1,14 @@
-<!--components/common/popup/index.wxml-->
-<view class="popup {{position}} {{active?'':'hide'}}" style="{{position+':'+margin}};" catchtouchmove="ture">
-  <slot></slot>
-</view>
+
+<block wx:if="{{position==='center'}}">
+  <view wx:if="{{active}}" class="popup {{position}}" catchtouchmove="ture">
+    <slot></slot>
+  </view>
+</block>
+
+<block wx:else>
+  <view class="popup {{position}} {{active?'':'hide'}}" style="{{position+':'+margin}};" catchtouchmove="ture">
+    <slot></slot>
+  </view>
+</block>
 
 <view hidden="{{!active}}" class="modal" bindtap='hide'></view>

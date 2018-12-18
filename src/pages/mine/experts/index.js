@@ -3,7 +3,6 @@ const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 
 Page({
   data: {
-    id:'',
     experts:[],
     pageIndex: 1,
     nomore: false,
@@ -11,16 +10,6 @@ Page({
    },
  
    onLoad:function(options){
-    let myId=wx.getStorageSync('user').userId
-    let curId=options.id
-
-    wx.setNavigationBarTitle({
-      title: myId==curId?'我的粉丝':'TA的粉丝'
-    })
-    
-    this.setData({
-      id:curId
-    })
     this.getExperts();
    },
 
@@ -41,19 +30,6 @@ Page({
     this.getExperts()
   },
 
-  follow:async function(e){
-    const index=e.currentTarget.dataset.index
-    const target=this.data.experts[index]
-    const res = await app.request.post('/blog/attentionInfo/follow',{
-      attentionUserId:target.userId
-    })
-    if(res.code!==0)return
-    target.checked=target.checked===0?1:0
-    this.setData({
-      experts:this.data.experts
-    })
-  },
-
   getExperts: async function (){
     let nomore = this.data.nomore
     if (nomore)return
@@ -62,11 +38,8 @@ Page({
     })
 
     let pIndex = this.data.pageIndex
-    let res = await app.request.post('/blog/attentionInfo/getPageList',{
-      type:1,
-      userId:this.data.id,
+    let res = await app.request.post('/user/talent/myTalents',{
       pageIndex:pIndex,
-      pageSize:10
     })
 
     if (res.code === 0) {

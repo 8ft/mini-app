@@ -4,8 +4,12 @@ let isIPX=false
 
 Component({
   externalClasses:['custom-class'],
-  properties: {
 
+  properties: {
+    position:{
+      type:String,
+      value:'fixed'
+    }
   },
 
   data: {

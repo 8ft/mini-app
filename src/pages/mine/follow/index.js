@@ -34,10 +34,10 @@ Page({
   refresh:function(){
     this.setData({
       pageIndex: 1,
-      blogs: [],
+      experts: [],
       nomore: false
     })
-    this.getBlogs()
+    this.getExperts()
   },
 
   follow:async function(e){

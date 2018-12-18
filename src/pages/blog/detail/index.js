@@ -16,16 +16,24 @@ Page(observer({
 
     cIndex:-1,
     boxSwitch:false,
+    boxHeight:0,
     scrollViewHeight:0,
     loading:true
   },
 
   onLoad:function(options){
     wx.getSystemInfo({
-      success: data => {
-        let fixedHeight=wx.getStorageSync('isIPX')?34:0
+      success: res => {
+        let isIPX=false
+        if(/iPhone X/.test(res.model)){
+          isIPX=true
+        }
+
+        let fixedHeight=isIPX?34:0
+        let boxHeight=res.windowHeight*.98
         this.setData({
-          scrollViewHeight: data.windowHeight*.98-fixedHeight - (180+fixedHeight)/data.pixelRatio
+          boxHeight:boxHeight,
+          scrollViewHeight: boxHeight-fixedHeight - (180+fixedHeight)/res.pixelRatio
         })
       }
     })

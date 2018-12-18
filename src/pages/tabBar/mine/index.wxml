@@ -36,6 +36,12 @@
     <text class='arrow-right'>{{state}}</text>
 </view>
 
+<view class='entrances' bindtap='go' data-url="/pages/mine/experts/index">
+    <image src='/assets/img/mine/icon_my_talentpool@3x.png'></image>
+    我的人才库
+    <text class='arrow-right'></text>
+</view>
+
 <view class='entrances' bindtap='go' data-url="/pages/mine/wallet/index">
     <image src='/assets/img/mine/mine_wdqb@3x.png'></image>
     我的钱包
