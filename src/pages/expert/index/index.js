@@ -109,6 +109,8 @@ Page({
       blogInfo:blogInfo.data,
       tags:this.data.tags
     })
+
+    wx.stopPullDownRefresh()
   },
 
   getBlogTags: async function (){
