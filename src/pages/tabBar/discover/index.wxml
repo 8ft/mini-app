@@ -33,15 +33,15 @@
             <view></view>
         </view>
         <view class="filter-item {{activeFilter==='jobTypes'?'on':''}}" data-name="jobTypes" bindtap="selectFilter">
-            <text>{{jobTypes.selected.dictName||'职位'}}</text>
+            <text>{{jobTypes.selected.dictName&&jobTypes.selected.dictName!=='不限'?jobTypes.selected.dictName:'职位'}}</text>
             <view></view>
         </view>
         <view class="filter-item {{activeFilter==='exp'?'on':''}}" data-name="exp" bindtap="selectFilter">
-            <text>{{exp.selected.text||'经验'}}</text>
+            <text>{{exp.selected.text&&exp.selected.text!=='经验'?exp.selected.text:'经验'}}</text>
             <view></view>
         </view>
         <view class="filter-item {{activeFilter==='city'?'on':''}}" data-name="city" bindtap="selectFilter">
-            <text>{{selectedCity.zoneName||'地点'}}</text>
+            <text>{{selectedCity.zoneName&&selectedCity.zoneName!=='不限'?selectedCity.zoneName:'地点'}}</text>
             <view></view>
         </view>
     </view>
@@ -53,6 +53,7 @@
     </popup>
 
     <popup active="{{activeFilter==='exp'}}" margin="160rpx" bindhide='closePopup'>
+        <list-item data-item="{text:'不限',value:''}" data-type="exp" bindtap="filter" name="不限" active="{{!exp.selected.text}}"></list-item>
         <list-item wx:for="{{exp.list}}" data-item="{{item}}" data-type="exp" bindtap="filter" name="{{item.text}}" active="{{exp.selected.text===item.text}}"></list-item>
     </popup>
 
@@ -62,6 +63,7 @@
                 <list-item wx:for="{{jobTypes.list}}" data-code="{{item.dictValue}}" bindtap="scrollToJobTypes" name="{{item.dictName}}"></list-item>
             </view>
             <scroll-view scroll-y="true" scroll-into-view="{{jobTypes.parent}}" scroll-with-animation="true">
+                <list-item data-item="{dictName:'不限',dictValue:''}" data-type="jobTypes" bindtap="filter" name="不限" active="{{!jobTypes.selected.dictValue}}"></list-item>
                 <view id="job{{item.dictValue}}" wx:for="{{jobTypes.list}}">
                     <list-item wx:for="{{item.dictList}}" wx:for-item="job" data-item="{{job}}" data-type="jobTypes" bindtap="filter" name="{{job.dictName}}" active="{{jobTypes.selected.dictValue===job.dictValue}}"></list-item>
                 </view>

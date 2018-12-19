@@ -4,6 +4,8 @@ const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 Page({
 
   data: {
+    nodataHeight:0,
+
     uid:'',
     typeIndex:0,
     user:null,
@@ -109,6 +111,21 @@ Page({
       blogInfo:blogInfo.data,
       tags:this.data.tags
     })
+
+    if(data.userState!==2&&this.data.nodataHeight===0){
+      const query = wx.createSelectorQuery()
+      query.select('#nodata').fields({
+        rect: true
+      }, res => {
+        wx.getSystemInfo({
+          success: data => {
+            this.setData({
+              nodataHeight: data.windowHeight - res.top
+            })
+          }
+        })
+      }).exec()
+    }
 
     wx.stopPullDownRefresh()
   },

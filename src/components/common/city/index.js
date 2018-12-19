@@ -41,11 +41,16 @@ Component({
           cities:cityList
         })
       }else{
-        const hotCitys = cityList.filter((item, index, array) => {
-          return item.zoneLevel === 1
-        })
+        let hotCitys=[
+          {
+            zoneCode:'',
+            zoneName:'不限'
+          }
+        ]
         const cities= {
-          hot:hotCitys,
+          hot:hotCitys.concat(cityList.filter((item, index, array) => {
+            return item.zoneLevel === 1
+          })),
           list:{}
         }
 

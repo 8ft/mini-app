@@ -1,8 +1,9 @@
 <!--pages/expert/index/index.wxml-->
 <view class="part">
   <view class='base-info'>
-    <view class="base">
-      <image class='avatar' src="{{user.userAvatar}}"></image>
+    <view class="base" wx:if="{{user.userState===2}}">
+      <image mode="aspectFill" class='avatar' src="{{user.userAvatar}}"></image>
+      <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
       <view class='name'>{{user.nickName}}<text class="iconfont icon-xingbie{{user.userBaseInfo.sex===1?'nan':'nv'}}"></text></view>
       <text class='price'>{{user.userBaseInfo.daySalary}}元/天</text>
       <text class='p-title'>{{user.userBaseInfo.positionTitle}}</text>
@@ -10,6 +11,15 @@
       <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperience}}年经验</view>
       <view class='info'><text class='iconfont icon-tuandui'></text>{{user.userBaseInfo.settleTypeCn}}</view>
       <view class='info'><text class='iconfont icon-yiwancheng'></text>已完成{{user.finishOrderNums}}单</view>
+    </view>
+
+    <view class="base" wx:else>
+      <image mode="aspectFill" class='avatar' src="{{user.userAvatar||'/assets/img/default/avatar.png'}}"></image>
+      <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
+      <view class='name'>{{user.nickName}}</view>
+      <text class='p-title'>未认证用户</text>
+      <view class='info city'><text class='iconfont icon-weizhi'></text>无法获得地址</view>
+      <view class='info city'>用户还未填写任何相关个人信息哦~</view>
     </view>
 
     <view class="blog">
@@ -21,9 +31,9 @@
           <text>{{blogInfo.fansNum}}</text>
           <text>粉丝</text>
       </navigator>
-      <navigator hover-class="none" url="/pages/mine/blogs/index?id={{user.userId}}">
-          <text>{{blogInfo.articleNum}}</text>
-          <text>博文</text>
+      <navigator hover-class="none" url="/pages/expert/collection/index?id={{user.userId}}">
+          <text>{{blogInfo.favoriteNum}}</text>
+          <text>收藏</text>
       </navigator>
     </view>
   </view>
@@ -31,7 +41,7 @@
 
 <tabs under-line-ratio="{{.5}}" wx:if="{{blogInfo}}" custom-class="reset-tabs" tabs="{{['基础信息','文章('+blogInfo.articleNum+')']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 
-<block hidden="{{typeIndex===1}}" wx:if="{{typeIndex===0}}">
+<block hidden="{{typeIndex===1}}" wx:if="{{typeIndex===0&&user.userState===2}}">
   <view class="part">
     <view class='title'>
       I
@@ -75,9 +85,13 @@
   </view>
 </block>
 
-<block hidden="{{typeIndex===0}}" wx:else>
+<block wx:elif="{{typeIndex===1}}">
   <scroll-view class='blog-types' scroll-x="true">
     <view class="type {{tagIndex===index?'active':''}}" wx:for="{{tags}}" data-index="{{index}}" bindtap='switchTag'>{{item.name+' '+item.articleNum}}</view>
   </scroll-view>
   <blog-card wx:for="{{blogs}}" data="{{item}}"></blog-card>
 </block>
+
+<view wx:else  id="nodata" style="position:relative;height:{{nodataHeight}}px;">
+  <nodata name='projects'></nodata>
+</view>

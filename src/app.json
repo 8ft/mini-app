@@ -55,7 +55,8 @@
       "root": "pages/expert",
       "pages": [
         "index/index",
-        "applicant/index"
+        "applicant/index",
+        "collection/index"
       ]
     },
     {

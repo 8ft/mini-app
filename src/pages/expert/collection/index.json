@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "TA的收藏",
+  "onReachBottomDistance":true,
+  "usingComponents": {
+    "nodata": "/components/nodata/nodata",
+    "blog-card":"/components/blog/card/index"
+  }
+}

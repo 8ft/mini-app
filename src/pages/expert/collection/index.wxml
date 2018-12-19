@@ -1,0 +1,5 @@
+
+<block wx:if="{{!loading&&list.length>0}}"> 
+  <blog-card wx:for="{{list}}" data="{{item}}" show-author="true"></blog-card>
+</block>
+<nodata wx:else name="projects"></nodata>

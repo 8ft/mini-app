@@ -14,7 +14,8 @@ page{box-sizing:border-box;background:linear-gradient(0deg,rgba(104,196,255,1),$
         .name{font-size:40rpx;color:$black;font-weight:500;display:flex;align-items:center;
             .iconfont{font-size:30rpx;margin-left:16rpx;}}
 
-        .avatar{position:absolute;width:128rpx;height:128rpx;border-radius:50%;top:48rpx;right:30rpx;}
+        .avatar{position:absolute;width:128rpx;height:128rpx;border-radius:50%;top:36rpx;right:36rpx;}
+        .followed{position:absolute;width:96rpx;height:40rpx;line-height:40rpx;text-align:center;background:$lightGray;color:#fff;font-size:22rpx;border-radius:99rpx;top:148rpx;right:52rpx;}
 
         .price,.base-info .p-title{line-height:74rpx;}
         .price{color:#ff5e2c;font-size:30rpx;margin-right:20rpx;}

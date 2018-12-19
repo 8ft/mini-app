@@ -226,7 +226,7 @@ Page(observer({
        'sortWay.list':res.data.sortFieldOptions,
        'sortWay.selected':res.data.sortFieldOptions[0],
        'jobTypes.list':jobTypes.data.data[0].dictList,
-       'exp.list':res.data.workExperienceOptions,
+       'exp.list':this.data.exp.list.concat(res.data.workExperienceOptions),
        cities:cities.data.data
      })
     }
