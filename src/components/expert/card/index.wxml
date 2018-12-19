@@ -2,7 +2,7 @@
 <view class="expert">
   <view class="card">
       <navigator class="info" hover-class="none" url="/pages/expert/index/index?id={{data.userId}}">
-        <image class="avatar" mode="aspectFill" src="{{data.userAvatar}}"></image>
+        <image class="avatar" mode="aspectFill" src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>
         <image class="type" mode="aspectFill" src="/assets/img/discover/{{data.settleType===2?'team':'personal'}}.png"></image>
         <view class="last-login">{{data.loginTimeCn}}</view>
         <view class="name"><text>{{data.nickName}}</text>{{data.positionTitle}}</view>

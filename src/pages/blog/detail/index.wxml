@@ -1,7 +1,7 @@
 <view class="title">{{detail.articleTitle}}</view>
 
 <view class="author">
-    <image mode='aspectFill' src="{{detail.userAvatar}}"></image> 
+    <image mode='aspectFill' src="{{detail.userAvatar||'/assets/img/default/avatar.png'}}"></image> 
     <view class="info">
         <text class="name">{{detail.nickName}}</text>
         <view class="other"><text>{{detail.articleSourceTypeName}}</text>{{detail.createTime+' · 阅读'+detail.viewNum}}</view>
