@@ -14,6 +14,10 @@ Page(observer({
     comments:[],
     commentsPostion:0,
 
+    replies:[],
+    nomore:false,
+    pageIndex:1,
+
     cIndex:-1,
     boxSwitch:false,
     boxHeight:0,
@@ -54,9 +58,28 @@ Page(observer({
     }
   },
 
-  openBox:function(e){
+  openBox:async function(e){
+    const index=e.currentTarget.dataset.index
+    if(index!==this.data.cIndex){
+      this.setData({
+        cIndex:index
+      })
+
+      if(this.data.replies.length>0){
+        this.setData({
+          replies:[],
+          pageIndex:1,
+          nomore:false
+        })
+      }
+
+      const comment=this.data.comments[index]
+      if(comment.replyNum>0){
+        await this.getReplies()
+      }
+    }
+
     this.setData({
-      cIndex:e.currentTarget.dataset.index,
       boxSwitch:true
     })
   },
@@ -118,7 +141,7 @@ Page(observer({
 
     let detail = await app.request.post('/blog/article/detail',{
       articleId:this.data.id,
-      comments:1
+      comments:2
     })
     if (detail.code !== 0) return
 
@@ -128,6 +151,32 @@ Page(observer({
       loading:false,
       detail:detail.data,
       comments:detail.data.comments.list
+    })
+  },
+
+  getReplies: async function () {
+    let nomore = this.data.nomore
+    if(nomore)return
+
+    let pIndex=this.data.pageIndex
+    let res = await app.request.post('/blog/comment/getList',{
+      articleId:this.data.id,
+      comments:2,
+      replyId:this.data.comments[this.data.cIndex].id,
+      pageIndex:pIndex
+    })
+    if (res.code !== 0) return
+
+    if (res.data.page > pIndex){
+      pIndex++
+    }else{
+      nomore=true
+    }
+
+    this.setData({
+      nomore:nomore,
+      pageIndex:pIndex,
+      replies:this.data.replies.concat(res.data.list)
     })
   },
 

@@ -111,7 +111,7 @@ Page(observer({
     })
     if (res.code === 0) {
       this.setData({
-        types: res.data
+        types: res.data.splice(1)
       })
     }
   },
