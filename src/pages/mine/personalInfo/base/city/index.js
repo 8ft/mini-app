@@ -24,9 +24,7 @@ Page({
   },
 
   select:function(e){
-    let city = e.detail.city
-    app.globalData.userInfo.userBaseInfo.city = city.zoneCode
-    app.globalData.userInfo.userBaseInfo.cityCn = city.zoneName
+    app.globalData.editUserInfoCache.city=e.detail.city
     wx.navigateBack()
   },
 

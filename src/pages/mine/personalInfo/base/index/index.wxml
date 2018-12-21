@@ -27,7 +27,7 @@
 
   <view class='info need'>
     <text class='name'>所在城市</text>
-    <navigator class='input arrow-right' url="/pages/mine/personalInfo/base/city/index" hover-class='none'>{{userBaseInfo.cityCn}}</navigator>
+    <navigator class='input arrow-right' url="/pages/mine/personalInfo/base/city/index" hover-class='none'>{{cityCn}}</navigator>
   </view>
 </view>
 

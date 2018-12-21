@@ -15,7 +15,9 @@ Page(observer({
     sexIndex:0,
     expIndex:0,
     positionType:'',
-    positionTypeCn:''
+    positionTypeCn:'',
+    city:'',
+    cityCn:''
   },
 
   onLoad:async function () {
@@ -59,11 +61,13 @@ Page(observer({
   },
 
   onShow:function(){
-    const data=app.globalData.editUserInfoCache.jobTypes
+    const data=app.globalData.editUserInfoCache
     const userBaseInfo=this.props.stores.account.userInfo.userBaseInfo
     this.setData({
-      positionType:data.value||userBaseInfo.positionType,
-      positionTypeCn:data.valueCn||userBaseInfo.positionTypeCn
+      city:data.city.zoneCode||userBaseInfo.city,
+      cityCn:data.city.zoneName||userBaseInfo.cityCn,
+      positionType:data.jobTypes.value||userBaseInfo.positionType,
+      positionTypeCn:data.jobTypes.valueCn||userBaseInfo.positionTypeCn
     })
   },
 
@@ -150,13 +154,14 @@ Page(observer({
       positionType:this.data.positionType,
       workExperience: data.workExperience || dicts[3].dictList[0].dictValue,
       daySalary:data.daySalary,
-      city:data.city,
+      city:this.data.city,
       sex: data.sex || dicts[0].dictList[0].dictValue,
       qq:data.qq,
       email:data.email,
       wechat:data.wechat
     })
     if(res.code===0){
+      this.props.stores.account.updateUserInfo()
       wx.navigateBack()
     }
   },
