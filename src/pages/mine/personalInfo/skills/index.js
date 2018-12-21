@@ -1,11 +1,12 @@
-// pages/mine/personalInfo/skills/index.js
 
-//获取应用实例
 const app = getApp()
-//引入async await依赖库
 const regeneratorRuntime = require('../../../../libs/regenerator-runtime.js')
+const observer = require('../../../../libs/observer').observer
 
-Page({
+Page(observer({
+  props: {
+    stores: app.stores
+  },
 
   data: {
     skills:[],
@@ -14,7 +15,7 @@ Page({
   },
 
   onLoad: function (options) {
-    let userSkills = app.globalData.userInfo.userSkills
+    let userSkills =this.props.stores.account.userInfo.userSkills
     if (userSkills.length>0){
       userSkills=userSkills.map(item=>{
         return {
@@ -158,7 +159,9 @@ Page({
       userSkillInfos: JSON.stringify(this.data.addedSkills)
     })
     if (res.code === 0) {
+      this.props.stores.account.updateUserInfo()
       wx.navigateBack()
     }
   }
-})
+
+}))

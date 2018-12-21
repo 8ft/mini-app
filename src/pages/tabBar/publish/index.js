@@ -173,16 +173,9 @@ Page(observer({
     })
 
     if (res.code === 0) {
-      let userBaseInfo
-      if (app.globalData.userInfo){
-        userBaseInfo= app.globalData.userInfo.userBaseInfo
-      }else{
-        let user = await app.request.post('/user/userAuth/getUserBaseInfo', {})
-        userBaseInfo = user.data.userBaseInfo
-      }
-
       this.refresh()
-      
+
+      let userBaseInfo=this.props.stores.account.userInfo.userBaseInfo
       if (!(userBaseInfo.qq||userBaseInfo.wechat)){
         this.setData({
           showCollector: true
@@ -219,6 +212,10 @@ Page(observer({
         content:''
       }
     }
+  },
+
+  updateUserInfo:function(){
+    this.props.stores.account.updateUserInfo()
   },
 
   hideCollector:function(){

@@ -1,12 +1,13 @@
-// pages/mine/personalInfo/works/index.js
 
-//获取应用实例
 const app = getApp()
-//引入async await依赖库
 const regeneratorRuntime = require('../../../../libs/regenerator-runtime.js')
 const upload = require('../../../../api/upload.js')
+const observer = require('../../../../libs/observer').observer
 
-Page({
+Page(observer({
+  props: {
+    stores: app.stores
+  },
 
   data: {
     dicts:null,
@@ -28,7 +29,7 @@ Page({
 
     const index = options.index
     if (index){
-      let data = app.globalData.userInfo.userSampleInfos[index]
+      let data = this.props.stores.account.userInfo.userSampleInfos[index]
 
       let desc = data.sampleDesc,
         conLen = desc.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "").length,
@@ -177,8 +178,9 @@ Page({
       sampleUrl: data.url.toLowerCase()
     })
     if (res.code === 0) {
+      this.props.stores.account.updateUserInfo()
       wx.navigateBack()
     }
   }
  
-})
+}))

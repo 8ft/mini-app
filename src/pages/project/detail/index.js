@@ -136,14 +136,8 @@ Page(observer({
 
   apply:async function(){
     if(!app.checkLogin())return
-    
-    let res = await app.request.post('/user/userAuth/getUserBaseInfo', {})
-    if (res.code !== 0) return
 
-    let state = res.data.userState
-    app.globalData.userInfo = res.data
-    
-    switch (state){
+    switch (this.props.stores.account.userInfo.userState){
       case 0://未完善
         wx.showModal({
           title: '提示',
@@ -185,7 +179,6 @@ Page(observer({
         break;
     }
   },
-
 
   preview: function () {
     wx.previewImage({

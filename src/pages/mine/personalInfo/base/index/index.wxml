@@ -63,7 +63,7 @@
 
   <view class='info need'>
     <text class='name'>职位类型</text>
-    <navigator class='input arrow-right' url="/pages/mine/personalInfo/base/jobTypes/index" hover-class='none'>{{userBaseInfo.positionTypeCn}}</navigator>
+    <navigator class='input arrow-right' url="/pages/mine/personalInfo/base/jobTypes/index" hover-class='none'>{{positionTypeCn}}</navigator>
   </view>
 
   <view class='info need'>

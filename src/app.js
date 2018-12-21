@@ -4,21 +4,14 @@ const util = require('./utils/util.js')
 const stores= require('./stores/index')
 
 App({
-  onLaunch:function(){
-    stores.account.account=wx.getStorageSync('account')
-  },
-
   stores: stores,
   request: request,
   util: util,
 
   globalData: {
-    userInfo:null,
-    editUserInfoCache:{
-      jobTypes:null,
-      detail: {
-        content: ''
-      }
+    editUserInfoCache: {
+      jobTypes: {},
+      city:{}
     },
     publishDataCache:{
       skills:null,

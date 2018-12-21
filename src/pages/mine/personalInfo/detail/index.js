@@ -1,15 +1,13 @@
-// pages/mine/personalInfo/detail/index.js
 
-//获取应用实例
 const app = getApp()
-//引入async await依赖库
 const regeneratorRuntime = require('../../../../libs/regenerator-runtime.js')
+const observer = require('../../../../libs/observer').observer
 
-Page({
+Page(observer({
+  props: {
+    stores: app.stores
+  },
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     height:'',
     content: '',
@@ -31,7 +29,7 @@ Page({
       }
     })
 
-    let input = app.globalData.userInfo.userIntro
+    let input = this.props.stores.account.userInfo.userIntro
     let conLen = input.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "").length
     
     let inputLen
@@ -60,6 +58,7 @@ Page({
       introduction: this.data.content.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "")
     })
     if (res.code === 0) {
+      this.props.stores.account.updateUserInfo()
       wx.navigateBack()
     }
   },
@@ -101,4 +100,4 @@ Page({
     })
   }
 
-})
+}))

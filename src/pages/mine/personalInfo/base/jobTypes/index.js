@@ -1,10 +1,7 @@
-// pages/project/publish/skills/index.js
 
-//获取应用实例
 const app = getApp()
 
 Page({
-
   data: {
     jobTypes: null,
     selectJobTypes: [],
@@ -12,18 +9,31 @@ Page({
   },
 
   onLoad: function (options) {
-    let data = app.globalData.userInfo.userBaseInfo
+    const data = app.globalData.editUserInfoCache.jobTypes
+    const valueArr=data.value.split('|')
+    const list=data.list.map(item=>{
+      item.dictList=item.dictList.map(li => {
+        if (valueArr.indexOf(li.dictValue) > -1) {
+          li.selected = true
+        }
+        return li
+      })
+      return item
+    })
+
     this.setData({
-      jobTypes: app.globalData.editUserInfoCache.jobTypes,
-      selectJobTypes: data.positionType?data.positionType.split('|'):[],
-      selectJobTypesCn: data.positionTypeCn ? data.positionTypeCn.split('|'):[]
+      jobTypes:list,
+      selectJobTypes: valueArr,
+      selectJobTypesCn: data.valueCn.split('|')
     })
   },
 
   onUnload: function () {
-    app.globalData.editUserInfoCache.jobTypes = this.data.jobTypes
-    app.globalData.userInfo.userBaseInfo.positionType = this.data.selectJobTypes.join('|')
-    app.globalData.userInfo.userBaseInfo.positionTypeCn = this.data.selectJobTypesCn.join('|')
+    app.globalData.editUserInfoCache.jobTypes={
+      list:this.data.jobTypes,
+      value:this.data.selectJobTypes.join('|'),
+      valueCn:this.data.selectJobTypesCn.join('|')
+    }
   },
 
   select: function (e) {

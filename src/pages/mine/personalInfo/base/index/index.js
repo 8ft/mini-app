@@ -1,28 +1,31 @@
-// pages/mine/personalInfo/base/index.js
 
-//获取应用实例
 const app = getApp()
-//引入async await依赖库
 const regeneratorRuntime = require('../../../../../libs/regenerator-runtime.js')
+const observer = require('../../../../../libs/observer').observer
 
-Page({
+Page(observer({
+  props: {
+    stores: app.stores
+  },
+  
   data: {
     userBaseInfo:null,
     dicts:[],
     joinIndex:0,
     sexIndex:0,
-    expIndex:0
+    expIndex:0,
+    positionType:'',
+    positionTypeCn:''
   },
 
-  onShow:async function () {
-    const data = app.globalData.userInfo.userBaseInfo
-    let dicts = this.data.dicts
-    if (dicts.length===0){
-      dicts = await this.getDicts()
-      this.setData({
-        dicts: dicts
-      })
-      this.saveJobTypes()
+  onLoad:async function () {
+    const data = this.props.stores.account.userInfo.userBaseInfo
+    const dicts = await this.getDicts()
+
+    app.globalData.editUserInfoCache.jobTypes={
+      list:dicts[2].dictList,
+      value:data.positionType,
+      valueCn:data.positionTypeCn
     }
 
     let joinIndex
@@ -47,10 +50,20 @@ Page({
     })
     
     this.setData({
+      dicts: dicts,
       userBaseInfo: data,
       joinIndex:joinIndex,
       sexIndex: sexIndex,
       expIndex: expIndex
+    })
+  },
+
+  onShow:function(){
+    const data=app.globalData.editUserInfoCache.jobTypes
+    const userBaseInfo=this.props.stores.account.userInfo.userBaseInfo
+    this.setData({
+      positionType:data.value||userBaseInfo.positionType,
+      positionTypeCn:data.valueCn||userBaseInfo.positionTypeCn
     })
   },
 
@@ -63,21 +76,6 @@ Page({
     if (res.code === 0) {
       return res.data.data
     }
-  },
-
-  saveJobTypes: function () {
-    let types = this.data.dicts[2].dictList,
-      curTypes = app.globalData.userInfo.userBaseInfo.positionType.split('|')
-    
-    for(let i=0;i<types.length;i++){
-      types[i].dictList = types[i].dictList.map(item => {
-        if (curTypes.indexOf(item.dictValue) > -1) {
-          item.selected = true
-        }
-        return item
-      })
-    }
-    app.globalData.editUserInfoCache.jobTypes=types    
   },
 
   select: function (e) {
@@ -149,7 +147,7 @@ Page({
       nickName: data.nickName,
       settleType: data.settleType||dicts[1].dictList[0].dictValue,
       positionTitle:data.positionTitle,
-      positionType:data.positionType,
+      positionType:this.data.positionType,
       workExperience: data.workExperience || dicts[3].dictList[0].dictValue,
       daySalary:data.daySalary,
       city:data.city,
@@ -236,4 +234,4 @@ Page({
     return false
   }
 
-})
+}))

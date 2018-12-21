@@ -61,6 +61,7 @@ Component({
         wechat: this.data.wechat
       })
       if (res.code !==0) return
+      this.triggerEvent('save')
       this.setData({
         qq: '',
         wechat: '',

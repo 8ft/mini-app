@@ -37,11 +37,8 @@ Page(observer({
     })
     if (blogInfo.code !== 0) return
 
-    app.globalData.userInfo = baseInfo.data
     this.setData({
-      user: baseInfo.data,
-      blogInfo:blogInfo.data,
-      state:state
+      blogInfo:blogInfo.data
     })
   },
 

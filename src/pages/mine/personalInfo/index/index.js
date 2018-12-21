@@ -1,28 +1,21 @@
-// pages/mine/personalInfo/index.js
-
-//获取应用实例
 const app = getApp()
-//引入async await依赖库
 const regeneratorRuntime = require('../../../../libs/regenerator-runtime.js')
 const upload = require('../../../../api/upload.js')
+const observer = require('../../../../libs/observer').observer
 
-Page({
-  data: {
-    user:null
+Page(observer({
+  props: {
+    stores: app.stores
   },
 
   onShow:function(){
     app.checkLogin()
-    this.getInfo()
   },
 
-  getInfo:async function(){
-    let res = await app.request.post('/user/userAuth/getUserBaseInfo', {})
-    if (res.code === 0) {
-      app.globalData.userInfo = res.data
-      this.setData({
-        user:res.data
-      })  
+  onUnload:function(){
+    app.globalData.editUserInfoCache={
+      jobTypes: {},
+      city:{}
     }
   },
 
@@ -43,7 +36,7 @@ Page({
   },  
 
   chooseImage:function(){
-    if (this.data.user.userState === 1)return
+    if (this.props.stores.account.userInfo.userState === 1)return
     wx.chooseImage({
       count:1,
       sizeType: ['compressed'],
@@ -57,7 +50,7 @@ Page({
 
   updateAvatar:async function(no){
     let res = await app.request.post('/user/userAuth/submitNickname', {
-      nickName: '八疯兔',
+      nickName: this.props.stores.account.userInfo.nickName,
       userAvatar: no
     })
     if (res.code === 0) this.getInfo()
@@ -85,7 +78,7 @@ Page({
   },
 
   submit:async function(){
-    let user = this.data.user
+    let user = this.props.stores.account.userInfo
     if (!(Object.keys(user.userBaseInfo).length > 0)) {
       wx.showToast({
         title: '请完善基本信息',
@@ -119,12 +112,11 @@ Page({
 
     let res = await app.request.post('/user/userAuth/submitUserAuth', {})
     if (res.code === 0){
-      this.getInfo()
+      this.props.stores.account.updateUserInfo()
       wx.navigateTo({
         url: '/pages/mine/personalInfo/success/index',
         icon:'none'
       })
     }
   }
-
-})
+}))

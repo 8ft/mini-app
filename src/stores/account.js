@@ -1,9 +1,9 @@
 const request = require('../api/request.js')
 const regeneratorRuntime = require('../libs/regenerator-runtime.js')
-const extendObservable = require('../libs/mobx').extendObservable;
+const mobx = require('../libs/mobx');
 
 const account = function () {
-  extendObservable(this, {
+  mobx.extendObservable(this, {
     account:wx.getStorageSync('account'),
     userInfo:null,
     
@@ -12,8 +12,8 @@ const account = function () {
     },
 
     get stateCn(){
-      if(this.userInfo===null)return
       let stateCn=''
+      if(this.userInfo===null)return stateCn
       switch(this.userInfo.userState){
         case 0:
         stateCn='请完善'
@@ -28,18 +28,22 @@ const account = function () {
         stateCn = '审核未通过'
           break;
       }
-      return state
+      return stateCn
     }
   });
 
-  this.getUserInfo = async () => {
-    let res = await app.request.post('/user/userAuth/getUserBaseInfo')
-    if (res.code !== 0) return
-    this.userInfo=res.data
+  this.updateUserInfo = async () => {
+    if(this.logged_in){
+      let res = await request.post('/user/userAuth/getUserBaseInfo')
+      if (res.code !== 0) return
+      this.userInfo=res.data
+    }else{
+      this.userInfo=null
+    }
   }
 
   this.login = async (app,oid,uid) => {
-    let res = await app.request.post('/user/userThirdpartInfo/login', {
+    let res = await request.post('/user/userThirdpartInfo/login', {
       thirdpartIdentifier: oid,
       uid: uid,
       type: 0
@@ -63,13 +67,6 @@ const account = function () {
       let res = await request.post('/user/userAuth/logout')
     }
     app.globalData = {
-      userInfo: null,
-      editUserInfoCache: {
-        jobTypes: null,
-        detail: {
-          content: ''
-        }
-      },
       publishDataCache: {
         skills: null,
         needSkills: [],
@@ -82,7 +79,14 @@ const account = function () {
     app.stores.toRefresh.updateList('logout')
     wx.clearStorageSync()
     this.account=''
+    this.updateUserInfo()
   }
+
+  mobx.autorun(() => {
+    if(this.logged_in&&this.userInfo===null){
+      this.updateUserInfo()
+    }
+  })
 }
 
 module.exports = new account
