@@ -1,13 +1,13 @@
 <view class="title">{{detail.articleTitle}}</view>
 
-<view class="author">
+<navigator class="author" hover-class="none" url="/pages/expert/index/index?id={{detail.updateUserId}}">
     <image mode='aspectFill' src="{{detail.userAvatar||'/assets/img/default/avatar.png'}}"></image> 
     <view class="info">
         <text class="name">{{detail.nickName}}</text>
         <view class="other"><text>{{detail.articleSourceTypeName}}</text>{{detail.createTime+' · 阅读'+detail.viewNum}}</view>
     </view>
-    <button class="{{detail.attentionState===1?'followed':''}}" hover-class="none" bindtap="follow">{{detail.attentionState===1?'已关注':'+关注'}}</button>
-</view>
+    <button class="{{detail.attentionState===1?'followed':''}}" hover-class="none" catchtap="follow">{{detail.attentionState===1?'已关注':'+关注'}}</button>
+</navigator>
 
 <view class="html">
     <htmltowxml text="{{detail.content}}"></htmltowxml>
@@ -20,8 +20,10 @@
     <view class="title">评论</view>
     <block wx:if="{{comments.length>0}}">
         <view class="comment" wx:for="{{comments}}">
-            <image mode='aspectFill' src="{{item.userAvatar}}"></image>
-            <view class="name">{{item.createUserName}}</view>
+            <navigator hover-class="none" url="/pages/expert/index/index?id={{item.createUserId}}">
+                <image mode='aspectFill' src="{{item.userAvatar}}"></image>
+                <view class="name">{{item.createUserName}}</view>
+            </navigator>
             <text class="con">{{item.content}}</text>
             <view class="other">{{item.createTime}}
                 <view bindtap="openBox" data-index="{{index}}">{{item.replyNum}}条回复</view>
@@ -41,8 +43,10 @@
 
         <scroll-view style="height:{{scrollViewHeight}}px;" scroll-y="true" scroll-top='0' bindscrolltolower="getReplies">
             <view class="comment">
-                <image mode='aspectFill' src="{{comments[cIndex].userAvatar}}"></image>
-                <view class="name">{{comments[cIndex].createUserName}}</view>
+                <navigator hover-class="none" url="/pages/expert/index/index?id={{comments[cIndex].createUserId}}">
+                    <image mode='aspectFill' src="{{comments[cIndex].userAvatar}}"></image>
+                    <view class="name">{{comments[cIndex].createUserName}}</view>
+                </navigator>
                 <text class="con">{{comments[cIndex].content}}</text>
                 <view class="other">{{comments[cIndex].createTime}}</view>
             </view>
@@ -50,8 +54,10 @@
             <view class="comments">
                 <view class="title">评论</view>
                 <view class="comment" hidden="{{replies.length===0}}" wx:for="{{replies}}">
-                    <image mode='aspectFill' src="{{item.userAvatar}}"></image>
-                    <view class="name">{{item.createUserName}}</view>
+                    <navigator hover-class="none" url="/pages/expert/index/index?id={{item.createUserId}}">
+                        <image mode='aspectFill' src="{{item.userAvatar}}"></image>
+                        <view class="name">{{item.createUserName}}</view>
+                    </navigator>
                     <text class="con">{{item.content}}</text>
                     <view class="other">{{item.createTime}}
                         <text bindtap="download">回复</text>

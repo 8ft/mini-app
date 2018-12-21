@@ -32,7 +32,9 @@ Page({
   },
 
   onReachBottom:function(){
-    this.getBlogs()
+    if(this.data.typeIndex===1){
+      this.getBlogs()
+    }
   },
 
   copyLink:function(e){

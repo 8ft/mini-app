@@ -21,11 +21,11 @@
     </view>
 
     <!-- 项目方 -->
-    <view wx:if="{{character!=='publisher'}}" class='cooperation-info border-t'>
+    <navigator hover-class="none" wx:if="{{character!=='publisher'}}" class='cooperation-info border-t' url="/pages/expert/index/index?id={{detail.pusherUserInfo.userId}}">
         <image class='avatar' src="{{detail.pusherUserInfo.userAvatar||'/assets/img/default/avatar.png'}}"></image>
         <view>{{detail.pusherUserInfo.nickName}}</view>
         <view class='right'><image class='icon' src="/assets/img/icon/xmf.png"></image></view>
-    </view>
+    </navigator>
 
     <!-- 申请的专家 -->
     <navigator class='applyUsers arrow-right' hover-class='none' wx:if="{{applyUsers}}" url="/pages/expert/applicant/index?id={{detail.id}}">

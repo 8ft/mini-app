@@ -12,7 +12,7 @@
             </swiper-item>
         </swiper>
         <scroll-view class='types' scroll-x="true">
-            <navigator wx:for="{{types}}" url="/pages/blog/list/index?id={{item.id}}&index={{index}}" hover-class="none">
+            <navigator wx:for="{{types}}" url="/pages/blog/list/index?id={{item.id}}&index={{index+1}}" hover-class="none">
                 <image src="{{item.icon}}"></image>
                 <text>{{item.name}}</text>
             </navigator>

@@ -41,6 +41,7 @@
         "tradeDetail/index",
         "follow/index",
         "fans/index",
+        "blogs/index",
         "experts/index"
       ]
     },

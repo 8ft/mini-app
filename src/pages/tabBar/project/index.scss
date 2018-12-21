@@ -7,10 +7,21 @@ swiper{width:670rpx;height:260rpx;margin:$m auto;background:$blue;border-radius:
 
 .types{display:flex;padding:0 10rpx;
     navigator{flex:1;text-align:center;}
-    image{width:90rpx;height:90rpx;}
+    .project-type-icon{display:inline-block;width:74rpx;height:74rpx;line-height:74rpx;text-align:center;color:#fff;border-radius:50%;margin:8rpx 0;
+        &.quanbu{background: #84ADFF;box-shadow: 0 4rpx 4rpx #D7E4FF; }
+        &.kaifa{background:#f5b94f;box-shadow: 0 4rpx 4rpx #FDE7BF;}
+        &.sheji{background:$lightRed;box-shadow: 0 4rpx 4rpx #FECCC4;}
+        &.chanpin{background:$blue;box-shadow: 0 4rpx 4rpx #C3DFFC;}
+        &.yunying{background:#FF8924;box-shadow: 0 4rpx 4rpx #FFD9B9;}}
+    .iconfont{font-size:46rpx;}
     text{display:block;font-size:$m;color:$lightBlack;font-weight:400;}}
 
-.projects{padding:0 40rpx;}
+.part{padding:0 40rpx;}
+
+.blogs{width:100%;white-space:nowrap;margin-top:39rpx;
+    navigator{display: inline-block;}
+    image{width:280rpx;height: 160rpx;border-radius: 8rpx;margin-left: 30rpx;}
+}
 
 .title{display:flex;align-items:center;font-size:$xxl;color:$black;line-height:$xxl;margin:62rpx 0 17rpx;
     .iconfont{font-size:$xxl;margin-right:20rpx;}

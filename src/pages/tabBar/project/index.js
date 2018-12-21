@@ -15,7 +15,8 @@ Page(observer({
 
   data: {
    banners:null,
-   types: ['全部'],
+   blogs:null,
+   types: ['全部','开发','设计','市场运营','产品'],
    pageIndex: 1,
    projects:[],
    nomore: false
@@ -25,7 +26,7 @@ Page(observer({
     this.props.stores.toRefresh.refresh('index',async(exist)=>{
       if(this.data.banners===null){
         this.getBanner()
-        await this.getProjectTypes()
+        this.getBlogs()
         this.getProjects()
       }else if(exist){
         this.refresh()
@@ -35,6 +36,7 @@ Page(observer({
 
   onPullDownRefresh:function(){
     this.getBanner()
+    this.getBlogs()
     this.refresh()
   },
 
@@ -51,6 +53,15 @@ Page(observer({
     this.getProjects()
   },
 
+  getBlogs:async function(){
+    let res = await app.request.post('/blog/carouselConfig/getList')
+    if(res.code===0){
+      this.setData({
+        blogs: res.data.list
+      })
+    }
+  },
+
   getBanner:async function(){
     let res = await app.request.post('/public/appActivityMenu/getList', {
       menuClass: 'home_banner',
@@ -61,24 +72,6 @@ Page(observer({
         banners: res.data.filter(banner=>{
           return banner.menuType==='show'
         })
-      })
-    }
-  },
-
-  getProjectTypes:async function(){
-    let res = await app.request.post('/dict/dictCommon/getDicts', {
-      dictType: 'project_type', 
-      resultType: '1'
-    })
-
-    if (res.code === 0) {
-      let list=res.data.data[0].dictList
-      let types = list.map((item) => {
-        return item.dictName
-      })
-      
-      this.setData({
-        types: this.data.types.concat(types)
       })
     }
   },

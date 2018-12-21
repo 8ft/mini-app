@@ -7,28 +7,49 @@
 
 <view class='types clearfix'>
   <navigator url='/pages/project/list/index?type=-1' hover-class="none">
-    <image src='/assets/img/project/qb.png'></image>
+    <view class='project-type-icon quanbu'>
+      <view class="iconfont icon-quanbu"></view>
+    </view>
     <text>全部</text>
   </navigator>
   <navigator url='/pages/project/list/index?type=0' hover-class="none">
-    <image src='/assets/img/project/kf.png'></image>
+    <view class='project-type-icon kaifa'>
+      <view class="iconfont icon-kaifa"></view>
+    </view>
     <text>开发</text>
   </navigator>
   <navigator url='/pages/project/list/index?type=1' hover-class="none">
-    <image src='/assets/img/project/sj.png'></image>
+    <view class='project-type-icon sheji'>
+      <view class="iconfont icon-sheji"></view>
+    </view>
     <text>设计</text>
   </navigator>
   <navigator url='/pages/project/list/index?type=2' hover-class="none">
-    <image src='/assets/img/project/yy.png'></image>
+    <view class='project-type-icon yunying'>
+      <view class="iconfont icon-yunying"></view>
+    </view>
     <text>市场/运营</text>
   </navigator>
   <navigator url='/pages/project/list/index?type=3' hover-class="none">
-    <image src='/assets/img/project/cp.png'></image>
+    <view class='project-type-icon chanpin'>
+      <view class="iconfont icon-chanpin"></view>
+    </view>
     <text>产品</text>
   </navigator>
 </view>
 
-<view class='projects'>
+<view class="part">
+   <view class='title'>
+    <view class="iconfont icon-zhangzishi"></view>
+    <text>今日涨姿势</text>
+    <navigator class='arrow-right' url='/pages/blogs/list/index?' hover-class="none">更多</navigator>
+  </view>
+</view>
+<scroll-view class='blogs' scroll-x="true">
+    <image wx:for="{{blogs}}" src="{{item.coverImage}}" data-obj="{{item}}" bindtap="bannerJump"></image>
+</scroll-view>
+
+<view class='part'>
   <view class='title'>
     <view class="iconfont icon-xiangmuku"></view>
     <text>项目库</text>

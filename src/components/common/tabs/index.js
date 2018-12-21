@@ -17,7 +17,8 @@ Component({
     }
   },
   data: {
-    animationData:null
+    animationData:null,
+    scrollLeft:0
   },
 
   lifetimes: {
@@ -27,6 +28,11 @@ Component({
         timingFunction: 'ease',
       })
       this.animation = animation
+
+      wx.getSystemInfo({
+        success: res=> {
+          this.windowWidth=res.windowWidth
+       }})
     },
     ready:function(){
       if(this.data.animationData)return
@@ -60,11 +66,14 @@ Component({
           const ratio=this.properties.underLineRatio
           const width = res.width *ratio
           const diff=res.width*(1-ratio)/2
+          const x=sv.scrollLeft+res.left + diff
 
           this.setData({
             active: index,
-            animationData: this.animation.width(width).translateX(sv.scrollLeft+res.left + diff).step().export()
+            animationData: this.animation.width(width).translateX(x).step().export(),
+            scrollLeft:x-this.windowWidth/2+width/2
           })
+
         }).exec()
 
       }).exec()

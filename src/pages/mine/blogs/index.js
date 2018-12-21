@@ -81,6 +81,10 @@ Page(observer({
     }
   },
 
+  onPullDownRefresh:function(){
+    this.refresh()
+  },
+
   onReachBottom:function(){
     if (this.data.typeIndex === 0) {
       this.getBlogs()
