@@ -10,20 +10,20 @@
 
 <view class="userinfo" wx:else>
   <view class="base">
-    <view class='nickName'><text>{{user.nickName}}</text><view class="iconfont icon-xingbie{{user.userBaseInfo.sex===1?'nan':'nv'}}"></view></view>
-    <view class='finished'>已完成{{user.finishOrderNums}}单</view>
-    <image class='avatar' src="{{user.userAvatar||'/assets/img/default/avatar.png'}}"></image>
+    <view class='nickName'><text>{{props.stores.account.userInfo.nickName}}</text><view class="iconfont icon-xingbie{{props.stores.account.userInfo.userBaseInfo.sex===1?'nan':'nv'}}"></view></view>
+    <view class='finished'>已完成{{props.stores.account.userInfo.finishOrderNums}}单</view>
+    <image class='avatar' src="{{props.stores.account.userInfo.userAvatar||'/assets/img/default/avatar.png'}}"></image>
   </view>
   <view class="blog">
-    <navigator hover-class="none" url="/pages/mine/follow/index?id={{user.userId}}">
+    <navigator hover-class="none" url="/pages/mine/follow/index?id={{props.stores.account.userInfo.userId}}">
         <text>{{blogInfo.attentionNum}}</text>
         <text>关注</text>
     </navigator>
-    <navigator hover-class="none" url="/pages/mine/fans/index?id={{user.userId}}">
+    <navigator hover-class="none" url="/pages/mine/fans/index?id={{props.stores.account.userInfo.userId}}">
         <text>{{blogInfo.fansNum}}</text>
         <text>粉丝</text>
     </navigator>
-    <navigator hover-class="none" url="/pages/mine/blogs/index?id={{user.userId}}&blogNum={{blogInfo.articleNum}}&collectNum={{blogInfo.favoriteNum}}">
+    <navigator hover-class="none" url="/pages/mine/blogs/index?id={{props.stores.account.userInfo.userId}}&blogNum={{blogInfo.articleNum}}&collectNum={{blogInfo.favoriteNum}}">
         <text>{{blogInfo.articleNum}}</text>
         <text>博文</text>
     </navigator>
@@ -33,7 +33,7 @@
 <view class='entrances' bindtap='go' data-url="/pages/mine/personalInfo/index/index">
     <image src='/assets/img/mine/mine_grzy@3x.png'></image>
     个人主页
-    <text class='arrow-right'>{{state}}</text>
+    <text class='arrow-right'>{{props.stores.account.stateCn}}</text>
 </view>
 
 <view class='entrances' bindtap='go' data-url="/pages/mine/experts/index">
@@ -45,7 +45,7 @@
 <view class='entrances' bindtap='go' data-url="/pages/mine/wallet/index">
     <image src='/assets/img/mine/mine_wdqb@3x.png'></image>
     我的钱包
-    <text class='arrow-right'>{{props.stores.account.logged_in?user.balance+'元':''}}</text>
+    <text class='arrow-right'>{{props.stores.account.logged_in?props.stores.account.userInfo.balance+'元':''}}</text>
 </view>
 
 <button class='entrances' open-type="share" bindtap='onShareAppMessage'>

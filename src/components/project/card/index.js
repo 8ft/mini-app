@@ -8,7 +8,7 @@ Component({
   },
 
   attached:function(){
-    let user = wx.getStorageSync('user')
+    let user = wx.getStorageSync('account')
     if (user) {
       this.setData({
         uid: user.userId

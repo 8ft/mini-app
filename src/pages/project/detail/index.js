@@ -60,7 +60,7 @@ Page(observer({
     })
     if(res.code!==0)return
 
-    const user = wx.getStorageSync('user')
+    const user = wx.getStorageSync('account')
     let data = res.data,
       character = '', 
       applyUsers=null,

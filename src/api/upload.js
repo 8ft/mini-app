@@ -11,7 +11,7 @@ const uploadFile = (file,category,batch)=>{
         'Content-Type': config.contentType,
         'client_type': config.clientType,
         'api_version': config.version,
-        'token': wx.getStorageSync('user').token || ''
+        'token': wx.getStorageSync('account').token || ''
       },
       formData: {
         category: category,

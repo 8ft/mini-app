@@ -8,19 +8,12 @@ Page(observer({
   },
 
   data: {
-    user:null,
-    blogInfo:null,
-    state:''
+    blogInfo:null
   },
 
   onShow:function(){
-    if (this.props.stores.account.logged_in){
-     this.getInfo()
-    }else{
-      this.setData({
-        state:''
-      })
-    }
+    console.log(this.props.stores.account)
+    
   },
 
   onShareAppMessage: function () {
@@ -39,24 +32,6 @@ Page(observer({
   },
 
   getInfo: async function () {
-    let baseInfo = await app.request.post('/user/userAuth/getUserBaseInfo')
-    if (baseInfo.code !== 0) return
-    let state=''
-    switch(baseInfo.data.userState){
-      case 0:
-        state='请完善'
-        break;
-      case 1:
-        state = '审核中'
-        break;
-      case 2:
-        state = '审核通过'
-        break;
-      case 3:
-        state = '审核未通过'
-        break;
-    }
-
     let blogInfo=await app.request.post('/blog/attentionInfo/queryBlogUserInfo',{
       userId:baseInfo.data.userId
     })

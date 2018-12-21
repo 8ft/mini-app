@@ -5,10 +5,7 @@ const stores= require('./stores/index')
 
 App({
   onLaunch:function(){
-    let user = wx.getStorageSync('user')
-    if(user){
-      this.stores.account.logged_in=true
-    }
+    stores.account.account=wx.getStorageSync('account')
   },
 
   stores: stores,

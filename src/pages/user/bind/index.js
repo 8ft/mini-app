@@ -91,8 +91,10 @@ Page(observer({
       return
     }
 
+    const uid=wx.getStorageSync('unionid')
+
     let res = await app.request.post('/user/userThirdpartInfo/bind', {
-      thirdpartIdentifier: wx.getStorageSync('unionid'),
+      thirdpartIdentifier: uid,
       type:0,
       telephone: phone,
       validateCode:code,
@@ -101,16 +103,8 @@ Page(observer({
     })
 
     if (res.code===0){
-      wx.setStorageSync('user', res.data)
-      this.props.stores.account.login(app)
-      this.getInfo()
+      const oid=wx.getStorageSync('openid')
+      this.props.stores.account.login(app,oid,uid)
     }
-  },
-
-  getInfo: async function () {
-    let res = await app.request.post('/user/userAuth/getUserBaseInfo', {})
-    if (res.code !== 0) return
-    app.globalData.userInfo = res.data
-    wx.navigateBack()
   }
 }))

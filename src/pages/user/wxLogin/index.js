@@ -47,7 +47,7 @@ Page(observer({
         uid = data.unionid
         if (uid) {
           wx.setStorageSync('unionid', uid)
-          this.login(oid, uid)
+          this.props.stores.account.login(app, oid, uid)
         }else{
           //请求解密接口
           let decodeData = await app.request.get('/weixin/mini/getUnionId', {
@@ -59,7 +59,7 @@ Page(observer({
           if (decodeData.status === 1) {
             uid = decodeData.userInfo.unionid
             wx.setStorageSync('unionid', uid)
-            this.login(oid, uid)
+            this.props.stores.account.login(app, oid, uid)
           } else {
             wx.showToast({
               title: decodeData.msg,
@@ -69,31 +69,5 @@ Page(observer({
         }
       }
     })
-  },
-
-  login:async function(oid, uid){
-    let res = await app.request.post('/user/userThirdpartInfo/login', {
-      thirdpartIdentifier: oid,
-      uid: uid,
-      type: 0
-    })
-
-    let code = res.code
-    if (code === 0) {
-      wx.setStorageSync('user', res.data)
-      this.props.stores.account.login(app)
-      this.getUserInfo()
-    } else if (code === 507) {
-      wx.redirectTo({
-        url: '/pages/user/bind/index'
-      })
-    }
-  },
-
-  getUserInfo: async function () {
-    let res = await app.request.post('/user/userAuth/getUserBaseInfo', {})
-    if (res.code !== 0) return
-    app.globalData.userInfo = res.data
-    wx.navigateBack()
   }
 }))
