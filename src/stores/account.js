@@ -56,6 +56,7 @@ const account = function () {
     }else{
       this.blogInfo=null
     }
+    wx.stopPullDownRefresh()
   }
 
   this.follow=diff=>{
@@ -107,6 +108,11 @@ const account = function () {
     app.stores.toRefresh.updateList('logout')
     wx.clearStorageSync()
     this.account=''
+    this.userInfo=null
+    this.blogInfo=null
+  }
+
+  this.refresh=()=>{
     this.userInfo=null
     this.blogInfo=null
   }

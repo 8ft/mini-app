@@ -19,21 +19,14 @@ Page(observer({
     }
   },
 
+  onPullDownRefresh:function(){
+    this.props.stores.account.refresh()
+  },
+
   go:function(e){
     if (!app.checkLogin()) return 
     wx.navigateTo({
       url: e.currentTarget.dataset.url
-    })
-  },
-
-  getInfo: async function () {
-    let blogInfo=await app.request.post('/blog/attentionInfo/queryBlogUserInfo',{
-      userId:baseInfo.data.userId
-    })
-    if (blogInfo.code !== 0) return
-
-    this.setData({
-      blogInfo:blogInfo.data
     })
   },
 
