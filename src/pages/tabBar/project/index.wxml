@@ -42,7 +42,7 @@
    <view class='title'>
     <view class="iconfont icon-zhangzishi"></view>
     <text>今日涨姿势</text>
-    <navigator class='arrow-right' url='/pages/blogs/list/index?' hover-class="none">更多</navigator>
+    <navigator class='arrow-right' url="/pages/blog/list/index?id=&index=0" hover-class="none">更多</navigator>
   </view>
 </view>
 <scroll-view class='blogs' scroll-x="true">
