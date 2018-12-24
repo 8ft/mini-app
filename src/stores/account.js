@@ -6,6 +6,7 @@ const account = function () {
   mobx.extendObservable(this, {
     account:wx.getStorageSync('account'),
     userInfo:null,
+    blogInfo:null,
     
     get logged_in(){
       return this.account!==''
@@ -39,6 +40,26 @@ const account = function () {
       this.userInfo=res.data
     }else{
       this.userInfo=null
+    }
+  }
+
+  this.follow=diff=>{
+    this.blogInfo.attentionNum+=diff
+  },
+
+  this.collect=diff=>{
+    this.blogInfo.favoriteNum+=diff
+  }
+
+  this.updateBlogInfo = async () => {
+    if(this.logged_in){
+      let res=await request.post('/blog/attentionInfo/queryBlogUserInfo',{
+        userId:this.account.userId
+      })
+      if (res.code !== 0) return
+      this.blogInfo=res.data
+    }else{
+      this.blogInfo=null
     }
   }
 
@@ -80,11 +101,13 @@ const account = function () {
     wx.clearStorageSync()
     this.account=''
     this.updateUserInfo()
+    this.updateBlogInfo()
   }
 
   mobx.autorun(() => {
     if(this.logged_in&&this.userInfo===null){
       this.updateUserInfo()
+      this.updateBlogInfo()
     }
   })
 }

@@ -16,15 +16,15 @@
   </view>
   <view class="blog">
     <navigator hover-class="none" url="/pages/mine/follow/index?id={{props.stores.account.userInfo.userId}}">
-        <text>{{blogInfo.attentionNum}}</text>
+        <text>{{props.stores.account.blogInfo.attentionNum}}</text>
         <text>关注</text>
     </navigator>
     <navigator hover-class="none" url="/pages/mine/fans/index?id={{props.stores.account.userInfo.userId}}">
-        <text>{{blogInfo.fansNum}}</text>
+        <text>{{props.stores.account.blogInfo.fansNum}}</text>
         <text>粉丝</text>
     </navigator>
-    <navigator hover-class="none" url="/pages/mine/blogs/index?id={{props.stores.account.userInfo.userId}}&blogNum={{blogInfo.articleNum}}&collectNum={{blogInfo.favoriteNum}}">
-        <text>{{blogInfo.articleNum}}</text>
+    <navigator hover-class="none" url="/pages/mine/blogs/index?id={{props.stores.account.userInfo.userId}}">
+        <text>{{props.stores.account.blogInfo.articleNum}}</text>
         <text>博文</text>
     </navigator>
   </view>

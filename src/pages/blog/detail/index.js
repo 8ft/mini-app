@@ -118,6 +118,7 @@ Page(observer({
         attentionUserId:this.data.detail.updateUserId
       })
       if(res.code!==0)return
+      this.props.stores.account.follow(this.data.detail.attentionState===0?1:-1)
       this.setData({
         'detail.attentionState':this.data.detail.attentionState===0?1:0
       })
@@ -130,6 +131,7 @@ Page(observer({
         articleId:this.data.id
       })
       if(res.code!==0)return
+      this.props.stores.account.collect(this.data.detail.favoriteState===0?1:-1)
       this.setData({
         'detail.favoriteState':this.data.detail.favoriteState===0?1:0
       })

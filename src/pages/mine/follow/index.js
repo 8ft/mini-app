@@ -1,7 +1,12 @@
 const app = getApp()
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
+const observer = require('../../../libs/observer').observer
 
-Page({
+Page(observer({
+  props: {
+    stores: app.stores
+  },
+
   data: {
    id:'',
    experts:[],
@@ -47,11 +52,11 @@ Page({
       attentionUserId:target.userId
     })
     if(res.code!==0)return
+    this.props.stores.account.follow(target.checked===0?1:-1)
     target.checked=target.checked===0?1:0
     this.setData({
       experts:this.data.experts
     })
-    
   },
 
   getExperts: async function (){
@@ -86,4 +91,4 @@ Page({
     wx.stopPullDownRefresh()
   }
   
-})
+}))

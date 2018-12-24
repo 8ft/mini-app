@@ -28,37 +28,42 @@ Page(observer({
     loading:true,
   },
 
-  onLoad:function (options) {
-    const blogs=parseInt(options.blogNum)
-    const collection=parseInt(options.collectNum)
+  onLoad:async function (options) {
+    const articleNum=this.props.stores.account.blogInfo.articleNum
+    const favoriteNum=this.props.stores.account.blogInfo.favoriteNum
 
     this.data.tags.push({
       name:'全部文章',
-      articleNum:blogs,
+      articleNum:articleNum,
       id:''
     })
+
+    await this.getBlogTags()
 
     this.setData({
       tags:this.data.tags,
       uid:options.id,
       blogInfo:{
-        articleNum:blogs,
-        favoriteNum:collection
+        articleNum:articleNum,
+        favoriteNum:favoriteNum
       }
     })
   },
 
   onShow:function(){
-    this.props.stores.toRefresh.refresh('blogs',exist=>{
-      if (this.data.tags.length<2){
-        this.getBlogTags()
-        if(this.data.blogInfo.articleNum!==0){
-          this.getBlogs()
-        }
-      }else if(exist){
-        this.refresh()
-      }
-    })
+    if(this.data.blogInfo===null)return 
+    let favoriteNum=this.data.blogInfo.favoriteNum
+    const cur_favoriteNum=this.props.stores.account.blogInfo.favoriteNum
+    if(favoriteNum!=cur_favoriteNum){
+      let collection = this.data.collection
+      this.setData({
+        'blogInfo.favoriteNum':cur_favoriteNum,
+        'collection.pageIndex': 1,
+        'collection.nomore': false,
+        'collection.list': []
+      })
+      this.getCollection()
+    }
   },
 
   refresh:function(){

@@ -11,11 +11,6 @@ Page(observer({
     blogInfo:null
   },
 
-  onShow:function(){
-    console.log(this.props.stores.account)
-    
-  },
-
   onShareAppMessage: function () {
     return {
       title: '接包发包专业平台',
