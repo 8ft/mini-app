@@ -52,7 +52,7 @@
             </view>
 
             <view class="comments">
-                <view class="title">评论</view>
+                <view class="title">{{replies.length===0?'抢先':''}}评论</view>
                 <view class="comment" hidden="{{replies.length===0}}" wx:for="{{replies}}">
                     <navigator hover-class="none" url="/pages/expert/index/index?id={{item.createUserId}}">
                         <image mode='aspectFill' src="{{item.userAvatar}}"></image>

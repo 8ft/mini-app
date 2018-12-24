@@ -111,7 +111,6 @@ Page(observer({
 
   refresh:function(){
     if (this.data.typeIndex === 0) {
-      let myPublish = this.data.myPublish
       this.setData({
         'myPublish.pageIndex': 1,
         'myPublish.nomore': false,
@@ -119,7 +118,6 @@ Page(observer({
       })
       this.getMyPublish()
     } else {
-      let myApply = this.data.myApply
       this.setData({
         'myApply.pageIndex': 1,
         'myApply.nomore': false,

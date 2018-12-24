@@ -1,5 +1,5 @@
 <!--components/project/card/card.wxml-->
-<navigator class='blog' hover-class="none" url="/pages/blog/detail/index?id={{data.id}}">
+<view class='blog' hover-class="none" data-url="/pages/blog/detail/index?id={{data.id}}" bindtap="goDetail">
   <view wx:if="{{showAuthor}}" class="author">
     <image lazy-load="true" mode='aspectFill' src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>{{data.nickName}}
   </view>
@@ -10,4 +10,4 @@
     <text><text class="iconfont icon-pinglun"></text>{{data.commentNum+'  '}}</text>
     <text><text class="iconfont icon-liulan"></text>{{data.viewNum}}</text>
   </view>
-</navigator>
+</view>

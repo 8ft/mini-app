@@ -33,7 +33,7 @@ Page(observer({
     const favoriteNum=this.props.stores.account.blogInfo.favoriteNum
 
     this.data.tags.push({
-      name:'全部文章',
+      name:'全部标签',
       articleNum:articleNum,
       id:''
     })
@@ -53,11 +53,10 @@ Page(observer({
   onShow:function(){
     if(this.data.blogInfo===null)return 
     let favoriteNum=this.data.blogInfo.favoriteNum
-    const cur_favoriteNum=this.props.stores.account.blogInfo.favoriteNum
-    if(favoriteNum!=cur_favoriteNum){
-      let collection = this.data.collection
+    const latest_favoriteNum=this.props.stores.account.blogInfo.favoriteNum
+    if(favoriteNum!=latest_favoriteNum){
       this.setData({
-        'blogInfo.favoriteNum':cur_favoriteNum,
+        'blogInfo.favoriteNum':latest_favoriteNum,
         'collection.pageIndex': 1,
         'collection.nomore': false,
         'collection.list': []

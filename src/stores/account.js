@@ -37,18 +37,13 @@ const account = function () {
     if(this.logged_in){
       let res = await request.post('/user/userAuth/getUserBaseInfo')
       if (res.code !== 0) return
+      if(this.blogInfo===null){
+        this.updateBlogInfo()
+      }
       this.userInfo=res.data
     }else{
       this.userInfo=null
     }
-  }
-
-  this.follow=diff=>{
-    this.blogInfo.attentionNum+=diff
-  },
-
-  this.collect=diff=>{
-    this.blogInfo.favoriteNum+=diff
   }
 
   this.updateBlogInfo = async () => {
@@ -61,6 +56,14 @@ const account = function () {
     }else{
       this.blogInfo=null
     }
+  }
+
+  this.follow=diff=>{
+    this.blogInfo.attentionNum+=diff
+  },
+
+  this.collect=diff=>{
+    this.blogInfo.favoriteNum+=diff
   }
 
   this.login = async (app,oid,uid) => {
@@ -88,6 +91,10 @@ const account = function () {
       let res = await request.post('/user/userAuth/logout')
     }
     app.globalData = {
+      editUserInfoCache: {
+        jobTypes: {},
+        city:{}
+      },
       publishDataCache: {
         skills: null,
         needSkills: [],
@@ -100,14 +107,13 @@ const account = function () {
     app.stores.toRefresh.updateList('logout')
     wx.clearStorageSync()
     this.account=''
-    this.updateUserInfo()
-    this.updateBlogInfo()
+    this.userInfo=null
+    this.blogInfo=null
   }
 
   mobx.autorun(() => {
     if(this.logged_in&&this.userInfo===null){
       this.updateUserInfo()
-      this.updateBlogInfo()
     }
   })
 }
