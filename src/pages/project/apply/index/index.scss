@@ -15,11 +15,8 @@ page{box-sizing:border-box;padding-bottom:150rpx;background:#fff;padding:0 40rpx
     .conLen{position:absolute;bottom:20rpx;right:20rpx;font-size:$m;color:$lightGray;z-index:$bottomFloor;}
     .placeholder{position:absolute;color:$lightGray;top:0;left:0;}}
 
-checkbox{.wx-checkbox-input{width:$m;height:$m;}
-    .wx-checkbox-input.wx-checkbox-input-checked{border-color:#0080ff;background:#0080ff;}} 
-
-.agree{margin-top:23rpx;text-align:center;font-size:$m;color:$gray;
-    navigator{display:inline;color:#0080ff;}}
-
-.action-bar{position:fixed;bottom:0;left:0;background:#fff;width:100%;height:150rpx;display:flex;align-items:center;
-    button{margin:0 auto;width:630rpx;height:96rpx;background:$darkBlue;border-radius:4rpx;color:#fff;font-size:$xl;line-height:96rpx;}}
+.agree{margin-top:23rpx;font-size:$m;color:$gray;display:flex; align-items: center;
+    .checkbox{width:24rpx;height:24rpx;border-radius: 50%;border:$border;display:inline-block;margin-right:5rpx;box-sizing:border-box;
+        &.checked{border:8rpx solid $darkBlue;}
+    }
+    navigator{display:inline-block;color:$darkBlue;}}

@@ -16,11 +16,12 @@
 </view>
 
 <view class='agree'>
-  <checkbox color='#fff' checked="true" bindtap="setAgree"/>
+  <view class="checkbox {{disagree?'':'checked'}}" bindtap="setAgree"></view>
   项目成交同意默认签署
   <navigator url='/pages/project/apply/agreement/index'>《巨牛汇三方服务合同》</navigator>
 </view>
 
-<view class='action-bar'>
-  <button bindtap='publish' bindtap='send' disabled="{{disagree}}">发送申请</button>
-</view>
+<action-bar>
+  <button class="submit" bindtap='publish' bindtap='send' disabled="{{disagree}}">发送申请</button>
+</action-bar>
+
