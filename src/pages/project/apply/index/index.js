@@ -31,6 +31,12 @@ Page(observer({
    
     switch (inputType) {
       case 'price':
+        if(validInput.length>0&&!/^[1-9]\d{0,6}\.{0,1}\d{0,2}$/.test(validInput)){
+          validInput=this.data.price
+        }else if(validInput.length>7&&/^\d*$/.test(validInput)){
+          validInput=validInput.slice(0,7)
+        }
+        
         this.setData({
           price: validInput
         })

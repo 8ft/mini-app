@@ -2,7 +2,7 @@
 <view class='info need'>
   <text class='name'>您的报价(元)</text>
   <view class='input'>
-    <input type="number" maxlength='7' placeholder="该项目预算为{{budget}}" data-type="price" value="{{price}}" bindinput='input'></input>
+    <input type="digit" maxlength='10' placeholder="该项目预算为{{budget}}" data-type="price" value="{{price}}" bindinput='input'></input>
   </view>
 </view>
 

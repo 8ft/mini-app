@@ -1,7 +1,7 @@
 const config = require('config.js')
 const requestArr=[]
 
-const request =(url, options) => {
+const request =(url, options,requireServerDate) => {
   if (requestArr.length === 0) { 
     wx.showLoading()
   }
@@ -40,8 +40,13 @@ const request =(url, options) => {
             })
           }
         } 
-        resolve(res.data)
+
+        //缓存服务器时间
+        if(requireServerDate){
+          wx.setStorageSync('serverDate',res.header.Date)
+        }
         
+        resolve(res.data)
       },
       fail(error) {
         requestArr.pop()
@@ -62,12 +67,12 @@ const request =(url, options) => {
   })
 }
 
-const get = (url, options = {}) => {
-  return request(url, { method: 'GET', data: options })
+const get = (url, options = {},requireServerDate) => {
+  return request(url, { method: 'GET', data: options },requireServerDate)
 }
 
-const post = (url, options) => {
-  return request(url, { method: 'POST', data: options })
+const post = (url, options,requireServerDate) => {
+  return request(url, { method: 'POST', data: options },requireServerDate)
 }
 
 module.exports = {

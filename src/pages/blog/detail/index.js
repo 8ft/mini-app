@@ -147,12 +147,16 @@ Page(observer({
     })
     if (detail.code !== 0) return
 
-    detail.data.createTime=detail.data.createTime.split(' ')[0]
+    detail.data.createTime=app.util.formatTime(detail.data.createTime,'blogDetail')
     detail.data.articleTags=detail.data.articleTags.split('|')
+
     this.setData({
       loading:false,
       detail:detail.data,
-      comments:detail.data.comments.list
+      comments:detail.data.comments.list.map(item=>{
+        item.createTime=app.util.formatTime(item.createTime,'blogComment')
+        return item
+      })
     })
   },
 
@@ -178,7 +182,10 @@ Page(observer({
     this.setData({
       nomore:nomore,
       pageIndex:pIndex,
-      replies:this.data.replies.concat(res.data.list)
+      replies:this.data.replies.concat(res.data.list.map(item=>{
+        item.createTime=app.util.formatTime(item.createTime,'blogComment')
+        return item
+      }))
     })
   },
 

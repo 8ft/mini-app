@@ -103,7 +103,7 @@ Page({
     if (blogInfo.code !== 0) return
 
     this.data.tags.push({
-      name:'全部文章',
+      name:'全部标签',
       articleNum:blogInfo.data.articleNum,
       id:''
     })
@@ -174,6 +174,7 @@ Page({
           if(blog.articleBrief.length>76){
             blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
           }
+          blog.createTime=app.util.formatTime(blog.createTime,'blogCard')
           return blog
         })),
         pageIndex:pIndex,

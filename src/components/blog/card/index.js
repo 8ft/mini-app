@@ -1,4 +1,5 @@
-// components/project/card/card.js
+const util=require('../../../utils/util.js')
+
 Component({
   properties: {
     data:Object,

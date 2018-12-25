@@ -127,7 +127,7 @@ Page(observer({
       categoryId:1,
       pageIndex:pIndex,
       pageSize:10
-    })
+    },true)
 
     if (res.code === 0) {
       if (res.data.page > pIndex){
@@ -141,6 +141,7 @@ Page(observer({
           if(blog.articleBrief.length>76){
             blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
           }
+          blog.createTime=app.util.formatTime(blog.createTime,'blogCard')
           return blog
         })),
         'blogs.pageIndex':pIndex,
@@ -151,16 +152,7 @@ Page(observer({
   },
   
   bannerJump:function(e){
-    let obj=e.currentTarget.dataset.obj
-    switch (obj.menuType){
-      case 'view':
-        // wx.navigateTo({
-        //   url: `/pages/common/webview/index?url=${encodeURIComponent(obj.menuUrl)}`
-        // })
-      break;
-      case 'click':
-      break;
-    }
+   app.bannerJump(e)
   },
 
   selectFilter: function (e) {

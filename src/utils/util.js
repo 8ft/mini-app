@@ -1,12 +1,44 @@
-const formatTime = date => {
+const formatTime = (time,type) => {
+  const serverDate=new Date(wx.getStorageSync('serverDate'))
+  const year_server = serverDate.getFullYear()
+  const date=new Date(time)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes()
-  const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  let dateSpan = serverDate - date;
+  dateSpan = Math.abs(dateSpan);
+  const iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+
+  switch(type){
+    case 'blogCard':
+      if(iDays<1){
+        return [hour, minute].map(formatNumber).join(':')
+      }else if(iDays>=1&&iDays<=7){
+        return iDays+'天前'
+      }else{
+        return `${year}年${formatNumber(month)}月${formatNumber(day)}日`
+      }
+    break;
+    case 'blogDetail':
+      if(year!==year_server){
+        return `${year}年${formatNumber(month)}月${formatNumber(day)}日`
+      }else {
+        return `${formatNumber(month)}月${formatNumber(day)}日`
+      }
+    break;
+    case 'blogComment':
+      if(year===year_server&&iDays<1){
+        return [hour, minute].map(formatNumber).join(':')
+      }else if(year===year_server&&iDays>=1){
+        return `${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
+      }else{
+        return `${year}年-${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
+      }
+    break;
+  }
 }
 
 const formatNumber = n => {

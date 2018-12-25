@@ -9,7 +9,7 @@
 <block wx:if="{{!inProgress}}">
   <view class='part' style="padding-bottom:0;">
     <view class='name'>{{detail.projectName}}
-      <view class='status{{detail.projectState}}' wx:if="{{character&&detail.projectStateCn}}">{{detail.projectStateCn}}</view>
+      <view class='status{{detail.projectState}}' wx:if="{{character&&detail.projectState!=7&&detail.projectStateCn}}">{{detail.projectStateCn}}</view>
     </view>
     <text class='price'>{{detail.projectBudgetCn}}</text>
     <view class='others'>

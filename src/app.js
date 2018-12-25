@@ -33,6 +33,31 @@ App({
     }
   },
 
+  bannerJump:function(e){
+    let obj=e.currentTarget.dataset.obj
+    if(obj.menuType!==undefined){
+      switch (obj.menuType){
+        case 'view':
+          // wx.navigateTo({
+          //   url: `/pages/common/webview/index?url=${encodeURIComponent(obj.menuUrl)}`
+          // })
+        break;
+        case 'click':
+        break;
+      }
+    }else if(obj.type!==undefined){
+      switch (obj.type){
+        case 0:
+          wx.navigateTo({
+            url: `/pages/blog/detail/index?id=${obj.linkUrl.match(/blog\/(\d*)\.html/)[1]}`
+          })
+        break;
+        case 1:
+        break;
+      }
+    }
+  },
+
   download: function () {
     wx.showModal({
       title: '温馨提示',

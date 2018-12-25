@@ -61,6 +61,7 @@ Page({
           if(blog.articleBrief.length>76){
             blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
           }
+          blog.createTime=app.util.formatTime(blog.createTime,'blogCard')
           return blog
         })),
         pageIndex:pIndex,

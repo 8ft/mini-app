@@ -162,6 +162,7 @@ Page(observer({
           if(blog.articleBrief.length>76){
             blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
           }
+          blog.createTime=app.util.formatTime(blog.createTime,'blogCard')
           return blog
         })),
         'blogs.pageIndex':pIndex,
@@ -198,6 +199,7 @@ Page(observer({
           if(blog.articleBrief.length>76){
             blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
           }
+          blog.createTime=app.util.formatTime(blog.createTime,'blogCard')
           return blog
         })),
         'collection.pageIndex':pIndex,

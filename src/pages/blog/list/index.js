@@ -92,7 +92,7 @@ Page(observer({
       categoryId:this.data.typeId,
       pageIndex:pIndex,
       pageSize:10
-    })
+    },true)
 
     if (res.code === 0) {
       if (res.data.page > pIndex){
@@ -106,6 +106,7 @@ Page(observer({
           if(blog.articleBrief.length>76){
             blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
           }
+          blog.createTime=app.util.formatTime(blog.createTime,'blogCard')
           return blog
         })),
         pageIndex:pIndex,

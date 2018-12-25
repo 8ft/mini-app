@@ -103,20 +103,11 @@ Page(observer({
         nomore:nomore
       })
     }
-
     wx.stopPullDownRefresh()
   },
-  
+
   bannerJump:function(e){
-    let obj=e.currentTarget.dataset.obj
-    switch (obj.menuType){
-      case 'view':
-        // wx.navigateTo({
-        //   url: `/pages/common/webview/index?url=${encodeURIComponent(obj.menuUrl)}`
-        // })
-      break;
-      case 'click':
-      break;
-    }
+    app.bannerJump(e)
   }
+
 }))
