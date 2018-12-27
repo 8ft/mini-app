@@ -101,17 +101,15 @@ Page({
       userId:data.userId
     })
     if (blogInfo.code !== 0) return
-
-    this.data.tags.push({
-      name:'全部标签',
-      articleNum:blogInfo.data.articleNum,
-      id:''
-    })
     
     this.setData({
       user:data,
       blogInfo:blogInfo.data,
-      tags:this.data.tags
+      'tags[0]':{
+        name:'全部标签',
+        articleNum:blogInfo.data.articleNum,
+        id:''
+      }
     })
 
     if(data.userState!==2&&this.data.nodataHeight===0){

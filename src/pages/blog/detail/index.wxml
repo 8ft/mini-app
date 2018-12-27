@@ -6,7 +6,8 @@
         <text class="name">{{detail.nickName}}</text>
         <view class="other"><text>{{detail.articleSourceTypeName}}</text>{{detail.createTime+' · 阅读'+detail.viewNum}}</view>
     </view>
-    <button class="{{detail.attentionState===1?'followed':''}}" hover-class="none" catchtap="follow">{{detail.attentionState===1?'已关注':'+关注'}}</button>
+    <button class="share" wx:if="{{isMyself}}" open-type="share" catchtap='onShareAppMessage'>分享</button>
+    <button wx:else class="{{detail.attentionState===1?'followed':''}}" hover-class="none" catchtap="follow">{{detail.attentionState===1?'已关注':'+关注'}}</button>
 </navigator>
 
 <view class="html">
@@ -21,13 +22,13 @@
     <block wx:if="{{comments.length>0}}">
         <view class="comment" wx:for="{{comments}}">
             <navigator hover-class="none" url="/pages/expert/index/index?id={{item.createUserId}}">
-                <image mode='aspectFill' src="{{item.userAvatar}}"></image>
+                <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
                 <view class="name">{{item.createUserName}}</view>
             </navigator>
             <text class="con">{{item.content}}</text>
             <view class="other">{{item.createTime}}
-                <view bindtap="openBox" data-index="{{index}}">{{item.replyNum}}条回复</view>
-                <text bindtap="download">回复</text>
+                <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-index="{{index}}">{{item.replyNum}}条回复</view>
+                <text bindtap="openBox" data-index="{{index}}">回复</text>
             </view>
         </view>
     </block>
@@ -44,7 +45,7 @@
         <scroll-view style="height:{{scrollViewHeight}}px;" scroll-y="true" scroll-top='0' bindscrolltolower="getReplies">
             <view class="comment">
                 <navigator hover-class="none" url="/pages/expert/index/index?id={{comments[cIndex].createUserId}}">
-                    <image mode='aspectFill' src="{{comments[cIndex].userAvatar}}"></image>
+                    <image lazy-load="true" mode='aspectFill' src="{{comments[cIndex].userAvatar}}"></image>
                     <view class="name">{{comments[cIndex].createUserName}}</view>
                 </navigator>
                 <text class="con">{{comments[cIndex].content}}</text>
@@ -55,7 +56,7 @@
                 <view class="title">{{replies.length===0?'抢先':''}}评论</view>
                 <view class="comment" hidden="{{replies.length===0}}" wx:for="{{replies}}">
                     <navigator hover-class="none" url="/pages/expert/index/index?id={{item.createUserId}}">
-                        <image mode='aspectFill' src="{{item.userAvatar}}"></image>
+                        <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
                         <view class="name">{{item.createUserName}}</view>
                     </navigator>
                     <text class="con">{{item.content}}</text>
@@ -77,7 +78,7 @@
 <action-bar id="actionBar" custom-class="action-bar-reset">
     <view class=".action-bar-con">
         <input placeholder="我要评论..." disabled="true" bindtap="download"/>
-        <view class="iconfont {{detail.favoriteState===1?'collected icon-yishoucang':'icon-shoucang1'}}" bindtap="collect"></view>
+        <view wx:if="{{!isMyself}}" class="iconfont {{detail.favoriteState===1?'collected icon-yishoucang':'icon-shoucang1'}}" bindtap="collect"></view>
         <view class="iconfont icon-xiaoxi1" bindtap="scrollToComments"></view>
         <text class="apply-num">{{detail.comments.count}}</text>
     </view>

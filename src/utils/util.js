@@ -1,7 +1,8 @@
 const formatTime = (time,type) => {
   const serverDate=new Date(wx.getStorageSync('serverDate'))
   const year_server = serverDate.getFullYear()
-  const date=new Date(time)
+  const day_server=serverDate.getDate()
+  const date=new Date(time.replace(/-/g, '/'))
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -11,11 +12,15 @@ const formatTime = (time,type) => {
   let dateSpan = serverDate - date;
   dateSpan = Math.abs(dateSpan);
   const iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
-
+  
   switch(type){
     case 'blogCard':
       if(iDays<1){
-        return [hour, minute].map(formatNumber).join(':')
+        if(day_server!==day){
+          return '1天前'
+        }else{
+          return [hour, minute].map(formatNumber).join(':')
+        }
       }else if(iDays>=1&&iDays<=7){
         return iDays+'天前'
       }else{
@@ -31,7 +36,11 @@ const formatTime = (time,type) => {
     break;
     case 'blogComment':
       if(year===year_server&&iDays<1){
-        return [hour, minute].map(formatNumber).join(':')
+        if(day_server!==day){
+          return `${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
+        }else{
+          return [hour, minute].map(formatNumber).join(':')
+        }
       }else if(year===year_server&&iDays>=1){
         return `${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
       }else{

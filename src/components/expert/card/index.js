@@ -4,6 +4,7 @@ const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 
 Component({
   properties: {
+    index:Number,
     data:Object,
     remarkable:{
       type:Boolean,
@@ -32,9 +33,7 @@ Component({
         talentUserId:this.properties.data.userId
       })
       if (res.code !==0) return
-      this.setData({
-        'data.followFlag':this.properties.data.followFlag===0?1:0
-      })
+      this.triggerEvent('collect', { index: this.properties.index,flag:this.properties.data.followFlag===0?1:0})
     },
 
     _openRemarkBox:function(){
@@ -65,10 +64,7 @@ Component({
         talentUserId:this.properties.data.userId
       })
       if (res.code !==0) return
-      this.setData({
-        'data.talentRemark':remark
-      })
-
+      this.triggerEvent('remark', { index: this.properties.index,remark:remark})
       this._closeRemarkBox()
     }
   }

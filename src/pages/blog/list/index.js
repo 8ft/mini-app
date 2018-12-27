@@ -27,7 +27,7 @@ Page(observer({
   },
 
   onShow:function(){
-    this.props.stores.toRefresh.refresh('discover',exist=>{
+    this.props.stores.toRefresh.refresh('blog_list',exist=>{
       if(this.data.types.length===0){
         this.getBlogTypes()
         this.getBlogs()

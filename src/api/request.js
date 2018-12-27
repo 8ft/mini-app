@@ -41,7 +41,7 @@ const request =(url, options,requireServerDate) => {
           }
         } 
 
-        //缓存服务器时间
+        //返回服务器时间
         if(requireServerDate){
           wx.setStorageSync('serverDate',res.header.Date)
         }

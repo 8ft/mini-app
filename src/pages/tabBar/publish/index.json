@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "nodata": "/components/nodata/nodata",
-    "collector": "/components/collector/contactInfo/index"
+    "collector": "/components/collector/contactInfo/index",
+    "action-bar":"/components/common/actionBar/index"
   }
 }

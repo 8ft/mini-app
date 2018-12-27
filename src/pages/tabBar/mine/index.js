@@ -14,7 +14,7 @@ Page(observer({
   onShareAppMessage: function () {
     return {
       title: '接包发包专业平台',
-      path: 'pages/project/index/index',
+      path: 'pages/tabBar/project/index',
       imageUrl:'/assets/img/share.png'
     }
   },

@@ -8,13 +8,12 @@ Page(observer({
   },
 
   data: {
-    uid:'',
-
     typeIndex:0,
     blogInfo:null,
 
-    tags:[],
     tagIndex:0,
+    tags:[],
+
     blogs:{
       list:[],
       pageIndex: 1,
@@ -28,26 +27,23 @@ Page(observer({
     loading:true,
   },
 
-  onLoad:async function (options) {
+  onLoad:function (options) {
     const articleNum=this.props.stores.account.blogInfo.articleNum
     const favoriteNum=this.props.stores.account.blogInfo.favoriteNum
 
-    this.data.tags.push({
-      name:'全部标签',
-      articleNum:articleNum,
-      id:''
-    })
-
-    await this.getBlogTags()
-
     this.setData({
-      tags:this.data.tags,
-      uid:options.id,
+      'tags[0]':{
+        name:'全部标签',
+        articleNum:articleNum,
+        id:''
+      },
       blogInfo:{
         articleNum:articleNum,
         favoriteNum:favoriteNum
       }
     })
+
+    this.getBlogTags()
   },
 
   onShow:function(){
@@ -125,7 +121,7 @@ Page(observer({
 
   getBlogTags: async function (){
     let res = await app.request.post('/blog/catalog/getList',{
-      userId: this.data.uid,
+      userId: this.props.stores.account.userInfo.userId,
       pageIndex:1,
       pageSize:99
     })
@@ -133,6 +129,7 @@ Page(observer({
     this.setData({
       tags:this.data.tags.concat(res.data.list)
     }) 
+    this.getBlogs()
   },
 
   getBlogs: async function (){
@@ -143,9 +140,11 @@ Page(observer({
     })
 
     let pIndex = this.data.blogs.pageIndex
-    let res = await app.request.post('/blog/article/myArticles',{
+    let res = await app.request.post('/blog/article/getList',{
       queryType:1,
+      articleType:1,
       catalogId:this.data.tags[this.data.tagIndex].id,
+      ownerId:this.props.stores.account.userInfo.userId,
       pageIndex:pIndex,
       pageSize:10
     })
@@ -181,8 +180,10 @@ Page(observer({
     })
 
     let pIndex = this.data.collection.pageIndex
-    let res = await app.request.post('/blog/article/myArticles',{
+    let res = await app.request.post('/blog/article/getList',{
       queryType:2,
+      articleType:1,
+      ownerId:this.props.stores.account.userInfo.userId,
       pageIndex:pIndex,
       pageSize:10
     })

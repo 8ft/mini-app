@@ -8,6 +8,7 @@ Page(observer({
   },
 
   data: {
+    isMyself:false,
     id:'',
     detail:null,
 
@@ -41,20 +42,21 @@ Page(observer({
         })
       }
     })
-
+    
     this.setData({
+      uid:options.uid,
       id:options.id
     })
   },
 
   onShow:function(){
-   this.getDetail()
+    this.getDetail()
   },
 
   onShareAppMessage: function () {
     return {
       title: '接包发包专业平台',
-      path: `pages/blog/detail/index?id=${this.data.id}`
+      path: `pages/blog/detail/index?id=${this.data.id}&uid=${this.data.uid}`
     }
   },
 
@@ -148,9 +150,15 @@ Page(observer({
     if (detail.code !== 0) return
 
     detail.data.createTime=app.util.formatTime(detail.data.createTime,'blogDetail')
-    detail.data.articleTags=detail.data.articleTags.split('|')
+    detail.data.articleTags=[detail.data.categoryName].concat(detail.data.articleTags.split('|'))
+
+    let isMyself=false
+    if(this.props.stores.account.logged_in){
+      isMyself=this.props.stores.account.userInfo.userId===this.data.uid
+    }
 
     this.setData({
+      isMyself:isMyself,
       loading:false,
       detail:detail.data,
       comments:detail.data.comments.list.map(item=>{

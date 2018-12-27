@@ -23,7 +23,7 @@
         <text>{{props.stores.account.blogInfo.fansNum}}</text>
         <text>粉丝</text>
     </navigator>
-    <navigator hover-class="none" url="/pages/mine/blogs/index?id={{props.stores.account.userInfo.userId}}">
+    <navigator hover-class="none" url="/pages/mine/blogs/index">
         <text>{{props.stores.account.blogInfo.articleNum}}</text>
         <text>博文</text>
     </navigator>

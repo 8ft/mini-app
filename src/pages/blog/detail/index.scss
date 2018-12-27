@@ -11,6 +11,7 @@ page{background:#fff;}
             text{font-size:16rpx;line-height:24rpx;padding:0 5rpx;border:$border;border-radius:4rpx;display:inline-block;margin-right:13rpx;}}}
     button{color:#fff;background:$red;width:136rpx;height:56rpx;line-height:56rpx;font-size:26rpx;border-radius:4rpx;
         &.followed{background: $gray;}
+        &.share{background: $darkBlue;}
     }}
 
 .html{padding:0 30rpx;

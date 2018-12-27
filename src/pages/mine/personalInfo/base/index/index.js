@@ -118,28 +118,8 @@ Page(observer({
   input: function (e) {
     let inputType = e.currentTarget.dataset.type
     let val = e.detail.value.replace(/[ ]/g, "").replace(/[\r\n]/g, "")
-    switch (inputType) {
-      case 'nickName':
-        this.data.userBaseInfo.nickName=val
-        break;
-      case 'positionTitle':
-        this.data.userBaseInfo.positionTitle = val
-        break;
-      case 'daySalary':
-        this.data.userBaseInfo.daySalary = val
-        break;
-      case 'qq':
-        this.data.userBaseInfo.qq = val
-        break;
-      case 'wechat':
-        this.data.userBaseInfo.wechat = val
-        break;
-      case 'email':
-        this.data.userBaseInfo.email = val
-        break;
-    }
     this.setData({
-      userBaseInfo: this.data.userBaseInfo
+      [`userBaseInfo.${inputType}`]:val
     })
   },
 

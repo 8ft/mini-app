@@ -75,12 +75,16 @@ Page(observer({
     }
 
     if(skill.active===true){
-      skill.active=false
+      this.setData({
+        [`skills[${data.type}].dictList[${data.index}].active`]:false
+      })
       addedSkills = addedSkills.filter(item=>{
         return item.skillValue != data.skill.dictValue
       })
     }else{
-      skill.active = true
+      this.setData({
+        [`skills[${data.type}].dictList[${data.index}].active`]:true
+      })
       this.data.addedSkills.push({
         skillCode: data.skill.dictCode,
         skillValue: data.skill.dictValue,
@@ -91,7 +95,6 @@ Page(observer({
     }
     
     this.setData({
-      skills: this.data.skills,
       addedSkills: addedSkills
     })
   },
@@ -147,7 +150,6 @@ Page(observer({
 
     addedSkills.splice(index, 1)
     this.setData({
-      skills: this.data.skills,
       addedSkills: addedSkills
     })
 

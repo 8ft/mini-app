@@ -54,9 +54,8 @@ Page(observer({
     })
     if(res.code!==0)return
     this.props.stores.account.follow(target.checked===0?1:-1)
-    target.checked=target.checked===0?1:0
     this.setData({
-      experts:this.data.experts
+      [`experts[${index}].checked`]:target.checked===0?1:0
     })
   },
 

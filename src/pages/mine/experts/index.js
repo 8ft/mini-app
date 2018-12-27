@@ -30,6 +30,24 @@ Page({
     this.getExperts()
   },
 
+  updateExpert:function(e){
+    const data=e.detail
+    if(data.remark!==undefined){
+      this.setData({
+        [`experts[${data.index}].talentRemark`]:data.remark
+      })
+    }else{
+      this.setData({
+        [`experts[${data.index}].followFlag`]:data.flag
+      })
+      if(data.flag===0){
+        this.setData({
+          [`experts[${data.index}].talentRemark`]:''
+        })
+      }
+    }
+  },
+
   getExperts: async function (){
     let nomore = this.data.nomore
     if (nomore)return

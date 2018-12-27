@@ -76,7 +76,7 @@ Page(observer({
       if (character === 'applicant' && ['4', '9'].indexOf(data.projectState) > -1) {
         applyInfo=await this.getApplyInfo(data.id,user.userId)
       }
-      if (data.applyNum > 0 && ['2', '5','6','7','8','10','11','14'].indexOf(data.projectState)>-1&& character === 'publisher' ) {
+      if (data.applyNum > 0 && ['2','7','8','10','11','14'].indexOf(data.projectState)>-1&& character === 'publisher' ) {
         applyUsers=await this.getApplyUsers(data.id)
       }
     }

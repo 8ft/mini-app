@@ -49,7 +49,9 @@ Page(observer({
         this.getBlogTypes()
         this.getBlogs()
       }else if(exist){
-        this.refresh()
+        if(this.data.pageIndex===1){
+          this.refresh()
+        }
       }
     })
   },
@@ -227,6 +229,12 @@ Page(observer({
   scrollToJobTypes:function(e){
     this.setData({
       'jobTypes.parent':'job'+e.currentTarget.dataset.code
+    })
+  },
+
+  updateExpert:function(e){
+    this.setData({
+      [`experts.list[${e.detail.index}].followFlag`]:e.detail.flag
     })
   },
 

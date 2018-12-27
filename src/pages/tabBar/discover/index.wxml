@@ -46,7 +46,7 @@
         </view>
     </view>
 
-    <expert-card wx:for="{{experts.list}}" data="{{item}}"></expert-card>
+    <expert-card wx:for="{{experts.list}}" index="{{index}}" data="{{item}}" bindcollect="updateExpert"></expert-card>
 
     <popup active="{{activeFilter==='sortWay'}}" margin="160rpx" bindhide='closePopup'>
         <list-item wx:for="{{sortWay.list}}" data-item="{{item}}" data-type="sortWay" bindtap="filter" name="{{item.text}}" active="{{sortWay.selected.text===item.text}}"></list-item>

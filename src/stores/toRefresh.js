@@ -5,11 +5,15 @@ const pages = {
     'index',
     'work',
     'publish',
-    'project_list'
+    'project_list',
+    'project_detail',
+    'blog_list',
+    'discover'
   ],
   'logout': [
     'index',
-    'publish'
+    'publish',
+    'discover'
   ],
   'applied': [
     'index',

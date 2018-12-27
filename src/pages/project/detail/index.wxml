@@ -45,19 +45,19 @@
     <view class="final-price {{(detail.projectState!=5&&detail.projectState!=6&&detail.projectState!=11)?'paid':''}}">项目金额：<text>{{cooperation.comfirmPrice}}元</text></view>
     <text class='lead-times'>交付日期：{{cooperation.deliverTime}}</text>
 
-    <view wx:if="{{character==='publisher'}}" class='cooperation-info'>
-        <image class='avatar' src="{{applyUsers.list[0].userAvatar}}"></image>
+    <navigator hover-class="none" wx:if="{{character==='publisher'}}" class='cooperation-info' url="/pages/expert/index/index?id={{detail.applyUserInfo.userId}}">
+        <image class='avatar' src="{{detail.applyUserInfo.userAvatar||'/assets/img/default/avatar.png'}}"></image>
         <view>
-          <view class='name'>{{applyUsers.list[0].nickName}}</view>
+          <view class='name'>{{detail.applyUserInfo.nickName}}</view>
           <image class='icon' src="/assets/img/icon/zj.png"></image>
         </view>
-        <view class='right' data-phone="{{applyUsers.list[0].mobile}}" bindtap='call'><image class='icon-phone' src="/assets/img/icon/lxdh.png"></image>{{applyUsers.list[0].mobile}}</view>
-    </view>
-    <view wx:else class='cooperation-info border-t'>
-        <image class='avatar' src="{{detail.pusherUserInfo.userAvatar}}"></image>
+        <view class='right' data-phone="{{detail.applyUserInfo.mobile}}" catchtap='call'><image class='icon-phone' src="/assets/img/icon/lxdh.png"></image>{{detail.applyUserInfo.mobile}}</view>
+    </navigator>
+    <navigator hover-class="none" wx:else class='cooperation-info border-t' url="/pages/expert/index/index?id={{detail.pusherUserInfo.userId}}">
+        <image class='avatar' src="{{detail.pusherUserInfo.userAvatar||'/assets/img/default/avatar.png'}}"></image>
         <view>{{detail.pusherUserInfo.nickName}}</view>
         <view class='right'><image class='icon' src="/assets/img/icon/xmf.png"></image></view>
-    </view>
+    </navigator>
   </view>
 </block>
 
