@@ -2,7 +2,8 @@
 <tabs wx:if="{{typesCn.length>0}}" fixed="true" custom-class="reset-tabs" tabs="{{typesCn}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 
 <view hidden="{{typeIndex===1&&!props.stores.account.logged_in}}" class="blogs">
-  <blog-card wx:for="{{blogs}}" data="{{item}}" show-author="true"></blog-card>
+  <blog-card wx:if="{{blogs.length>0}}" wx:for="{{blogs}}" data="{{item}}" show-author="true"></blog-card>
+  <nodata wx:if="{{typeIndex===1&&props.stores.account.logged_in&&blogs.length===0}}" name='projects'></nodata>
 </view>
 
 <nodata wx:if="{{typeIndex===1&&!props.stores.account.logged_in}}" name='bolgListMyFollow'></nodata>
