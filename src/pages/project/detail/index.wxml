@@ -94,7 +94,8 @@
 
 <!-- 申请 -->
 <action-bar wx:if="{{detail.projectState==2&&character!=='publisher'}}">
-  <button class='btn-one' bindtap='apply'>发送申请</button>
+  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
+  <button class='btn-two-third' bindtap='apply'>发送申请</button>
 </action-bar>
 
 <!-- 申请中 -->
