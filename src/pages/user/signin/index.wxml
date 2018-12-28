@@ -9,7 +9,7 @@
 <text class='input-title'>验证码</text>
 <view class='input'>
   <input type='number' placeholder='请输入验证码' data-name="code" bindinput='input'></input>
-  <button class='btn-code' bindtap='getCode'>{{getCodeTxt}}</button>
+  <button class='get-code' bindtap='getCode'>{{getCodeTxt}}</button>
 </view>
 
 <text class='input-title'>密码</text>

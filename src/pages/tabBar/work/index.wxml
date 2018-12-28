@@ -61,7 +61,7 @@
             <text>{{item.projectCycle}}完成</text>
             <text class='publish-time'>已申请：{{item.applyNum}}人</text>
           </view>
-          <text class='price'>{{(item.comfirmPrice&&item.projectInfoState!=9)?item.comfirmPrice+'元':item.projectBudget}}</text>
+          <text class='price'>{{item.projectBudget}}</text>
           <view class="status{{item.projectState}}">{{item.projectStateCn}}</view>
         </navigator>
       </scroll-view>
