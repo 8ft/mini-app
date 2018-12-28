@@ -10,19 +10,20 @@ const formatTime = (time,type) => {
   const minute = date.getMinutes()
 
   let dateSpan = serverDate - date;
-  dateSpan = Math.abs(dateSpan);
-  const iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
+  dateSpan = Math.abs(dateSpan)/ (24 * 3600 * 1000);
+  let iDays
+  if(dateSpan<1&&day_server===day){
+    iDays=0
+  }else{
+    iDays= Math.ceil(dateSpan);
+  }
   
   switch(type){
     case 'blogCard':
       if(iDays<1){
-        if(day_server!==day){
-          return '1天前'
-        }else{
-          return [hour, minute].map(formatNumber).join(':')
-        }
+        return [hour, minute].map(formatNumber).join(':')
       }else if(iDays>=1&&iDays<=7){
-        return iDays+'天前'
+        return day_server-day+'天前'
       }else{
         return `${year}年${formatNumber(month)}月${formatNumber(day)}日`
       }
@@ -36,11 +37,7 @@ const formatTime = (time,type) => {
     break;
     case 'blogComment':
       if(year===year_server&&iDays<1){
-        if(day_server!==day){
-          return `${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
-        }else{
-          return [hour, minute].map(formatNumber).join(':')
-        }
+        return [hour, minute].map(formatNumber).join(':')
       }else if(year===year_server&&iDays>=1){
         return `${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
       }else{

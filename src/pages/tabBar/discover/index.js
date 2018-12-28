@@ -49,9 +49,7 @@ Page(observer({
         this.getBlogTypes()
         this.getBlogs()
       }else if(exist){
-        if(this.data.pageIndex===1){
-          this.refresh()
-        }
+        this.refresh()
       }
     })
   },

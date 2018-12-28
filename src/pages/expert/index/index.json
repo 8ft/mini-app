@@ -1,10 +1,11 @@
 {
-  "navigationBarTitleText": "个人主页",
+  "navigationBarTitleText": "TA的主页",
   "enablePullDownRefresh": true,
   "onReachBottomDistance":true,
   "usingComponents": {
     "tabs": "/components/common/tabs/index",
     "nodata": "/components/nodata/nodata",
-    "blog-card":"/components/blog/card/index"
+    "blog-card":"/components/blog/card/index",
+    "action-bar": "/components/common/actionBar/index"
   }
 }

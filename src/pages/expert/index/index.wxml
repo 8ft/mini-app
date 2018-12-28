@@ -92,6 +92,16 @@
   <blog-card wx:for="{{blogs}}" data="{{item}}"></blog-card>
 </block>
 
-<view wx:else  id="nodata" style="position:relative;height:{{nodataHeight}}px;">
-  <nodata name='projects'></nodata>
+<view wx:else id="nodata" style="position:relative;height:{{nodataHeight}}px;">
+  <nodata></nodata>
 </view>
+
+
+<action-bar wx:if="{{from==='applicant'}}">
+  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
+  <button class='btn-two-third' bindtap="download">雇佣专家</button>
+</action-bar>
+
+<action-bar wx:else >
+  <button class='btn-one' bindtap='download'><text class='iconfont icon-lianxi'></text>发送消息</button>
+</action-bar>

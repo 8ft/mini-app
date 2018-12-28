@@ -72,14 +72,14 @@
   </view>
 
   <action-bar position="relative">
-    <button class="submit" bindtap='publish'>发布项目</button>
+    <button class='btn-one' bindtap='publish'>发布项目</button>
   </action-bar>
 
   <collector show="{{showCollector}}" bindhide='hideCollector' bindsave='updateUserInfo'></collector>
 </block>
 
 <block wx:else>
-  <nodata name='publish'></nodata>
+  <nodata text='登录了就能发布项目了喔~' login="true"></nodata>
 </block>
 
 

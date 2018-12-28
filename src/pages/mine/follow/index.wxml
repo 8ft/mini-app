@@ -9,6 +9,6 @@
    <button class="{{item.checked===1?'followed':''}}" hover-class="none" data-index="{{index}}" catchtap="follow">{{item.checked===1?'已关注':'+关注'}}</button>
 </navigator>
 
-<nodata wx:if="{{!loading&&experts.length===0}}" name='projects'></nodata>
+<nodata wx:if="{{!loading&&experts.length===0}}"></nodata>
 
 

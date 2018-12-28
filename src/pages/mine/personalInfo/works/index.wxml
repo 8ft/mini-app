@@ -50,5 +50,5 @@
 </view>
 
 <action-bar>
-  <button class="submit" bindtap='publish' bindtap='save'>保存</button>
+  <button class='btn-one' bindtap='save'>保存</button>
 </action-bar>

@@ -1,5 +1,5 @@
 <!--pages/expert/applicant/index.wxml-->
-<navigator class='applicant' wx:for="{{applicants}}" url="/pages/expert/index/index?id={{item.userId}}">
+<navigator class='applicant' wx:for="{{applicants}}" url="/pages/expert/index/index?id={{item.userId}}&from=applicant">
   <image class='avatar' src="{{item.userAvatar}}"></image>
   <view class='info border-b'>  
     <view class='name'>

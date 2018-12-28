@@ -1,8 +1,8 @@
 <!--components/nodata/nodata.wxml-->
 <view class='nodata'>
-  <image src="{{contents[name].img}}"></image>
-  <view>{{contents[name].text}}</view>
-  <navigator wx:if="{{contents[name].login}}" url='/pages/user/wxLogin/index' hover-class='none'>登录</navigator>
+  <image src="{{img}}"></image>
+  <view>{{text}}</view>
+  <navigator wx:if="{{login}}" url='/pages/user/wxLogin/index' hover-class='none'>登录</navigator>
 </view>
 
 

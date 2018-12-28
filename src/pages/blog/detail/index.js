@@ -152,6 +152,23 @@ Page(observer({
     detail.data.createTime=app.util.formatTime(detail.data.createTime,'blogDetail')
     detail.data.articleTags=[detail.data.categoryName].concat(detail.data.articleTags.split('|'))
 
+    let tip=''
+    switch(detail.data.articleState){
+      case -1:
+      tip='文章已删除'
+      break;
+      case 0:
+      tip='别急呀！文章正在审核中...\n通过后即可查看，请稍后再试'
+      break;
+      case 2:
+      tip='内容审核不通过'
+      break;
+      case 3:
+      tip='文章已下架'
+      break;
+    }
+    detail.data.tip=tip
+
     let isMyself=false
     if(this.props.stores.account.logged_in){
       isMyself=this.props.stores.account.userInfo.userId===this.data.uid

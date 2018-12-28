@@ -12,5 +12,5 @@
   <button class='btn-code' disabled="{{countDown!==60}}" bindtap='getCode'>{{getCodeTxt}}</button>
 </view>
 
-<button class='submit' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">完成</button>
+<button class='btn-one' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">完成</button>
 

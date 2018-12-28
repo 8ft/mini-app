@@ -22,6 +22,6 @@
 </view>
 
 <action-bar>
-  <button class="submit" bindtap='publish' bindtap='send' disabled="{{disagree}}">发送申请</button>
+  <button class='btn-one' bindtap='send' disabled="{{disagree}}">发送申请</button>
 </action-bar>
 

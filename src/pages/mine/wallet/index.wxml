@@ -33,6 +33,6 @@
 </block>
 
 <block wx:else>
-  <nodata name='wallet'></nodata>
+  <nodata text='您暂时还没有收支明细记录哦~'></nodata>
 </block>
 

@@ -61,20 +61,20 @@
             <text>{{item.projectCycle}}完成</text>
             <text class='publish-time'>已申请：{{item.applyNum}}人</text>
           </view>
-          <text class='price'>{{item.projectBudget}}</text>
+          <text class='price'>{{(item.comfirmPrice&&item.projectInfoState!=9)?item.comfirmPrice+'元':item.projectBudget}}</text>
           <view class="status{{item.projectState}}">{{item.projectStateCn}}</view>
         </navigator>
       </scroll-view>
 
       <block wx:elif="{{!loading}}">
-        <nodata name="{{typeIndex===0?'myPublish':'myApply'}}"></nodata>
+        <nodata text="{{typeIndex===0?'还没有项目哦，快去发布OR申请~':'还没有申请过项目呢~'}}"></nodata>
       </block>
 
   </view>
 </block>
 
 <block wx:else>
-  <nodata name='myProjects'></nodata>
+  <nodata text='登录了就能开始处理工作了喔~' login="true"></nodata>
 </block>
 
 

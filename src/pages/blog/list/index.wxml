@@ -3,9 +3,9 @@
 
 <view hidden="{{typeIndex===1&&!props.stores.account.logged_in}}" class="blogs">
   <blog-card wx:if="{{blogs.length>0}}" wx:for="{{blogs}}" data="{{item}}" show-author="true"></blog-card>
-  <nodata wx:if="{{typeIndex===1&&props.stores.account.logged_in&&blogs.length===0}}" name='projects'></nodata>
+  <nodata wx:if="{{typeIndex===1&&props.stores.account.logged_in&&blogs.length===0}}"></nodata>
 </view>
 
-<nodata wx:if="{{typeIndex===1&&!props.stores.account.logged_in}}" name='bolgListMyFollow'></nodata>
+<nodata wx:if="{{typeIndex===1&&!props.stores.account.logged_in}}" text='登录后可以查看更多内容哦' login="true"></nodata>
 
 

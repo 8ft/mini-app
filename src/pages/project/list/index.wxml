@@ -40,7 +40,7 @@
     </view>
   </block>
   <block wx:elif="{{!loading}}">
-    <nodata name='projects'></nodata>
+    <nodata></nodata>
   </block>
 
 

@@ -76,5 +76,5 @@
 </view>
 
 <action-bar wx:if="{{props.stores.account.userInfo.userState!==2&&props.stores.account.userInfo.userState!==1}}">
-   <button class="submit" bindtap='publish' bindtap='submit'>提交审核</button>
+   <button class='btn-one' bindtap='submit'>提交审核</button>
 </action-bar>

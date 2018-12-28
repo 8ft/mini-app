@@ -14,5 +14,13 @@ Component({
         uid: user.userId
       })
     }
+  },
+
+  methods:{
+    toApplicant:function(){
+      wx.navigateTo({
+        url:`/pages/expert/applicant/index?id=${this.data.project.id}`
+      })
+    }
   }
 })

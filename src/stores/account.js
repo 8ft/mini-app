@@ -91,6 +91,7 @@ const account = function () {
     if (!expire){
       let res = await request.post('/user/userAuth/logout')
     }
+
     app.globalData = {
       editUserInfoCache: {
         jobTypes: {},
@@ -105,11 +106,18 @@ const account = function () {
         }
       }
     }
-    app.stores.toRefresh.updateList('logout')
     wx.clearStorageSync()
     this.account=''
     this.userInfo=null
     this.blogInfo=null
+
+    if (!expire){
+      wx.reLaunch({
+        url: '/pages/tabBar/mine/index'
+      })
+    }else{
+      app.stores.toRefresh.updateList('logout')
+    }
   }
 
   this.refresh=()=>{

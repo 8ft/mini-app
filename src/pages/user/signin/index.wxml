@@ -17,7 +17,7 @@
   <input password="true" placeholder='请输入密码' data-name="pwd" bindinput='input'></input>
 </view>
 
-<button class='submit' disabled="{{disagree}}" bindtap='signin'>注册</button>
+<button class='btn-one' disabled="{{disagree}}" bindtap='signin'>注册</button>
 
 <view class='agree'>
   <checkbox color='#fff' checked="true" bindtap="setAgree"/>

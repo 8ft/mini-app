@@ -6,6 +6,7 @@ Page({
   data: {
     nodataHeight:0,
 
+    from:'',
     uid:'',
     typeIndex:0,
     user:null,
@@ -22,6 +23,7 @@ Page({
 
   onLoad:function (options) {
     this.setData({
+      from:options.from,
       uid:options.id
     })
     this.getUserInfo()
@@ -55,7 +57,7 @@ Page({
 
   switchList:async function(e){
     const index = e.detail.index
-    if(index===1&&this.data.blogs.length===0){
+    if(index===1&&this.data.tags.length<=1){
       await this.getBlogTags()
       this.getBlogs()
     }
@@ -181,6 +183,8 @@ Page({
       })
     }
     wx.stopPullDownRefresh()
-  }
+  },
+
+  download:app.download
  
 })
