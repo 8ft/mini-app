@@ -53,7 +53,8 @@ Page(observer({
       nickName: this.props.stores.account.userInfo.nickName,
       userAvatar: no
     })
-    if (res.code === 0) this.getInfo()
+    if (res.code !== 0)return
+    this.props.stores.account.updateUserInfo()
   },
 
   delWorks:function(e){
@@ -70,7 +71,7 @@ Page(observer({
               title: '删除成功',
               icon: 'none'
             })
-            this.getInfo()
+            this.props.stores.account.updateUserInfo()
           }
         }
       }

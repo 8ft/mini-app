@@ -122,6 +122,7 @@ Page(observer({
   },
 
   getMyAttentionStats:async function(){
+    if(!this.props.stores.account.logged_in)return
     let res = await app.request.post('/blog/attentionInfo/myAttentionStats')
     if (res.code === 0) {
       this.setData({

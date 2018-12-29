@@ -9,7 +9,7 @@ Component({
         if(newVal.topFlag===1){
           state.push('置顶')
         }
-        
+
         switch(newVal.articleState){
           case 0:
             state.push('审核中')
@@ -18,7 +18,7 @@ Component({
             state.push('审核未通过')
           break;
           case 3:
-            state.push('下架')
+            state.push('已下架')
           break;
         }
 
@@ -34,7 +34,7 @@ Component({
   },
 
   data:{
-    state:''
+    state:[]
   },
 
   methods:{
