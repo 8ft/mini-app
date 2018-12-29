@@ -6,7 +6,7 @@
   <text class="title">{{data.articleTitle}}</text>
   <text class="pre-view">{{data.articleBrief}}</text>
   <view class="other-info">
-    <text class="publish-time">{{data.createTime}}<text wx:if="{{state}}">{{state}}</text></text>
+    <text class="publish-time">{{data.createTime}}<text wx:for="{{state}}">{{item}}</text></text>
     <text><text class="iconfont icon-pinglun"></text>{{data.commentNum+'  '}}</text>
     <text><text class="iconfont icon-liulan"></text>{{data.viewNum}}</text>
   </view>

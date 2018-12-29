@@ -5,21 +5,21 @@ Component({
     data:{
       type:Object,
       observer(newVal, oldVal, changedPath) {
-        let state=''
+        let state=[]
+        if(newVal.topFlag===1){
+          state.push('置顶')
+        }
+        
         switch(newVal.articleState){
           case 0:
-            state='待审核'
+            state.push('审核中')
           break;
           case 2:
-            state='不通过'
+            state.push('审核未通过')
           break;
           case 3:
-            state='下架'
+            state.push('下架')
           break;
-        }
-
-        if(newVal.topFlag===1){
-          state='置顶'
         }
 
         this.setData({
