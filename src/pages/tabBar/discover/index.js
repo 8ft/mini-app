@@ -11,6 +11,7 @@ Page(observer({
    pageIndex:0,
 
    banners:null,
+   hasNew:0,
    types: [],
    blogs:{
      list:[],
@@ -43,6 +44,9 @@ Page(observer({
   },
 
   onShow:function(){
+    if(this.data.pageIndex===0){
+      this.getMyAttentionStats()
+    }
     this.props.stores.toRefresh.refresh('discover',exist=>{
       if(this.data.banners===null){
         this.getBanner()
@@ -85,6 +89,7 @@ Page(observer({
         'blogs.nomore': false
       })
       this.getBanner()
+      this.getMyAttentionStats()
       this.getBlogs()
     }else{
       this.setData({
@@ -112,6 +117,15 @@ Page(observer({
     if (res.code === 0) {
       this.setData({
         types: res.data.splice(1)
+      })
+    }
+  },
+
+  getMyAttentionStats:async function(){
+    let res = await app.request.post('/blog/attentionInfo/myAttentionStats')
+    if (res.code === 0) {
+      this.setData({
+        hasNew: res.data.articleNews
       })
     }
   },

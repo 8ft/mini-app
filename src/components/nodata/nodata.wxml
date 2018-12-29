@@ -1,7 +1,7 @@
 <!--components/nodata/nodata.wxml-->
 <view class='nodata'>
-  <image src="{{img}}"></image>
-  <view>{{text}}</view>
+  <image mode='widthFix' src="/assets/img/nodata/{{img||'default'}}.png"></image>
+  <text>{{text}}</text>
   <navigator wx:if="{{login}}" url='/pages/user/wxLogin/index' hover-class='none'>登录</navigator>
 </view>
 

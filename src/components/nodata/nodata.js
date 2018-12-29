@@ -2,7 +2,7 @@ Component({
   properties: {
     img:{
       type:String,
-      value:'/assets/img/default/no-project.png'
+      value:'default'
     },
     text:{
       type:String,

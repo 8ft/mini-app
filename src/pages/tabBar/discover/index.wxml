@@ -13,12 +13,13 @@
         </swiper>
         <scroll-view class='types' scroll-x="true">
             <navigator wx:for="{{types}}" url="/pages/blog/list/index?id={{item.id}}&index={{index+1}}" hover-class="none">
+                <view wx:if="{{item.id==='4'&&hasNew!==0}}" class="has-new"></view>
                 <image src="{{item.icon}}"></image>
                 <text>{{item.name}}</text>
             </navigator>
         </scroll-view>
         <view class="blogs">
-            <blog-card wx:for="{{blogs.list}}" data="{{item}}" show-author="true"></blog-card>
+            <blog-card wx:for="{{blogs.list}}" data="{{item}}" show-author="{{item.articleType!==2?true:false}}"></blog-card>
         </view>
     </view>
 </block>

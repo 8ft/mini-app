@@ -36,6 +36,11 @@ Component({
       this.triggerEvent('collect', { index: this.properties.index,flag:this.properties.data.followFlag===0?1:0})
     },
 
+    _addRemark:function(){
+      if(this.properties.data.talentRemark)return
+      this._openRemarkBox()
+    },
+
     _openRemarkBox:function(){
       this.setData({
         showRemarkBox:true

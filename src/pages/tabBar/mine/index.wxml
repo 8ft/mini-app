@@ -11,7 +11,7 @@
 <view class="userinfo" wx:else>
   <view class="base">
     <view class='nickName'><text>{{props.stores.account.userInfo.nickName}}</text><view class="iconfont icon-xingbie{{props.stores.account.userInfo.userBaseInfo.sex===1?'nan':'nv'}}"></view></view>
-    <view class='finished'>已完成{{props.stores.account.userInfo.finishOrderNums}}单</view>
+    <view class='finished'><image src='/assets/img/mine/icon_my_project@3x.png'></image>已完成{{props.stores.account.userInfo.finishOrderNums}}单</view>
     <image class='avatar' src="{{props.stores.account.userInfo.userAvatar||'/assets/img/default/avatar.png'}}"></image>
   </view>
   <view class="blog">

@@ -1,7 +1,8 @@
 
 <block wx:if="{{detail.articleState===1||isMyself}}">
     <view class="title">{{detail.articleTitle}}</view>
-    <navigator class="author" hover-class="none" url="/pages/expert/index/index?id={{detail.updateUserId}}">
+
+    <navigator wx:if="{{detail.articleType!==2}}" class="author" hover-class="none" url="/pages/expert/index/index?id={{detail.updateUserId}}">
         <image mode='aspectFill' src="{{detail.userAvatar||'/assets/img/default/avatar.png'}}"></image> 
         <view class="info">
             <text class="name">{{detail.nickName}}</text>
@@ -11,6 +12,12 @@
         <button wx:elif="{{detail.articleState===1}}" class="{{detail.attentionState===1?'followed':''}}" hover-class="none" catchtap="follow">{{detail.attentionState===1?'已关注':'+关注'}}</button>
     </navigator>
 
+    <view wx:else class="author">
+        <view class="info">
+            <view class="other"><text>{{detail.articleSourceTypeName}}</text>{{detail.createTime+' · 阅读'+detail.viewNum}}</view>
+        </view>
+    </view>
+    
     <view class="html">
         <view wx:if="{{detail.articleState===3||detail.articleState===2}}" class="xiajia">
             <image mode='aspectFill' src="/assets/img/discover/xiajia.png"></image> 
@@ -37,7 +44,7 @@
                 </view>
             </view>
         </block>
-        <nodata wx:elif="{{!loading}}" text='还没有人评论哦~快来抢沙发吧'></nodata>
+        <nodata wx:elif="{{!loading}}" img='comment' text='还没有人评论哦~快来抢沙发吧'></nodata>
     </view>
 
     <popup position="bottom" active="{{boxSwitch}}">
@@ -91,7 +98,7 @@
 </block>
 
 <block wx:else>
-    <nodata wx:if="{{!loading}}" text="{{detail.tip}}"></nodata>
+    <nodata wx:if="{{!loading}}" img="{{detail.nodata.img}}" text="{{detail.nodata.text}}"></nodata>
 </block>
 
 

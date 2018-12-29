@@ -11,7 +11,8 @@ swiper{width:690rpx;height:295rpx;margin:$m auto;background:$blue;border-radius:
     image{border-radius:10rpx;width:100%;height:100%;}}
 
 .types{width:100%;white-space:nowrap;
-    navigator{display:inline-block;text-align:center;width:150rpx;
+    navigator{display:inline-block;text-align:center;width:150rpx;position: relative;
+    .has-new{width:10rpx;height:10rpx;background:#FF0000;border:2px solid #fff;border-radius:50%;position:absolute;left:50%;top:8rpx;margin-left:16rpx;}
     image{width:72rpx;height:72rpx;margin-bottom:13rpx;}
     text{display:block;font-size:$m;line-height:$m;color:$lightBlack;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}}}
 

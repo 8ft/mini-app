@@ -4,7 +4,7 @@
       <navigator class="info" hover-class="none" url="/pages/expert/index/index?id={{data.userId}}">
         <image class="avatar" lazy-load="true" mode="aspectFill" src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>
         <image class="type" mode="aspectFill" src="/assets/img/discover/{{data.settleType===2?'team':'personal'}}.png"></image>
-        <view class="last-login">{{data.loginTimeCn}}</view>
+        <!-- <view class="last-login">{{data.loginTimeCn}}</view> -->
         <view class="name"><text>{{data.nickName}}</text>{{data.positionTitle}}</view>
         <view class="label">{{data.cityCn}}</view>
         <view class="label">{{data.workExperience}}年</view>
@@ -14,7 +14,7 @@
       </navigator>
       <view class="action">
         <view catchtap="_download"><text class="iconfont icon-xiaoxi1"></text>私信</view>
-        <view catchtap="_openRemarkBox" wx:if="{{remarkable&&data.followFlag===1}}"><text wx:if="{{!data.talentRemark}}" class="iconfont icon-beizhu"></text>{{data.talentRemark?'已添加备注':'备注'}}</view>
+        <view catchtap="_addRemark" wx:if="{{remarkable&&data.followFlag===1}}"><text wx:if="{{!data.talentRemark}}" class="iconfont icon-beizhu"></text>{{data.talentRemark?'已添加备注':'备注'}}</view>
         <view catchtap="_collect"><text class="iconfont icon-{{data.followFlag===0?'shoucang1':'yishoucang'}}"></text>{{data.followFlag===0?'收藏':'已收藏'}}</view>
       </view>
   </view>
