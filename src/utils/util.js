@@ -25,7 +25,7 @@ const formatTime = (time,type) => {
       }else if(iDays>=1&&iDays<=7){
         return iDays+'天前'
       }else{
-        return `${year}·${formatNumber(month)}·${formatNumber(day)}`
+        return `${year}.${formatNumber(month)}.${formatNumber(day)}`
       }
     break;
     case 'blogDetail':

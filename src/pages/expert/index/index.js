@@ -23,7 +23,7 @@ Page({
 
   onLoad:function (options) {
     this.setData({
-      from:options.from,
+      from:options.from||'',
       uid:options.id
     })
     this.getUserInfo()
@@ -89,7 +89,7 @@ Page({
     if (res.code !== 0) return
 
     let data=res.data
-    if(data.userState!==0){
+    if(data.userState===2){
       data.userBaseInfo.positionTypeCn = data.userBaseInfo.positionTypeCn.split('|')
       data.userSampleInfos = data.userSampleInfos.map(item=>{
         if (item.sampleDesc.length >= 30){
