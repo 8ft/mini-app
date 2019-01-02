@@ -1,4 +1,6 @@
 @import '../../../assets/scss/var.scss'; 
+@import '../../../towxml/style/main.wxss';
+@import '../../../towxml/style/theme/light.wxss';
 
 page{background:#fff;}
 .title{font-size:48rpx;color:$black;font-weight:600;line-height:60rpx;padding:38rpx 30rpx 0;}
@@ -14,6 +16,7 @@ page{background:#fff;}
         &.share{background:$darkBlue;}}}
 
 .html{padding:0 30rpx;
+    .h2w__main{padding:0!important;margin:0!important;}
     .xiajia{display:flex;align-items:center;width:600rpx;box-sizing:border-box;padding:16rpx 32rpx;background:#ffeded;margin:0 auto 35rpx;border-radius:12rpx;
         image{width:64rpx;height:64rpx;margin-right:28rpx;}
         text{width:439rpx;font-size:22rpx;line-height:30rpx;color:#ff4b4b;}}

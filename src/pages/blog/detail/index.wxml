@@ -23,7 +23,10 @@
             <image mode='aspectFill' src="/assets/img/discover/xiajia.png"></image> 
             <text>{{detail.auditRemark}}</text>
         </view>
-        <htmltowxml text="{{detail.content}}"></htmltowxml>
+        
+        <import src="/towxml/entry.wxml"/>
+        <template is="entry" data="{{...article}}"/>
+
         <view class="tags">
             <view wx:for="{{detail.articleTags}}">{{item}}</view>
         </view>

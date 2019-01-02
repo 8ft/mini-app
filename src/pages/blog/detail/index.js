@@ -1,6 +1,9 @@
 const app = getApp()
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
-const observer = require('../../../libs/observer').observer;
+const observer = require('../../../libs/observer').observer
+const Towxml = require('../../../towxml/main')
+
+const towxml=new Towxml()  
 
 Page(observer({
   props: {
@@ -11,6 +14,7 @@ Page(observer({
     isMyself:false,
     id:'',
     detail:null,
+    article:{},
 
     comments:[],
     commentsPostion:0,
@@ -194,6 +198,16 @@ Page(observer({
         item.createTime=app.util.formatTime(item.createTime,'blogComment')
         return item
       })
+    })
+
+    //解析html
+    let wxml = towxml.toJson(
+      detail.data.content,               
+      'html'             
+    )
+
+    this.setData({
+      article: wxml
     })
   },
 

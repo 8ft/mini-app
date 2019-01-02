@@ -1,6 +1,5 @@
 {
     "usingComponents": {
-        "htmltowxml": "plugin://htmltowxml/view",
         "nodata": "/components/nodata/nodata",
         "action-bar": "/components/common/actionBar/index",
         "popup": "/components/common/popup/index"

@@ -2,6 +2,8 @@ const formatTime = (time,type) => {
   const serverDate=new Date(wx.getStorageSync('serverDate'))
   const year_server = serverDate.getFullYear()
   const day_server=serverDate.getDate()
+  const hour_server=serverDate.getHours()
+
   const date=new Date(time.replace(/-/g, '/'))
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -9,13 +11,11 @@ const formatTime = (time,type) => {
   const hour = date.getHours()
   const minute = date.getMinutes()
 
-  let dateSpan = serverDate - date;
-  dateSpan = Math.abs(dateSpan)/ (24 * 3600 * 1000);
-  let iDays
-  if(dateSpan<1&&day_server===day){
-    iDays=0
-  }else{
-    iDays= Math.ceil(dateSpan);
+  let dateSpan = serverDate - date
+  let iDays = Math.floor(dateSpan/ (24 * 3600 * 1000))
+
+  if(hour_server<hour){
+    iDays+=1
   }
   
   switch(type){
@@ -23,9 +23,9 @@ const formatTime = (time,type) => {
       if(iDays<1){
         return [hour, minute].map(formatNumber).join(':')
       }else if(iDays>=1&&iDays<=7){
-        return day_server-day+'天前'
+        return iDays+'天前'
       }else{
-        return `${year}年${formatNumber(month)}月${formatNumber(day)}日`
+        return `${year}·${formatNumber(month)}·${formatNumber(day)}`
       }
     break;
     case 'blogDetail':
@@ -36,12 +36,12 @@ const formatTime = (time,type) => {
       }
     break;
     case 'blogComment':
-      if(year===year_server&&iDays<1){
+      if(iDays<1){
         return [hour, minute].map(formatNumber).join(':')
       }else if(year===year_server&&iDays>=1){
         return `${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
       }else{
-        return `${year}年-${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
+        return `${year}-${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
       }
     break;
   }
