@@ -11,59 +11,59 @@
   ],
   "subpackages": [
     {
-      "root": "packageProject/pages",
+      "root": "packageProject",
       "name": "project",
       "pages": [
-        "list/index",
-        "detail/index",
-        "apply/index/index",
-        "apply/agreement/index"
+        "pages/list/index",
+        "pages/detail/index",
+        "pages/apply/index/index",
+        "pages/apply/agreement/index"
       ]
     },
     {
-      "root": "packagePublish/pages",
+      "root": "packagePublish",
       "name": "publish",
       "pages": [
-        "desc/index",
-        "skills/index",
-        "success/index"
+        "pages/desc/index",
+        "pages/skills/index",
+        "pages/success/index"
       ]
     },
     {
-      "root": "packageMine/pages",
+      "root": "packageMine",
       "name": "mine",
       "pages": [
-        "personalInfo/index/index",
-        "personalInfo/base/index/index",
-        "personalInfo/base/jobTypes/index",
-        "personalInfo/base/city/index",
-        "personalInfo/detail/index",
-        "personalInfo/skills/index",
-        "personalInfo/works/index",
-        "personalInfo/success/index",
-        "wallet/index",
-        "tradeDetail/index",
-        "follow/index",
-        "fans/index",
-        "blogs/index",
-        "experts/index"
+        "pages/personalInfo/index/index",
+        "pages/personalInfo/base/index/index",
+        "pages/personalInfo/base/jobTypes/index",
+        "pages/personalInfo/base/city/index",
+        "pages/personalInfo/detail/index",
+        "pages/personalInfo/skills/index",
+        "pages/personalInfo/works/index",
+        "pages/personalInfo/success/index",
+        "pages/wallet/index",
+        "pages/tradeDetail/index",
+        "pages/follow/index",
+        "pages/fans/index",
+        "pages/blogs/index",
+        "pages/experts/index"
       ]
     },
     {
-      "root": "packageBlog/pages",
+      "root": "packageBlog",
       "name": "blog",
       "pages": [
-        "list/index",
-        "detail/index"
+        "pages/list/index",
+        "pages/detail/index"
       ]
     },
     {
-      "root": "packageExpert/pages",
+      "root": "packageExpert",
       "name": "expert",
       "pages": [
-        "index/index",
-        "applicant/index",
-        "collection/index"
+        "pages/index/index",
+        "pages/applicant/index",
+        "pages/collection/index"
       ]
     }
   ],
