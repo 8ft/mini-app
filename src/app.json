@@ -1,16 +1,18 @@
 {
   "pages": [
-    "pages/tabBar/project/index",
-    "pages/tabBar/work/index",
-    "pages/tabBar/publish/index",
-    "pages/tabBar/mine/index",
+    "pages/project/index",
+    "pages/work/index",
+    "pages/publish/index",
+    "pages/mine/index",
     "pages/user/wxLogin/index",
     "pages/user/bind/index",
-    "pages/tabBar/discover/index"
+    "pages/discover/index",
+    "pages/webview/index"
   ],
   "subpackages": [
     {
-      "root": "pages/project",
+      "root": "packageProject/pages",
+      "name": "project",
       "pages": [
         "list/index",
         "detail/index",
@@ -19,7 +21,8 @@
       ]
     },
     {
-      "root": "pages/publish",
+      "root": "packagePublish/pages",
+      "name": "publish",
       "pages": [
         "desc/index",
         "skills/index",
@@ -27,7 +30,8 @@
       ]
     },
     {
-      "root": "pages/mine",
+      "root": "packageMine/pages",
+      "name": "mine",
       "pages": [
         "personalInfo/index/index",
         "personalInfo/base/index/index",
@@ -46,57 +50,53 @@
       ]
     },
     {
-      "root": "pages/blog",
+      "root": "packageBlog/pages",
+      "name": "blog",
       "pages": [
         "list/index",
         "detail/index"
       ]
     },
     {
-      "root": "pages/expert",
+      "root": "packageExpert/pages",
+      "name": "expert",
       "pages": [
         "index/index",
         "applicant/index",
         "collection/index"
       ]
-    },
-    {
-      "root": "pages/common",
-      "pages": [
-        "webview/index"
-      ]
     }
   ],
   "preloadRule": {
-    "pages/tabBar/project/index": {
+    "pages/project/index": {
       "network": "all",
       "packages": [
-        "pages/project"
+        "project"
       ]
     },
-    "pages/tabBar/publish/index": {
+    "pages/publish/index": {
       "network": "all",
       "packages": [
-        "pages/publish"
+        "publish"
       ]
     },
-    "pages/tabBar/discover/index": {
+    "pages/discover/index": {
       "network": "all",
       "packages": [
-        "pages/blog",
-        "pages/expert"
+        "blog",
+        "expert"
       ]
     },
-    "pages/tabBar/mine/index": {
+    "pages/mine/index": {
       "network": "all",
       "packages": [
-        "pages/mine"
+        "mine"
       ]
     },
-    "pages/project/detail/index": {
+    "packageProject/pages/detail/index": {
       "network": "all",
       "packages": [
-        "pages/expert"
+        "expert"
       ]
     }
   },
@@ -112,33 +112,33 @@
     "list": [
       {
         "text": "项目",
-        "pagePath": "pages/tabBar/project/index",
-        "iconPath": "./assets/img/tabbar/projects.png",
-        "selectedIconPath": "./assets/img/tabbar/projects_fill.png"
+        "pagePath": "pages/project/index",
+        "iconPath": "assets/img/tabbar/projects.png",
+        "selectedIconPath": "assets/img/tabbar/projects_fill.png"
       },
       {
         "text": "工作",
-        "pagePath": "pages/tabBar/work/index",
-        "iconPath": "./assets/img/tabbar/work.png",
-        "selectedIconPath": "./assets/img/tabbar/work_fill.png"
+        "pagePath": "pages/work/index",
+        "iconPath": "assets/img/tabbar/work.png",
+        "selectedIconPath": "assets/img/tabbar/work_fill.png"
       },
       {
         "text": "发布",
-        "pagePath": "pages/tabBar/publish/index",
-        "iconPath": "./assets/img/tabbar/publish.png",
-        "selectedIconPath": "./assets/img/tabbar/publish_fill.png"
+        "pagePath": "pages/publish/index",
+        "iconPath": "assets/img/tabbar/publish.png",
+        "selectedIconPath": "assets/img/tabbar/publish_fill.png"
       },
       {
         "text": "发现",
-        "pagePath": "pages/tabBar/discover/index",
-        "iconPath": "./assets/img/tabbar/discover.png",
-        "selectedIconPath": "./assets/img/tabbar/discover_fill.png"
+        "pagePath": "pages/discover/index",
+        "iconPath": "assets/img/tabbar/discover.png",
+        "selectedIconPath": "assets/img/tabbar/discover_fill.png"
       },
       {
         "text": "我的",
-        "pagePath": "pages/tabBar/mine/index",
-        "iconPath": "./assets/img/tabbar/mine.png",
-        "selectedIconPath": "./assets/img/tabbar/mine_fill.png"
+        "pagePath": "pages/mine/index",
+        "iconPath": "assets/img/tabbar/mine.png",
+        "selectedIconPath": "assets/img/tabbar/mine_fill.png"
       }
     ]
   },

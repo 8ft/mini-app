@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "项目详情",
+  "usingComponents": {
+    "action-bar": "/components/common/actionBar/index",
+    "project-status":"../../components/status/index"
+  }
+}

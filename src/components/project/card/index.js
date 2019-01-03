@@ -19,7 +19,7 @@ Component({
   methods:{
     toApplicant:function(){
       wx.navigateTo({
-        url:`/pages/expert/applicant/index?id=${this.data.project.id}`
+        url:`/packageExpert/pages/applicant/index?id=${this.data.project.id}`
       })
     }
   }

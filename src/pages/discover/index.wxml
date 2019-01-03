@@ -1,0 +1,81 @@
+<view class="switch">
+    <view class="{{pageIndex===0?'active':''}}" data-index="{{0}}" bindtap="switchPage">博客</view>
+    <view class="{{pageIndex===1?'active':''}}" data-index="{{1}}" bindtap="switchPage">人才库</view>
+</view>
+
+<block wx:if="{{pageIndex===0}}">
+    <view style="background:#fff;">
+        <view class="switch-place-holder"></view>
+        <swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
+            <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>
+                <image src="{{banner.coverImage}}"></image>
+            </swiper-item>
+        </swiper>
+        <scroll-view class='types' scroll-x="true">
+            <navigator wx:for="{{types}}" url="/packageBlog/pages/list/index?id={{item.id}}&index={{index+1}}" hover-class="none">
+                <view wx:if="{{item.id==='4'&&hasNew!==0}}" class="has-new"></view>
+                <image src="{{item.icon}}"></image>
+                <text>{{item.name}}</text>
+            </navigator>
+        </scroll-view>
+        <view class="blogs">
+            <blog-card wx:for="{{blogs.list}}" data="{{item}}" show-author="{{item.articleType!==2?true:false}}"></blog-card>
+        </view>
+    </view>
+</block>
+
+<block wx:else>
+    <view class="switch-place-holder"></view>
+    <view class="filter-place-holder"></view>
+
+    <view class='filter'>
+        <view class="filter-item {{activeFilter==='sortWay'?'on':''}}" data-name="sortWay" bindtap="selectFilter">
+            <text>{{sortWay.selected.text||'默认排序'}}</text>
+            <view></view>
+        </view>
+        <view class="filter-item {{activeFilter==='jobTypes'?'on':''}}" data-name="jobTypes" bindtap="selectFilter">
+            <text>{{jobTypes.selected.dictName&&jobTypes.selected.dictName!=='不限'?jobTypes.selected.dictName:'职位'}}</text>
+            <view></view>
+        </view>
+        <view class="filter-item {{activeFilter==='exp'?'on':''}}" data-name="exp" bindtap="selectFilter">
+            <text>{{exp.selected.text&&exp.selected.text!=='经验'?exp.selected.text:'经验'}}</text>
+            <view></view>
+        </view>
+        <view class="filter-item {{activeFilter==='city'?'on':''}}" data-name="city" bindtap="selectFilter">
+            <text>{{selectedCity.zoneName&&selectedCity.zoneName!=='不限'?selectedCity.zoneName:'地点'}}</text>
+            <view></view>
+        </view>
+    </view>
+
+    <expert-card wx:for="{{experts.list}}" index="{{index}}" data="{{item}}" bindcollect="updateExpert"></expert-card>
+
+    <popup active="{{activeFilter==='sortWay'}}" margin="160rpx" bindhide='closePopup'>
+        <list-item wx:for="{{sortWay.list}}" data-item="{{item}}" data-type="sortWay" bindtap="filter" name="{{item.text}}" active="{{sortWay.selected.text===item.text}}"></list-item>
+    </popup>
+
+    <popup active="{{activeFilter==='exp'}}" margin="160rpx" bindhide='closePopup'>
+        <list-item data-item="{text:'不限',value:''}" data-type="exp" bindtap="filter" name="不限" active="{{!exp.selected.text}}"></list-item>
+        <list-item wx:for="{{exp.list}}" data-item="{{item}}" data-type="exp" bindtap="filter" name="{{item.text}}" active="{{exp.selected.text===item.text}}"></list-item>
+    </popup>
+
+    <popup active="{{activeFilter==='jobTypes'}}" margin="160rpx" bindhide='closePopup'>
+        <view class="job-types">
+             <view class="parent">
+                <list-item wx:for="{{jobTypes.list}}" data-code="{{item.dictValue}}" bindtap="scrollToJobTypes" name="{{item.dictName}}"></list-item>
+            </view>
+            <scroll-view scroll-y="true" scroll-into-view="{{jobTypes.parent}}" scroll-with-animation="true">
+                <list-item data-item="{dictName:'不限',dictValue:''}" data-type="jobTypes" bindtap="filter" name="不限" active="{{!jobTypes.selected.dictValue}}"></list-item>
+                <view id="job{{item.dictValue}}" wx:for="{{jobTypes.list}}">
+                    <list-item wx:for="{{item.dictList}}" wx:for-item="job" data-item="{{job}}" data-type="jobTypes" bindtap="filter" name="{{job.dictName}}" active="{{jobTypes.selected.dictValue===job.dictValue}}"></list-item>
+                </view>
+            </scroll-view>
+        </view>
+    </popup>
+
+    <popup active="{{activeFilter==='city'}}" margin="160rpx" bindhide='closePopup'>
+        <city wx:if="{{cities}}" height="700rpx" data="{{cities}}" bindselect="selectCity"></city>
+    </popup>
+
+</block>
+
+

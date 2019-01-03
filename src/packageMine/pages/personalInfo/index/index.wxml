@@ -1,0 +1,80 @@
+<!--pages/mine/personalInfo/index.wxml-->
+<view class='tip' wx:if="{{props.stores.account.userInfo.userState!==2}}"><text class="iconfont icon-gonggao"></text>{{props.stores.account.userInfo.userState===0?'完善信息并通过审核即可申请项目':'每次修改都需要审核哦~'}}</view>
+
+<view class="userinfo">
+  <view class='nickName'>
+    <text>{{props.stores.account.userInfo.nickName}}</text>
+    <view class='state' wx:if="{{props.stores.account.userInfo.userState===1}}">审核中</view>
+  </view>
+  <image class='avatar' src="{{props.stores.account.userInfo.userAvatar||'/assets/img/default/avatar.png'}}" bindtap='chooseImage'></image>
+  <navigator wx:if="{{props.stores.account.userInfo.userState!==1}}" url="/packageMine/pages/personalInfo/base/index/index"><text class="iconfont icon-bianji-"></text>编辑</navigator>
+  <block wx:if="{{!props.stores.account.userInfo.userBaseInfo.positionTitle}}">
+    <view class='place-holder'>填写基本信息更好的展示自己</view>
+  </block>
+  <block wx:else>
+    <view class='info'><text>入驻类型</text>{{props.stores.account.userInfo.userBaseInfo.settleTypeCn}}</view>
+    <view class='info'><text>性别</text>{{props.stores.account.userInfo.userBaseInfo.sexCn}}</view>
+    <view class='info' wx:if="{{props.stores.account.userInfo.userBaseInfo.wechat}}"><text>微信</text>{{props.stores.account.userInfo.userBaseInfo.wechat}}</view>
+    <view class='info' wx:if="{{props.stores.account.userInfo.userBaseInfo.qq}}"><text>QQ</text>{{props.stores.account.userInfo.userBaseInfo.qq}}</view>
+    <view class='info' wx:if="{{props.stores.account.userInfo.userBaseInfo.email}}"><text>邮箱</text>{{props.stores.account.userInfo.userBaseInfo.email}}</view>
+    <view class='info'><text>职位头衔</text>{{props.stores.account.userInfo.userBaseInfo.positionTitle}}</view>
+    <view class='info'><text>职业类型</text>{{props.stores.account.userInfo.userBaseInfo.positionTypeCn}}</view>
+    <view class='info'><text>工作经验</text>{{props.stores.account.userInfo.userBaseInfo.workExperienceCn}}</view>
+    <view class='info'><text>日薪（8小时）</text>{{props.stores.account.userInfo.userBaseInfo.daySalary}}</view>
+    <view class='info'><text>所在城市</text>{{props.stores.account.userInfo.userBaseInfo.cityCn}}</view>
+  </block>
+</view>
+
+<view class='part'>
+  <view class='title border-b clearfix'>
+    详细介绍
+    <navigator wx:if="{{props.stores.account.userInfo.userState!==1}}" hover-class='none' url='/packageMine/pages/personalInfo/detail/index'>编辑</navigator>
+  </view>
+  <block wx:if="{{!props.stores.account.userInfo.userIntro}}">
+    <view class='place-holder'>完善全面的介绍可以让客户更完整立体的了解你</view>
+  </block>
+  <block wx:else>
+    <text decode='true' class='detail'>{{props.stores.account.userInfo.userIntro}}</text>
+  </block>
+</view>
+
+<view class='part'>
+  <view class='title border-b clearfix'>
+    擅长技能
+    <navigator wx:if="{{props.stores.account.userInfo.userState!==1}}" hover-class='none' url='/packageMine/pages/personalInfo/skills/index'>添加</navigator>
+  </view>
+  <block wx:if="{{props.stores.account.userInfo.userSkills.length===0}}">
+    <view class='place-holder'>添加属于你的技能，可以为你更精准的推荐匹配项目</view>
+  </block>
+  <block wx:else>
+    <view class='skills'>
+      <view class="skill active" wx:for="{{props.stores.account.userInfo.userSkills}}">{{item.skillName}}</view>
+    </view>
+  </block>
+  
+</view>
+
+<view class='part'>
+  <view class="title {{props.stores.account.userInfo.userSampleInfos?'':'border-b'}}">     
+    作品案例
+    <navigator wx:if="{{props.stores.account.userInfo.userState!==1}}" hover-class='none' url="/packageMine/pages/personalInfo/works/index">添加</navigator>
+  </view>
+  <block wx:if="{{props.stores.account.userInfo.userSampleInfos.length===0}}">
+    <view class='place-holder'>至少添加1个以上的作品案例</view>
+  </block>
+  <block wx:else>
+    <view class='works' wx:for="{{props.stores.account.userInfo.userSampleInfos}}">
+      <image mode='aspectFill' src="{{item.sampleImage||'/assets/img/default/banner.png'}}" data-url="{{item.sampleImage||''}}" bindtap='preview'></image>
+      <view class='name'>{{item.sampleName}}</view>
+      <text decode='true' class='desc'>{{item.sampleDesc}}</text>
+      <view class='url' wx:if="{{item.sampleUrl}}" data-link="{{item.sampleUrl}}" bindtap="copyLink"><text class='iconfont icon-lianjie'></text>{{item.sampleUrl}}</view>
+      <view class='type'><text class='iconfont icon-biaoji'></text>{{item.tradeTypeCn}}</view>
+      <button wx:if="{{props.stores.account.userInfo.userState!==1}}" class='btn del' bindtap="delWorks" data-id="{{item.id}}">删除</button>
+      <navigator wx:if="{{props.stores.account.userInfo.userState!==1}}" class='btn edit' url="/packageMine/pages/personalInfo/works/index?index={{index}}">编辑</navigator>
+    </view>
+  </block>
+</view>
+
+<action-bar wx:if="{{props.stores.account.userInfo.userState!==2&&props.stores.account.userInfo.userState!==1}}">
+   <button class='btn-one' bindtap='submit'>提交审核</button>
+</action-bar>

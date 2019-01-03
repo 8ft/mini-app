@@ -1,0 +1,38 @@
+<!--pages/mine/wallet/index.wxml-->
+<view id="baseInfo" class='base-info'>
+  <view class='title'>账户余额</view>
+  <view class='left'>￥{{wallet.balance}}</view>
+  <view class='totle'><text>历史收入</text>{{wallet.totalIncome}}元</view>
+  <button bindtap='download'>提现<text class='iconfont icon-xiayiye'></text></button>
+</view>
+
+<block wx:if="{{records.length>0}}">
+  <scroll-view 
+          class='records' 
+          style="height:{{scrollViewHeight}}px" 
+          scroll-y="true" 
+          upper-threshold="-80" 
+          enable-back-to-top="true"
+          bindscrolltoupper='refresh' 
+          bindscrolltolower="getRecords"> 
+
+    <navigator class='record' hover-class="none" wx:for="{{records}}" url="/packageMine/pages/tradeDetail/index?id={{item.id}}">
+      <image src="../../assets/img/icon_sr@3x.png" wx:if="{{item.orderType===12}}"></image>
+      <image src="../../assets/img/icon_tx@3x.png" wx:if="{{item.orderType===20}}"></image>
+
+      <view class='info border-b'>
+        <view class='name'>{{item.orderTypeName}}</view>
+        <text class='time'>{{item.createTime}}</text>
+        <view class="money {{item.incomeFlag===1?'income':''}}">{{item.amount}}元
+          <text wx:if="{{item.orderType===20&&(item.orderStatus===4||item.orderStatus===2)}}">{{item.orderTypeName+item.orderStatusName}}</text>
+        </view>
+      </view>
+    </navigator>
+
+  </scroll-view>
+</block>
+
+<block wx:else>
+  <nodata text='您暂时还没有收支明细记录哦~'></nodata>
+</block>
+

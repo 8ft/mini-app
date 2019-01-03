@@ -1,5 +1,5 @@
 <!--components/project/card/card.wxml-->
-<view class='blog' hover-class="none" data-url="/pages/blog/detail/index?id={{data.id}}&uid={{data.updateUserId}}" bindtap="goDetail">
+<view class='blog' hover-class="none" data-url="/packageBlog/pages/detail/index?id={{data.id}}&uid={{data.updateUserId}}" bindtap="goDetail">
   <view wx:if="{{showAuthor}}" class="author">
     <image lazy-load="true" mode='aspectFill' src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>{{data.nickName}}
   </view>

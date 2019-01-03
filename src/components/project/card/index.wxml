@@ -1,5 +1,5 @@
 <!--components/project/card/card.wxml-->
-<navigator class='project' hover-class="none" url="/pages/project/detail/index?no={{project.projectNo}}">
+<navigator class='project' hover-class="none" url="/packageProject/pages/detail/index?no={{project.projectNo}}">
   <view class='info'>
     <text class='title'>{{project.projectName}}</text>
     <view class='tags'>

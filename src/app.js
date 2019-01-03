@@ -39,7 +39,7 @@ App({
       switch (obj.menuType){
         case 'view':
           // wx.navigateTo({
-          //   url: `/pages/common/webview/index?url=${encodeURIComponent(obj.menuUrl)}`
+          //   url: `/pages/webview/index?url=${encodeURIComponent(obj.menuUrl)}`
           // })
         break;
         case 'click':
@@ -49,7 +49,7 @@ App({
       switch (obj.type){
         case 0:
           wx.navigateTo({
-            url: `/pages/blog/detail/index?id=${obj.linkUrl.match(/blog\/(\d*)\.html/)[1]}`
+            url: `/packageBlog/pages/detail/index?id=${obj.linkUrl.match(/blog\/(\d*)\.html/)[1]}`
           })
         break;
         case 1:

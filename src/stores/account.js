@@ -113,7 +113,7 @@ const account = function () {
 
     if (!expire){
       wx.reLaunch({
-        url: '/pages/tabBar/mine/index'
+        url: '/pages/mine/index'
       })
     }else{
       app.stores.toRefresh.updateList('logout')

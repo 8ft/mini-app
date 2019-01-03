@@ -1,0 +1,85 @@
+<!--pages/project/publish/index.wxml-->
+<block wx:if="{{props.stores.account.logged_in}}">
+  <view class="con">
+    <view class='big-title'>发布项目</view>
+    <view class='info types need clearfix'>
+      <text class='name'>项目类型</text>
+      <view class="type {{typeIndex===index?'active':''}}" wx:for="{{dicts[0].dictList}}" data-index="{{index}}" data-type="type" bindtap="select">
+        <view class="iconfont icon-{{typeIconName[item.dictName]}}"></view>
+        <text>{{item.dictName}}</text>
+      </view>
+    </view>
+
+    <view class='info need'>
+      <text class='name'>子类型</text>
+      <view class='input arrow-right'>
+        <picker bindchange="select" value="{{subTypeIndex}}" range="{{dicts[0].dictList[typeIndex].dictList}}" range-key="dictName" data-type="subType">
+            {{dicts[0].dictList[typeIndex].dictList[subTypeIndex].dictName}}
+        </picker>
+      </view>
+    </view>
+
+    <view class='info'>
+      <text class='name'>所需技能</text>
+      <view class='input arrow-right' bindtap='toSkills'>{{needsSkillsCn}}</view>
+    </view>
+
+    <view class='info need'>
+      <text class='name'>项目名称</text>
+      <view class='input'>
+        <input placeholder='20字以内' maxlength='20' data-type="project" value="{{pName}}" bindinput='input'></input>
+      </view>
+    </view>
+
+    <view class='info need'>
+      <text class='name'>项目描述</text>
+      <navigator class='input arrow-right' url="/packagePublish/pages/desc/index" hover-class='none'>{{desc}}</navigator>
+    </view>
+
+    <view class='info need'>
+      <text class='name'>价格预算</text>
+      <view class='input arrow-right'>
+        <picker bindchange="select" value="{{budgetIndex}}" range="{{dicts[1].dictList}}" range-key="dictName" data-type="budget">
+            {{dicts[1].dictList[budgetIndex].dictName}}
+        </picker>
+      </view>
+    </view>
+
+    <view class='info need'>
+      <text class='name'>项目周期</text>
+      <view class='input arrow-right'>
+        <picker bindchange="select" value="{{cycleIndex}}" range="{{dicts[2].dictList}}" range-key="dictName" data-type="cycle">
+            {{dicts[2].dictList[cycleIndex].dictName}}
+        </picker>
+      </view>
+    </view>
+
+    <view class='info'>
+      <text class='name'>公司名称</text>
+      <view class='input'>
+        <input placeholder='20字以内' maxlength='20' data-type="company" value="{{cName}}" bindinput='input'></input>
+      </view>
+    </view>
+
+    <view class='info need'>
+      <text class='name'>倾向让谁完成</text>
+      <view class='input arrow-right'>
+        <picker bindchange="select" value="{{cooperaterIndex}}" range="{{dicts[3].dictList}}" range-key="dictName" data-type="cooperater">
+            {{dicts[3].dictList[cooperaterIndex].dictName}}
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <action-bar position="relative">
+    <button class='btn-one' bindtap='publish'>发布项目</button>
+  </action-bar>
+
+  <collector show="{{showCollector}}" bindhide='hideCollector' bindsave='updateUserInfo'></collector>
+</block>
+
+<block wx:else>
+  <nodata text='登录了就能发布项目了喔~' login="true"></nodata>
+</block>
+
+

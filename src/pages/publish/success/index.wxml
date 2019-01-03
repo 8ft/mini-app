@@ -1,6 +1,0 @@
-<!--pages/project/publish/success/index.wxml-->
-<image class='icon' src="/assets/img/icon/success.png"></image>
-
-<text class='txt'>感谢发布项目，我们会在24小时内\n反馈审核结果</text>
-
-<navigator open-type='redirect' class='btn' url="/pages/project/detail/index?no={{no}}">查看项目</navigator>
