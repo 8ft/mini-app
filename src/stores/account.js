@@ -1,73 +1,64 @@
 const request = require('../api/request.js')
 const regeneratorRuntime = require('../libs/regenerator-runtime.js')
-const mobx = require('../libs/mobx');
+const mobx = require('../libs/mobx')
+const stateCn = {
+  0: '请完善',
+  1: '审核中',
+  2: '审核通过',
+  3: '审核未通过'
+}
 
 const account = function () {
   mobx.extendObservable(this, {
-    account:wx.getStorageSync('account'),
-    userInfo:null,
-    blogInfo:null,
-    
-    get logged_in(){
-      return this.account!==''
+    account: wx.getStorageSync('account'),
+    userInfo: null,
+    blogInfo: null,
+
+    get logged_in() {
+      return this.account !== ''
     },
 
-    get stateCn(){
-      let stateCn=''
-      if(this.userInfo===null)return stateCn
-      switch(this.userInfo.userState){
-        case 0:
-        stateCn='请完善'
-          break;
-        case 1:
-        stateCn = '审核中'
-          break;
-        case 2:
-        stateCn = '审核通过'
-          break;
-        case 3:
-        stateCn = '审核未通过'
-          break;
-      }
-      return stateCn
+    get stateCn() {
+      if (this.userInfo === null) return ''
+      return stateCn[this.userInfo.userState]
     }
   });
 
   this.updateUserInfo = async () => {
-    if(this.logged_in){
+    if (this.logged_in) {
       let res = await request.post('/user/userAuth/getUserBaseInfo')
       if (res.code !== 0) return
-      if(this.blogInfo===null){
+      if (this.blogInfo === null) {
         this.updateBlogInfo()
       }
-      this.userInfo=res.data
-    }else{
-      this.userInfo=null
+      this.userInfo = res.data
+    } else {
+      this.userInfo = null
     }
   }
 
   this.updateBlogInfo = async () => {
-    if(this.logged_in){
-      let res=await request.post('/blog/attentionInfo/queryBlogUserInfo',{
-        userId:this.account.userId
+    if (this.logged_in) {
+      let res = await request.post('/blog/attentionInfo/queryBlogUserInfo', {
+        userId: this.account.userId
       })
       if (res.code !== 0) return
-      this.blogInfo=res.data
-    }else{
-      this.blogInfo=null
+      this.blogInfo = res.data
+    } else {
+      this.blogInfo = null
     }
     wx.stopPullDownRefresh()
   }
 
-  this.follow=diff=>{
-    this.blogInfo.attentionNum+=diff
+  this.follow = diff => {
+    this.blogInfo.attentionNum += diff
   },
 
-  this.collect=diff=>{
-    this.blogInfo.favoriteNum+=diff
-  }
+    this.collect = diff => {
+      this.blogInfo.favoriteNum += diff
+    }
 
-  this.login = async (app,oid,uid) => {
+  this.login = async (app, oid, uid) => {
     let res = await request.post('/user/userThirdpartInfo/login', {
       thirdpartIdentifier: oid,
       uid: uid,
@@ -78,7 +69,7 @@ const account = function () {
     if (code === 0) {
       wx.setStorageSync('account', res.data)
       app.stores.toRefresh.updateList('login')
-      this.account=res.data
+      this.account = res.data
       wx.navigateBack()
     } else if (code === 507) {
       wx.redirectTo({
@@ -87,15 +78,15 @@ const account = function () {
     }
   }
 
-  this.logout =async (app,expire)=> {
-    if (!expire){
+  this.logout = async (app, expire) => {
+    if (!expire) {
       let res = await request.post('/user/userAuth/logout')
     }
 
     app.globalData = {
       editUserInfoCache: {
         jobTypes: {},
-        city:{}
+        city: {}
       },
       publishDataCache: {
         skills: null,
@@ -107,26 +98,26 @@ const account = function () {
       }
     }
     wx.clearStorageSync()
-    this.account=''
-    this.userInfo=null
-    this.blogInfo=null
+    this.account = ''
+    this.userInfo = null
+    this.blogInfo = null
 
-    if (!expire){
+    if (!expire) {
       wx.reLaunch({
         url: '/pages/mine/index'
       })
-    }else{
+    } else {
       app.stores.toRefresh.updateList('logout')
     }
   }
 
-  this.refresh=()=>{
-    this.userInfo=null
-    this.blogInfo=null
+  this.refresh = () => {
+    this.userInfo = null
+    this.blogInfo = null
   }
 
   mobx.autorun(() => {
-    if(this.logged_in&&this.userInfo===null){
+    if (this.logged_in && this.userInfo === null) {
       this.updateUserInfo()
     }
   })

@@ -2,8 +2,25 @@ const app = getApp()
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 const observer = require('../../../libs/observer').observer
 const Towxml = require('../../towxml/main')
-
 const towxml=new Towxml()  
+const nodataCon = {
+  '-1':{
+    img:'',
+    text:'文章已删除'
+  },
+  0: {
+    img:'blog_audit',
+    text:"别急呀！文章正在审核中...\n通过后即可查看，请稍后再试"
+  },
+  2: {
+    img:'blog_illegal',
+    text:'内容审核不通过'
+  },
+  3:{
+    img:'blog_xiajia',
+    text:'文章已下架'
+  }
+}
 
 Page(observer({
   props: {
@@ -157,35 +174,7 @@ Page(observer({
 
     detail.data.createTime=app.util.formatTime(detail.data.createTime,'blogDetail')
     detail.data.articleTags=[detail.data.categoryName].concat(detail.data.articleTags.split('|'))
-
-    let nodata
-    switch(detail.data.articleState){
-      case -1:
-        nodata={
-          img:'',
-          text:'文章已删除'
-        }
-      break;
-      case 0:
-        nodata={
-          img:'blog_audit',
-          text:"别急呀！文章正在审核中...\n通过后即可查看，请稍后再试"
-        }
-      break;
-      case 2:
-        nodata={
-          img:'blog_illegal',
-          text:'内容审核不通过'
-        }
-      break;
-      case 3:
-        nodata={
-          img:'blog_xiajia',
-          text:'文章已下架'
-        }
-      break;
-    }
-    detail.data.nodata=nodata
+    detail.data.nodata=nodataCon[detail.data.articleState]
 
     let isMyself=false
     if(this.props.stores.account.logged_in){
