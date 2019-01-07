@@ -1,7 +1,6 @@
-//app.js
 const request = require('./api/request.js')
 const util = require('./utils/util.js')
-const stores= require('./stores/index')
+const stores = require('./stores/index')
 
 App({
   stores: stores,
@@ -11,19 +10,19 @@ App({
   globalData: {
     editUserInfoCache: {
       jobTypes: {},
-      city:{}
+      city: {}
     },
-    publishDataCache:{
-      skills:null,
-      needSkills:[],
-      needSkillsCn:[],
-      desc:{
-        content:''
+    publishDataCache: {
+      skills: null,
+      needSkills: [],
+      needSkillsCn: [],
+      desc: {
+        content: ''
       }
     }
   },
 
-  checkLogin: function(){
+  checkLogin: function () {
     if (!this.stores.account.logged_in) {
       wx.navigateTo({
         url: '/pages/user/wxLogin/index',
@@ -33,27 +32,27 @@ App({
     }
   },
 
-  bannerJump:function(e){
-    let obj=e.currentTarget.dataset.obj
-    if(obj.menuType!==undefined){
-      switch (obj.menuType){
+  bannerJump: function (e) {
+    let obj = e.currentTarget.dataset.obj
+    if (obj.menuType !== undefined) {
+      switch (obj.menuType) {
         case 'view':
           // wx.navigateTo({
           //   url: `/pages/webview/index?url=${encodeURIComponent(obj.menuUrl)}`
           // })
-        break;
+          break;
         case 'click':
-        break;
+          break;
       }
-    }else if(obj.type!==undefined){
-      switch (obj.type){
+    } else if (obj.type !== undefined) {
+      switch (obj.type) {
         case 0:
           wx.navigateTo({
             url: `/packageBlog/pages/detail/index?id=${obj.linkUrl.match(/blog\/(\d*)\.html/)[1]}`
           })
-        break;
+          break;
         case 1:
-        break;
+          break;
       }
     }
   },

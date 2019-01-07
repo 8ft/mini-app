@@ -10,9 +10,9 @@ const path = require('path');
 const config = require('./build/config');
 const hasRmCssFiles = new Set();
 
-gulp.task('clear',()=>{
+gulp.task('clear', () => {
     return gulp.src('./dist/*')
-    .pipe(clean({ force: true }));
+        .pipe(clean({ force: true }));
 });
 
 gulp.task('copy', () => gulp.src(['./src/**/*', '!./src/**/*.scss'])
@@ -47,7 +47,7 @@ gulp.task('sass', ['copy'], () => gulp.src('./src/**/*.scss')
     .pipe(replace(/(\/\*\*\s{0,})(@.+)(\s{0,}\*\*\/)/g, ($1, $2, $3) => $3.replace(/\.scss/g, '.wxss')))
     .pipe(rename({
         extname: '.wxss',
-    })) 
+    }))
     .pipe(gulp.dest('./dist')));
 
 gulp.task('clean:wxss', ['sass'], () => {
@@ -59,8 +59,8 @@ gulp.task('clean:wxss', ['sass'], () => {
         .pipe(clean({ force: true }));
 });
 
-gulp.task('watch',()=>{
+gulp.task('watch', () => {
     gulp.watch('./src/**/*', ['clean:wxss']);
 })
 
-gulp.task('default',['clean:wxss'] )
+gulp.task('default', ['clean:wxss'])

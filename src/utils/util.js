@@ -1,10 +1,10 @@
-const formatTime = (time,type) => {
-  const serverDate=new Date(wx.getStorageSync('serverDate'))
+const formatTime = (time, type) => {
+  const serverDate = new Date(wx.getStorageSync('serverDate'))
   const year_server = serverDate.getFullYear()
-  const day_server=serverDate.getDate()
-  const hour_server=serverDate.getHours()
+  const day_server = serverDate.getDate()
+  const hour_server = serverDate.getHours()
 
-  const date=new Date(time.replace(/-/g, '/'))
+  const date = new Date(time.replace(/-/g, '/'))
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -12,38 +12,38 @@ const formatTime = (time,type) => {
   const minute = date.getMinutes()
 
   let dateSpan = serverDate - date
-  let iDays = Math.floor(dateSpan/ (24 * 3600 * 1000))
+  let iDays = Math.floor(dateSpan / (24 * 3600 * 1000))
 
-  if(hour_server<hour){
-    iDays+=1
+  if (hour_server < hour) {
+    iDays += 1
   }
-  
-  switch(type){
+
+  switch (type) {
     case 'blogCard':
-      if(iDays<1){
+      if (iDays < 1) {
         return [hour, minute].map(formatNumber).join(':')
-      }else if(iDays>=1&&iDays<=7){
+      } else if (iDays >= 1 && iDays <= 7) {
         return `${iDays}天前`
-      }else{
+      } else {
         return `${year}.${formatNumber(month)}.${formatNumber(day)}`
       }
-    break;
+      break;
     case 'blogDetail':
-      if(year!==year_server){
+      if (year !== year_server) {
         return `${year}年${formatNumber(month)}月${formatNumber(day)}日`
-      }else {
+      } else {
         return `${formatNumber(month)}月${formatNumber(day)}日`
       }
-    break;
+      break;
     case 'blogComment':
-      if(iDays<1){
+      if (iDays < 1) {
         return [hour, minute].map(formatNumber).join(':')
-      }else if(year===year_server&&iDays>=1){
+      } else if (year === year_server && iDays >= 1) {
         return `${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
-      }else{
+      } else {
         return `${year}-${formatNumber(month)}-${formatNumber(day)} ${hour}:${minute}`
       }
-    break;
+      break;
   }
 }
 
@@ -52,7 +52,7 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-const validatePhone = (phone) =>{
+const validatePhone = (phone) => {
   if (!phone) {
     wx.showToast({
       title: '请输入手机号码',
@@ -60,7 +60,7 @@ const validatePhone = (phone) =>{
     })
     return false
   }
-  if (!/^0?1[3|4|5|8|7][0-9]\d{8}$/.test(phone)){
+  if (!/^0?1[3|4|5|8|7][0-9]\d{8}$/.test(phone)) {
     wx.showToast({
       title: '手机号码格式有误',
       icon: 'none'
@@ -82,7 +82,7 @@ const validatePwd = (pwd) => {
 }
 
 module.exports = {
-  validatePhone:validatePhone,
-  validatePwd:validatePwd,
+  validatePhone: validatePhone,
+  validatePwd: validatePwd,
   formatTime: formatTime
 }
