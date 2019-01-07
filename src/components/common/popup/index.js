@@ -1,6 +1,4 @@
-// components/common/popup/index.js
 Component({
-
   properties: {
     position:{
       type:String,
@@ -16,12 +14,8 @@ Component({
     }
   },
 
-  data: {
- 
-  },
-
   methods: {
-    hide:function(){
+    _hide:function(){
       this.triggerEvent('hide')
       this.setData({
         active: false

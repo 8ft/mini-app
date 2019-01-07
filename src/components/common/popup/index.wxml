@@ -11,4 +11,4 @@
   </view>
 </block>
 
-<view hidden="{{!active}}" class="modal" bindtap='hide'></view>
+<view hidden="{{!active}}" class="modal" bindtap='_hide'></view>

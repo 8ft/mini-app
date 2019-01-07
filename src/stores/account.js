@@ -26,7 +26,7 @@ const account = function () {
 
   this.updateUserInfo = async () => {
     if (this.logged_in) {
-      let res = await request.post('/user/userAuth/getUserBaseInfo')
+      const res = await request.post('/user/userAuth/getUserBaseInfo')
       if (res.code !== 0) return
       if (this.blogInfo === null) {
         this.updateBlogInfo()
@@ -39,7 +39,7 @@ const account = function () {
 
   this.updateBlogInfo = async () => {
     if (this.logged_in) {
-      let res = await request.post('/blog/attentionInfo/queryBlogUserInfo', {
+      const res = await request.post('/blog/attentionInfo/queryBlogUserInfo', {
         userId: this.account.userId
       })
       if (res.code !== 0) return
@@ -59,7 +59,7 @@ const account = function () {
     }
 
   this.login = async (app, oid, uid) => {
-    let res = await request.post('/user/userThirdpartInfo/login', {
+    const res = await request.post('/user/userThirdpartInfo/login', {
       thirdpartIdentifier: oid,
       uid: uid,
       type: 0
@@ -80,7 +80,7 @@ const account = function () {
 
   this.logout = async (app, expire) => {
     if (!expire) {
-      let res = await request.post('/user/userAuth/logout')
+      await request.post('/user/userAuth/logout')
     }
 
     app.globalData = {

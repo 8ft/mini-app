@@ -64,11 +64,11 @@ Component({
         cityList.forEach(city => {
           if (city.zoneName==='重庆市'){
             cities.list['C'].push(city)
-            leftLetters.indexOf('C')<0&&leftLetters.push('C')
+            !leftLetters.includes('C')&&leftLetters.push('C')
           }else{
             letter=getLetter(city.zoneName[0])[0]
             cities.list[letter].push(city)
-            leftLetters.indexOf(letter)<0&&leftLetters.push(letter)
+            !leftLetters.includes(letter)&&leftLetters.push(letter)
           }
         })
 

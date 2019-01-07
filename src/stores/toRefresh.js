@@ -28,22 +28,22 @@ const toRefresh = function () {
     list: []
   });
 
-  this.updateList = scene=>{
+  this.updateList = scene => {
     pages[scene].forEach(page => {
       this.add(page)
     })
   }
 
   this.add = page => {
-    if(this.list.indexOf(page)===-1){
+    if (!this.list.includes(page)) {
       this.list.push(page)
     }
   }
 
-  this.refresh = (page,callBack) =>{
+  this.refresh = (page, callBack) => {
     const index = this.list.indexOf(page)
-    const exist=index > -1
-    if (exist){
+    const exist = index > -1
+    if (exist) {
       this.list.splice(index, 1)
     }
     callBack(exist)

@@ -23,7 +23,7 @@ const formatTime = (time,type) => {
       if(iDays<1){
         return [hour, minute].map(formatNumber).join(':')
       }else if(iDays>=1&&iDays<=7){
-        return iDays+'天前'
+        return `${iDays}天前`
       }else{
         return `${year}.${formatNumber(month)}.${formatNumber(day)}`
       }

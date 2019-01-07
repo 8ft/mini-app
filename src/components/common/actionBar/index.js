@@ -1,5 +1,3 @@
-// components/common/actionBar/index.js
-
 let isIPX=false
 
 Component({
@@ -29,9 +27,5 @@ Component({
     this.setData({
       isIPX:isIPX
     })
-  },
-
-  methods: {
-  
   }
 })

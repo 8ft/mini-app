@@ -17,7 +17,7 @@ Component({
   },
 
   methods:{
-    toApplicant:function(){
+    _toApplicant:function(){
       wx.navigateTo({
         url:`/packageExpert/pages/applicant/index?id=${this.data.project.id}`
       })

@@ -1,4 +1,3 @@
-// components/common/navigationBar/index.js
 Component({
   externalClasses: ['custom-class'],
 

@@ -1,4 +1,3 @@
-// components/tabs/tabs.js
 Component({
   externalClasses:['custom-class'],
   properties: {
@@ -36,29 +35,28 @@ Component({
     },
     ready:function(){
       if(this.data.animationData)return
-      this.selectTab(this.properties.active)
+      this._selectTab(this.properties.active)
     }
   },
 
   pageLifetimes: {
     show: function () {
-      this.selectTab(this.properties.active)
+      this._selectTab(this.properties.active)
     }
   },
 
   methods: {
-    tabClick: function (e) {
+    _tabClick: function (e) {
       let index = e.currentTarget.dataset.index
       if (index!==this.data.active){
-        this.selectTab(index)
+        this._selectTab(index)
         this.triggerEvent('change', { index: index})
       }
     },
-    selectTab:function(index){
+    _selectTab:function(index){
       wx.createSelectorQuery().in(this).select('#scrollView').fields({
         scrollOffset:true
       },sv=>{
-
         wx.createSelectorQuery().in(this).select(`#tab${index}`).fields({
           size: true,
           rect:true
@@ -67,15 +65,12 @@ Component({
           const width = res.width *ratio
           const diff=res.width*(1-ratio)/2
           const x=sv.scrollLeft+res.left + diff
-
           this.setData({
             active: index,
             animationData: this.animation.width(width).translateX(x).step().export(),
             scrollLeft:x-this.windowWidth/2+width/2
           })
-
         }).exec()
-
       }).exec()
     }
   }

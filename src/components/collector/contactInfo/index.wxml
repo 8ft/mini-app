@@ -1,14 +1,13 @@
-<!--components/collector/contactInfo/index.wxml-->
 <view class='collector' wx:if="{{show}}">
   <view class='main'>
     <image class='icon bingo' src='/assets/img/collector/bingo.png'></image>
     <view class='content'>
       <view class='title'>提交成功</view>
       <view class='msg'>感谢发布项目，我们会在24小时内反馈审核结果！留下QQ或微信在你遇到任何问题时我们更好的与你取得联系。</view>
-      <input class='collectInfo' maxlength='20' placeholder='请输入您的QQ号' type='number' placeholder-style='color:#BCD9F8' data-type="qq" value="{{qq}}" bindinput='input'></input>
-      <input class='collectInfo' maxlength='20' placeholder='请输入您的微信号' placeholder-style='color:#BCD9F8' data-type="wechat"  value="{{wechat}}" bindinput='input'></input>
-      <button class='save' disabled="{{disable}}" bindtap='save'>保存</button>    
+      <input class='collectInfo' maxlength='20' placeholder='请输入您的QQ号' type='number' placeholder-style='color:#BCD9F8' data-type="qq" value="{{qq}}" bindinput='_input'></input>
+      <input class='collectInfo' maxlength='20' placeholder='请输入您的微信号' placeholder-style='color:#BCD9F8' data-type="wechat"  value="{{wechat}}" bindinput='_input'></input>
+      <button class='save' disabled="{{disable}}" bindtap='_save'>保存</button>    
     </view>
-    <button class='close' bindtap='hide'>X</button>
+    <button class='close' bindtap='_hide'>X</button>
   </view>
 </view>

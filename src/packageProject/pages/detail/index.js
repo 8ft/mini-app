@@ -66,17 +66,17 @@ Page(observer({
       applyUsers=null,
       applyInfo=null,
       cooperation=null,
-      inProgress = ['5', '6','8','10','11','14'].indexOf(data.projectState) > -1?true:false
+      inProgress = ['5', '6','8','10','11','14'].includes(data.projectState)
 
     if (inProgress) cooperation= await this.getCooperation(data.id)
 
     //已登录且参与项目，判断角色,并请求对应数据
     if (user && data.relationStatus===1) {
       character = user.userId == data.publisher?'publisher':'applicant'
-      if (character === 'applicant' && ['4', '9'].indexOf(data.projectState) > -1) {
+      if (character === 'applicant' && ['4', '9'].includes(data.projectState)) {
         applyInfo=await this.getApplyInfo(data.id,user.userId)
       }
-      if (data.applyNum > 0 && ['2','7','8','10','11','14'].indexOf(data.projectState)>-1&& character === 'publisher' ) {
+      if (data.applyNum > 0 && ['2','7','8','10','11','14'].includes(data.projectState)&& character === 'publisher' ) {
         applyUsers=await this.getApplyUsers(data.id)
       }
     }

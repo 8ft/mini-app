@@ -13,7 +13,7 @@ Page({
     const valueArr=data.value.split('|')
     const list=data.list.map(item=>{
       item.dictList=item.dictList.map(li => {
-        if (valueArr.indexOf(li.dictValue) > -1) {
+        if (valueArr.includes(li.dictValue)) {
           li.selected = true
         }
         return li

@@ -15,7 +15,7 @@
       <view class='hot'>已有{{project.applyNum}}人申请</view>
     </block>
     <block wx:else>
-      <button class='myself' catchtap="toApplicant">{{project.applyNum}}人申请</button>
+      <button class='myself' catchtap="_toApplicant">{{project.applyNum}}人申请</button>
       <view class='hot'>我发布的</view>
     </block>
   </view>
