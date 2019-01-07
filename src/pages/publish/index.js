@@ -1,6 +1,6 @@
 const app = getApp()
 const regeneratorRuntime = require('../../libs/regenerator-runtime.js')
-const observer = require('../../libs/observer').observer;
+const observer = require('../../libs/observer').observer
 
 Page(observer({
   props: {

@@ -26,7 +26,7 @@ Page(observer({
     this.setData({
       id:curId
     })
-    this.getExperts();
+    this.getExperts()
    },
 
   onPullDownRefresh:function(){

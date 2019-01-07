@@ -22,7 +22,7 @@ const account = function () {
       if (this.userInfo === null) return ''
       return stateCn[this.userInfo.userState]
     }
-  });
+  })
 
   this.updateUserInfo = async () => {
     if (this.logged_in) {

@@ -10,7 +10,7 @@ Page({
    },
  
    onLoad:function(options){
-    this.getExperts();
+    this.getExperts()
    },
 
   onPullDownRefresh:function(){

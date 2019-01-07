@@ -26,7 +26,7 @@ const pages = {
 const toRefresh = function () {
   extendObservable(this, {
     list: []
-  });
+  })
 
   this.updateList = scene => {
     pages[scene].forEach(page => {
