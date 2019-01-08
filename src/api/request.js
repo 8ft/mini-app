@@ -3,7 +3,9 @@ const requestArr = []
 
 const request = (url, options, requireServerDate, hideLoading) => {
   if (!hideLoading && requestArr.length === 0) {
-    wx.showLoading()
+    wx.showLoading({
+      mask: true
+    })
   }
   requestArr.push(1)
 
@@ -19,11 +21,6 @@ const request = (url, options, requireServerDate, hideLoading) => {
         'token': wx.getStorageSync('account').token || ''
       },
       success(res) {
-        requestArr.pop()
-        if (requestArr.length === 0) {
-          wx.hideLoading()
-        }
-
         let code = res.data.code
         if (code && code !== 0) {
           if (code === 506001) {
@@ -49,11 +46,6 @@ const request = (url, options, requireServerDate, hideLoading) => {
         resolve(res.data)
       },
       fail(error) {
-        requestArr.pop()
-        if (requestArr.length === 0) {
-          wx.hideLoading()
-        }
-
         wx.showModal({
           title: '请求异常',
           content: error.errMsg,
@@ -61,6 +53,12 @@ const request = (url, options, requireServerDate, hideLoading) => {
           confirmText: '好的'
         })
         reject()
+      },
+      complete: () => {
+        requestArr.pop()
+        if (requestArr.length === 0) {
+          wx.hideLoading()
+        }
       }
     })
 
