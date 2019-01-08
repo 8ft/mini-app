@@ -20,7 +20,7 @@ hljs.registerLanguage('php', require('./languages/php'));
 hljs.registerLanguage('powershell', require('./languages/powershell'));
 hljs.registerLanguage('python', require('./languages/python'));
 hljs.registerLanguage('ruby', require('./languages/ruby'));
-hljs.registerLanguage('scss', require('./languages/scss'));
+hljs.registerLanguage('scss', require('./languages/wxss'));
 hljs.registerLanguage('shell', require('./languages/shell'));
 hljs.registerLanguage('sql', require('./languages/sql'));
 hljs.registerLanguage('swift', require('./languages/swift'));
