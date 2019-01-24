@@ -52,11 +52,11 @@ const account = function () {
 
   this.follow = diff => {
     this.blogInfo.attentionNum += diff
-  },
+  }
 
-    this.collect = diff => {
-      this.blogInfo.favoriteNum += diff
-    }
+  this.collect = diff => {
+    this.blogInfo.favoriteNum += diff
+  }
 
   this.login = async (app, oid, uid) => {
     const res = await request.post('/user/userThirdpartInfo/login', {

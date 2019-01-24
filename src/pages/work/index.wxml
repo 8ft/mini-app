@@ -2,8 +2,7 @@
 
 <block wx:if="{{props.stores.account.logged_in}}">
 
-  <view class='big-title'>我的工作</view>
-  <tabs under-line-ratio="{{.5}}" custom-class="reset-tabs" tabs="{{['我的项目','申请项目']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+  <tabs under-line-ratio="{{.5}}" tabs="{{['我的项目','申请项目']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 
   <scroll-view class='types' scroll-x="true">
     <!--我的项目-->
@@ -28,10 +27,9 @@
         enable-back-to-top="true"
         bindscrolltoupper='refresh' 
         bindscrolltolower="getMyPublish"> 
-        <navigator class='project border-b' wx:for="{{myPublish.projects}}" hover-class="none" url="/packageProject/pages/detail/index?no={{item.projectNo}}">
-          <view class='icon {{iconName[item.projectType]}}'>
-            <view class="iconfont icon-{{iconName[item.projectType]}}"></view>
-          </view>
+
+        <project-card wx:for="{{myPublish.projects}}" project="{{item}}" private="true"></project-card>
+        <!-- <navigator class='project border-b' wx:for="{{myPublish.projects}}" hover-class="none" url="/packageProject/pages/detail/index?no={{item.projectNo}}">
           <view class='name'>{{item.projectName}}</view>
           <view class='base-info'>
             <text>{{item.projectCycle}}完成</text>
@@ -39,7 +37,7 @@
           </view>
           <text class='price'>{{(item.comfirmPrice&&item.projectInfoState!=2)?item.comfirmPrice+'元':item.projectBudget}}</text>
           <view class="status{{item.projectState}}">{{item.projectStateCn}}</view>
-        </navigator>
+        </navigator> -->
       </scroll-view>
 
     <!--申请项目-->
@@ -52,10 +50,10 @@
         enable-back-to-top="true"
         bindscrolltoupper='refresh' 
         bindscrolltolower="getMyApply"> 
-        <navigator class='project border-b' wx:for="{{myApply.projects}}" hover-class="none" url="/packageProject/pages/detail/index?no={{item.projectNo}}">
-          <view class='icon {{iconName[item.projectType]}}'>
-            <view class="iconfont icon-{{iconName[item.projectType]}}"></view>
-          </view>
+
+        <project-card wx:for="{{myApply.projects}}" project="{{item}}" private="true"></project-card>
+
+        <!-- <navigator class='project border-b' wx:for="{{}}" hover-class="none" url="/packageProject/pages/detail/index?no={{item.projectNo}}">
           <view class='name'>{{item.projectName}}</view>
           <view class='base-info'>
             <text>{{item.projectCycle}}完成</text>
@@ -63,7 +61,7 @@
           </view>
           <text class='price'>{{item.projectBudget}}</text>
           <view class="status{{item.projectState}}">{{item.projectStateCn}}</view>
-        </navigator>
+        </navigator> -->
       </scroll-view>
 
       <block wx:elif="{{!loading}}">

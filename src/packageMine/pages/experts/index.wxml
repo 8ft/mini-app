@@ -1,6 +1,0 @@
-  
-
-<expert-card wx:for="{{experts}}" index="{{index}}" data="{{item}}" remarkable="true" bindcollect="updateExpert" bindremark="updateExpert"></expert-card>
-<nodata wx:if="{{!loading&&experts.length===0}}"></nodata>
-
-

@@ -5,11 +5,11 @@
     scroll-view{width:100%;white-space:nowrap;overflow: hidden;}
     .tab{display:inline-block;text-align:center;font-weight:400;margin:0 32rpx;font-size:$l;color:$lightBlack;height:84rpx;line-height:84rpx;
         view{display: inline-block;}
-        &.active{color:$darkBlue;font-weight:bold;}
+        &.active{color:$black!important;font-weight:600;}
     }
     .tab-underline{width:0;height:6rpx;background:$darkBlue;}
 }
 
-.place-holder{background:#fff;height:84rpx;line-height:84rpx;}
+.place-holder{background:transparent;height:84rpx;line-height:84rpx;}
 
 

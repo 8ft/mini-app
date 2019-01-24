@@ -5,8 +5,8 @@
         .nickName{display:flex;align-items:center;font-size:60rpx;height:60rpx;line-height:60rpx;color:#333;font-weight:500;
             text{display:block;max-width:50%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
             .iconfont{margin-left:20rpx;font-size:40rpx;}}
-        .icon-xingbienv{color:$lightRed;}
-        .icon-xingbienan{color:$darkBlue;}
+        .icon-nv{color:$lightRed;}
+        .icon-nan{color:$darkBlue;}
         navigator{text-align:center;margin-top:20rpx;color:#fff;border-radius:8rpx;background:$darkBlue;width:200rpx;height:60rpx;line-height:60rpx;font-size:28rpx;}
         .finished{color:#999;font-size:$xl;margin-top:30rpx;line-height:32rpx;
             image{margin-right: 16rpx;width:32rpx;height:32rpx;vertical-align: middle;}

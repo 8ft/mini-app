@@ -1,6 +1,7 @@
 const util=require('../../../utils/util.js')
 
 Component({
+  externalClasses: ['custom-class'],
   properties: {
     data:{
       type:Object,

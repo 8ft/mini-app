@@ -9,7 +9,7 @@
         <view class="label">{{data.cityCn}}</view>
         <view class="label">{{data.workExperience}}年</view>
         <view class="label">完成{{data.finishOrderNums}}单</view>
-        <view class="price">{{data.daySalary}}元/日</view>
+        <view class="price" wx:if="{{data.daySalary!==''}}">{{data.daySalary}}元/日</view>
         <view class="tags">{{data.positionTypeCn}}</view>
       </navigator>
       <view class="action">

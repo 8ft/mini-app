@@ -1,6 +1,6 @@
 @import '../../../assets/wxss/var.scss'; 
 
-.project{display:flex;align-items:center;padding:35rpx 0 36rpx;border-bottom:$border;color:$gray;}
+.project{display:flex;align-items:center;padding:35rpx 0 36rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;}
 .info{width:530rpx;}
 
 .apply{width:140rpx;text-align:center;

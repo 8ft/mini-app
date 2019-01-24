@@ -155,6 +155,7 @@ Page(observer({
       })
       return true
     }
+    
     if (!data.city) {
       wx.showToast({
         title: '请选择城市',
@@ -162,6 +163,7 @@ Page(observer({
       })
       return true
     }
+
     if (!(data.wechat||data.qq||data.email)) {
       wx.showToast({
         title: '微信号、QQ、邮箱至少填写一个',
@@ -194,7 +196,6 @@ Page(observer({
       return true
     }
     
-    
     if (!data.positionTitle) {
       wx.showToast({
         title: '请输入职位头衔',
@@ -202,6 +203,7 @@ Page(observer({
       })
       return true
     }
+
     if (!data.positionType) {
       wx.showToast({
         title: '请选择职位类型',
@@ -209,13 +211,7 @@ Page(observer({
       })
       return true
     }
-    if (!data.daySalary) {
-      wx.showToast({
-        title: '请输入日薪',
-        icon: 'none'
-      })
-      return true
-    }
+
     return false
   }
 

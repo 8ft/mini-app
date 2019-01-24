@@ -8,7 +8,7 @@ Page(observer({
   },
 
   data: {
-    blogInfo:null
+    sex:''
   },
 
   onShareAppMessage: function () {
@@ -21,6 +21,16 @@ Page(observer({
 
   onPullDownRefresh:function(){
     this.props.stores.account.refresh()
+  },
+
+  onShow:function(){
+    if(!this.props.stores.account.logged_in)return
+    const sex=this.props.stores.account.userInfo.userBaseInfo.sex===1?'nan':'nv'
+    if(this.data.sex!==sex){
+      this.setData({
+        sex:sex
+      })
+    }
   },
 
   go:function(e){

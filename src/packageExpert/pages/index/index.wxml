@@ -4,8 +4,8 @@
     <view class="base" wx:if="{{user.userState===2}}">
       <image mode="aspectFill" class='avatar' src="{{user.userAvatar}}"></image>
       <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
-      <view class='name'>{{user.nickName}}<text class="iconfont icon-xingbie{{user.userBaseInfo.sex===1?'nan':'nv'}}"></text></view>
-      <text class='price'>{{user.userBaseInfo.daySalary}}元/天</text>
+      <view class='name'>{{user.nickName}}<text class="iconfont icon-{{user.userBaseInfo.sex===1?'nan':'nv'}}"></text></view>
+      <text class='price' wx:if="{{user.userBaseInfo.daySalary!==''}}">{{user.userBaseInfo.daySalary}}元/天</text>
       <text class='p-title'>{{user.userBaseInfo.positionTitle}}</text>
       <view class='info city'><text class='iconfont icon-weizhi'></text>{{user.userBaseInfo.cityCn}}</view>
       <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperience}}年经验</view>
@@ -18,7 +18,7 @@
       <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
       <view class='name'>{{user.nickName}}</view>
       <text class='p-title'>未认证用户</text>
-      <view class='info city'><text class='iconfont icon-weizhi'></text>无法获得地址</view>
+      <!-- <view class='info city'><text class='iconfont icon-weizhi'></text>无法获得地址</view> -->
       <view class='info city'>用户还未填写任何相关个人信息哦~</view>
     </view>
 
@@ -39,7 +39,7 @@
   </view>
 </view>
 
-<tabs under-line-ratio="{{.5}}" wx:if="{{blogInfo}}" custom-class="reset-tabs" tabs="{{['基础信息','文章('+blogInfo.articleNum+')']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+<tabs under-line-ratio="{{.5}}" wx:if="{{blogInfo}}" tabs="{{['基础信息','文章('+blogInfo.articleNum+')']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 
 <block hidden="{{typeIndex===1}}" wx:if="{{typeIndex===0&&user.userState===2}}">
   <view class="part">

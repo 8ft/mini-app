@@ -1,8 +1,10 @@
 {
-    "navigationBarTitleText": "我的人才库",
+    "navigationBarTitleText": "我的收藏",
     "enablePullDownRefresh": true,
     "onReachBottomDistance":true,
     "usingComponents": {
+        "tabs": "/components/common/tabs/index",
+        "blog-card":"/components/blog/card/index",
         "expert-card":"/components/expert/card/index",
         "nodata":"/components/nodata/nodata"
     }

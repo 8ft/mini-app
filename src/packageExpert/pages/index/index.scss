@@ -8,8 +8,8 @@ page{box-sizing:border-box;background:linear-gradient(0deg,rgba(104,196,255,1),$
 
     .base{padding:48rpx 30rpx 0;
         .iconfont{color:$lightGray;font-size:$s;margin-right:8rpx;
-            &.icon-xingbienv{color:#ff8686;}
-            &.icon-xingbienan{color:$darkBlue;}}
+            &.icon-nv{color:#ff8686;}
+            &.icon-nan{color:$darkBlue;}}
 
         .name{font-size:40rpx;color:$black;font-weight:500;display:flex;align-items:center;
             .iconfont{font-size:30rpx;margin-left:16rpx;}}
@@ -47,7 +47,7 @@ page{box-sizing:border-box;background:linear-gradient(0deg,rgba(104,196,255,1),$
     .iconfont{font-size:$s;margin-right:12rpx;}
     .link{display:inline-block;position:absolute;right:0;bottom:40rpx;background:#e5f2ff;border-radius:20rpx;height:40rpx;line-height:40rpx;text-align:center;color:$darkBlue;font-size:$s;padding:0 20rpx;}}
 
-.reset-tabs{width:50%;margin:30rpx 0 0!important;font-size: $xl!important;}
+.tabs .tab{width:50%;margin:30rpx 0 0!important;font-size: $xl!important;}
 
 .blog-types{width:100%;padding:32rpx 0;white-space:nowrap;box-sizing:border-box;
     .type{font-size:$l;line-height:60rpx;margin-right:$m;color:$lightBlack;background:#f7f7f7;padding:0 36rpx;border-radius:99rpx;display:inline-block;

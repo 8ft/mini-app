@@ -1,0 +1,14 @@
+  
+<tabs under-line-ratio="{{.8}}" fixed="true" tabs="{{['人才','文章']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+
+<view class="content">
+  <block wx:if="{{typeIndex===0}}">
+      <expert-card wx:for="{{experts.list}}" index="{{index}}" data="{{item}}" remarkable="true" bindcollect="updateExpert" bindremark="updateExpert"></expert-card>
+      <nodata wx:if="{{!loading&&experts.list.length===0}}"></nodata>
+  </block>
+
+  <block wx:else>
+    <blog-card custom-class="reset-blog-card" wx:for="{{articles.list}}" data="{{item}}" show-author="true"></blog-card>
+    <nodata wx:if="{{!loading&&articles.list.length===0}}"></nodata>
+  </block>
+</view>

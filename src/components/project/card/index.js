@@ -1,10 +1,22 @@
 Component({
   properties: {
-    project:Object
+    private:{
+      type:Boolean,
+      value:false
+    },
+    project:{
+      type:Object,
+      observer(newVal, oldVal, changedPath) {
+        this.setData({
+          skills:newVal.projectSkill.split('|')
+        })
+      }
+    }
   },
 
   data: {
-    uid:''
+    uid:'',
+    skills:[]
   },
 
   attached:function(){

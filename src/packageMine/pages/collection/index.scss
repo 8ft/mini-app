@@ -1,0 +1,8 @@
+@import '../../../assets/wxss/var.scss';  
+
+.content{padding-bottom:100rpx;}
+.tabs{
+    scroll-view{text-align: center;}
+    .tab{margin:0 60rpx!important;font-size:32rpx!important;}
+}
+.reset-blog-card{width:718rpx;box-sizing: border-box;border-radius:20rpx;margin: 24rpx auto 0;}

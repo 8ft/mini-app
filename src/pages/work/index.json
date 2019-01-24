@@ -1,5 +1,7 @@
 {
+  "navigationBarTitleText": "工作",
   "usingComponents": {
+    "project-card": "/components/project/card/index",
     "tabs": "/components/common/tabs/index",
     "nodata": "/components/nodata/nodata"
   }

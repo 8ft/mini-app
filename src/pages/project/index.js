@@ -87,10 +87,7 @@ Page(observer({
     })
 
     if (res.code === 0) {
-      let list = res.data.list.map((project) => {
-        project.projectSkill = project.projectSkill.split('|')
-        return project
-      })
+
       if (res.data.page > pIndex){
         pIndex++
       }else{
@@ -98,7 +95,7 @@ Page(observer({
       }
     
       this.setData({
-        projects: this.data.projects.concat(list),
+        projects: this.data.projects.concat(res.data.list),
         pageIndex:pIndex,
         nomore:nomore
       })

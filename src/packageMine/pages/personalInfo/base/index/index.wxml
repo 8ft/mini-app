@@ -75,7 +75,7 @@
     </view>
   </view>
 
-  <view class='info need'>
+  <view class='info'>
     <text class='name'>日薪（8小时）</text>
     <view class='input'>
       <input type='number' maxlength='4' placeholder='输入金额' data-type="daySalary" value="{{userBaseInfo.daySalary}}" bindinput='input'></input>
