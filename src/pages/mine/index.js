@@ -24,7 +24,7 @@ Page(observer({
   },
 
   onShow:function(){
-    if(!this.props.stores.account.logged_in)return
+    if(!this.props.stores.account.userInfo)return
     const sex=this.props.stores.account.userInfo.userBaseInfo.sex===1?'nan':'nv'
     if(this.data.sex!==sex){
       this.setData({

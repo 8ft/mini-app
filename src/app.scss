@@ -9,7 +9,7 @@ text{word-break:break-all;white-space:pre-wrap;}
 button{-webkit-appearance:none;background:#fff;padding:0;margin:0;border-radius:0;}
 button::after{border:none;}
 
-button[class^='btn-']{box-sizing:border-box;height:96rpx;background:$darkBlue;border:1px solid $darkBlue;border-radius:4rpx;color:#fff;font-size:$xl;line-height:96rpx;text-align:center;
+[class^='btn-']{box-sizing:border-box;height:96rpx;background:$darkBlue;border:1px solid $darkBlue;border-radius:4rpx;color:#fff;font-size:$xl;line-height:96rpx;text-align:center;
     &.white{color:$darkBlue;background:#fff;}
     .iconfont{font-size:34rpx;margin-right:10rpx;}
     .pay{line-height:$xl;border-left:1px solid #f8f8f8;margin-left:48rpx;padding-left:48rpx;}}

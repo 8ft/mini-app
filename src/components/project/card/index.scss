@@ -1,18 +1,31 @@
 @import '../../../assets/wxss/var.scss'; 
 
-.project{display:flex;align-items:center;padding:35rpx 0 36rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;}
-.info{width:530rpx;}
+.project{position:relative;display:flex;align-items:center;padding:35rpx 0 36rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;
+    &.mine{width:718rpx;margin:21rpx auto 0;border-radius: 20rpx;border-bottom: none;padding: 40rpx 0 40rpx 32rpx;}
 
-.apply{width:140rpx;text-align:center;
-    button{font-size:$l;width:140rpx;height:60rpx;line-height:60rpx;background:$darkBlue;border-radius:6px;color:#fff;margin-bottom:20rpx;}
-    button.myself{background:$orange;}}
+    .info{width:530rpx;
+        .title{display:block;width:90%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:34rpx;color:black;font-weight:600;}
+        .tags{margin:24rpx 0 16rpx;
+            label{display:inline-block;padding:0 12rpx;margin:0 12rpx 12rpx 0;font-size:$s;line-height:40rpx;background:#f5f5f5;}
+            .type{color:$darkBlue;background:rgba(0, 131, 255, .1);}}
+        .price{font-size:30rpx;color:$red;font-weight:600;}
+        .read{font-size:$m;margin-left:20rpx;padding-left:20rpx;display:inline-block;line-height:17rpx;border-left:$border;}
+        
+    }
 
-.title{display:block;width:90%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:34rpx;color:black;font-weight:600;}
+    .apply{width:140rpx;text-align:center;
+        button{font-size:$l;width:140rpx;height:60rpx;line-height:60rpx;background:$darkBlue;border-radius:6px;color:#fff;margin-bottom:20rpx;}
+        button.myself{background:$orange;}
+        .hot{font-size:$s;line-height:$s;color:#bbb;}
+    }
+    
+    .other-info{position: absolute;right:29rpx;bottom:40rpx;font-size:$m;color:$gray; }
+}
 
-.tags{margin:24rpx 0 16rpx;
-    label{display:inline-block;padding:0 12rpx;margin:0 12rpx 12rpx 0;font-size:$s;line-height:40rpx;background:#f5f5f5;}
-    .type{color:$darkBlue;background:rgba(0, 131, 255, .1);}}
+.status1,.status10,.status14{background:$blue;}
+.status2,.status5,.status6,.status7{background:$green;}
+.status3,.status9,.status13{background:$red;}  
+.status4{background:$yellow;}
+.status8{background:$lightGreen;}
+.status11,.status12{background:#ccc;}
 
-.price{font-size:30rpx;color:$red;font-weight:600;}
-.read{font-size:$m;margin-left:20rpx;padding-left:20rpx;display:inline-block;line-height:17rpx;border-left:$border;}
-.hot{font-size:$s;line-height:$s;color:#bbb;}

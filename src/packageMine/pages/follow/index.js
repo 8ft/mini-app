@@ -16,7 +16,7 @@ Page(observer({
   },
 
   onLoad:function(options){
-    let myId=wx.getStorageSync('user').userId
+    let myId=wx.getStorageSync('account').userId
     let curId=options.id
 
     wx.setNavigationBarTitle({

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "TA的主页",
+  "navigationBarTitleText": "",
   "enablePullDownRefresh": true,
   "onReachBottomDistance":true,
   "usingComponents": {

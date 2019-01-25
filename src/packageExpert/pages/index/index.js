@@ -4,6 +4,7 @@ const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 Page({
 
   data: {
+    isMyself:false,
     nodataHeight:0,
 
     from:'',
@@ -22,11 +23,26 @@ Page({
   },
 
   onLoad:function (options) {
+    const myId=wx.getStorageSync('account').userId
+    const curId=options.id
+    const isMyself=myId===curId
+
+    wx.setNavigationBarTitle({
+      title: isMyself?'我的主页':'TA的主页'
+    })
+
     this.setData({
       from:options.from||'',
-      uid:options.id
+      uid:curId,
+      isMyself:isMyself
     })
     this.getUserInfo()
+  },
+
+  onShareAppMessage: function () {
+    return {
+      title: `${this.data.user.nickName}的主页`
+    }
   },
 
   onPullDownRefresh:function(){

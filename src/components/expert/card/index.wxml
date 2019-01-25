@@ -3,13 +3,20 @@
   <view class="card">
       <navigator class="info" hover-class="none" url="/packageExpert/pages/index/index?id={{data.userId}}">
         <image class="avatar" lazy-load="true" mode="aspectFill" src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>
-        <image class="type" mode="aspectFill" src="/assets/img/discover/{{data.settleType===2?'team':'personal'}}.png"></image>
+        <badge val="{{data.settleTypeCn}}" bg="{{data.settleType===1?'#FF9166':'#8CB0D2'}}" padding="18"></badge>
         <!-- <view class="last-login">{{data.loginTimeCn}}</view> -->
-        <view class="name"><text>{{data.nickName}}</text>{{data.positionTitle}}</view>
-        <view class="label">{{data.cityCn}}</view>
-        <view class="label">{{data.workExperience}}年</view>
-        <view class="label">完成{{data.finishOrderNums}}单</view>
-        <view class="price" wx:if="{{data.daySalary!==''}}">{{data.daySalary}}元/日</view>
+        <view class="name">
+          <view>{{data.nickName}}</view>{{data.positionTitle}}
+          <view class="iconfont icon-{{data.sex===1?'nan':'nv'}}"></view>
+        </view>
+
+        <view>
+          <view class="label">{{data.cityCn}}</view>
+          <view class="label">{{data.workExperience}}年</view>
+          <view class="label">完成{{data.finishOrderNums}}单</view>
+          <view class="price" wx:if="{{data.daySalary!==''}}">{{data.daySalary}}元/日</view>
+        </view>
+
         <view class="tags">{{data.positionTypeCn}}</view>
       </navigator>
       <view class="action">

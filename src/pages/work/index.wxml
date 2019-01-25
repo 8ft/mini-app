@@ -28,7 +28,7 @@
         bindscrolltoupper='refresh' 
         bindscrolltolower="getMyPublish"> 
 
-        <project-card wx:for="{{myPublish.projects}}" project="{{item}}" private="true"></project-card>
+        <project-card wx:for="{{myPublish.projects}}" project="{{item}}"></project-card>
         <!-- <navigator class='project border-b' wx:for="{{myPublish.projects}}" hover-class="none" url="/packageProject/pages/detail/index?no={{item.projectNo}}">
           <view class='name'>{{item.projectName}}</view>
           <view class='base-info'>
@@ -51,7 +51,7 @@
         bindscrolltoupper='refresh' 
         bindscrolltolower="getMyApply"> 
 
-        <project-card wx:for="{{myApply.projects}}" project="{{item}}" private="true"></project-card>
+        <project-card wx:for="{{myApply.projects}}" project="{{item}}"></project-card>
 
         <!-- <navigator class='project border-b' wx:for="{{}}" hover-class="none" url="/packageProject/pages/detail/index?no={{item.projectNo}}">
           <view class='name'>{{item.projectName}}</view>

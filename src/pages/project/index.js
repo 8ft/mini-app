@@ -95,7 +95,10 @@ Page(observer({
       }
     
       this.setData({
-        projects: this.data.projects.concat(res.data.list),
+        projects: this.data.projects.concat(res.data.list.map((project) => {
+          project.projectSkill = project.projectSkill.split('|')
+          return project
+        })),
         pageIndex:pIndex,
         nomore:nomore
       })

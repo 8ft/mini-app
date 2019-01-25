@@ -1,15 +1,22 @@
 <!--components/project/card/card.wxml-->
-<navigator class='project' hover-class="none" url="/packageProject/pages/detail/index?no={{project.projectNo}}">
+<navigator class="project{{project.relationType?' mine':''}}" hover-class="none" url="/packageProject/pages/detail/index?no={{project.projectNo}}">
+  
   <view class='info'>
     <text class='title'>{{project.projectName}}</text>
     <view class='tags'>
       <label class='type'>{{project.projectSubtype}}</label>
-      <label wx:if="{{skills.length>0}}" wx:for="{{skills}}">{{item}}</label>
+      <label wx:if="{{project.projectSkill.length>0}}" wx:for="{{project.projectSkill}}">{{item}}</label>
     </view>
-    <text class='price'>{{project.projectBudget}}</text>
-    <text class='read'>已浏览：{{project.viewNum}}</text>
+    <text class='price'>{{(project.relationType==='1'&&project.comfirmPrice&&project.projectInfoState!=2)?project.comfirmPrice+'元':project.projectBudget}}</text>
+
+    <text class='read' wx:if="{{!project.relationType}}">已浏览：{{project.viewNum}}</text>
+    <text class='read' wx:if="{{project.relationType}}">{{project.projectCycle}}完成</text>
   </view>
-  <view class='apply' wx:if="{{!private}}">
+
+  <badge wx:if="{{project.relationType}}" val="{{project.projectStateCn}}" bg="{{bg[project.projectState]}}"></badge>
+  <view class="other-info" wx:if="{{project.relationType}}">{{project.relationType==='1'?project.createTime:'已申请:'+project.applyNum+'人'}}</view>
+
+  <view class='apply' wx:if="{{!project.relationType}}">
     <block wx:if="{{project.publisher!=uid}}">
       <button>马上申请</button>
       <view class='hot'>已有{{project.applyNum}}人申请</view>
@@ -19,4 +26,5 @@
       <view class='hot'>我发布的</view>
     </block>
   </view>
+
 </navigator>

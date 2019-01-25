@@ -171,8 +171,8 @@ Page(observer({
     
       this.setData({
         'articles.list': this.data.articles.list.concat(res.data.list.map(blog=>{
-          if(blog.articleBrief.length>50){
-            blog.articleBrief=blog.articleBrief.substring(0,50)+'...'
+          if(blog.articleBrief.length>76){
+            blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
           }
           blog.createTime=app.util.formatTime(blog.createTime,'blogCard')
           return blog

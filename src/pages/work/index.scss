@@ -11,20 +11,4 @@
     &.active{color:$black;font-weight:500;}}
 
 #projects{position:relative;width:100%;}
-scroll-view{padding:0 16rpx;box-sizing:border-box;}
-.project{display:block;padding:40rpx 32rpx;box-sizing:border-box;position:relative;border-radius: 20rpx;margin-bottom:20rpx;background: #fff;
-    &:first-of-type{margin-top:20rpx;}
-}
 
-.name{font-size:$xl;line-height:$xl;color:$black;margin-bottom:20rpx;font-weight:500;width:66%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.base-info{font-size:$m;color:$gray;}
-.publish-time{margin-left:41rpx;}
-.price{color:$red;font-size:$l;line-height:$l;position:absolute;right:30rpx;top:44rpx;font-weight:500;}
-view[class^='status']{line-height:$xl;padding:0 12rpx;color:#fff;position:absolute;right:30rpx;bottom:44rpx;border-radius:99rpx;font-size:20rpx;font-weight:400;}
-
-.status1,.status10,.status14{background:$blue;}
-.status2,.status5,.status6,.status7{background:$green;}
-.status3,.status9,.status13{background:$red;}  
-.status4{background:$yellow;}
-.status8{background:$lightGreen;}
-.status11,.status12{background:#ccc;}

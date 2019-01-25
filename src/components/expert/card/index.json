@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
+    "badge": "../../common/badge/index",
     "popup":"../../common/popup/index"
   }
 }

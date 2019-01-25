@@ -8,8 +8,8 @@ page{box-sizing:border-box;background:linear-gradient(0deg,rgba(104,196,255,1),$
 
     .base{padding:48rpx 30rpx 0;
         .iconfont{color:$lightGray;font-size:$s;margin-right:8rpx;
-            &.icon-nv{color:#ff8686;}
-            &.icon-nan{color:$darkBlue;}}
+            &.icon-nv{color:$lightRed;}
+            &.icon-nan{color:$blue;}}
 
         .name{font-size:40rpx;color:$black;font-weight:500;display:flex;align-items:center;
             .iconfont{font-size:30rpx;margin-left:16rpx;}}

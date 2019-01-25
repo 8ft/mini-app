@@ -173,13 +173,13 @@ Page(observer({
 
     this.setData({
       'myPublish.pageIndex': myPublish.pageIndex,
-      'myPublish.projects':myPublish.projects.concat(res.data.list.map(item => {
-        item.createTime = item.createTime.split(' ')[0].replace(/-/g, '.')
-        return item
+      'myPublish.projects':myPublish.projects.concat(res.data.list.map(project => {
+        project.createTime = project.createTime.split(' ')[0].replace(/-/g, '.')
+        project.projectSkill = project.projectSkill.split('|')
+        return project
       })),
       loading:false
     })
-
   },
 
   getMyApply:async function(){
@@ -206,9 +206,10 @@ Page(observer({
 
     this.setData({
       'myApply.pageIndex': myApply.pageIndex,
-      'myApply.projects': myApply.projects.concat(res.data.list.map(item => {
-        item.createTime = item.createTime.split(' ')[0].replace(/-/g, '.')
-        return item
+      'myApply.projects': myApply.projects.concat(res.data.list.map(project => {
+        project.createTime = project.createTime.split(' ')[0].replace(/-/g, '.')
+        project.projectSkill = project.projectSkill.split('|')
+        return project
       })),
       loading:false
     })
