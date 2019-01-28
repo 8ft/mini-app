@@ -14,7 +14,7 @@
   </view>
 
   <badge wx:if="{{project.relationType}}" val="{{project.projectStateCn}}" bg="{{bg[project.projectState]}}"></badge>
-  <view class="other-info" wx:if="{{project.relationType}}">{{project.relationType==='1'?project.createTime:'已申请:'+project.applyNum+'人'}}</view>
+  <view class="other-info" wx:if="{{project.relationType}}">{{project.relationType==='1'?project.createTime+'发布':'已申请:'+project.applyNum+'人'}}</view>
 
   <view class='apply' wx:if="{{!project.relationType}}">
     <block wx:if="{{project.publisher!=uid}}">

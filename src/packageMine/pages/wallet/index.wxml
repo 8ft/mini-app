@@ -17,8 +17,8 @@
           bindscrolltolower="getRecords"> 
 
     <navigator class='record' hover-class="none" wx:for="{{records}}" url="/packageMine/pages/tradeDetail/index?id={{item.id}}">
-      <image src="../../assets/img/icon_sr@3x.png" wx:if="{{item.orderType===12}}"></image>
-      <image src="../../assets/img/icon_tx@3x.png" wx:if="{{item.orderType===20}}"></image>
+      <image src="../../assets/img/wallet/icon_tx@3x.png" wx:if="{{item.orderType===20}}"></image>
+      <image src="../../assets/img/wallet/icon_sr@3x.png" wx:else></image>
 
       <view class='info border-b'>
         <view class='name'>{{item.orderTypeName}}</view>

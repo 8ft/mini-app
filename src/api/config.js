@@ -5,6 +5,6 @@ module.exports = {
 
   contentType: 'application/x-www-form-urlencoded;charset=utf-8',
   clientType:'40',
-  version: '1.4.0000'
+  version: '1.6.0000'
 }
 

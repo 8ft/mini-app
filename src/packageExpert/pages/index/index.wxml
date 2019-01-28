@@ -5,12 +5,13 @@
       <image mode="aspectFill" class='avatar' src="{{user.userAvatar}}"></image>
       <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
       <view class='name'>{{user.nickName}}<text class="iconfont icon-{{user.userBaseInfo.sex===1?'nan':'nv'}}"></text></view>
-      <text class='price' wx:if="{{user.userBaseInfo.daySalary!==''}}">{{user.userBaseInfo.daySalary}}元/天</text>
       <text class='p-title'>{{user.userBaseInfo.positionTitle}}</text>
-      <view class='info city'><text class='iconfont icon-weizhi'></text>{{user.userBaseInfo.cityCn}}</view>
-      <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperience}}年经验</view>
-      <view class='info'><text class='iconfont icon-tuandui'></text>{{user.userBaseInfo.settleTypeCn}}</view>
-      <view class='info'><text class='iconfont icon-yiwancheng'></text>已完成{{user.finishOrderNums}}单</view>
+      <text class='price' wx:if="{{user.userBaseInfo.daySalary!==''}}">{{user.userBaseInfo.daySalary}}元/天</text>
+      <view>
+        <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperience}}年经验</view>
+        <view class='info'><text class='iconfont icon-tuandui'></text>{{user.userBaseInfo.settleTypeCn}}</view>
+        <view class='info'><text class='iconfont icon-weizhi'></text>{{user.userBaseInfo.cityCn}}</view>
+      </view>
     </view>
 
     <view class="base" wx:else>
@@ -31,10 +32,14 @@
           <text>{{blogInfo.fansNum}}</text>
           <text>粉丝</text>
       </navigator>
-      <navigator hover-class="none" url="/packageExpert/pages/collection/index?id={{user.userId}}">
+      <navigator hover-class="none">
+          <text>{{user.finishOrderNums||0}}</text>
+          <text>成单量</text>
+      </navigator>
+      <!-- <navigator hover-class="none" url="/packageExpert/pages/collection/index?id={{user.userId}}">
           <text>{{blogInfo.favoriteNum}}</text>
           <text>收藏</text>
-      </navigator>
+      </navigator> -->
     </view>
   </view>
 </view>

@@ -57,7 +57,7 @@ Page(observer({
           })
 
           if (decodeData.status === 1) {
-            uid = decodeData.userInfo.unionid
+            uid = decodeData.userInfo.unionId
             wx.setStorageSync('unionid', uid)
             this.props.stores.account.login(app, oid, uid)
           } else {

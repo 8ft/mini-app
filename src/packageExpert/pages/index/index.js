@@ -28,7 +28,7 @@ Page({
     const isMyself=myId===curId
 
     wx.setNavigationBarTitle({
-      title: isMyself?'我的主页':'TA的主页'
+      title: isMyself?'个人主页':'TA的主页'
     })
 
     this.setData({
