@@ -4,7 +4,7 @@
     <text class='name'>入驻类型</text>
     <view class='input arrow-right'>
       <picker bindchange="select" value="{{joinIndex}}" range="{{dicts[1].dictList}}" range-key="dictName" data-type="join">
-          {{userBaseInfo.settleTypeCn||dicts[1].dictList[0].dictName}}
+          {{userBaseInfo.settleTypeCn||dicts[1].dictList[joinIndex].dictName}}
       </picker>
     </view>
   </view>
@@ -78,7 +78,7 @@
   <view class='info'>
     <text class='name'>日薪（8小时）</text>
     <view class='input'>
-      <input type='number' maxlength='4' placeholder='输入金额' data-type="daySalary" value="{{userBaseInfo.daySalary}}" bindinput='input'></input>
+      <input type='number' maxlength='4' placeholder='输入金额' data-type="daySalary" value="{{userBaseInfo.daySalary||''}}" bindinput='input'></input>
     </view>
   </view>
 </view>

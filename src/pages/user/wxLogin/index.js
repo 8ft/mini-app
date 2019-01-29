@@ -8,11 +8,26 @@ Page(observer({
   },
 
   data: {
+    oid:'',
+    uid:'',
     encryptedData:'',
     iv:''
   },
 
   onLoad: function () {
+    wx.login({
+      success: async res => {
+        let data = await app.request.get('/weixin/mini/getOpenId', {
+          code: res.code
+        })
+        this.setData({
+          oid:data.openid,
+          uid:data.unionid||''
+        })
+        wx.setStorageSync('openid', data.openid)
+      }
+    })
+
     if(this.props.stores.account.logged_in){
       this.props.stores.account.logout(app,true)
     }
@@ -34,40 +49,31 @@ Page(observer({
   },
 
   preLogin:async function(){
-    let oid,uid
-    wx.login({
-      success: async res => {
-        let data = await app.request.get('/weixin/mini/getOpenId', {
-          code: res.code
+    const oid=this.data.oid
+    let uid=this.data.uid
+   
+    if (uid) {
+      wx.setStorageSync('unionid', uid)
+      this.props.stores.account.login(app, oid, uid)
+    }else{
+      //请求解密接口
+      let decodeData = await app.request.get('/weixin/mini/getUnionId', {
+        encryptedData: this.data.encryptedData,
+        iv: this.data.iv,
+        openId: oid
+      })
+
+      if (decodeData.status === 1) {
+        uid = decodeData.userInfo.unionId
+        wx.setStorageSync('unionid', uid)
+        this.props.stores.account.login(app, oid, uid)
+      } else {
+        wx.showToast({
+          title: decodeData.msg,
+          icon: 'none'
         })
-
-        oid = data.openid
-        wx.setStorageSync('openid', oid)
-
-        uid = data.unionid
-        if (uid) {
-          wx.setStorageSync('unionid', uid)
-          this.props.stores.account.login(app, oid, uid)
-        }else{
-          //请求解密接口
-          let decodeData = await app.request.get('/weixin/mini/getUnionId', {
-            encryptedData: this.data.encryptedData,
-            iv: this.data.iv,
-            openId: oid
-          })
-
-          if (decodeData.status === 1) {
-            uid = decodeData.userInfo.unionId
-            wx.setStorageSync('unionid', uid)
-            this.props.stores.account.login(app, oid, uid)
-          } else {
-            wx.showToast({
-              title: decodeData.msg,
-              icon: 'none'
-            })
-          }
-        }
       }
-    })
+    }
   }
+
 }))

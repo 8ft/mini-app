@@ -20,55 +20,59 @@ Page(observer({
     cityCn:''
   },
 
-  onLoad:async function () {
-    const data = this.props.stores.account.userInfo.userBaseInfo
-    const dicts = await this.getDicts()
+  onShow:async function(){
+    if(this.data.dicts.length===0){
+      const data=app.util.deepCopy(this.props.stores.account.userInfo.userBaseInfo)
+      const dicts = await this.getDicts()
 
-    app.globalData.editUserInfoCache.jobTypes={
-      list:dicts[2].dictList,
-      value:data.positionType,
-      valueCn:data.positionTypeCn
+      app.globalData.editUserInfoCache.jobTypes={
+        list:dicts[2].dictList,
+        value:data.positionType,
+        valueCn:data.positionTypeCn
+      }
+
+      let joinIndex=0
+      dicts[1].dictList.forEach((item, index) => {
+        if (item.dictName === data.settleTypeCn) {
+          joinIndex=index
+        }
+      })
+
+      let sexIndex=0
+      dicts[0].dictList.forEach((item, index) => {
+        if (item.dictName === data.sexCn) {
+          sexIndex = index
+        }
+      })
+
+      let expIndex=0
+      dicts[3].dictList.forEach((item, index) => {
+        if (item.dictName === data.workExperienceCn) {
+          expIndex = index
+        }
+      })
+      
+      this.setData({
+        dicts: dicts,
+        userBaseInfo: data,
+        joinIndex:joinIndex,
+        sexIndex: sexIndex,
+        expIndex: expIndex,
+        city:data.city,
+        cityCn:data.cityCn,
+        positionType:data.positionType,
+        positionTypeCn:data.positionTypeCn
+      })
+    }else{
+      const cache=app.globalData.editUserInfoCache
+      const data=this.data.userBaseInfo
+      this.setData({
+        city:cache.city.zoneCode||data.city,
+        cityCn:cache.city.zoneName||data.cityCn,
+        positionType:cache.jobTypes.value||data.positionType,
+        positionTypeCn:cache.jobTypes.valueCn||data.positionTypeCn
+      })
     }
-
-    let joinIndex
-    dicts[1].dictList.forEach((item, index) => {
-      if (item.dictName === data.settleTypeCn) {
-        joinIndex=index
-      }
-    })
-
-    let sexIndex
-    dicts[0].dictList.forEach((item, index) => {
-      if (item.dictName === data.sexCn) {
-        sexIndex = index
-      }
-    })
-
-    let expIndex
-    dicts[3].dictList.forEach((item, index) => {
-      if (item.dictName === data.workExperienceCn) {
-        expIndex = index
-      }
-    })
-    
-    this.setData({
-      dicts: dicts,
-      userBaseInfo: data,
-      joinIndex:joinIndex,
-      sexIndex: sexIndex,
-      expIndex: expIndex
-    })
-  },
-
-  onShow:function(){
-    const data=app.globalData.editUserInfoCache
-    const userBaseInfo=this.props.stores.account.userInfo.userBaseInfo
-    this.setData({
-      city:data.city.zoneCode||userBaseInfo.city,
-      cityCn:data.city.zoneName||userBaseInfo.cityCn,
-      positionType:data.jobTypes.value||userBaseInfo.positionType,
-      positionTypeCn:data.jobTypes.valueCn||userBaseInfo.positionTypeCn
-    })
   },
 
   getDicts: async function () {
@@ -118,6 +122,9 @@ Page(observer({
   input: function (e) {
     let inputType = e.currentTarget.dataset.type
     let val = e.detail.value.replace(/[ ]/g, "").replace(/[\r\n]/g, "")
+    if(inputType==='daySalary'&&val==='0'){
+      val=''
+    }
     this.setData({
       [`userBaseInfo.${inputType}`]:val
     })
@@ -148,6 +155,7 @@ Page(observer({
 
   hasNull:function(){
     let data = this.data.userBaseInfo
+    
     if(!data.nickName){
       wx.showToast({
         title: '请输入昵称',
@@ -156,7 +164,7 @@ Page(observer({
       return true
     }
     
-    if (!data.city) {
+    if (!this.data.city) {
       wx.showToast({
         title: '请选择城市',
         icon: 'none'
@@ -204,7 +212,7 @@ Page(observer({
       return true
     }
 
-    if (!data.positionType) {
+    if (!this.data.positionType) {
       wx.showToast({
         title: '请选择职位类型',
         icon: 'none'

@@ -10,29 +10,44 @@ Page({
 
   onLoad: function (options) {
     const data = app.globalData.editUserInfoCache.jobTypes
-    const valueArr=data.value.split('|')
-    const list=data.list.map(item=>{
-      item.dictList=item.dictList.map(li => {
-        if (valueArr.includes(li.dictValue)) {
-          li.selected = true
-        }
-        return li
+    let list=data.list
+    let selectJobTypes=[]
+    let selectJobTypesCn=[]
+
+    if(data.value){
+      selectJobTypes=data.value.split('|')
+      selectJobTypesCn=data.valueCn.split('|')
+      list=list.map(item=>{
+        item.dictList=item.dictList.map(li => {
+          if (selectJobTypes.includes(li.dictValue)) {
+            li.selected = true
+          }
+          return li
+        })
+        return item
       })
-      return item
-    })
+    }
 
     this.setData({
       jobTypes:list,
-      selectJobTypes: valueArr,
-      selectJobTypesCn: data.valueCn.split('|')
+      selectJobTypes: selectJobTypes,
+      selectJobTypesCn: selectJobTypesCn
     })
   },
 
   onUnload: function () {
+    let value=''
+    let valueCn=''
+
+    if(this.data.selectJobTypes.length>0){
+      value=this.data.selectJobTypes.join('|')
+      valueCn=this.data.selectJobTypesCn.join('|')
+    }
+
     app.globalData.editUserInfoCache.jobTypes={
       list:this.data.jobTypes,
-      value:this.data.selectJobTypes.join('|'),
-      valueCn:this.data.selectJobTypesCn.join('|')
+      value:value,
+      valueCn:valueCn
     }
   },
 
@@ -49,6 +64,12 @@ Page({
     if (selectJobTypes.length === 5&&index<0) {
       wx.showToast({
         title: '最多只可选5个',
+        icon: 'none'
+      })
+      return
+    }else if(selectJobTypes.length === 1&&index>=0){
+      wx.showToast({
+        title: '最少需要选一个',
         icon: 'none'
       })
       return

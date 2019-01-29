@@ -8,7 +8,8 @@ Page(observer({
   },
 
   data: {
-    sex:''
+    sex:'',
+    sexArr:['nv','nan']
   },
 
   onShareAppMessage: function () {
@@ -25,8 +26,8 @@ Page(observer({
 
   onShow:function(){
     if(!this.props.stores.account.userInfo)return
-    const sex=this.props.stores.account.userInfo.userBaseInfo.sex===1?'nan':'nv'
-    if(this.data.sex!==sex){
+    const sex=this.props.stores.account.userInfo.userBaseInfo.sex
+    if(this.data.sex!=sex){
       this.setData({
         sex:sex
       })

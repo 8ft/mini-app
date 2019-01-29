@@ -70,7 +70,7 @@ const validatePhone = (phone) => {
   return true
 }
 
-const validatePwd = (pwd) => {
+const validatePwd = pwd => {
   if (!pwd) {
     wx.showToast({
       title: '请输入密码',
@@ -81,8 +81,13 @@ const validatePwd = (pwd) => {
   return true
 }
 
+const deepCopy=obj=>{
+  return JSON.parse(JSON.stringify(obj))
+}
+
 module.exports = {
   validatePhone: validatePhone,
   validatePwd: validatePwd,
-  formatTime: formatTime
+  formatTime: formatTime,
+  deepCopy:deepCopy
 }

@@ -2,7 +2,7 @@ const request = require('../api/request.js')
 const regeneratorRuntime = require('../libs/regenerator-runtime.js')
 const mobx = require('../libs/mobx')
 const stateCn = {
-  0: '请完善',
+  0: '未完善',
   1: '审核中',
   2: '审核通过',
   3: '审核未通过'

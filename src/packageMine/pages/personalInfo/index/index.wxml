@@ -20,7 +20,7 @@
     <view class='info'><text>职位头衔</text>{{props.stores.account.userInfo.userBaseInfo.positionTitle}}</view>
     <view class='info'><text>职业类型</text>{{props.stores.account.userInfo.userBaseInfo.positionTypeCn}}</view>
     <view class='info'><text>工作经验</text>{{props.stores.account.userInfo.userBaseInfo.workExperienceCn}}</view>
-    <view class='info' wx:if="{{props.stores.account.userInfo.userBaseInfo.daySalary!==''}}"><text>日薪（8小时）</text>{{props.stores.account.userInfo.userBaseInfo.daySalary}}</view>
+    <view class='info' wx:if="{{props.stores.account.userInfo.userBaseInfo.daySalary}}"><text>日薪（8小时）</text>{{props.stores.account.userInfo.userBaseInfo.daySalary}}</view>
     <view class='info'><text>所在城市</text>{{props.stores.account.userInfo.userBaseInfo.cityCn}}</view>
   </block>
 </view>
@@ -75,7 +75,11 @@
   </block>
 </view>
 
-<action-bar wx:if="{{props.stores.account.userInfo.userState!==2&&props.stores.account.userInfo.userState!==1}}">
+<action-bar wx:if="{{props.stores.account.userInfo.userState===0}}">
+   <button class='btn-one' bindtap='submit'>提交审核</button>
+</action-bar>
+
+<action-bar wx:elif="{{props.stores.account.userInfo.userState===3}}">
    <navigator class='btn-one-third white' hover-class="none" url="/packageExpert/pages/index/index?id={{props.stores.account.userInfo.userId}}">预览</navigator>
    <button class='btn-two-third' bindtap='submit'>提交审核</button>
 </action-bar>
