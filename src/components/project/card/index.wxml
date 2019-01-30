@@ -7,7 +7,7 @@
       <label class='type'>{{project.projectSubtype}}</label>
       <label wx:if="{{project.projectSkill.length>0}}" wx:for="{{project.projectSkill}}">{{item}}</label>
     </view>
-    <text class='price'>{{(project.relationType==='1'&&project.comfirmPrice&&project.projectInfoState!=2)?project.comfirmPrice+'元':project.projectBudget}}</text>
+    <text class='price'>{{(project.relationType!=='2'&&project.comfirmPrice&&project.projectInfoState!=2)?project.comfirmPrice+'元':project.projectBudget}}</text>
 
     <text class='read' wx:if="{{!project.relationType}}">已浏览：{{project.viewNum}}</text>
     <text class='read' wx:if="{{project.relationType}}">{{project.projectCycle}}完成</text>

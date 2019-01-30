@@ -9,7 +9,7 @@
     .state{line-height:$xxl;padding:0 20rpx;text-align:center;font-size:$s;color:#fff;background:#fa5a32;border-radius:99rpx;margin-left:10rpx;}
     navigator{text-align:center;margin-top:30rpx;margin-bottom:45rpx;color:$lightBlack;border-radius:8rpx;background:#f2f2f2;width:114rpx;height:50rpx;line-height:50rpx;font-size:26rpx;}
     .avatar{position:absolute;top:$m;right:40rpx;width:140rpx;height:140rpx;border-radius:50%;}
-    .info{position:relative;padding-left:240rpx;font-size:$l;line-height:58rpx;color:$lightBlack;white-space:pre-wrap;word-break:break-all;}
+    .info{position:relative;padding-left:240rpx;font-size:$l;line-height:58rpx;color:$lightBlack;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
     .info text{position:absolute;left:0;top:0;}}
 
 .place-holder{color:$gray;font-size:$m;margin-top:30rpx;}

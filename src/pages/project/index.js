@@ -96,7 +96,9 @@ Page(observer({
     
       this.setData({
         projects: this.data.projects.concat(res.data.list.map((project) => {
-          project.projectSkill = project.projectSkill.split('|')
+          if(project.projectSkill){
+            project.projectSkill = project.projectSkill.split('|')
+          }
           return project
         })),
         pageIndex:pIndex,

@@ -5,7 +5,7 @@ const stateCn = {
   0: '未完善',
   1: '审核中',
   2: '审核通过',
-  3: '审核未通过'
+  3: '未通过'
 }
 
 const account = function () {

@@ -29,7 +29,7 @@ Page(observer({
 
     const index = options.index
     if (index){
-      let data = this.props.stores.account.userInfo.userSampleInfos[index]
+      let data = app.util.deepCopy(this.props.stores.account.userInfo.userSampleInfos[index])
 
       let desc = data.sampleDesc,
         conLen = desc.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "").length,

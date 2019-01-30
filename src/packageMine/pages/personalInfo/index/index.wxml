@@ -1,5 +1,4 @@
-<!--pages/mine/personalInfo/index.wxml-->
-<view class='tip' wx:if="{{props.stores.account.userInfo.userState!==2}}"><text class="iconfont icon-gonggao"></text>{{props.stores.account.userInfo.userState===0?'完善信息并通过审核即可申请项目':'每次修改都需要审核哦~'}}</view>
+<view class='tip' wx:if="{{props.stores.account.userInfo.userState===0}}"><text class="iconfont icon-gonggao"></text>完善信息并通过审核即可申请项目</view>
 
 <view class="userinfo">
   <view class='nickName'>

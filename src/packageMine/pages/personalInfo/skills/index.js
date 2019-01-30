@@ -15,7 +15,7 @@ Page(observer({
   },
 
   onLoad: function (options) {
-    let userSkills =this.props.stores.account.userInfo.userSkills
+    let userSkills =app.util.deepCopy(this.props.stores.account.userInfo.userSkills)
     if (userSkills.length>0){
       userSkills=userSkills.map(item=>{
         return {

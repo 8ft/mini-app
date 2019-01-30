@@ -1,14 +1,14 @@
 <!--pages/expert/index/index.wxml-->
 <view class="part">
   <view class='base-info'>
-    <view class="base" wx:if="{{user.userState===2}}">
+    <view class="base" wx:if="{{user.userState===2||isMyself}}">
       <image mode="aspectFill" class='avatar' src="{{user.userAvatar}}"></image>
       <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
       <view class='name'>{{user.nickName}}<text class="iconfont icon-{{user.userBaseInfo.sex===1?'nan':'nv'}}"></text></view>
       <text class='p-title'>{{user.userBaseInfo.positionTitle}}</text>
-      <text class='price' wx:if="{{user.userBaseInfo.daySalary!==''}}">{{user.userBaseInfo.daySalary}}元/天</text>
+      <text class='price' wx:if="{{user.userBaseInfo.daySalary}}">{{user.userBaseInfo.daySalary}}元/天</text>
       <view>
-        <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperience}}年经验</view>
+        <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperienceCn}}</view>
         <view class='info'><text class='iconfont icon-tuandui'></text>{{user.userBaseInfo.settleTypeCn}}</view>
         <view class='info'><text class='iconfont icon-weizhi'></text>{{user.userBaseInfo.cityCn}}</view>
       </view>
@@ -18,7 +18,7 @@
       <image mode="aspectFill" class='avatar' src="{{user.userAvatar||'/assets/img/default/avatar.png'}}"></image>
       <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
       <view class='name'>{{user.nickName}}</view>
-      <text class='p-title'>未认证用户</text>
+      <view class='p-title'>未认证用户</view>
       <!-- <view class='info city'><text class='iconfont icon-weizhi'></text>无法获得地址</view> -->
       <view class='info city'>用户还未填写任何相关个人信息哦~</view>
     </view>
@@ -46,7 +46,7 @@
 
 <tabs under-line-ratio="{{.5}}" wx:if="{{blogInfo}}" tabs="{{['基础信息','文章('+blogInfo.articleNum+')']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 
-<block hidden="{{typeIndex===1}}" wx:if="{{typeIndex===0&&user.userState===2}}">
+<block hidden="{{typeIndex===1}}" wx:if="{{typeIndex===0&&(user.userState===2||isMyself)}}">
   <view class="part">
     <view class='title'>
       I
@@ -107,7 +107,7 @@
     <button class='btn-two-third' bindtap="download">雇佣专家</button>
   </action-bar>
 
-  <action-bar wx:else >
+  <action-bar wx:elif="{{blogInfo.followed===1}}" >
     <button class='btn-one' bindtap='download'><text class='iconfont icon-lianxi'></text>发送消息</button>
   </action-bar>
 </block>

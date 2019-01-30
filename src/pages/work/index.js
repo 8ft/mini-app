@@ -175,7 +175,9 @@ Page(observer({
       'myPublish.pageIndex': myPublish.pageIndex,
       'myPublish.projects':myPublish.projects.concat(res.data.list.map(project => {
         project.createTime = project.createTime.split(' ')[0].replace(/-/g, '.')
-        project.projectSkill = project.projectSkill.split('|')
+        if(project.projectSkill){
+          project.projectSkill = project.projectSkill.split('|')
+        }
         return project
       })),
       loading:false
@@ -208,7 +210,9 @@ Page(observer({
       'myApply.pageIndex': myApply.pageIndex,
       'myApply.projects': myApply.projects.concat(res.data.list.map(project => {
         project.createTime = project.createTime.split(' ')[0].replace(/-/g, '.')
-        project.projectSkill = project.projectSkill.split('|')
+        if(project.projectSkill){
+          project.projectSkill = project.projectSkill.split('|')
+        }
         return project
       })),
       loading:false

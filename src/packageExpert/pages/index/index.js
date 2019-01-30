@@ -1,7 +1,11 @@
 const app = getApp()
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
+const observer = require('../../../libs/observer').observer
 
-Page({
+Page(observer({
+  props: {
+    stores: app.stores
+  },
 
   data: {
     isMyself:false,
@@ -99,15 +103,29 @@ Page({
   },
 
   getUserInfo: async function () {
-    let res = await app.request.post('/user/userAuth/viewUserBaseInfo', {
-      userId: this.data.uid
-    })
-    if (res.code !== 0) return
+    let userInfo
+    if(this.data.isMyself){
+      userInfo=app.util.deepCopy(this.props.stores.account.userInfo)
+    }else{
+      let res = await app.request.post('/user/userAuth/viewUserBaseInfo', {
+        userId: this.data.uid
+      })
+      if (res.code !== 0) return
+      userInfo=res.data
+    }
 
-    let data=res.data
-    if(data.userState===2){
-      data.userBaseInfo.positionTypeCn = data.userBaseInfo.positionTypeCn.split('|')
-      data.userSampleInfos = data.userSampleInfos.map(item=>{
+    let positionTitle=userInfo.userBaseInfo.positionTitle
+    if(positionTitle&&positionTitle.length>10){
+      userInfo.userBaseInfo.positionTitle=`${positionTitle.substr(0,10)}...`
+    }
+
+    let positionTypeCn=userInfo.userBaseInfo.positionTypeCn
+    if(positionTypeCn){
+      userInfo.userBaseInfo.positionTypeCn=positionTypeCn.split('|')
+    }
+
+    if(userInfo.userSampleInfos.length>0){
+      userInfo.userSampleInfos = userInfo.userSampleInfos.map(item=>{
         if (item.sampleDesc.length >= 30){
           item.sampleDesc=item.sampleDesc.substring(0,30)+'...'
         }
@@ -116,12 +134,12 @@ Page({
     }
 
     let blogInfo=await app.request.post('/blog/attentionInfo/queryBlogUserInfo',{
-      userId:data.userId
+      userId:userInfo.userId
     })
     if (blogInfo.code !== 0) return
     
     this.setData({
-      user:data,
+      user:userInfo,
       blogInfo:blogInfo.data,
       'tags[0]':{
         name:'全部标签',
@@ -130,7 +148,7 @@ Page({
       }
     })
 
-    if(data.userState!==2&&this.data.nodataHeight===0){
+    if(userInfo.userState!==2&&!this.data.isMyself&&this.data.nodataHeight===0){
       const query = wx.createSelectorQuery()
       query.select('#nodata').fields({
         rect: true
@@ -203,4 +221,4 @@ Page({
 
   download:app.download
  
-})
+}))
