@@ -7,10 +7,8 @@ const request = (url, options, requireServerDate, hideLoading) => {
       mask: true
     })
   }
-  requestArr.push(1)
-
   return new Promise((resolve, reject) => {
-    wx.request({
+    requestArr.push(wx.request({
       url: `${config.host}${url}`,
       method: options.method,
       data: options.data,
@@ -24,7 +22,14 @@ const request = (url, options, requireServerDate, hideLoading) => {
         let code = res.data.code
         if (code && code !== 0) {
           if (code === 506001) {
-            //重新登录
+            /**
+             * 登录过期
+             * 中断正在进行的其他异步请求
+             * 跳转登录页面
+             */
+            requestArr.forEach(request=>{
+              request.abort()
+            })
             wx.navigateTo({
               url: '/pages/user/wxLogin/index'
             })
@@ -37,21 +42,21 @@ const request = (url, options, requireServerDate, hideLoading) => {
             })
           }
         }
-
         //返回服务器时间
         if (requireServerDate) {
           wx.setStorageSync('serverDate', res.header.Date)
         }
-
         resolve(res.data)
       },
       fail(error) {
-        wx.showModal({
-          title: '请求异常',
-          content: error.errMsg,
-          showCancel: false,
-          confirmText: '好的'
-        })
+        if(error.errMsg!=='request:fail abort'){
+          wx.showModal({
+            title: '请求异常',
+            content: error.errMsg,
+            showCancel: false,
+            confirmText: '好的'
+          })
+        }
         reject()
       },
       complete: () => {
@@ -60,8 +65,7 @@ const request = (url, options, requireServerDate, hideLoading) => {
           wx.hideLoading()
         }
       }
-    })
-
+    }))
   })
 }
 

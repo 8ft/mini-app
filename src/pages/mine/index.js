@@ -8,8 +8,7 @@ Page(observer({
   },
 
   data: {
-    sex:'',
-    sexArr:['nv','nan']
+    sex:''
   },
 
   onShareAppMessage: function () {
