@@ -1,7 +1,7 @@
 @import '../../assets/wxss/var.scss';  
 
 .userinfo{background:#fff;margin-bottom:30rpx;
-    .base{position:relative;padding:46rpx 48rpx;
+    .base{position:relative;padding:0 48rpx 46rpx;
         .nickName{display:flex;align-items:center;font-size:60rpx;height:60rpx;line-height:60rpx;color:#333;font-weight:500;
             text{display:block;max-width:50%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
             .iconfont{margin-left:20rpx;font-size:40rpx;}}
@@ -11,7 +11,7 @@
         .finished{color:#999;font-size:$xl;margin-top:30rpx;line-height:32rpx;
             image{margin-right: 16rpx;width:32rpx;height:32rpx;vertical-align: middle;}
         }
-        .avatar{position:absolute;top:46rpx;right:48rpx;width:136rpx;height:136rpx;border-radius:50%;}
+        .avatar{position:absolute;top:0;right:48rpx;width:136rpx;height:136rpx;border-radius:50%;}
     }
     
     .blog{display:flex;align-items:center;text-align:center;font-size:44rpx;color:$lightBlack;padding:18rpx 0 28rpx;background:#fff;width:100%;

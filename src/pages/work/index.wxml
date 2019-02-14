@@ -1,21 +1,19 @@
-<!--pages/project/mine/index.wxml-->
 
 <block wx:if="{{props.stores.account.logged_in}}">
-
-  <tabs under-line-ratio="{{.5}}" tabs="{{['我的项目','申请项目']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+  <nav-bar>
+    <tabs under-line-ratio="{{.5}}" tabs="{{['我的项目','申请项目']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+  </nav-bar>
 
   <scroll-view class='types' scroll-x="true">
     <!--我的项目-->
     <block wx:if="{{typeIndex===0}}">
       <view class="type {{myPublish.currentState===index?'active':''}}" wx:for="{{myPublish.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
     </block>
-
     <!--申请项目-->
     <block wx:else>
       <view class="type {{myApply.currentState===index?'active':''}}" wx:for="{{myApply.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
     </block>
   </scroll-view>
-
 
   <view id="projects" style="height:{{scrollViewHeight}}px">
     <!--我的项目-->

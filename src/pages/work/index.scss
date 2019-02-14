@@ -1,11 +1,10 @@
 @import '../../assets/wxss/var.scss';  
 
 .tabs{border:none!important;
-    scroll-view{text-align: center;}
     .tab{font-size:34rpx!important;margin:0 33rpx;color:$gray!important;}
 }
 
-.types{width:100%;white-space:nowrap;box-sizing:border-box;padding-top:16rpx;background: #fff;}
+.types{width:100%;white-space:nowrap;box-sizing:border-box;background: #fff;}
 .type{font-size:$l;line-height:80rpx;margin-right:50rpx;color:$gray;display:inline-block;
     &:first-of-type{margin-left:44rpx;}
     &.active{color:$black;font-weight:500;}}

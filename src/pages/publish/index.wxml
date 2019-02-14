@@ -1,7 +1,10 @@
-<!--pages/project/publish/index.wxml-->
+
 <block wx:if="{{props.stores.account.logged_in}}">
-  <view class="con">
+  <nav-bar fixed="{{false}}">
     <view class='big-title'>发布项目</view>
+  </nav-bar>
+
+  <view class="con">
     <view class='info types need clearfix'>
       <text class='name'>项目类型</text>
       <view class="type {{typeIndex===index?'active':''}}" wx:for="{{dicts[0].dictList}}" data-index="{{index}}" data-type="type" bindtap="select">

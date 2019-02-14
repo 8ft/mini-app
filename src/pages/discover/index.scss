@@ -17,7 +17,7 @@ swiper{width:690rpx;height:295rpx;margin:0 auto 20rpx;border-radius:10rpx;
 .blogs{margin-top:32rpx;border-top:$border;}
 
 
-.filter{position:fixed;box-sizing:border-box;z-index:$topFloor;display:flex;align-items:center;height:80rpx;width:100%;top:54rpx;left:0;background:#fff;border-bottom:$border;}
+.filter{position:fixed;box-sizing:border-box;z-index:$topFloor;display:flex;align-items:center;height:80rpx;width:100%;left:0;background:#fff;border-bottom:$border;}
 .filter-place-holder{height: 80rpx;}
 .filter-item{flex:1;text-align:center;font-size:$l;color:$lightBlack;
     text{display:inline-block;vertical-align:middle;max-width: 120rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;height: $l;line-height: $l;}

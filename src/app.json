@@ -101,9 +101,9 @@
     }
   },
   "window": {
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle":"black",
+    "navigationStyle":"custom",
+    "backgroundTextStyle": "dark"
   },
   "tabBar": {
     "backgroundColor": "#fff",
@@ -141,6 +141,9 @@
         "selectedIconPath": "assets/img/tabbar/mine_fill.png"
       }
     ]
+  },
+  "usingComponents": {
+    "nav-bar": "/components/common/navBar/index"
   },
   "networkTimeout": {
     "request": 60000

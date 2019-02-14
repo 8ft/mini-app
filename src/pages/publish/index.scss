@@ -1,9 +1,11 @@
 @import '../../assets/wxss/var.scss';  
 
-page{background:#fff;padding:0 40rpx;box-sizing:border-box;}
+page{background:#fff;}
+
+.con{padding:0 40rpx;}
 
 .info{display:flex;align-items:center;padding:46rpx 0 42rpx;border-bottom:$border;}
-.types{display:block;border-bottom:none;margin-top:30rpx;
+.types{display:block;border-bottom:none;
     .name{display:block;margin-bottom:30rpx;}}
 
 .type{float:left;width:126rpx;height:126rpx;background:#f5f5f5;text-align:center;padding-top:20rpx;box-sizing:border-box;

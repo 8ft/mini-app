@@ -49,6 +49,15 @@ Page(observer({
     }
     this.props.stores.toRefresh.refresh('discover',exist=>{
       if(this.data.banners===null){
+        wx.getSystemInfo({
+          success: res => {
+            const navHeight=100+res.statusBarHeight*750/res.windowWidth
+            this.setData({
+              navHeight: `${navHeight}rpx`,
+              popupTop:`${navHeight+80}rpx`
+            })
+          }
+        })
         this.getBanner()
         this.getBlogTypes()
         this.getBlogs()

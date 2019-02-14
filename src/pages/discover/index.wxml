@@ -1,4 +1,6 @@
-<tabs fixed="true" under-line-ratio="{{.7}}" tabs="{{['博客','人才库','服务']}}" active="{{pageIndex}}" bindchange="switchPage"></tabs>
+<nav-bar id="navBar">
+    <tabs under-line-ratio="{{.7}}" tabs="{{['博客','人才库','服务']}}" active="{{pageIndex}}" bindchange="switchPage"></tabs>
+</nav-bar>
 
 <block wx:if="{{pageIndex===0}}">
     <view style="background:#fff;padding-top:20rpx;">
@@ -22,8 +24,7 @@
 
 <block wx:elif="{{pageIndex===1}}">
     <view class="filter-place-holder"></view>
-
-    <view class='filter'>
+    <view class='filter' style="top:{{navHeight}};">
         <view class="filter-item {{activeFilter==='sortWay'?'on':''}}" data-name="sortWay" bindtap="selectFilter">
             <text>{{sortWay.selected.text||'默认排序'}}</text>
             <view></view>
@@ -44,16 +45,16 @@
 
     <expert-card wx:for="{{experts.list}}" index="{{index}}" data="{{item}}" bindcollect="updateExpert"></expert-card>
 
-    <popup active="{{activeFilter==='sortWay'}}" margin="134rpx" bindhide='closePopup'>
+    <popup active="{{activeFilter==='sortWay'}}" margin="{{popupTop}}" bindhide='closePopup'>
         <list-item wx:for="{{sortWay.list}}" data-item="{{item}}" data-type="sortWay" bindtap="filter" name="{{item.text}}" active="{{sortWay.selected.text===item.text}}"></list-item>
     </popup>
 
-    <popup active="{{activeFilter==='exp'}}" margin="134rpx" bindhide='closePopup'>
+    <popup active="{{activeFilter==='exp'}}" margin="{{popupTop}}" bindhide='closePopup'>
         <list-item data-item="{text:'不限',value:''}" data-type="exp" bindtap="filter" name="不限" active="{{!exp.selected.text}}"></list-item>
         <list-item wx:for="{{exp.list}}" data-item="{{item}}" data-type="exp" bindtap="filter" name="{{item.text}}" active="{{exp.selected.text===item.text}}"></list-item>
     </popup>
 
-    <popup active="{{activeFilter==='jobTypes'}}" margin="134rpx" bindhide='closePopup'>
+    <popup active="{{activeFilter==='jobTypes'}}" margin="{{popupTop}}" bindhide='closePopup'>
         <view class="job-types">
              <view class="parent">
                 <list-item wx:for="{{jobTypes.list}}" data-code="{{item.dictValue}}" bindtap="scrollToJobTypes" name="{{item.dictName}}"></list-item>
@@ -67,7 +68,7 @@
         </view>
     </popup>
 
-    <popup active="{{activeFilter==='city'}}" margin="134rpx" bindhide='closePopup'>
+    <popup active="{{activeFilter==='city'}}" margin="{{popupTop}}" bindhide='closePopup'>
         <city wx:if="{{cities}}" height="700rpx" data="{{cities}}" bindselect="selectCity"></city>
     </popup>
 </block>

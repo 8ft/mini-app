@@ -27,7 +27,7 @@ button::after{border:none;}
 .arrow-right::before{right:0;border-right:0;border-left-color:$lightBlack;}
 .arrow-right::after{right:3rpx;border-right:0;border-left-color:#fff;}
 
-.big-title{font-size:64rpx;color:$black;margin-bottom:43rpx;font-weight:bold;}
+.big-title{font-size:64rpx;color:$black;font-weight:bold;text-indent: 40rpx;}
 
 .border-b{border-bottom:$border;}
 .border-t{border-top:$border;}

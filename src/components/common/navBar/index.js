@@ -1,7 +1,9 @@
 Component({
-  externalClasses: ['custom-class'],
-
   properties: {
+    fixed:{
+      type:Boolean,
+      value:true
+    },
     title:String,
     returnable:{
       type:Boolean,
@@ -10,8 +12,7 @@ Component({
   },
 
   data: {
-    top:0,
-    height:0
+    top:0
   },
 
   attached:function(){
@@ -20,19 +21,8 @@ Component({
         this.setData({
           top: res.statusBarHeight
         })
-      },
+      }
     })
-  },
-
-  ready:function(){
-    const query = wx.createSelectorQuery().in(this)
-    query.select('#appHeader').fields({
-      size: true
-    }, (res) => {
-      this.setData({
-        height: res.height
-      })
-    }).exec()
   },
 
   methods: {
