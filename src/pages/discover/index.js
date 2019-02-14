@@ -71,7 +71,7 @@ Page(observer({
   },
 
   switchPage:function(e){
-    const pageIndex=e.currentTarget.dataset.index
+    const pageIndex=e.detail.index
     this.setData({
       pageIndex:pageIndex
     })

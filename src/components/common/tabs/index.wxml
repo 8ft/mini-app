@@ -9,4 +9,4 @@
   </scroll-view>
 </view>
 
-<view wx:if="{{fixed}}" class="place-holder custom-class"></view>
+<view wx:if="{{fixed}}" class="place-holder"></view>
