@@ -1,3 +1,4 @@
+<nav-bar></nav-bar>
 
 <block wx:if="{{detail.articleState===1||isMyself}}">
     <view class="title">{{detail.articleTitle}}</view>

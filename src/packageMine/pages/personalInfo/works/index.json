@@ -1,5 +1,4 @@
 {
-  "navigationBarTitleText": "作品案例",
   "usingComponents": {
     "list-item": "/components/common/listItem/index",
     "action-bar": "/components/common/actionBar/index"

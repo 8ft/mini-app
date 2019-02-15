@@ -1,15 +1,8 @@
-// pages/mine/wallet/index.js
 
-//获取应用实例
 const app = getApp()
-//引入async await依赖库
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     scrollViewHeight:0,
     wallet:null,
@@ -19,6 +12,15 @@ Page({
   },
 
   onLoad: function (options) {
+    wx.getSystemInfo({
+      success: res => {
+        const navHeight=160+res.statusBarHeight*750/res.windowWidth
+        this.setData({
+          navHeight: `${navHeight}rpx`
+        })
+      }
+    })
+
     const query = wx.createSelectorQuery()
     query.select('#baseInfo').fields({
       size: true

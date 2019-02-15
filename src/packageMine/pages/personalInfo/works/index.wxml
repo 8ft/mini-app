@@ -1,4 +1,5 @@
-<!--pages/mine/personalInfo/works/index.wxml-->
+<nav-bar title="作品案例"></nav-bar>
+
 <view class='part'>
 
   <view class='info need'>

@@ -7,7 +7,11 @@ Component({
     title:String,
     returnable:{
       type:Boolean,
-      value:true
+      value:false
+    },
+    transparent:{
+      type:Boolean,
+      value:false
     }
   },
 
@@ -16,6 +20,10 @@ Component({
   },
 
   attached:function(){
+    this.setData({
+      returnable:getCurrentPages().length>1
+    })
+
     wx.getSystemInfo({
       success: res=>{
         this.setData({

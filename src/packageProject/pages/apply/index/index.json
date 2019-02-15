@@ -1,5 +1,4 @@
 {
-  "navigationBarTitleText": "意向申请",
   "usingComponents": {
     "action-bar": "/components/common/actionBar/index"
   }

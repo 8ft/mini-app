@@ -1,4 +1,5 @@
-<!--pages/project/apply/agreement/index.wxml-->
+<nav-bar title="三方合同"></nav-bar>
+
 <view class='title'>巨牛汇三方服务合同</view>
 <view>甲方（雇主）：</view>
 <view>乙方（提供服务者）：</view>

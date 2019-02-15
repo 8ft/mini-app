@@ -31,11 +31,8 @@ Page(observer({
     const curId=options.id
     const isMyself=myId===curId
 
-    wx.setNavigationBarTitle({
-      title: isMyself?'个人主页':'TA的主页'
-    })
-
     this.setData({
+      pageTitle:isMyself?'个人主页':'TA的主页',
       from:options.from||'',
       uid:curId,
       isMyself:isMyself

@@ -1,7 +1,7 @@
 @import '../../../assets/wxss/var.scss';  
 
 .content{padding-bottom:100rpx;}
-.tabs{
+.tabs{padding-top:20rpx;
     scroll-view{text-align: center;}
     .tab{margin:0 60rpx!important;font-size:32rpx!important;}
 }

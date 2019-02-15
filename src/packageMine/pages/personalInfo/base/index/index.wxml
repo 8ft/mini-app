@@ -1,4 +1,5 @@
-<!--pages/mine/personalInfo/base/index.wxml-->
+<nav-bar title="基本信息"></nav-bar>
+
 <view class='part'>
   <view class='info need'>
     <text class='name'>入驻类型</text>

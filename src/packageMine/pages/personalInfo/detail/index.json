@@ -1,5 +1,4 @@
 {
-  "navigationBarTitleText": "详细介绍",
   "usingComponents": {
     "action-bar": "/components/common/actionBar/index"
   }

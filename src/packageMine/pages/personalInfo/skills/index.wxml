@@ -1,4 +1,5 @@
-<!--pages/mine/personalInfo/skills/index.wxml-->
+<nav-bar title="擅长技能"></nav-bar>
+
 <view class='part diy'>
   <view class='title'>自定义技能</view>
   <view class='add'>

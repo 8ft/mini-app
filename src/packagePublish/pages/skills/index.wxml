@@ -1,2 +1,3 @@
-<!--pages/project/publish/skills/index.wxml-->
+<nav-bar title="所需技能"></nav-bar>
+
 <list-item wx:for="{{skills}}" data-index="{{index}}" data-code="{{item.dictValue}}" data-name="{{item.dictName}}" bindtap="select" name="{{item.dictName}}" active="{{item.selected}}"></list-item>

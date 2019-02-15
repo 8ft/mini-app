@@ -1,3 +1,4 @@
+<nav-bar title="TA的收藏"></nav-bar>
 
 <block wx:if="{{!loading&&list.length>0}}"> 
   <blog-card wx:for="{{list}}" data="{{item}}" show-author="true"></blog-card>

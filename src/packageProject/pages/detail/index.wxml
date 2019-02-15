@@ -1,5 +1,5 @@
 
-<nav-bar returnable="{{true}}" title="项目详情"></nav-bar>
+<nav-bar title="项目详情"></nav-bar>
 
 <!-- 状态栏 -->
 <block wx:if="{{!(detail.projectState==2&&detail.applyNum==0)}}">

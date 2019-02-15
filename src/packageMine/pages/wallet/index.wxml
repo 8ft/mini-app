@@ -1,5 +1,6 @@
-<!--pages/mine/wallet/index.wxml-->
-<view id="baseInfo" class='base-info'>
+<nav-bar transparent="true"></nav-bar>
+
+<view id="baseInfo" class='base-info' style="padding-top:{{navHeight}};">
   <view class='title'>账户余额</view>
   <view class='left'>￥{{wallet.balance}}</view>
   <view class='totle'><text>历史收入</text>{{wallet.totalIncome}}元</view>

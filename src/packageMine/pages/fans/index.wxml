@@ -1,4 +1,4 @@
-  
+<nav-bar title="{{pageTitle}}"></nav-bar>
 
 <navigator hover-class="none" class="expert" wx:for="{{experts}}" url="/packageExpert/pages/index/index?id={{item.userId}}">
    <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar||'/assets/img/default/avatar.png'}}"></image>

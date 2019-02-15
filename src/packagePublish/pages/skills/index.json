@@ -1,5 +1,4 @@
 {
-  "navigationBarTitleText": "所需技能",
   "usingComponents": {
     "list-item": "/components/common/listItem/index"
   }

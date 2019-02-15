@@ -1,4 +1,5 @@
-<!--pages/expert/applicant/index.wxml-->
+<nav-bar title="申请的专家"></nav-bar>
+
 <navigator class='applicant' wx:for="{{applicants}}" url="/packageExpert/pages/index/index?id={{item.userId}}&from=applicant">
   <image class='avatar' src="{{item.userAvatar}}"></image>
   <view class='info border-b'>  

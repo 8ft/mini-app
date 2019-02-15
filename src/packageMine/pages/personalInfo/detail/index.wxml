@@ -1,4 +1,5 @@
-<!--pages/mine/personalInfo/detail/index.wxml-->
+<nav-bar title="详细介绍"></nav-bar>
+
 <textarea style="height:{{height}}rpx;" maxlength="{{inputLen}}" disabled="{{demoShow}}" bindinput="input" value="{{content}}"></textarea>
 
 <text class='placeholder' wx:if="{{content.length<=0}}">描述你在专业领域内的经历、成就，充分展示你的实力，更具个人风格的描述对项目方更有吸引力。

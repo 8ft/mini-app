@@ -1,5 +1,6 @@
-  
-<tabs under-line-ratio="{{.8}}" fixed="true" tabs="{{['人才','文章']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+<nav-bar title="我的收藏"></nav-bar>
+
+<tabs under-line-ratio="{{.8}}" tabs="{{['人才','文章']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 
 <view class="content">
   <block wx:if="{{typeIndex===0}}">

@@ -18,12 +18,9 @@ Page(observer({
    onLoad:function(options){
     const myId=wx.getStorageSync('account').userId
     const curId=options.id
-
-    wx.setNavigationBarTitle({
-      title: myId==curId?'我的粉丝':'TA的粉丝'
-    })
     
     this.setData({
+      pageTitle:myId==curId?'我的粉丝':'TA的粉丝',
       id:curId
     })
     this.getExperts()

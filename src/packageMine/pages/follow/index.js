@@ -19,10 +19,8 @@ Page(observer({
     let myId=wx.getStorageSync('account').userId
     let curId=options.id
 
-    wx.setNavigationBarTitle({
-      title: myId==curId?'我的关注':'TA的关注'
-    })
     this.setData({
+      pageTitle:myId==curId?'我的关注':'TA的关注',
       id:options.id
     })
     this.getExperts();

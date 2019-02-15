@@ -1,5 +1,4 @@
 {
-  "navigationBarTitleText": "我的博文",
   "enablePullDownRefresh": true,
   "onReachBottomDistance":true,
   "usingComponents": {

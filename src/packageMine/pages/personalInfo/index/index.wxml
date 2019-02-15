@@ -1,3 +1,5 @@
+<nav-bar title="编辑个人主页"></nav-bar>
+
 <view class='tip' wx:if="{{props.stores.account.userInfo.userState===0}}"><text class="iconfont icon-gonggao"></text>完善信息并通过审核即可申请项目</view>
 
 <view class="userinfo">

@@ -1,4 +1,5 @@
-<!--pages/mine/personalInfo/base/jobTypes/index.wxml-->
+<nav-bar title="职位类型"></nav-bar>
+
 <view class='tip border-t'>职位类型最多可选5个</view>
 <view wx:for="{{jobTypes}}" wx:for-item="type" wx:for-index="pIndex">
   <view class="title">{{type.dictName}}</view>

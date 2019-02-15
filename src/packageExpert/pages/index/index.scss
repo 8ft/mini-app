@@ -1,8 +1,10 @@
 @import '../../../assets/wxss/var.scss';  
 
-page{box-sizing:border-box;background:linear-gradient(0deg,rgba(104,196,255,1),$darkBlue) no-repeat;background-size:100% 200rpx;padding:40rpx 0;}
+page{background: #fff;}
 
-.part{padding:0 30rpx;}
+.part{padding:0 30rpx;
+    &.bg{padding-top:40rpx;background:linear-gradient(0deg,rgba(104,196,255,1),$darkBlue) no-repeat;background-size:100% 200rpx;}
+}
 
 .base-info{position:relative;box-sizing:border-box;width:100%;background:rgba(255,255,255,1);box-shadow:0rpx 3rpx 20rpx 0rpx rgba(0, 0, 0, .15);border-radius:12rpx;margin:0 auto;
     .base{padding:48rpx 30rpx 0;

@@ -1,4 +1,5 @@
-<!--pages/project/apply/index.wxml-->
+<nav-bar title="意向申请"></nav-bar>
+
 <view class='info need'>
   <text class='name'>您的报价(元)</text>
   <view class='input'>

@@ -1,9 +1,9 @@
-<view class="nav-bar {{fixed?'fixed':''}}" style="padding-top:{{top}}px;">
-  <view class='nva-bar-back' catchtap='back' wx:if="{{returnable}}"></view>
+<view class="nav-bar {{fixed?'fixed':''}} {{transparent?'transparent':''}}" style="padding-top:{{top}}px;">
+  <view class="iconfont icon-fanhui" catchtap='back' wx:if="{{returnable}}"></view>
   <view class="nav-bar-title" wx:if="{{title}}">{{title}}</view>
   <slot></slot>
 </view>
-<view wx:if="{{fixed}}" class="nav-bar-placeholder" style="padding-top:{{top}}px;"></view>
+<view wx:if="{{fixed&&!transparent}}" class="nav-bar-placeholder" style="padding-top:{{top}}px;"></view>
 
 
 

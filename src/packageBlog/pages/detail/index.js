@@ -57,11 +57,12 @@ Page(observer({
           isIPX=true
         }
 
-        let fixedHeight=isIPX?34:0
-        let boxHeight=res.windowHeight*.98
+        const pixelRatio=res.windowWidth/750
+        const fixedHeight=isIPX?34:0
+        const boxHeight=(res.windowHeight-100*pixelRatio-res.statusBarHeight)*.98
         this.setData({
           boxHeight:boxHeight,
-          scrollViewHeight: boxHeight-fixedHeight - (180+fixedHeight)/res.pixelRatio
+          scrollViewHeight: boxHeight- (180+fixedHeight)*pixelRatio
         })
       }
     })
