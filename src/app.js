@@ -9,8 +9,7 @@ App({
 
   globalData: {
     editUserInfoCache: {
-      jobTypes: {},
-      city: {}
+      jobTypes: {}
     },
     publishDataCache: {
       skills: null,

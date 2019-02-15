@@ -59,6 +59,16 @@ Page(observer({
     })
   },
 
+  onReady:function(){
+    wx.createSelectorQuery().select('#navBar').fields({
+      size: true
+    }, res => {
+      this.setData({
+        navHeight:`${res.height}px`
+      })
+    }).exec()
+  },
+
   onPullDownRefresh: function () {
     this.refresh()
   },

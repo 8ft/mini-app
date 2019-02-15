@@ -1,7 +1,7 @@
 
 <block wx:if="{{props.stores.account.logged_in}}">
-  <nav-bar fixed="{{false}}">
-    <view class='big-title'>发布项目</view>
+  <nav-bar returnable="{{false}}" fixed="{{false}}">
+    <view slot="nav" class='big-title'>发布项目</view>
   </nav-bar>
 
   <view class="con">

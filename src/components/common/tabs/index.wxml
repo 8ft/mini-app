@@ -1,6 +1,6 @@
 
 
-<view class="tabs {{fixed?'fixed':''}}">
+<view class="tabs {{fixed?'fixed':''}}" style="top:{{top}};">
   <scroll-view id="scrollView" scroll-x="true" scroll-left="{{scrollLeft}}" scroll-with-animation="{{true}}">
     <view wx:for="{{tabs}}" bindtap="_tabClick" data-index="{{index}}" class="tab {{active===index?'active':''}}">
       <view id="tab{{index}}">{{item}}</view>

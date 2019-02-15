@@ -1,12 +1,15 @@
 @import '../../../assets/wxss/var.scss'; 
 @import '../../../assets/font/icons.scss'; 
-.nav-bar{width:100%;height:100rpx;background:#fff;position:relative;display:flex; align-items: center;
-  .iconfont{height:100rpx;width:100rpx;line-height: 100rpx;position: absolute;bottom: 0;left:0;text-indent: 20rpx;}
-  .nav-bar-title{flex:1;line-height:100rpx;font-size:36rpx;font-weight:500;color:#333;text-align:center;}
-  &.fixed{position:fixed;top:0;left:0;z-index: $topFloor;}
-  &.transparent{background: transparent!important;
-    .iconfont,.nav-bar-title{color:#fff!important;}
+.nav-bar{width:100%;
+  .nav-bar-default{position:relative;display:flex; align-items: center;background:#fff;width:100%;height:100rpx;
+    .icon-fanhui{height:100rpx;width:100rpx;line-height: 100rpx;position: absolute;bottom: 0;left:0;text-indent: 20rpx;color:#333;}
+    .nav-bar-title{flex:1;line-height:100rpx;font-size:36rpx;font-weight:500;color:#333;text-align:center;}
+    &.transparent{background: transparent!important;
+      .icon-fanhui,.nav-bar-title{color:#fff;}
+    }
   }
+  
+  &.fixed{position:fixed;top:0;left:0;z-index: $topFloor;}
 }
 .nav-bar-placeholder{width:100%;height:100rpx;}
 

@@ -28,7 +28,7 @@
 
   <view class='info need'>
     <text class='name'>所在城市</text>
-    <navigator class='input arrow-right' url="/packageMine/pages/personalInfo/base/city/index" hover-class='none'>{{cityCn}}</navigator>
+    <view class='input arrow-right' bindtap="openCityBox">{{cityCn}}</view>
   </view>
 </view>
 
@@ -87,4 +87,15 @@
 <action-bar>
   <button class='btn-one' bindtap='save'>保存</button>
 </action-bar>
+
+<popup position="bottom" active="{{cityBoxSwitch}}">
+  <view class="city-box"> 
+    <view class="city-box-title">
+        <view class="iconfont icon-guanbi1" bindtap="closeCityBox"></view>所在城市
+    </view>
+    <view style="height:{{scrollViewHeight}}px;">
+      <city wx:if="{{cities}}" data="{{cities}}" bindselect="selectCity"></city>
+    </view>
+  </view>
+</popup>
 

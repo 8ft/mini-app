@@ -20,6 +20,15 @@ Page(observer({
   },
 
   onLoad:function(options){
+    wx.getSystemInfo({
+      success: res => {
+        const navHeight=100+res.statusBarHeight*750/res.windowWidth
+        this.setData({
+          navHeight: `${navHeight}rpx`
+        })
+      }
+    })
+
     this.setData({
       typeId:options.id||'',
       typeIndex:parseInt(options.index)||0

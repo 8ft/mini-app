@@ -1,4 +1,4 @@
-<nav-bar fixed="{{false}}"></nav-bar>
+<nav-bar returnable="{{false}}" fixed="{{false}}"></nav-bar>
 
 <view class="userinfo" wx:if="{{!props.stores.account.logged_in}}">
     <view class="base">

@@ -1,5 +1,5 @@
-<nav-bar>
-    <tabs under-line-ratio="{{.7}}" tabs="{{['博客','人才库','服务']}}" active="{{pageIndex}}" bindchange="switchPage"></tabs>
+<nav-bar returnable="{{false}}">
+    <tabs slot="nav" under-line-ratio="{{.7}}" tabs="{{['博客','人才库','服务']}}" active="{{pageIndex}}" bindchange="switchPage"></tabs>
 </nav-bar>
 
 <block wx:if="{{pageIndex===0}}">

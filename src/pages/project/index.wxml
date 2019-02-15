@@ -1,4 +1,4 @@
-<nav-bar title="巨牛汇" fixed="false"></nav-bar>
+<nav-bar title="巨牛汇" returnable="{{false}}"></nav-bar>
 
 <swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
   <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>

@@ -1,4 +1,0 @@
-<nav-bar title="所在城市"></nav-bar>
-<view class="cities">
-  <city wx:if="{{cities}}" data="{{cities}}" bindinit="cacheCityData" bindselect="select"></city>
-</view>

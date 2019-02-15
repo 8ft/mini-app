@@ -1,6 +1,7 @@
 @import '../../../assets/wxss/var.scss';  
 
 page{color:$gray;text-align:center;background:#fff;}
+.icon-fanhui{color:black!important;}
 .bg{position:absolute;top:0;left:0;width:100%;height:1260rpx;}
 .con{position:absolute;top:700rpx;left:0;width:100%;z-index:$bottomFloor;}
 .title{display:block;font-size:48rpx;color:black;text-align:center;}

@@ -17,7 +17,21 @@ Page(observer({
     positionType:'',
     positionTypeCn:'',
     city:'',
-    cityCn:''
+    cityCn:'',
+    cityBoxSwitch:false
+  },
+
+  onLoad:function(){
+    this.getCity()
+    wx.getSystemInfo({
+      success: res => {
+        const pixelRatio=res.windowWidth/750
+        const boxHeight=(res.windowHeight-100*pixelRatio-res.statusBarHeight)*.98
+        this.setData({
+          scrollViewHeight: boxHeight- 90*pixelRatio
+        })
+      }
+    })
   },
 
   onShow:async function(){
@@ -67,12 +81,39 @@ Page(observer({
       const cache=app.globalData.editUserInfoCache
       const data=this.data.userBaseInfo
       this.setData({
-        city:cache.city.zoneCode||data.city,
-        cityCn:cache.city.zoneName||data.cityCn,
         positionType:cache.jobTypes.value||data.positionType,
         positionTypeCn:cache.jobTypes.valueCn||data.positionTypeCn
       })
     }
+  },
+
+  getCity:async function(){
+    let res = await app.request.post('/dict/dictZone/getList', {})
+    if (res.code !== 0) return
+    this.setData({
+      cities:res.data.data
+    })
+  },
+
+  openCityBox:function(){
+    this.setData({
+      cityBoxSwitch:true
+    })
+  },
+
+  closeCityBox:function(){
+    this.setData({
+      cityBoxSwitch:false
+    })
+  },
+
+  selectCity:function(e){
+    const city=e.detail.city
+    this.setData({
+      city:city.zoneCode,
+      cityCn:city.zoneName
+    })
+    this.closeCityBox()
   },
 
   getDicts: async function () {

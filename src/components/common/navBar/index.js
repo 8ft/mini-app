@@ -1,4 +1,8 @@
 Component({
+  options: {
+    multipleSlots: true,
+    addGlobalClass: true
+  },
   properties: {
     fixed:{
       type:Boolean,
@@ -7,7 +11,7 @@ Component({
     title:String,
     returnable:{
       type:Boolean,
-      value:false
+      value:true
     },
     transparent:{
       type:Boolean,
@@ -15,22 +19,25 @@ Component({
     }
   },
 
-  data: {
-    top:0
-  },
-
-  attached:function(){
-    this.setData({
-      returnable:getCurrentPages().length>1
-    })
-
-    wx.getSystemInfo({
-      success: res=>{
+  lifetimes: {
+    attached:function(){
+      wx.getSystemInfo({
+        success: res=>{
+          this.setData({
+            top: res.statusBarHeight
+          })
+        }
+      })
+    },
+    ready: function () {
+      wx.createSelectorQuery().in(this).select('#navBar').fields({
+        size: true
+      }, size => {
         this.setData({
-          top: res.statusBarHeight
+          height:size.height
         })
-      }
-    })
+      }).exec()
+    }
   },
 
   methods: {

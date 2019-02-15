@@ -1,4 +1,4 @@
-<!--pages/user/wxLogin/index.wxml-->
+<nav-bar transparent="{{true}}"></nav-bar>
 <image class='bg' src='/assets/img/login-bg.png'></image>
 <view class='con'>
   <view class='title'>欢迎登录</view>

@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "action-bar": "/components/common/actionBar/index"
+    "action-bar": "/components/common/actionBar/index",
+    "popup": "/components/common/popup/index",
+    "city": "/components/common/city/index"
   }
 }

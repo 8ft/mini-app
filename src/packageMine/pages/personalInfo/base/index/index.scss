@@ -18,3 +18,9 @@
 .input{margin-left:20rpx;min-height:$xl;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
 .arrow-right::before{border-left-color:$lightGray;}
+
+.city-box{position:relative;width:100%;box-sizing:border-box;background:#fff;border-radius:12rpx 12rpx 0 0;
+    .city-box-title{text-align:center;height:90rpx;line-height:90rpx;position:relative;border-bottom:$border;font-size:$xxl;color:$black;
+        .iconfont{font-size:30rpx;position:absolute;left:0rpx;top:0;padding:30rpx;line-height:30rpx;}
+    }
+}
