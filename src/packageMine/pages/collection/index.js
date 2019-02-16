@@ -64,9 +64,9 @@ Page(observer({
     switch(this.data.typeIndex){
       case 0:
         if(this.data.experts.list.length>0){
+          this.data.experts.list=[]
           this.setData({
             experts:{
-              list:[],
               pageIndex:1,
               nomore:false
             }
@@ -76,9 +76,9 @@ Page(observer({
       break;
       case 1:
         if(this.data.articles.list.length>0){
+          this.data.articles.list=[]
           this.setData({
             articles:{
-              list:[],
               pageIndex:1,
               nomore:false
             }
