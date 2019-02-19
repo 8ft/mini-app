@@ -55,11 +55,9 @@ Page(observer({
   },
 
   refresh:function(){
-    this.setData({
-      pageIndex: 1,
-      blogs: [],
-      nomore: false
-    })
+    this.data.pageIndex=1
+    this.data.blogs=[]
+    this.data.nomore=false
     this.getBlogs()
   },
 

@@ -111,18 +111,14 @@ Page(observer({
 
   refresh:function(){
     if (this.data.typeIndex === 0) {
-      this.setData({
-        'myPublish.pageIndex': 1,
-        'myPublish.nomore': false,
-        'myPublish.projects': []
-      })
+      this.data.myPublish.pageIndex=1
+      this.data.myPublish.nomore=false
+      this.data.myPublish.projects=[]
       this.getMyPublish()
     } else {
-      this.setData({
-        'myApply.pageIndex': 1,
-        'myApply.nomore': false,
-        'myApply.projects': []
-      })
+      this.data.myApply.pageIndex=1
+      this.data.myApply.nomore=false
+      this.data.myApply.projects=[]
       this.getMyApply()
     }
   },

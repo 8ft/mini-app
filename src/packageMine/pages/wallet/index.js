@@ -38,11 +38,9 @@ Page({
   },
 
   refresh:function(){
-    this.setData({
-      pageIndex:1,
-      nomore:false,
-      records:[]
-    })
+    this.data.pageIndex=1
+    this.data.records=[]
+    this.data.nomore=false
     this.getRecords()
   },
 

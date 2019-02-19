@@ -45,11 +45,9 @@ Page(observer({
   },
 
   refresh:function(){
-    this.setData({
-      pageIndex: 1,
-      projects: [],
-      nomore: false
-    })
+    this.data.pageIndex=1
+    this.data.projects=[]
+    this.data.nomore=false
     this.getProjects()
   },
 

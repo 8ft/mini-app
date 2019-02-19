@@ -18,11 +18,9 @@ Page({
   },
 
   refresh:function(){
-    this.setData({
-      pageIndex: 1,
-      nomore: false,
-      list: []
-    })
+    this.data.pageIndex=1
+    this.data.nomore=false
+    this.data.list=[]
     this.getCollection()
   },
 

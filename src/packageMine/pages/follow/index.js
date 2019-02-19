@@ -35,11 +35,9 @@ Page(observer({
   },
 
   refresh:function(){
-    this.setData({
-      pageIndex: 1,
-      experts: [],
-      nomore: false
-    })
+    this.data.pageIndex=1
+    this.data.experts=[]
+    this.data.nomore=false
     this.getExperts()
   },
 

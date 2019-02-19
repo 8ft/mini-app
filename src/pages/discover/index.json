@@ -1,10 +1,11 @@
 {
   "navigationBarTitleText": "发现",
   "enablePullDownRefresh": true,
-  "onReachBottomDistance":true,
+  
   "usingComponents": {
     "blog-card":"/components/blog/card/index",
     "expert-card":"/components/expert/card/index",
+    "service-card":"/components/service/card/index",
     "city":"/components/common/city/index",
     "popup": "/components/common/popup/index",
     "list-item": "/components/common/listItem/index",

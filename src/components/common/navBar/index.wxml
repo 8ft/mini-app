@@ -7,7 +7,7 @@
   <slot name="addones"></slot>
 </view>
 
-<view wx:if="{{fixed&&!transparent}}" class="nav-bar-placeholder" style="height:{{height}}px;"></view>
+<view wx:if="{{fixed&&!transparent&&placeholder}}" class="nav-bar-placeholder" style="height:{{height}}px;"></view>
 
 
 

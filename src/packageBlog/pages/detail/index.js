@@ -1,7 +1,7 @@
 const app = getApp()
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 const observer = require('../../../libs/observer').observer
-const Towxml = require('../../towxml/main')
+const Towxml = require('../../../libs/towxml/main')
 const towxml=new Towxml()  
 const nodataCon = {
   '-1':{

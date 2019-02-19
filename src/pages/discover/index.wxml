@@ -69,12 +69,44 @@
     </popup>
 
     <popup active="{{activeFilter==='city'}}" margin="{{popupTop}}" bindhide='closePopup'>
-        <city wx:if="{{cities}}" height="700rpx" data="{{cities}}" bindselect="selectCity"></city>
+        <city wx:if="{{cities}}" height="760rpx" data="{{cities}}" bindselect="selectCity"></city>
     </popup>
 </block>
 
 <block wx:else>
+    <view class="filter-place-holder"></view>
+    <view class='filter service' style="top:{{navHeight}};">
+        <view class="filter-item {{activeFilter==='service_sortWay'?'on':''}}" data-name="service_sortWay" bindtap="selectFilter">
+            <text>{{service_sortWay.selected.text}}</text>
+            <view></view>
+        </view>
+        <view class="filter-item {{activeFilter==='jobTypes'?'on':''}}" data-name="serviceTypes" bindtap="selectFilter">
+            <text>{{serviceTypes.selected.dictName&&serviceTypes.selected.dictName!=='不限'?serviceTypes.selected.dictName:'服务分类'}}</text>
+            <view></view>
+        </view>
+    </view>
 
+    <view class="services">
+        <service-card wx:for="{{services.list}}" data="{{item}}"></service-card>
+    </view>
+
+    <popup active="{{activeFilter==='service_sortWay'}}" margin="{{popupTop}}" bindhide='closePopup'>
+        <list-item wx:for="{{service_sortWay.list}}" data-item="{{item}}" data-type="service_sortWay" bindtap="filter" name="{{item.text}}" active="{{service_sortWay.selected.text===item.text}}"></list-item>
+    </popup>
+
+    <popup active="{{activeFilter==='serviceTypes'}}" margin="{{popupTop}}" bindhide='closePopup'>
+        <view class="job-types">
+             <view class="parent">
+                <list-item wx:for="{{serviceTypes.list}}" data-code="{{item.dictValue}}" bindtap="scrollToServiceTypes" name="{{item.dictName}}"></list-item>
+            </view>
+            <scroll-view scroll-y="true" scroll-into-view="{{serviceTypes.parent}}" scroll-with-animation="true">
+                <list-item data-item="{dictName:'不限',dictValue:''}" data-type="serviceTypes" bindtap="filter" name="不限" active="{{!serviceTypes.selected.dictValue}}"></list-item>
+                <view id="service{{item.dictValue}}" wx:for="{{serviceTypes.list}}">
+                    <list-item wx:for="{{item.dictList}}" wx:for-item="service" data-item="{{service}}" data-type="serviceTypes" bindtap="filter" name="{{service.dictName}}" active="{{serviceTypes.selected.dictValue===service.dictValue}}"></list-item>
+                </view>
+            </scroll-view>
+        </view>
+    </popup>
 </block>
 
 

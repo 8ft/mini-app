@@ -1,5 +1,8 @@
 Component({
   options: {
+    addGlobalClass: true,
+  },
+  options: {
     multipleSlots: true,
     addGlobalClass: true
   },
@@ -16,6 +19,10 @@ Component({
     transparent:{
       type:Boolean,
       value:false
+    },
+    placeholder:{
+      type:Boolean,
+      value:true
     }
   },
 

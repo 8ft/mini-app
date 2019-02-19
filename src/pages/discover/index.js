@@ -47,6 +47,20 @@ Page(observer({
       list: [],
       pageIndex: 1,
       nomore: false
+    },
+    service_sortWay: {
+      selected:{text:'默认排序',value:''},
+      list: [
+        {text:'默认排序',value:''},
+        {text:'价格从高到低',value:'5'},
+        {text:'价格从低到高',value:'4'},
+        {text:'成交量优先',value:'1'},
+      ]
+    },
+    serviceTypes: {
+      parent: '',
+      selected: {},
+      list: []
     }
   },
 
@@ -82,9 +96,9 @@ Page(observer({
   onReachBottom: function () {
     if (this.data.pageIndex === 0) {
       this.getBlogs()
-    } else if(this.data.pageIndex === 1) {
+    } else if (this.data.pageIndex === 1) {
       this.getExperts()
-    }else{
+    } else {
       this.getServices()
     }
   },
@@ -96,6 +110,7 @@ Page(observer({
       this.getFilter()
       this.getExperts()
     } else if (pageIndex === 2 && this.data.services.list.length === 0) {
+      this.getServiceTypes()
       this.getServices()
     }
 
@@ -266,6 +281,16 @@ Page(observer({
           'jobTypes.selected': data.item
         })
         break;
+      case 'serviceTypes':
+        this.setData({
+          'serviceTypes.selected': data.item
+        })
+        break;
+      case 'service_sortWay':
+        this.setData({
+          'service_sortWay.selected': data.item
+        })
+        break;
     }
 
     this.refresh()
@@ -315,24 +340,50 @@ Page(observer({
     app.bannerJump(e)
   },
 
+  getServiceTypes:async function () {
+    let res = await app.request.post('/dict/dictCommon/getDicts', {
+      dictType: 'product_type',
+      resultType: '1'
+    })
+
+    if (res.code === 0) {
+      this.setData({
+        'serviceTypes.list': res.data.data[0].dictList
+      })
+    }
+  },
+
+  scrollToServiceTypes: function (e) {
+    this.setData({
+      'serviceTypes.parent': 'service' + e.currentTarget.dataset.code
+    })
+  },
+
   getServices: async function () {
     let nomore = this.data.services.nomore
     if (nomore) return
 
     let pIndex = this.data.services.pageIndex
     let res = await app.request.post('/store/productBaseInfo/getList', {
-      pageIndex: pIndex
+      pageIndex: pIndex,
+      productSubtype:this.data.serviceTypes.selected.dictValue || '',
+      sortType:this.data.service_sortWay.selected.value
     })
 
     if (res.code === 0) {
-      if (res.data.page > pIndex) {
+      if (res.data.pageData.page > pIndex) {
         pIndex++
       } else {
         nomore = true
       }
 
       this.setData({
-        'services.list': this.data.services.list.concat(res.data.list),
+        'services.list': this.data.services.list.concat(res.data.pageData.list.map(service => {
+          if (service.productName.length > 30) {
+            service.productName = service.productName.substring(0, 30) + '...'
+          }
+          return service
+        })),
         'services.pageIndex': pIndex,
         'services.nomore': nomore
       })
@@ -341,3 +392,5 @@ Page(observer({
   }
 
 }))
+
+

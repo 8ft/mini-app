@@ -30,12 +30,9 @@ Page(observer({
   },
 
   refresh:function(){
-    let blogs = this.data.blogs
-    this.setData({
-      pageIndex: 1,
-      nomore: false,
-      blogs: []
-    })
+    this.data.pageIndex=1
+    this.data.nomore=false
+    this.data.blogs=[]
     this.getBlogs()
   },
 

@@ -1,0 +1,15 @@
+@import '../../../assets/wxss/var.scss'; 
+
+.service-card{position:relative;padding:30rpx 0 30rpx 243rpx;line-height: 40rpx;border-bottom:$border;height: 220rpx;
+    image{position: absolute;left:0;top:30rpx;width:220rpx;height:220rpx;}
+    .service-name{font-size: 26rpx;color:$gray;margin-bottom:32rpx;min-height: 80rpx;padding-top: 10rpx;}
+    .service-info{font-size: $m;color:$lightGray;
+        .service-price{color:$red;font-size: 38rpx;margin-right:40rpx;
+            &::before{content:'￥';font-size: $m;}
+            &::after{content:'/单';font-size: $m;}
+        }
+    }
+    .store-entrance{position: absolute;right:0;bottom:30rpx;font-size:$m;color:$black;}
+}
+
+

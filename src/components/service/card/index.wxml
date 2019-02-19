@@ -1,0 +1,7 @@
+<navigator class='service-card' hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
+  <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
+  <view class="service-name">{{data.productName}}</view>
+  <view class="service-info"><text class="service-price">{{data.price}}</text>成交量{{data.tradeNums}}</view>
+  <view class="service-info">{{data.storeName}}</view>
+  <view class="store-entrance" catchtap="_toStore">进店></view>
+</navigator>

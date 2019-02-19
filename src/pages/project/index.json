@@ -1,7 +1,6 @@
 {
   "navigationBarTitleText": "巨牛汇",
   "enablePullDownRefresh": true,
-  "onReachBottomDistance":true,
   "usingComponents": {
     "project-card":"/components/project/card/index"
   }

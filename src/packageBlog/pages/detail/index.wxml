@@ -25,7 +25,7 @@
             <text>{{detail.auditRemark}}</text>
         </view>
         
-        <import src="../../towxml/entry.wxml"/>
+        <import src="../../../libs/towxml/entry.wxml"/>
         <template is="entry" data="{{...article}}"/>
 
         <view class="tags">
@@ -83,7 +83,7 @@
                 </view>
             </scroll-view>
 
-            <action-bar custom-class="action-bar-reset" position="absolute">
+            <action-bar position="absolute">
                 <view class=".action-bar-con">
                     <input placeholder="我要评论..." disabled="true" bindtap="download"/>
                 </view>
@@ -91,7 +91,7 @@
         </view>
     </popup>
 
-    <action-bar id="actionBar" custom-class="action-bar-reset">
+    <action-bar id="actionBar">
         <view class=".action-bar-con">
             <input placeholder="我要评论..." disabled="true" bindtap="download"/>
             <view wx:if="{{!isMyself}}" class="iconfont {{detail.favoriteState===1?'collected icon-yishoucang':'icon-shoucang1'}}" bindtap="collect"></view>

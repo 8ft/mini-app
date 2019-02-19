@@ -1,7 +1,9 @@
 let isIPX=false
 
 Component({
-  externalClasses:['custom-class'],
+  options: {
+    addGlobalClass: true,
+  },
 
   properties: {
     position:{

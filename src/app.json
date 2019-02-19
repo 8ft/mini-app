@@ -64,6 +64,13 @@
         "pages/applicant/index",
         "pages/collection/index"
       ]
+    },
+    {
+      "root": "packageService",
+      "name": "service",
+      "pages": [
+        "pages/service/index"
+      ]
     }
   ],
   "preloadRule": {
@@ -83,13 +90,15 @@
       "network": "all",
       "packages": [
         "blog",
-        "expert"
+        "expert",
+        "service"
       ]
     },
     "pages/mine/index": {
       "network": "all",
       "packages": [
-        "mine"
+        "mine",
+        "service"
       ]
     },
     "packageProject/pages/detail/index": {

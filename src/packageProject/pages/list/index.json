@@ -1,6 +1,5 @@
 {
   "enablePullDownRefresh": true,
-  "onReachBottomDistance": true,
   "usingComponents": {
     "project-card": "/components/project/card/index",
     "popup": "/components/common/popup/index",

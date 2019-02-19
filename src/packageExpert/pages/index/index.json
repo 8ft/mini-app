@@ -1,6 +1,6 @@
 {
   "enablePullDownRefresh": true,
-  "onReachBottomDistance":true,
+  
   "usingComponents": {
     "tabs": "/components/common/tabs/index",
     "nodata": "/components/nodata/nodata",

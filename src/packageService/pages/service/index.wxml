@@ -1,0 +1,55 @@
+<nav-bar id="navBar" transparent="{{hideNav}}" placeholder="{{false}}">
+    <tabs class="{{hideNav?'hidden':''}}" slot="nav" under-line-ratio="{{.5}}" tabs="{{['服务','评价','详情']}}" active="{{contentIndex}}" bindchange="scrollToContent"></tabs>
+</nav-bar>
+
+<swiper indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
+  <swiper-item wx:for="{{detail.picUrlList}}">
+    <image mode="aspectFill" src="{{item}}"></image>
+  </swiper-item>
+</swiper>
+
+<view class="base-info">
+    <view class="price">
+        {{detail.price}}
+        <text>成交量{{detail.tradeNums}}</text>
+    </view>
+    <view class="name">{{detail.productName}}</view>
+</view>
+
+<view id="comments" class="comments" >
+    <block wx:if="{{comments.count>0}}">
+        <view class="title">买家评价({{comments.count}})
+            <navigator hover-class="none" url="">查看全部<text class="iconfont icon-xiayiye"></text></navigator>
+        </view>
+        <view class="comment" wx:for="{{comments.list}}">
+            <view class="user">
+                <image lazy-load="{{true}}" mode="aspectFill" src="{{item.createUserAvatar||'/assets/img/default/avatar.png'}}"></image>
+                <text>{{item.createNickName}}</text>
+            </view>
+            <view class="con">{{item.content}}</view>
+        </view>
+    </block>
+    <view class="no-comments" wx:else>暂无评价</view>
+</view>
+
+<view id="detail" class="detail">
+    <view class="title">服务详情</view>
+    <import src="../../../libs/towxml/entry.wxml" />
+    <template is="entry" data="{{...detail.productDesc}}" />
+</view>
+
+<action-bar>
+  <view class="action">
+      <view class="iconfont icon-shoucang1"></view>
+      <view class="name">店铺</view>
+  </view>
+  <view class="action">
+      <view class="iconfont icon-shoucang1"></view>
+      <view class="name">联系TA</view>
+  </view>
+  <view class="action">
+      <view class="iconfont icon-shoucang1"></view>
+      <view class="name">收藏</view>
+  </view>
+  <button class="buy">购买服务</button>
+</action-bar>

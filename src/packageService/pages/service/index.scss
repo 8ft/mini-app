@@ -1,0 +1,49 @@
+@import '../../../assets/wxss/var.scss';
+@import '../../../assets/font/icons.wxss';
+@import '../../../libs/towxml/style/main.wxss';
+@import '../../../libs/towxml/style/theme/light.wxss';  
+
+.hidden{visibility: hidden;}
+.tabs{border:none!important;
+    .tab:nth-of-type(1){margin-left:140rpx;}
+}
+
+swiper{width:100%;height: 748rpx;
+    image{width:100%;height:100%;margin:0;}}
+
+.base-info{background: #fff;padding:28rpx 32rpx 50rpx;position: relative;
+    .price{color:$red;font-size: 38rpx;line-height:32rpx;
+        &::before{content:'￥';font-size: $m;}
+        &::after{content:'/单';font-size: $m;}
+    }
+    text{position:absolute;top:28rpx;right:32rpx;color:$gray;font-size: $l;line-height:32rpx;}
+    .name{color:$lightBlack;font-size: 30rpx;font-weight: 500;margin-top: 33rpx;}
+}
+
+.title{color:$black;font-size: $xl;font-weight:500;}
+.comments{background: #fff;margin-top: 16rpx;
+    .title{padding:24rpx 30rpx 0 30rpx;line-height:$xl;
+        navigator{color:$darkBlue;float: right;}
+        .iconfont{font-size:25rpx;}
+    } 
+    .comment{padding:32rpx 30rpx;border-bottom:$border;
+        .user{height: 60rpx;font-size:$l;display:flex; align-items: center;
+            image{width:60rpx;height: 100%;border-radius: 50%;display: inline-block;margin-right:20rpx;}
+            text{flex: 1;}
+        }
+        .con{padding-left:80rpx;margin-top: 15rpx;}
+    }
+    .no-comments{color:$black;font-size: $xl;font-weight:500;text-indent: 26rpx;line-height: 120rpx;}
+}
+
+.detail{margin-top:16rpx;padding-bottom:50rpx;background: #fff;
+    .title{padding:30rpx 30rpx 0;} 
+}
+
+.action-bar .bar{padding:0 30rpx;box-sizing: border-box;}
+.action{margin-right: 50rpx;text-align:center;
+    .iconfont{font-size: 35rpx;margin-bottom:10rpx;}
+    .name{font-size: 26rpx;line-height: 26rpx;}
+}
+
+.buy{background: #FF8000;height: 88rpx;line-height:88rpx;color:#fff;flex: 1;font-size: $xl;border-radius: 4rpx;}
