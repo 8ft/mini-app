@@ -12,27 +12,16 @@ Page({
   },
 
   onLoad: function (options) {
-    wx.getSystemInfo({
-      success: res => {
-        const navHeight=160+res.statusBarHeight*750/res.windowWidth
-        this.setData({
-          navHeight: `${navHeight}rpx`
-        })
-      }
-    })
-
-    const query = wx.createSelectorQuery()
-    query.select('#baseInfo').fields({
+    const systemInfo=wx.getSystemInfoSync()
+    wx.createSelectorQuery().select('#baseInfo').fields({
       size: true
     }, res => {
-      wx.getSystemInfo({
-        success: data => {
-          this.setData({
-            scrollViewHeight: data.windowHeight - res.height
-          })
-        }
+      this.setData({
+        navHeight: `${160+systemInfo.statusBarHeight*750/systemInfo.windowWidth}rpx`,
+        scrollViewHeight: systemInfo.windowHeight - res.height
       })
     }).exec()
+    
     this.getWallet()
     this.getRecords()
   },

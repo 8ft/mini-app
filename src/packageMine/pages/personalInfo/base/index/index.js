@@ -23,14 +23,11 @@ Page(observer({
 
   onLoad:function(){
     this.getCity()
-    wx.getSystemInfo({
-      success: res => {
-        const pixelRatio=res.windowWidth/750
-        const boxHeight=(res.windowHeight-100*pixelRatio-res.statusBarHeight)*.98
-        this.setData({
-          scrollViewHeight: boxHeight- 90*pixelRatio
-        })
-      }
+    const systemInfo=wx.getSystemInfoSync()
+    const pixelRatio=systemInfo.windowWidth/750
+    const boxHeight=(systemInfo.windowHeight-100*pixelRatio-systemInfo.statusBarHeight)*.98
+    this.setData({
+      scrollViewHeight: boxHeight- 90*pixelRatio
     })
   },
 

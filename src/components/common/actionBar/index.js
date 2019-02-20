@@ -1,5 +1,3 @@
-let isIPX=false
-
 Component({
   options: {
     addGlobalClass: true,
@@ -12,22 +10,9 @@ Component({
     }
   },
 
-  data: {
-    isIPX:false
-  },
-
-  created:function(){
-    wx.getSystemInfo({
-      success: function(res) {
-        if(/iPhone X/.test(res.model))
-          isIPX=true
-        }
-     })
-  },
-
   attached:function(){
     this.setData({
-      isIPX:isIPX
+      isIPX:/iPhone X/.test(wx.getSystemInfoSync().model)
     })
   }
 })

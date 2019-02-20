@@ -17,20 +17,10 @@ Page({
   },
 
   onLoad: function (options) {
-    wx.getSystemInfo({
-      success:res=> {
-        let ww=res.windowWidth,
-          wh=res.windowHeight,
-          height = wh * 750 / ww - 300
-
-        this.setData({
-          height: height
-        })
-      }
-    })
-
+    const systemInfo=wx.getSystemInfoSync()
     let cache = app.globalData.publishDataCache.desc
     this.setData({
+      height: systemInfo.windowHeight * 750 / systemInfo.windowWidth - 300,
       content: cache.content.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, ""),
       inputLen: cache.inputLen||-1,
       conLen: cache.conLen||0,

@@ -6,6 +6,9 @@ Component({
     active: {
       type: Number,
       value: 0,
+      observer(newVal, oldVal, changedPath) {
+        this._selectTab(newVal)
+      }
     },
     tabs: Array,
     fixed: {
@@ -29,12 +32,7 @@ Component({
         timingFunction: 'ease',
       })
       this.animation = animation
-
-      wx.getSystemInfo({
-        success: res => {
-          this.windowWidth = res.windowWidth
-        }
-      })
+      this.windowWidth = wx.getSystemInfoSync().windowWidth
     },
     ready: function () {
       if (this.data.animationData) return

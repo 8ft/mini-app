@@ -146,16 +146,11 @@ Page(observer({
     })
 
     if(userInfo.userState!==2&&!this.data.isMyself&&this.data.nodataHeight===0){
-      const query = wx.createSelectorQuery()
-      query.select('#nodata').fields({
+      wx.createSelectorQuery().select('#nodata').fields({
         rect: true
       }, res => {
-        wx.getSystemInfo({
-          success: data => {
-            this.setData({
-              nodataHeight: data.windowHeight - res.top
-            })
-          }
+        this.setData({
+          nodataHeight: wx.getSystemInfoSync().windowHeight - res.top
         })
       }).exec()
     }

@@ -90,16 +90,11 @@ Page(observer({
     if(!this.props.stores.account.logged_in)return 
     this.props.stores.toRefresh.refresh('work',(exist)=>{
       if (this.data.scrollViewHeight===0){
-        const query = wx.createSelectorQuery()
-        query.select('#projects').fields({
+        wx.createSelectorQuery().select('#projects').fields({
           rect: true
         }, res => {
-          wx.getSystemInfo({
-            success: data => {
-              this.setData({
-                scrollViewHeight: data.windowHeight - res.top
-              })
-            }
+          this.setData({
+            scrollViewHeight: wx.getSystemInfoSync().windowHeight - res.top
           })
         }).exec()
         this.getMyPublish()

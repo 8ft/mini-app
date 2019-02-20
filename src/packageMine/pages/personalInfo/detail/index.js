@@ -17,17 +17,7 @@ Page(observer({
   },
 
   onLoad: function (options) {
-    wx.getSystemInfo({
-      success: res => {
-        let ww = res.windowWidth,
-          wh = res.windowHeight,
-          height = wh * 750 / ww - 250
-
-        this.setData({
-          height: height
-        })
-      }
-    })
+    const systemInfo=wx.getSystemInfoSync()
 
     let input = this.props.stores.account.userInfo.userIntro
     let conLen = input.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "").length
@@ -40,6 +30,7 @@ Page(observer({
     }
 
     this.setData({
+      height: systemInfo.windowHeight * 750 / systemInfo.windowWidth - 250,
       content: input,
       inputLen: inputLen,
       conLen: conLen,

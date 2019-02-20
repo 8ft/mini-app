@@ -1,5 +1,5 @@
-<nav-bar id="navBar" transparent="{{hideNav}}" placeholder="{{false}}">
-    <tabs class="{{hideNav?'hidden':''}}" slot="nav" under-line-ratio="{{.5}}" tabs="{{['服务','评价','详情']}}" active="{{contentIndex}}" bindchange="scrollToContent"></tabs>
+<nav-bar transparent="{{hideNav}}" placeholder="{{false}}" bindready="getNavHeight">
+    <tabs class="{{hideNav?'hidden':''}}" slot="nav" under-line-ratio="{{.5}}" tabs="{{['服务','评价','详情']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
 </nav-bar>
 
 <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">

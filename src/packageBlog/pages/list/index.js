@@ -20,16 +20,9 @@ Page(observer({
   },
 
   onLoad:function(options){
-    wx.getSystemInfo({
-      success: res => {
-        const navHeight=100+res.statusBarHeight*750/res.windowWidth
-        this.setData({
-          navHeight: `${navHeight}rpx`
-        })
-      }
-    })
-
+    const systemInfo=wx.getSystemInfoSync()
     this.setData({
+      navHeight: `${100+systemInfo.statusBarHeight*750/systemInfo.windowWidth}rpx`,
       typeId:options.id||'',
       typeIndex:parseInt(options.index)||0
     })

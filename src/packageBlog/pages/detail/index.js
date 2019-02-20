@@ -50,24 +50,13 @@ Page(observer({
   },
 
   onLoad:function(options){
-    wx.getSystemInfo({
-      success: res => {
-        let isIPX=false
-        if(/iPhone X/.test(res.model)){
-          isIPX=true
-        }
-
-        const pixelRatio=res.windowWidth/750
-        const fixedHeight=isIPX?34:0
-        const boxHeight=(res.windowHeight-100*pixelRatio-res.statusBarHeight)*.98
-        this.setData({
-          boxHeight:boxHeight,
-          scrollViewHeight: boxHeight- (180+fixedHeight)*pixelRatio
-        })
-      }
-    })
-    
+    const systemInfo=wx.getSystemInfoSync()
+    const pixelRatio=systemInfo.windowWidth/750
+    const fixedHeight=/iPhone X/.test(systemInfo.model)?34:0
+    const boxHeight=(systemInfo.windowHeight-100*pixelRatio-systemInfo.statusBarHeight)*.98
     this.setData({
+      boxHeight:boxHeight,
+      scrollViewHeight: boxHeight- (180+fixedHeight)*pixelRatio,
       uid:options.uid||'',
       id:options.id
     })

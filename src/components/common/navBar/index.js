@@ -28,12 +28,8 @@ Component({
 
   lifetimes: {
     attached:function(){
-      wx.getSystemInfo({
-        success: res=>{
-          this.setData({
-            top: res.statusBarHeight
-          })
-        }
+      this.setData({
+        top: wx.getSystemInfoSync().statusBarHeight
       })
     },
     ready: function () {
@@ -43,6 +39,7 @@ Component({
         this.setData({
           height:size.height
         })
+        this.triggerEvent('ready', { height: size.height })
       }).exec()
     }
   },

@@ -4,6 +4,9 @@ const observer = require('../../../libs/observer').observer
 const Towxml = require('../../../libs/towxml/main')
 const towxml = new Towxml()
 
+let toScrollList=[]
+let scrolling=false
+
 Page(observer({
   props: {
     stores: app.stores
@@ -11,7 +14,7 @@ Page(observer({
 
   data: {
     hideNav: true,
-    contentIndex:0,
+    tabIndex: 0,
     isMyself: false,
 
     id: '',
@@ -24,62 +27,48 @@ Page(observer({
       id: options.id
     })
     this.getDetail()
+
+    setInterval(()=>{
+      if(toScrollList.length>0){
+        this.setData({
+          tabIndex:toScrollList.pop()
+        })
+        toScrollList=[]
+      }
+    },400)
   },
 
-  onReady: function () {
-    const query = wx.createSelectorQuery()
-    query.select('#comments').fields({
-      rect: true
-    }, res => {
-      this.setData({
-        commentsPostion: res.top
-      })
-    }).exec()
+  onPageScroll(e) {
+    let sTop=e.scrollTop
 
-    query.select('#detail').fields({
-      rect: true
-    }, res => {
-      this.setData({
-        detailPostion: res.top
-      })
-    }).exec()
-
-    query.select('#navBar').fields({
-      size: true
-    }, res => {
-     console.log(res)
-    }).exec()
-  },
-
-  onPageScroll(scroll) {
-    let sTop=scroll.scrollTop 
-
-    if (sTop > 50 && this.data.hideNav === true) {
+    if (sTop > 100 && this.data.hideNav === true) {
       this.setData({
         hideNav: false
       })
-    } else if (sTop <= 50 && this.data.hideNav === false) {
+    } else if (sTop <= 100 && this.data.hideNav === false) {
       this.setData({
         hideNav: true
       })
     }
 
-    if(this.data.commentsPostion>sTop>0&&this.contentIndex!==0){
-      this.setData({
-        contentIndex:0
-      })
-    }else if(this.data.detailPostion>sTop>=this.data.commentsPostion&&this.contentIndex!==1){
-      this.setData({
-        contentIndex:1
-      })
-    }else if(sTop>=this.data.detailPostion&&this.contentIndex!==2){
-      this.setData({
-        contentIndex:2
-      })
+    if(scrolling)return
+    if(this.data.commentsPostion>sTop&&this.data.tabIndex!==0){
+      toScrollList.push(0)
+    }else if(this.data.detailPostion>sTop&&sTop>=this.data.commentsPostion&&this.data.tabIndex!==1){
+      toScrollList.push(1)
+    }else if(sTop>=this.data.detailPostion&&this.data.tabIndex!==2){
+      toScrollList.push(2)
     }
   },
 
-  scrollToContent: function (e) {
+  getNavHeight: function (e) {
+    this.setData({
+      navHeight: e.detail.height
+    })
+  },
+
+  tabChange: function (e) {
+    scrolling=true
     const index = e.detail.index
     let scrollTop = 0
 
@@ -91,8 +80,12 @@ Page(observer({
 
     wx.pageScrollTo({
       scrollTop: scrollTop,
-      duration: 300
+      duration: 0
     })
+
+    setTimeout(() => {
+      scrolling=false
+    }, 400)
   },
 
   getDetail: async function () {
@@ -130,5 +123,17 @@ Page(observer({
       detail: detail,
       comments: comments.data
     })
+
+    const query = this.createSelectorQuery()
+    query.select('#comments').boundingClientRect()
+    query.select('#detail').boundingClientRect()
+
+    query.exec(e => {
+      this.setData({
+        commentsPostion: e[0].top - this.data.navHeight,
+        detailPostion: e[1].top - this.data.navHeight
+      })
+    })
+
   },
 }))
