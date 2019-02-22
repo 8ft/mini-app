@@ -4,7 +4,11 @@ const observer = require('../../../libs/observer').observer
 const Towxml = require('../../../libs/towxml/main')
 const towxml = new Towxml()
 
+//为防止过度频繁的setData,根据滚动动态修改标签的功能设置了限速器
+//滚动时将要修改的标签ID录入toScrollList，每350毫秒取toScrollList组后一个进行setData,并清空toScrollList
+let iid=''
 let toScrollList=[]
+//手动点击切换标签,再动画完成之前,scrolling=true,阻止onPageScroll进行【根据滚动动态修改标签】
 let scrolling=false
 
 Page(observer({
@@ -13,6 +17,8 @@ Page(observer({
   },
 
   data: {
+    currentSwiper:1,
+
     hideNav: true,
     tabIndex: 0,
     isMyself: false,
@@ -27,7 +33,9 @@ Page(observer({
       id: options.id
     })
     this.getDetail()
+  },
 
+  onShow:function(){
     setInterval(()=>{
       if(toScrollList.length>0){
         this.setData({
@@ -35,17 +43,21 @@ Page(observer({
         })
         toScrollList=[]
       }
-    },400)
+    },350)
+  },
+
+  onHide:function(){
+    clearInterval(iid)
   },
 
   onPageScroll(e) {
     let sTop=e.scrollTop
 
-    if (sTop > 100 && this.data.hideNav === true) {
+    if (sTop > 50 && this.data.hideNav === true) {
       this.setData({
         hideNav: false
       })
-    } else if (sTop <= 100 && this.data.hideNav === false) {
+    } else if (sTop <= 50 && this.data.hideNav === false) {
       this.setData({
         hideNav: true
       })
@@ -59,6 +71,12 @@ Page(observer({
     }else if(sTop>=this.data.detailPostion&&this.data.tabIndex!==2){
       toScrollList.push(2)
     }
+  },
+
+  onSwiperChange:function(e){
+    this.setData({
+      currentSwiper:e.detail.current+1
+    })
   },
 
   getNavHeight: function (e) {
@@ -85,7 +103,7 @@ Page(observer({
 
     setTimeout(() => {
       scrolling=false
-    }, 400)
+    }, 350)
   },
 
   getDetail: async function () {
@@ -134,6 +152,20 @@ Page(observer({
         detailPostion: e[1].top - this.data.navHeight
       })
     })
-
   },
+
+  collect:async function(){
+    if(app.checkLogin()){
+      const res = await app.request.post('/store/collectionInfo/collect',{
+        businessId:this.data.detail.id,
+        type:1
+      })
+      if(res.code!==0)return
+      this.setData({
+        'detail.collectFlag':this.data.detail.collectFlag==='0'?'1':'0'
+      })
+    }
+  },
+  
+  download:app.download
 }))

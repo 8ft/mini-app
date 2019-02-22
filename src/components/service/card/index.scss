@@ -1,15 +1,30 @@
 @import '../../../assets/wxss/var.scss'; 
+@import '../../../assets/font/icons.wxss';
 
-.service-card{position:relative;padding:30rpx 0 30rpx 243rpx;line-height: 40rpx;border-bottom:$border;height: 220rpx;
-    image{position: absolute;left:0;top:30rpx;width:220rpx;height:220rpx;}
-    .service-name{font-size: 26rpx;color:$gray;margin-bottom:32rpx;min-height: 80rpx;padding-top: 10rpx;}
-    .service-info{font-size: $m;color:$lightGray;
-        .service-price{color:$red;font-size: 38rpx;margin-right:40rpx;
-            &::before{content:'￥';font-size: $m;}
-            &::after{content:'/单';font-size: $m;}
+.service-card{position:relative;font-size:26rpx;color:$gray;
+    .service-name{margin-bottom:32rpx;min-height:80rpx;padding-top:10rpx;}
+    .iconfont{font-size: inherit;}
+
+    &.normal{padding:30rpx 0 30rpx 243rpx;line-height:40rpx;border-bottom:$border;height:220rpx;
+        image{position:absolute;left:0;top:30rpx;width:220rpx;height:220rpx;}
+        .service-info{font-size:$m;color:$lightGray;
+            .service-price{color:$red;font-size:38rpx;margin-right:40rpx;
+                &::before{content:'￥';font-size:$m;}
+                &::after{content:'/单';font-size:$m;}}}
+        .store-entrance{position:absolute;right:0;bottom:30rpx;font-size:$m;color:$black;}}
+
+    &.collection{width:718rpx;height: 294rpx;padding:90rpx 30rpx 44rpx 210rpx;box-sizing:border-box;background:#fff;border-radius:10rpx;margin:20rpx auto;
+        .store-entrance{position:absolute;left:0;top:0;font-size:$m;color:$black;display:inlin-block;line-height:90rpx;text-indent:30rpx;}
+        image{position:absolute;left:30rpx;top:90rpx;width:160rpx;height:160rpx;border-radius: 10rpx;}
+        .service-name{min-height: 60rpx;line-height: 30rpx;}
+        .service-price{color:$red;font-size:38rpx;
+            &::before{content:'￥';font-size:$m;}
+            &::after{content:'/套';font-size:$m;}}
+        .collect{position:absolute;bottom:48rpx;right:30rpx;width:140rpx;height: 52rpx;line-height: 52rpx;border:2rpx solid rgba(229,229,229,1);font-size: $m;text-align: center;
+            .iconfont{margin-right:9rpx;
+                &.icon-yishoucang{color:$red;}
+            }
         }
-    }
-    .store-entrance{position: absolute;right:0;bottom:30rpx;font-size:$m;color:$black;}
-}
+    }}
 
 

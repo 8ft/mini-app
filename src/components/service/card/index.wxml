@@ -1,7 +1,29 @@
-<navigator class='service-card' hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
-  <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
+
+<navigator class="service-card {{appearance}}" hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
+  
+  
   <view class="service-name">{{data.productName}}</view>
-  <view class="service-info"><text class="service-price">{{data.price}}</text>成交量{{data.tradeNums}}</view>
-  <view class="service-info">{{data.storeName}}</view>
-  <view class="store-entrance" catchtap="_toStore">进店></view>
+
+  <block wx:if="{{appearance==='normal'}}">
+    <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
+    <view class="service-info"><text class="service-price">{{data.price}}</text>成交量{{data.tradeNums}}</view>
+    <view class="service-info">{{data.storeName}}</view>
+    <view class="store-entrance" catchtap="_toStore">进店></view>
+  </block>
+
+  <block wx:if="{{appearance==='collection'}}">
+    <image lazy-load="true" mode='aspectFill' src="{{data.picUrl}}"></image>
+    <view class="store-entrance" catchtap="_toStroe">
+      <text class="iconfont icon-dianpu"></text>
+      {{data.storeName}}
+      <text class="iconfont icon-xiayiye"></text>
+    </view>
+    <view class="service-price">{{data.price}}</view>
+    <view class="collect" catchtap="_collect">
+      <text class="iconfont icon-{{data.collectFlag==='1'?'yishoucang':'shoucang1'}}"></text>
+      {{data.collectFlag==='1'?'已收藏':'收藏'}}
+    </view>
+  </block>
+
 </navigator>
+

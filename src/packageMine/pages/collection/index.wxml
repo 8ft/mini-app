@@ -1,5 +1,5 @@
 <nav-bar title="我的收藏">
-  <tabs slot="addones" under-line-ratio="{{.8}}" tabs="{{['人才','文章']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
+  <tabs slot="addones" under-line-ratio="{{.8}}" tabs="{{['人才','服务','文章']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 </nav-bar>
 
 <view class="content">
@@ -8,8 +8,15 @@
       <nodata wx:if="{{!loading&&experts.list.length===0}}"></nodata>
   </block>
 
-  <block wx:else>
+  <block wx:elif="{{typeIndex===1}}">
+    <service-card appearance="collection" wx:for="{{services.list}}" data="{{item}}"></service-card>
+    <nodata wx:if="{{!loading&&services.list.length===0}}"></nodata>
+  </block>
+
+  <block wx:elif="{{typeIndex===2}}">
     <blog-card custom-class="reset-blog-card" wx:for="{{articles.list}}" data="{{item}}" show-author="true"></blog-card>
     <nodata wx:if="{{!loading&&articles.list.length===0}}"></nodata>
   </block>
+
+  
 </view>
