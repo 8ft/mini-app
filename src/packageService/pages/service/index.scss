@@ -46,7 +46,7 @@ scroll-view{width:100%;}
 }
 
 .action-bar .bar{padding:0 30rpx;box-sizing: border-box;}
-.action{margin-right: 50rpx;text-align:center;
+.action{padding-right: 50rpx;text-align:center;
     .iconfont{font-size: 35rpx;margin-bottom:10rpx;}
     .name{font-size: 26rpx;line-height: 26rpx;}
     &.lighten{color:$red;}

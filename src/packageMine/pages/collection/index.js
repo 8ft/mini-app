@@ -67,7 +67,7 @@ Page(observer({
         this.getExperts()
         break;
       case 1:
-        this.getServicies(1)
+        this.getServices(1)
         break;
       case 2:
         this.getArticles()
@@ -95,7 +95,7 @@ Page(observer({
             nomore: false
           }
         }
-        this.getServicies(1)
+        this.getServices(1)
         break;
       case 2:
         if (this.data.articles.list.length > 0) {
@@ -115,7 +115,7 @@ Page(observer({
     if (index === 2 && this.data.articles.list.length === 0 && this.props.stores.account.blogInfo.favoriteNum > 0) {
       this.getArticles()
     } else if (index === 1 && this.data.services.list.length === 0) {
-      this.getServicies(1)
+      this.getServices(1)
     }
     this.setData({
       typeIndex: index
@@ -169,7 +169,7 @@ Page(observer({
     wx.stopPullDownRefresh()
   },
 
-  getServicies: async function (type) {
+  getServices: async function (type) {
     let data = type === 1 ? this.data.services : this.data.stores
     let nomore = data.nomore
     if (nomore) return

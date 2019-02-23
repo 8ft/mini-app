@@ -405,17 +405,17 @@
     font-family: "Apple Color Emoji", "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-/**内置元素**/
-image,
-video {
-    width: 100%;
-    margin: 10rpx auto;
-}
 
-image {
-    height: auto;
-}
+.h2w image,
+.h2w video {
+        width: 100%;
+        margin: 10rpx auto;
+    }
 
-video {
-    height: 220px;
-}
+    .h2w image {
+        height: auto;
+    }
+
+    .h2w video {
+        height: 220px;
+    }

@@ -69,7 +69,8 @@
       "root": "packageService",
       "name": "service",
       "pages": [
-        "pages/service/index"
+        "pages/service/index",
+        "pages/store/index"
       ]
     }
   ],

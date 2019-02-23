@@ -1,17 +1,23 @@
 
 <navigator class="service-card {{appearance}}" hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
   
-  
-  <view class="service-name">{{data.productName}}</view>
-
   <block wx:if="{{appearance==='normal'}}">
+    <view class="service-name">{{data.productName}}</view>
     <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
     <view class="service-info"><text class="service-price">{{data.price}}</text>成交量{{data.tradeNums}}</view>
     <view class="service-info">{{data.storeName}}</view>
     <view class="store-entrance" catchtap="_toStore">进店></view>
   </block>
 
+  <block wx:if="{{appearance==='goods'}}">
+    <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
+    <view class="service-name">{{data.productName}}</view>
+    <text class="service-price">{{data.price}}</text>
+    <text class="service-tradeNums">成交量{{data.tradeNums}}</text>
+  </block>
+
   <block wx:if="{{appearance==='collection'}}">
+    <view class="service-name">{{data.productName}}</view>
     <image lazy-load="true" mode='aspectFill' src="{{data.picUrl}}"></image>
     <view class="store-entrance" catchtap="_toStroe">
       <text class="iconfont icon-dianpu"></text>

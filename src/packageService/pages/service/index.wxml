@@ -42,10 +42,10 @@
 </view>
 
 <action-bar>
-  <view class="action">
+  <navigator class="action" hover-class="none" url="/packageService/pages/store/index?id={{detail.storeId}}">
       <view class="iconfont icon-dianpu"></view>
       <view class="name">店铺</view>
-  </view>
+  </navigator>
   <view class="action" bindtap="download">
       <view class="iconfont icon-kefu"></view>
       <view class="name">联系TA</view>

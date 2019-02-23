@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "tabs": "/components/common/tabs/index",
+        "nodata": "/components/nodata/nodata",
+        "action-bar": "/components/common/actionBar/index",
+        "service-card":"/components/service/card/index"
+    }
+}
