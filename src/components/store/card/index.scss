@@ -1,0 +1,22 @@
+@import '../../../assets/wxss/var.scss'; 
+@import '../../../assets/font/icons.wxss';
+
+.store{width:718rpx;margin:24rpx auto 0;background:#fff;border-radius:20rpx;box-shadow:0 0 10px 0 rgba(0, 0, 0, .05);color:$black;
+    .store-info{height:211rpx;box-sizing:border-box;padding:30rpx 30rpx 30rpx 210rpx;border-bottom:$border;position:relative;
+        .store-logo{position:absolute;left:30rpx;top:30rpx;width:160rpx;height:160rpx;border-radius:10rpx;}
+        .store-name{padding:12rpx 0 10rpx 0;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;font-size:$xl;line-height:$xl;font-weight:600; }
+        .other-info{font-size: 26rpx;margin-top:18rpx;}
+    }
+    
+    .store-action{display:flex;align-items: center;height: 80rpx;
+        .iconfont{font-size: $xl;display:inline-block;margin-right: 18rpx;}
+        .icon-yishoucang{color:$red;}
+        view{flex:1;text-align: center;color:$lightBlack;font-size: $l;line-height:80rpx;
+            &:nth-of-type(n+2){border-left:$border;}
+        }
+    }
+}
+
+
+
+

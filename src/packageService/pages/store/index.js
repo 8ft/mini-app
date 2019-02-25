@@ -15,6 +15,13 @@ Page(observer({
     detail: null,
     loading: false,
 
+    activeFilter: '',
+    serviceTypes: {
+      parent: '',
+      selected: {},
+      list: []
+    },
+
     services: {
       list: [],
       pageIndex: 1,
@@ -31,13 +38,24 @@ Page(observer({
     this.setData({
       id: options.id
     })
-    this.getDetail()
+    this.getServiceTypes()
+  },
+
+  onShow:function(){
+    this.props.stores.toRefresh.refresh('service-store',async(exist)=>{
+      if(this.data.detail===null||exist){
+        this.getDetail()
+      }
+    })
   },
 
   getNavHeight: function (e) {
     const systemInfo=wx.getSystemInfoSync()
+    const ratio=systemInfo.windowWidth/750
+    const scrollViewHeight=systemInfo.windowHeight-e.detail.height-150*ratio
     this.setData({
-      swiperHeight:systemInfo.windowHeight-e.detail.height-150*systemInfo.windowWidth/750
+      scrollViewHeight:scrollViewHeight,
+      allServicesScrollViewHeight:scrollViewHeight-80*ratio
     })
   },
 
@@ -88,7 +106,64 @@ Page(observer({
       })
       if(res.code!==0)return
       this.setData({
-        'detail.collectFlag':this.data.detail.collectFlag==='0'?'1':'0'
+        'detail.collectFlag':this.data.detail.collectFlag==0?1:0
+      })
+    }
+  },
+
+  filter: function (e) {
+    let data = e.currentTarget.dataset
+    switch (data.type) {
+      case 'sortWay':
+        this.setData({
+          'sortWay.selected': data.item
+        })
+        break;
+      case 'serviceTypes':
+        this.setData({
+          'serviceTypes.selected': data.item
+        })
+        this.data.services = {
+          list: [],
+          pageIndex: 1,
+          nomore: false
+        }
+        break;
+    }
+    
+    this.getServices()
+    this.setData({
+      activeFilter: ''
+    })
+  },
+
+  selectFilter: function (e) {
+    if (this.data.activeFilter) {
+      this.setData({
+        activeFilter: ''
+      })
+    } else {
+      this.setData({
+        activeFilter: e.currentTarget.dataset.name
+      })
+    }
+  },
+
+  scrollToServiceTypes: function (e) {
+    this.setData({
+      'serviceTypes.parent': 'service' + e.currentTarget.dataset.code
+    })
+  },
+
+  getServiceTypes:async function () {
+    let res = await app.request.post('/dict/dictCommon/getDicts', {
+      dictType: 'product_type',
+      resultType: '1'
+    })
+
+    if (res.code === 0) {
+      this.setData({
+        'serviceTypes.list': res.data.data[0].dictList
       })
     }
   },
@@ -106,7 +181,8 @@ Page(observer({
     let res = await app.request.post('/store/productBaseInfo/getList', {
       pageIndex: pIndex,
       storeId: this.data.id,
-      sortType:isPage2?'1':'2'
+      sortType:isPage2?'1':'2',
+      productSubtype:this.data.serviceTypes.selected.dictValue || ''
     })
 
     if (res.code === 0) {

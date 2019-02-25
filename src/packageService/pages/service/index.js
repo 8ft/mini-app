@@ -32,10 +32,15 @@ Page(observer({
     this.setData({
       id: options.id
     })
-    this.getDetail()
   },
 
   onShow:function(){
+    this.props.stores.toRefresh.refresh('service-index',async(exist)=>{
+      if(this.data.detail===null||exist){
+        this.getDetail()
+      }
+    })
+
     setInterval(()=>{
       if(toScrollList.length>0){
         this.setData({

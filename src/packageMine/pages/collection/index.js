@@ -70,6 +70,9 @@ Page(observer({
         this.getServices(1)
         break;
       case 2:
+        this.getServices(0)
+        break;
+      case 3:
         this.getArticles()
         break;
     }
@@ -98,6 +101,16 @@ Page(observer({
         this.getServices(1)
         break;
       case 2:
+        if (this.data.stores.list.length > 0) {
+          this.data.stores = {
+            list: [],
+            pageIndex: 1,
+            nomore: false
+          }
+        }
+        this.getServices(0)
+        break;
+      case 3:
         if (this.data.articles.list.length > 0) {
           this.data.articles = {
             list: [],
@@ -112,11 +125,15 @@ Page(observer({
 
   switchList: function (e) {
     const index = e.detail.index
-    if (index === 2 && this.data.articles.list.length === 0 && this.props.stores.account.blogInfo.favoriteNum > 0) {
-      this.getArticles()
-    } else if (index === 1 && this.data.services.list.length === 0) {
+
+    if (index === 1 && this.data.services.list.length === 0) {
       this.getServices(1)
+    } else if (index === 2 && this.data.stores.list.length === 0) {
+      this.getServices(0)
+    } else if (index === 3 && this.data.articles.list.length === 0 && this.props.stores.account.blogInfo.favoriteNum > 0) {
+      this.getArticles()
     }
+
     this.setData({
       typeIndex: index
     })
@@ -190,7 +207,7 @@ Page(observer({
         nomore = true
       }
 
-      if(type===1){
+      if (type === 1) {
         this.setData({
           'services.list': this.data.services.list.concat(res.data.list.map(service => {
             if (service.productName.length > 30) {
@@ -202,10 +219,20 @@ Page(observer({
           'services.nomore': nomore,
           loading: false
         })
-      }else{
-
+      } else {
+        this.setData({
+          'stores.list': this.data.stores.list.concat(res.data.list.map(store => {
+            if (store.productName.length > 30) {
+              store.productName = store.productName.substring(0, 30) + '...'
+            }
+            return store
+          })),
+          'stores.pageIndex': pIndex,
+          'stores.nomore': nomore,
+          loading: false
+        })
       }
-     
+
     }
     wx.stopPullDownRefresh()
   },

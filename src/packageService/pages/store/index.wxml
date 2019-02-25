@@ -7,18 +7,39 @@
     <tabs slot="addones" class="{{hideNav?'hidden':''}}" under-line-ratio="{{.5}}" tabs="{{['首页','所有服务','最新']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
 </nav-bar>
 
-<swiper bindchange="onSwiperChange" current="{{tabIndex}}" duration="300" style="height:{{swiperHeight}}px;">
+<swiper bindchange="onSwiperChange" current="{{tabIndex}}" duration="300" style="height:{{scrollViewHeight}}px;">
     <swiper-item>
         <scroll-view
-            style="height:{{swiperHeight}}px" 
+            style="height:{{scrollViewHeight}}px" 
             scroll-y="true" 
             enable-back-to-top="true"> 
             <image class="store-detail" mode="widthFix" src="{{detail.homepage}}"></image>
         </scroll-view>
     </swiper-item>
-    <swiper-item>
+    <swiper-item style="position:relative;">
+        <view class="filter-place-holder"></view>
+        <view class='filter service'>
+            <view class="filter-item {{activeFilter==='jobTypes'?'on':''}}" data-name="serviceTypes" bindtap="selectFilter">
+                <text>{{serviceTypes.selected.dictName&&serviceTypes.selected.dictName!=='不限'?serviceTypes.selected.dictName:'分类'}}</text>
+                <view></view>
+            </view>
+        </view>
+        <popup active="{{activeFilter==='serviceTypes'}}" margin="80rpx" bindhide='closePopup'>
+            <view class="job-types">
+                <view class="parent">
+                    <list-item wx:for="{{serviceTypes.list}}" data-code="{{item.dictValue}}" bindtap="scrollToServiceTypes" name="{{item.dictName}}"></list-item>
+                </view>
+                <scroll-view scroll-y="true" scroll-into-view="{{serviceTypes.parent}}" scroll-with-animation="true">
+                    <list-item data-item="{dictName:'不限',dictValue:''}" data-type="serviceTypes" bindtap="filter" name="不限" active="{{!serviceTypes.selected.dictValue}}"></list-item>
+                    <view id="service{{item.dictValue}}" wx:for="{{serviceTypes.list}}">
+                        <list-item wx:for="{{item.dictList}}" wx:for-item="service" data-item="{{service}}" data-type="serviceTypes" bindtap="filter" name="{{service.dictName}}" active="{{serviceTypes.selected.dictValue===service.dictValue}}"></list-item>
+                    </view>
+                </scroll-view>
+            </view>
+        </popup>
+
         <scroll-view
-            style="height:{{swiperHeight}}px" 
+            style="height:{{allServicesScrollViewHeight}}px" 
             scroll-y="true" 
             enable-back-to-top="true"> 
             <service-card appearance="goods" wx:for="{{services.list}}" data="{{item}}"></service-card>
@@ -26,7 +47,7 @@
     </swiper-item>
     <swiper-item>
         <scroll-view
-            style="height:{{swiperHeight}}px" 
+            style="height:{{scrollViewHeight}}px" 
             scroll-y="true" 
             enable-back-to-top="true"> 
             <service-card appearance="goods" wx:for="{{services.list}}" data="{{item}}"></service-card>
@@ -40,8 +61,8 @@
       <text>成交量{{detail.tradeNums}}</text>
       <text>收藏数{{detail.collectNums}}</text>
   </view>
-  <view class="action {{detail.collectFlag==='1'?'lighten':''}}" bindtap="collect">
-      <view class="iconfont icon-{{detail.collectFlag==='1'?'yishoucang':'shoucang1'}}"></view>
+  <view class="action {{detail.collectFlag==1?'lighten':''}}" bindtap="collect">
+      <view class="iconfont icon-{{detail.collectFlag==1?'yishoucang':'shoucang1'}}"></view>
       <view class="name">收藏</view>
   </view>
    <view class="action" bindtap="download">

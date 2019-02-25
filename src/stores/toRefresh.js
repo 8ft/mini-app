@@ -8,7 +8,9 @@ const pages = {
     'project_list',
     'project_detail',
     'blog_list',
-    'discover'
+    'discover',
+    'service-store',
+    'service-index'
   ],
   'logout': [
     'index',

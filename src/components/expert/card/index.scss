@@ -21,8 +21,8 @@
         
         .action{display:flex;align-items: center;height: 80rpx;
             .iconfont{font-size: $xl;display:inline-block;margin-right: 18rpx;}
-            .icon-yishoucang{color:$yellow;}
-            view{flex:1;text-align: center;color:$lightBlack;font-size: $l;line-height:36rpx;
+            .icon-yishoucang{color:$red;}
+            view{flex:1;text-align: center;color:$lightBlack;font-size: $l;line-height:80rpx;
                 &:nth-of-type(n+2){border-left:$border;}
             }
         }

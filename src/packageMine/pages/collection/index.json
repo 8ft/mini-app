@@ -6,6 +6,7 @@
         "blog-card":"/components/blog/card/index",
         "expert-card":"/components/expert/card/index",
         "service-card":"/components/service/card/index",
+        "store-card":"/components/store/card/index",
         "nodata":"/components/nodata/nodata"
     }
 }

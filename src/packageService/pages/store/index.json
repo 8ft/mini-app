@@ -3,6 +3,8 @@
         "tabs": "/components/common/tabs/index",
         "nodata": "/components/nodata/nodata",
         "action-bar": "/components/common/actionBar/index",
-        "service-card":"/components/service/card/index"
+        "service-card":"/components/service/card/index",
+        "popup": "/components/common/popup/index",
+        "list-item": "/components/common/listItem/index"
     }
 }
