@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "action-bar": "/components/common/actionBar/index"
+  }
+}

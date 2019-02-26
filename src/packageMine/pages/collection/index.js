@@ -139,7 +139,7 @@ Page(observer({
     })
   },
 
-  updateExpert: function (e) {
+  updateExpertCard: function (e) {
     const data = e.detail
     if (data.remark !== undefined) {
       this.setData({
@@ -155,6 +155,20 @@ Page(observer({
         })
       }
     }
+  },
+
+  updateServiceCard: function (e) {
+    const data = e.detail
+    this.setData({
+      [`services.list[${data.index}].collectFlag`]: data.flag
+    })
+  },
+
+  updateStoreCard: function (e) {
+    const data = e.detail
+    this.setData({
+      [`stores.list[${data.index}].collectFlag`]: data.flag
+    })
   },
 
   getExperts: async function () {

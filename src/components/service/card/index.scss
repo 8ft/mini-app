@@ -3,7 +3,7 @@
 
 .service-card{position:relative;font-size:26rpx;color:$gray;
     .service-name{margin-bottom:32rpx;min-height:80rpx;padding-top:10rpx;}
-    .iconfont{font-size: inherit;}
+    .iconfont{font-size:inherit;}
 
     &.normal{padding:30rpx 0 30rpx 243rpx;line-height:40rpx;border-bottom:$border;height:220rpx;
         image{position:absolute;left:0;top:30rpx;width:220rpx;height:220rpx;}
@@ -11,29 +11,27 @@
             .service-price{color:$red;font-size:38rpx;margin-right:40rpx;
                 &::before{content:'￥';font-size:$m;}
                 &::after{content:'/单';font-size:$m;}}}
-        .store-entrance{position:absolute;right:0;bottom:30rpx;font-size:$m;color:$black;}}
+        .store-entrance{position:absolute;right:0;bottom:30rpx;font-size:$m;color:$black;line-height:50rpx;width:100rpx;font-weight:500;text-align:right;
+            text{vertical-align: middle;}
+            .iconfont{color:$black;font-size:20rpx;margin-left:5rpx;}}}
 
-    &.goods{width:330rpx;height: 460rpx;border-radius: 10rpx;overflow: hidden;float: left;position: relative;margin-left:30rpx;background:#fff;border-radius:10rpx;margin-top:33rpx;
-        image{width:330rpx;height: 296rpx;border-radius: 10rpx 10rpx 0 0;}
-        .service-name{padding:22rpx 26rpx;margin:0;min-height:60rpx;line-height: 30rpx;color:$black;font-size: $l;}
-        .service-price{color:$red;font-size:38rpx;position: absolute;bottom:28rpx;left:26rpx;max-width:50%;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;
+    &.goods{width:330rpx;height:460rpx;border-radius:10rpx;overflow:hidden;float:left;position:relative;margin-left:30rpx;background:#fff;border-radius:10rpx;margin-top:33rpx;
+        image{width:330rpx;height:296rpx;border-radius:10rpx 10rpx 0 0;}
+        .service-name{padding:22rpx 26rpx;margin:0;min-height:60rpx;line-height:30rpx;color:$black;font-size:$l;}
+        .service-price{color:$red;font-size:38rpx;position:absolute;bottom:28rpx;left:26rpx;max-width:50%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
             &::before{content:'￥';font-size:$m;}
             &::after{content:'/单';font-size:$m;}}
-        .service-tradeNums{position: absolute;right:26rpx;bottom:28rpx;font-size: $s;}
-    }
+        .service-tradeNums{position:absolute;right:26rpx;bottom:28rpx;font-size:$s;}}
 
-    &.collection{width:718rpx;height: 294rpx;padding:90rpx 30rpx 44rpx 210rpx;box-sizing:border-box;background:#fff;border-radius:10rpx;margin:20rpx auto;
+    &.collection{width:718rpx;height:294rpx;padding:90rpx 30rpx 44rpx 210rpx;box-sizing:border-box;background:#fff;border-radius:10rpx;margin:20rpx auto;
         .store-entrance{position:absolute;left:0;top:0;font-size:$m;color:$black;display:inlin-block;line-height:90rpx;text-indent:30rpx;}
-        image{position:absolute;left:30rpx;top:90rpx;width:160rpx;height:160rpx;border-radius: 10rpx;}
-        .service-name{min-height: 60rpx;line-height: 30rpx;}
+        image{position:absolute;left:30rpx;top:90rpx;width:160rpx;height:160rpx;border-radius:10rpx;}
+        .service-name{min-height:60rpx;line-height:30rpx;}
         .service-price{color:$red;font-size:38rpx;
             &::before{content:'￥';font-size:$m;}
             &::after{content:'/套';font-size:$m;}}
-        .collect{position:absolute;bottom:48rpx;right:30rpx;width:140rpx;height: 52rpx;line-height: 52rpx;border:2rpx solid rgba(229,229,229,1);font-size: $m;text-align: center;
+        .collect{position:absolute;bottom:48rpx;right:30rpx;width:140rpx;height:52rpx;line-height:52rpx;border:2rpx solid rgba(229,229,229,1);font-size:$m;text-align:center;
             .iconfont{margin-right:9rpx;
-                &.icon-yishoucang{color:$red;}
-            }
-        }
-    }}
+                &.icon-yishoucang{color:$red;}}}}}
 
 

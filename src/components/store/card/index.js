@@ -13,12 +13,12 @@ Component({
 
     _collect:async function(){
       if(!app.checkLogin())return
-      let res = await app.request.post('/user/talent/followTalent', {
-        action:this.properties.data.followFlag===0?1:0,
-        talentUserId:this.properties.data.userId
+      const res = await app.request.post('/store/collectionInfo/collect',{
+        businessId:this.properties.data.id,
+        type:0
       })
       if (res.code !==0) return
-      this.triggerEvent('collect', { index: this.properties.index,flag:this.properties.data.followFlag===0?1:0})
+      this.triggerEvent('collect', { index: this.properties.index,flag:this.properties.data.collectFlag==0?1:0})
     }
   }
 })

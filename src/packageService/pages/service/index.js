@@ -58,11 +58,11 @@ Page(observer({
   onPageScroll(e) {
     let sTop=e.scrollTop
 
-    if (sTop > 50 && this.data.hideNav === true) {
+    if (sTop > 80 && this.data.hideNav === true) {
       this.setData({
         hideNav: false
       })
-    } else if (sTop <= 50 && this.data.hideNav === false) {
+    } else if (sTop <= 80 && this.data.hideNav === false) {
       this.setData({
         hideNav: true
       })

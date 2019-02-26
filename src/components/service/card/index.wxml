@@ -6,7 +6,7 @@
     <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
     <view class="service-info"><text class="service-price">{{data.price}}</text>成交量{{data.tradeNums}}</view>
     <view class="service-info">{{data.storeName}}</view>
-    <view class="store-entrance" catchtap="_toStore">进店></view>
+    <view class="store-entrance" catchtap="_toStore"><text>进店</text><text class="iconfont icon-xiayiye"></text></view>
   </block>
 
   <block wx:if="{{appearance==='goods'}}">
@@ -26,8 +26,8 @@
     </view>
     <view class="service-price">{{data.price}}</view>
     <view class="collect" catchtap="_collect">
-      <text class="iconfont icon-{{data.collectFlag==='1'?'yishoucang':'shoucang1'}}"></text>
-      {{data.collectFlag==='1'?'已收藏':'收藏'}}
+      <text class="iconfont icon-{{data.collectFlag=='1'?'yishoucang':'shoucang1'}}"></text>
+      {{data.collectFlag=='1'?'已收藏':'收藏'}}
     </view>
   </block>
 

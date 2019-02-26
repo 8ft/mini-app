@@ -1,0 +1,22 @@
+<nav-bar title="购买服务"></nav-bar>
+
+<view class='info need'>
+  <text class='name'>您的报价(元)</text>
+  <view class='input'>
+    <input type="digit" maxlength='10' placeholder="该项目预算为" data-type="price" value="{{price}}" bindinput='input'></input>
+  </view>
+</view>
+
+<view class='info need' style='border-bottom:none;'>
+  <text class='name'>需求描述</text>
+</view>
+<view class='desc'>
+  <textarea value="{{desc}}" data-type="desc" bindinput='input' maxlength="{{inputLen}}"></textarea>
+  <view class='conLen'>{{conLen}}/1000</view>
+  <text class='placeholder' wx:if="{{desc.length<=0}}">请把需求再补充详细一些吧，越清晰具体 ，服务完成质量越高哦！ </text>
+</view>
+
+<action-bar>
+  <button class='btn-one' bindtap='send' disabled="{{disagree}}">发送申请</button>
+</action-bar>
+

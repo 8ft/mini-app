@@ -3,6 +3,7 @@ const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 
 Component({
   properties: {
+    index:Number,
     data:Object,
     appearance:{
       type:String,
@@ -26,10 +27,7 @@ Component({
         type:1
       })
       if(res.code!==0)return
-      this.setData({
-        'data.collectFlag':this.properties.data.collectFlag==='0'?'1':'0'
-      })
-    },
-    
+      this.triggerEvent('collect', { index: this.properties.index,flag:this.properties.data.collectFlag==0?1:0})
+    }
   }
 })

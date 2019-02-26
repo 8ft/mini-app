@@ -4,17 +4,17 @@
 
 <view class="content">
   <block wx:if="{{typeIndex===0}}">
-      <expert-card wx:for="{{experts.list}}" index="{{index}}" data="{{item}}" remarkable="true" bindcollect="updateExpert" bindremark="updateExpert"></expert-card>
+      <expert-card wx:for="{{experts.list}}" index="{{index}}" data="{{item}}" remarkable="true" bindcollect="updateExpertCard" bindremark="updateExpertCard"></expert-card>
       <nodata wx:if="{{!loading&&experts.list.length===0}}"></nodata>
   </block>
 
   <block wx:elif="{{typeIndex===1}}">
-    <service-card appearance="collection" wx:for="{{services.list}}" data="{{item}}"></service-card>
+    <service-card appearance="collection" bindcollect="updateServiceCard" wx:for="{{services.list}}" data="{{item}}" index="{{index}}"></service-card>
     <nodata wx:if="{{!loading&&services.list.length===0}}"></nodata>
   </block>
 
   <block wx:elif="{{typeIndex===2}}">
-    <store-card wx:for="{{stores.list}}" data="{{item}}" bindcollect="updateStore"></store-card>
+    <store-card wx:for="{{stores.list}}" bindcollect="updateStoreCard" data="{{item}}" index="{{index}}"></store-card>
     <nodata wx:if="{{!loading&&stores.list.length===0}}"></nodata>
   </block>
 
