@@ -1,22 +1,59 @@
 <nav-bar title="购买服务"></nav-bar>
 
-<view class='info need'>
-  <text class='name'>您的报价(元)</text>
-  <view class='input'>
-    <input type="digit" maxlength='10' placeholder="该项目预算为" data-type="price" value="{{price}}" bindinput='input'></input>
+<view class="service-card">
+  <view class="service-name">{{serviceInfo.productName}}</view>
+  <image lazy-load="true" mode='aspectFill' src="{{serviceInfo.coverFileUrl}}"></image>
+  <navigator class="store-entrance" hover-class="none" url="/packageService/pages/store?id={{storeInfo.storeId}}">
+    <text class="iconfont icon-dianpu"></text>
+    {{storeInfo.storeName}}
+    <text class="iconfont icon-xiayiye"></text>
+  </navigator>
+  <view class="service-type">服务分类：{{serviceInfo.productTypeCn}}/{{serviceInfo.productSubtypeCn}}</view>
+</view>
+
+<view class="input-box" style="padding-bottom:33rpx;">
+  <view class='title' style="border:none;">需求描述</view>
+  <view class='desc'>
+    <textarea value="{{desc}}" data-type="desc" bindinput='input' maxlength="{{inputLen}}"></textarea>
+    <view class='conLen'>{{conLen}}/1000字</view>
+    <text class='placeholder' wx:if="{{desc.length<=0}}">请把需求再补充详细一些吧，越清晰具体 ，服务完成质量越高哦！ </text>
   </view>
 </view>
 
-<view class='info need' style='border-bottom:none;'>
-  <text class='name'>需求描述</text>
+<view class="input-box">
+  <view class='title'>联系方式<text>至少填写一个联系方式</text></view>
+  <view class='info'>
+    <text class='name'>手机</text>
+    <view class='input'>
+      <input type="digit" maxlength='10' placeholder="请输入手机号码" data-type="price" value="{{price}}" bindinput='input'></input>
+    </view>
+  </view>
+  <view class='info'>
+    <text class='name'>微信</text>
+    <view class='input'>
+      <input type="digit" maxlength='10' placeholder="请输入微信号码" data-type="price" value="{{price}}" bindinput='input'></input>
+    </view>
+  </view>
 </view>
-<view class='desc'>
-  <textarea value="{{desc}}" data-type="desc" bindinput='input' maxlength="{{inputLen}}"></textarea>
-  <view class='conLen'>{{conLen}}/1000</view>
-  <text class='placeholder' wx:if="{{desc.length<=0}}">请把需求再补充详细一些吧，越清晰具体 ，服务完成质量越高哦！ </text>
+
+<view class="input-box">
+  <view class='title'>服务金额和时间<text>购买前请与卖家协商沟通 </text></view>
+  <view class='info'>
+    <text class='name'>金额</text>
+    <view class='input'>
+      <input type="digit" maxlength='10' placeholder="请输入服务金额" data-type="price" value="{{price}}" bindinput='input'></input>
+    </view>
+  </view>
+  <view class='info'>
+    <text class='name'>时间</text>
+    <view class='input'>
+      <input type="digit" maxlength='10' placeholder="请输入天数" data-type="price" value="{{price}}" bindinput='input'></input>
+    </view>
+  </view>
 </view>
 
 <action-bar>
-  <button class='btn-one' bindtap='send' disabled="{{disagree}}">发送申请</button>
+  <view class="service-price">服务金额:<text>123213</text></view>
+  <button class="submit" bindtap="submit">提交订单</button>
 </action-bar>
 

@@ -144,6 +144,7 @@ Page(observer({
       isMyself: isMyself,
       loading: false,
       detail: detail,
+      storeInfo:data.data.storeInfo,
       comments: comments.data
     })
 
@@ -168,6 +169,18 @@ Page(observer({
       if(res.code!==0)return
       this.setData({
         'detail.collectFlag':this.data.detail.collectFlag==='0'?'1':'0'
+      })
+    }
+  },
+
+  buy:function(){
+    if(app.checkLogin()){
+      wx.setStorageSync('serviceInfo',{
+        service:this.data.detail,
+        store:this.data.storeInfo
+      })
+      wx.navigateTo({
+        url:`/packageService/pages/buy/index?id=${this.data.id}`
       })
     }
   },

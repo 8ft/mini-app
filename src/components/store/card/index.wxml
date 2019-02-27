@@ -1,15 +1,15 @@
 
 <view class="store">
-    <navigator class="store-info" hover-class="none" url="/packageService/pages/store/index?id={{data.storeId}}">
+    <view class="store-info">
       <image class="store-logo" lazy-load="true" mode="aspectFill" src="{{data.picUrl}}"></image>
       <view class="store-name">{{data.storeName}}</view>
       <view class="other-info">{{data.business}}</view>
       <view class="other-info">已成交{{data.tradeNums}}单</view>
-    </navigator>
+    </view>
 
     <view class="store-action">
       <view catchtap="_download"><text class="iconfont icon-xiaoxi1"></text>私信</view>
-      <view catchtap=""><text class="iconfont icon-dianpu"></text>进店</view>
+      <view catchtap="_toStore"><text class="iconfont icon-dianpu"></text>进店</view>
       <view catchtap="_collect"><text class="iconfont icon-{{data.collectFlag==0?'shoucang1':'yishoucang'}}"></text>{{data.collectFlag==0?'收藏':'已收藏'}}</view>
     </view>
 </view>

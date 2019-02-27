@@ -16,9 +16,16 @@ Page(observer({
   },
 
   onLoad: function (options) {
+    const data=wx.getStorageSync('serviceInfo')
     this.setData({
+      serviceInfo:data.service,
+      storeInfo:data.store,
       id:options.id
     })
+  },
+
+  onHide:function(){
+    wx.removeStorageSync('serviceInfo')
   },
 
   input: function (e) {

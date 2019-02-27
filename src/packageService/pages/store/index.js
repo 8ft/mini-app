@@ -2,6 +2,12 @@ const app = getApp()
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 const observer = require('../../../libs/observer').observer
 
+const priceSortWays={
+  'default':{val:1,next:'asc'},
+  'asc':{val:4,next:'desc'},
+  'desc':{val:5,next:'default'},
+}
+
 Page(observer({
   props: {
     stores: app.stores
@@ -25,7 +31,8 @@ Page(observer({
     services: {
       list: [],
       pageIndex: 1,
-      nomore: false
+      nomore: false,
+      sort:'default'
     },
     latest:{
       list: [],
@@ -126,7 +133,8 @@ Page(observer({
         this.data.services = {
           list: [],
           pageIndex: 1,
-          nomore: false
+          nomore: false,
+          sort:'default'
         }
         break;
     }
@@ -149,6 +157,19 @@ Page(observer({
     }
   },
 
+  sortServicesByPrice:function(){
+    this.setData({
+      'services.sort':priceSortWays[this.data.services.sort].next
+    })
+    this.data.services = {
+      list: [],
+      pageIndex: 1,
+      nomore: false,
+      sort:this.data.services.sort
+    }
+    this.getServices()
+  },
+
   scrollToServiceTypes: function (e) {
     this.setData({
       'serviceTypes.parent': 'service' + e.currentTarget.dataset.code
@@ -169,8 +190,8 @@ Page(observer({
   },
 
   getServices: async function () {
-    const isPage2=this.data.tabIndex===1
-    let data =isPage2?this.data.services:this.data.latest
+    const isPageServices=this.data.tabIndex===1
+    let data =isPageServices?this.data.services:this.data.latest
     let nomore = data.nomore
     if (nomore) return
     this.setData({
@@ -181,7 +202,7 @@ Page(observer({
     let res = await app.request.post('/store/productBaseInfo/getList', {
       pageIndex: pIndex,
       storeId: this.data.id,
-      sortType:isPage2?'1':'2',
+      sortType:isPageServices?priceSortWays[data.sort].val:3,
       productSubtype:this.data.serviceTypes.selected.dictValue || ''
     })
 
@@ -192,7 +213,7 @@ Page(observer({
         nomore = true
       }
 
-      if(isPage2){
+      if(isPageServices){
         this.setData({
           'services.list': this.data.services.list.concat(res.data.pageData.list.map(service => {
             if (service.productName.length > 16) {
@@ -202,6 +223,7 @@ Page(observer({
           })),
           'services.pageIndex': pIndex,
           'services.nomore': nomore,
+          'services.sort':data.sort,
           loading: false
         })
       }else{

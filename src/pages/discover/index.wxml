@@ -80,7 +80,7 @@
             <text>{{service_sortWay.selected.text}}</text>
             <view></view>
         </view>
-        <view class="filter-item {{activeFilter==='jobTypes'?'on':''}}" data-name="serviceTypes" bindtap="selectFilter">
+        <view class="filter-item {{activeFilter==='serviceTypes'?'on':''}}" data-name="serviceTypes" bindtap="selectFilter">
             <text>{{serviceTypes.selected.dictName&&serviceTypes.selected.dictName!=='不限'?serviceTypes.selected.dictName:'服务分类'}}</text>
             <view></view>
         </view>

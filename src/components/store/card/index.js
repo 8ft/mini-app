@@ -11,6 +11,12 @@ Component({
   methods:{
     _download:app.download,
 
+    _toStore:function(){
+      wx.navigateTo({
+        url:`/packageService/pages/store/index?id=${this.properties.data.id}`
+      })
+    },
+
     _collect:async function(){
       if(!app.checkLogin())return
       const res = await app.request.post('/store/collectionInfo/collect',{

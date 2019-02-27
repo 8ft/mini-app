@@ -54,5 +54,5 @@
       <view class="iconfont icon-{{detail.collectFlag==='1'?'yishoucang':'shoucang1'}}"></view>
       <view class="name">收藏</view>
   </view>
-  <button class="buy" disabled="{{detail.invalidFlag===0}}">购买服务</button>
+  <button class="buy" disabled="{{detail.invalidFlag===0}}" bindtap="buy">购买服务</button>
 </action-bar>

@@ -19,11 +19,16 @@
     <swiper-item style="position:relative;">
         <view class="filter-place-holder"></view>
         <view class='filter service'>
-            <view class="filter-item {{activeFilter==='jobTypes'?'on':''}}" data-name="serviceTypes" bindtap="selectFilter">
+            <view class="filter-item {{activeFilter==='serviceTypes'?'on':''}}" data-name="serviceTypes" bindtap="selectFilter">
                 <text>{{serviceTypes.selected.dictName&&serviceTypes.selected.dictName!=='不限'?serviceTypes.selected.dictName:'分类'}}</text>
                 <view></view>
             </view>
+            <view class="filter-item sort {{services.sort}}" bindtap="sortServicesByPrice">
+                <text>价格</text>
+                <view></view>
+            </view>
         </view>
+
         <popup active="{{activeFilter==='serviceTypes'}}" margin="80rpx" bindhide='closePopup'>
             <view class="job-types">
                 <view class="parent">
@@ -42,7 +47,10 @@
             style="height:{{allServicesScrollViewHeight}}px" 
             scroll-y="true" 
             enable-back-to-top="true"> 
-            <service-card appearance="goods" wx:for="{{services.list}}" data="{{item}}"></service-card>
+            <block wx:if="{{services.list.length>0}}">
+                <service-card appearance="goods" wx:for="{{services.list}}" data="{{item}}"></service-card>
+            </block>
+            <nodata wx:else></nodata>
         </scroll-view>
     </swiper-item>
     <swiper-item>
@@ -50,7 +58,10 @@
             style="height:{{scrollViewHeight}}px" 
             scroll-y="true" 
             enable-back-to-top="true"> 
-            <service-card appearance="goods" wx:for="{{services.list}}" data="{{item}}"></service-card>
+            <block wx:if="{{services.list.length>0}}">
+                <service-card appearance="goods" wx:for="{{services.list}}" data="{{item}}"></service-card>
+            </block>
+            <nodata wx:else></nodata>
         </scroll-view>
     </swiper-item>
 </swiper>

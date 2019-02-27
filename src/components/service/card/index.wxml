@@ -19,7 +19,7 @@
   <block wx:if="{{appearance==='collection'}}">
     <view class="service-name">{{data.productName}}</view>
     <image lazy-load="true" mode='aspectFill' src="{{data.picUrl}}"></image>
-    <view class="store-entrance" catchtap="_toStroe">
+    <view class="store-entrance" catchtap="_toStore">
       <text class="iconfont icon-dianpu"></text>
       {{data.storeName}}
       <text class="iconfont icon-xiayiye"></text>
