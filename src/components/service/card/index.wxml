@@ -1,35 +1,52 @@
 
-<navigator class="service-card {{appearance}}" hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
+<navigator wx:if="{{appearance==='normal'}}" class="service-card {{appearance}}" hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
+  <view class="service-name">{{data.productName}}</view>
+  <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
+  <view class="service-info"><text class="service-price">{{data.price}}</text>成交量{{data.tradeNums}}</view>
+  <view class="service-info">{{data.storeName}}</view>
+  <view class="store-entrance" catchtap="_toStore"><text>进店</text><text class="iconfont icon-xiayiye"></text></view>
+</navigator>
   
-  <block wx:if="{{appearance==='normal'}}">
+<navigator wx:if="{{appearance==='goods'}}" class="service-card {{appearance}}" hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
+  <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
+  <view class="service-name">{{data.productName}}</view>
+  <text class="service-price">{{data.price}}</text>
+  <text class="service-tradeNums">成交量{{data.tradeNums}}</text>
+</navigator>
+  
+<navigator wx:if="{{appearance==='collection'}}" class="service-card {{appearance}}" hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
+  <view class="service-name">{{data.productName}}</view>
+  <image lazy-load="true" mode='aspectFill' src="{{data.picUrl}}"></image>
+  <view class="store-entrance" catchtap="_toStore">
+    <text class="iconfont icon-dianpu"></text>
+    {{data.storeName}}
+    <text class="iconfont icon-xiayiye"></text>
+  </view>
+  <view class="service-price">{{data.price}}</view>
+  <view class="collect" catchtap="_collect">
+    <text class="iconfont icon-{{data.collectFlag=='1'?'yishoucang':'shoucang1'}}"></text>
+    {{data.collectFlag=='1'?'已收藏':'收藏'}}
+  </view>
+</navigator>
+  
+<navigator wx:if="{{appearance==='order'}}" class="service-card {{appearance}}" hover-class="none" url="/packageService/pages/orderDetail/index?id={{data.id}}">
     <view class="service-name">{{data.productName}}</view>
     <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
-    <view class="service-info"><text class="service-price">{{data.price}}</text>成交量{{data.tradeNums}}</view>
-    <view class="service-info">{{data.storeName}}</view>
-    <view class="store-entrance" catchtap="_toStore"><text>进店</text><text class="iconfont icon-xiayiye"></text></view>
-  </block>
-
-  <block wx:if="{{appearance==='goods'}}">
-    <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
-    <view class="service-name">{{data.productName}}</view>
-    <text class="service-price">{{data.price}}</text>
-    <text class="service-tradeNums">成交量{{data.tradeNums}}</text>
-  </block>
-
-  <block wx:if="{{appearance==='collection'}}">
-    <view class="service-name">{{data.productName}}</view>
-    <image lazy-load="true" mode='aspectFill' src="{{data.picUrl}}"></image>
     <view class="store-entrance" catchtap="_toStore">
       <text class="iconfont icon-dianpu"></text>
       {{data.storeName}}
       <text class="iconfont icon-xiayiye"></text>
     </view>
     <view class="service-price">{{data.price}}</view>
-    <view class="collect" catchtap="_collect">
-      <text class="iconfont icon-{{data.collectFlag=='1'?'yishoucang':'shoucang1'}}"></text>
-      {{data.collectFlag=='1'?'已收藏':'收藏'}}
+
+    <view class="action-bar">
+      <view class="status">{{data.businessStateName}}</view>
+      <button class="action" data-action="delete" catchtap="_update" wx:if="{{activeActions[data.businessState].delete}}">删除</button>
+      <button class="action" data-action="close" catchtap="_update" wx:if="{{activeActions[data.businessState].close}}">关闭</button>
+      <navigator class="action" hover-class="none" url="/packageService/pages/pay/index?id={{data.id}}" wx:if="{{activeActions[data.businessState].pay}}">付款</navigator>
+      <navigator class="action" hover-class="none" url="/packageService/pages/payBack/index?id={{data.id}}" wx:if="{{activeActions[data.businessState].payBack}}">申请退款</navigator>
+      <button class="action" data-action="comfirm" catchtap="_update" wx:if="{{activeActions[data.businessState].comfirm}}">确认验收</button>
     </view>
-  </block>
 
 </navigator>
 

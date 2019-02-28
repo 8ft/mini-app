@@ -36,13 +36,13 @@
     <text class='arrow-right'>{{props.stores.account.stateCn}}</text>
 </view>
 
-<view class='entrances' bindtap='go' data-url="/packageMine/pages/collection/index">
+<view class='entrances' bindtap='go'>
     <image src='/assets/img/mine/mine_wddp@3x.png'></image>
     我的店铺
     <text class='arrow-right'></text>
 </view>
 
-<view class='entrances' bindtap='go' data-url="/packageMine/pages/collection/index">
+<view class='entrances' bindtap='go' data-url="/packageService/pages/orders/index">
     <image src='/assets/img/mine/mine_wddd@3x.png'></image>
     我的订单
     <text class='arrow-right'></text>

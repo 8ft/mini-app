@@ -35,9 +35,14 @@ Page(observer({
 
   go:function(e){
     if (!app.checkLogin()) return 
-    wx.navigateTo({
-      url: e.currentTarget.dataset.url
-    })
+    const url=e.currentTarget.dataset.url
+    if(url!==undefined){
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url
+      })
+    }else{
+      app.download()
+    }
   },
 
   logout:function(){

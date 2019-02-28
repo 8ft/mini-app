@@ -14,7 +14,9 @@
     }
 
     .info{display:flex;align-items:center;height:116rpx;border-bottom:$border;
-        .input{margin-left:20rpx;min-height:$xl;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .input{margin-left:20rpx;min-height:$xl;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+            input,text{display: inline-block;vertical-align: middle;}
+        }
     }
 
     .desc{position:relative;background:#fff;width:100%;height:236rpx;
@@ -26,7 +28,6 @@
 .service-price{flex:1;text-align: right;font-size:$m;
     text{color:$red;font-size:38rpx;margin-left:10rpx;
         &::before{content:'￥';font-size:$m;}
-        &::after{content:'.00';font-size:$m;}
     }
 }
 .submit{background: #FF8000;height: 98rpx;line-height:98rpx;color:#fff;width:208rpx;font-size: $xl;border-radius: 4rpx;margin:0 30rpx;}

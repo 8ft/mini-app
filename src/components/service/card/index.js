@@ -12,6 +12,14 @@ Component({
   },
 
   data:{
+    activeActions:{
+      0:{close:true},
+      1:{close:true,pay:true},
+      2:{payBack:true},
+      3:{payBack:true,comfirm:true},
+      4:{delete:true},
+      5:{delete:true}
+    }
   },
 
   methods:{
@@ -19,6 +27,11 @@ Component({
       wx.navigateTo({
         url:`/packageService/pages/store/index?id=${this.properties.data.storeId}`
       })
+    },
+
+    _update:function(e){
+      const action=e.currentTarget.dataset.action
+      
     },
 
     _collect:async function(){

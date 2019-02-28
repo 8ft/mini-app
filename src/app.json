@@ -71,7 +71,8 @@
       "pages": [
         "pages/service/index",
         "pages/store/index",
-        "pages/buy/index"
+        "pages/buy/index",
+        "pages/orders/index"
       ]
     }
   ],

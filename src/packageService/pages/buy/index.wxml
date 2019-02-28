@@ -1,9 +1,10 @@
 <nav-bar title="购买服务"></nav-bar>
 
+
 <view class="service-card">
   <view class="service-name">{{serviceInfo.productName}}</view>
   <image lazy-load="true" mode='aspectFill' src="{{serviceInfo.coverFileUrl}}"></image>
-  <navigator class="store-entrance" hover-class="none" url="/packageService/pages/store?id={{storeInfo.storeId}}">
+  <navigator class="store-entrance" hover-class="none" url="/packageService/pages/store/index?id={{storeInfo.storeId}}">
     <text class="iconfont icon-dianpu"></text>
     {{storeInfo.storeName}}
     <text class="iconfont icon-xiayiye"></text>
@@ -13,6 +14,7 @@
 
 <view class="input-box" style="padding-bottom:33rpx;">
   <view class='title' style="border:none;">需求描述</view>
+
   <view class='desc'>
     <textarea value="{{desc}}" data-type="desc" bindinput='input' maxlength="{{inputLen}}"></textarea>
     <view class='conLen'>{{conLen}}/1000字</view>
@@ -20,40 +22,56 @@
   </view>
 </view>
 
-<view class="input-box">
-  <view class='title'>联系方式<text>至少填写一个联系方式</text></view>
-  <view class='info'>
-    <text class='name'>手机</text>
-    <view class='input'>
-      <input type="digit" maxlength='10' placeholder="请输入手机号码" data-type="price" value="{{price}}" bindinput='input'></input>
-    </view>
-  </view>
-  <view class='info'>
-    <text class='name'>微信</text>
-    <view class='input'>
-      <input type="digit" maxlength='10' placeholder="请输入微信号码" data-type="price" value="{{price}}" bindinput='input'></input>
-    </view>
-  </view>
-</view>
+<form bindsubmit="formSubmit">
+  <view class="input-box">
+    <view class='title'>联系方式<text>至少填写一个联系方式</text></view>
 
-<view class="input-box">
-  <view class='title'>服务金额和时间<text>购买前请与卖家协商沟通 </text></view>
-  <view class='info'>
-    <text class='name'>金额</text>
-    <view class='input'>
-      <input type="digit" maxlength='10' placeholder="请输入服务金额" data-type="price" value="{{price}}" bindinput='input'></input>
+    <view class='info'>
+      <text class='name'>手机</text>
+      <view class='input'>
+        <input name="phone" type="number" maxlength='11' value="{{props.stores.account.account.telephone||''}}" placeholder="请输入手机号码"></input>
+      </view>
+    </view>
+    
+    <view class='info'>
+      <text class='name'>微信</text>
+      <view class='input'>
+        <input name="wechat" placeholder='请输入微信号' maxlength='20'></input>
+      </view>
     </view>
   </view>
-  <view class='info'>
-    <text class='name'>时间</text>
-    <view class='input'>
-      <input type="digit" maxlength='10' placeholder="请输入天数" data-type="price" value="{{price}}" bindinput='input'></input>
-    </view>
-  </view>
-</view>
 
-<action-bar>
-  <view class="service-price">服务金额:<text>123213</text></view>
-  <button class="submit" bindtap="submit">提交订单</button>
-</action-bar>
+
+  <view class="input-box">
+    <view class='title'>服务金额和时间<text>购买前请与卖家协商沟通 </text></view>
+
+    <view class='info'>
+      <text class='name'>金额</text>
+      <view class='input'>
+        <input name="price" type="digit" maxlength='10' placeholder="请输入服务金额" data-type="price" value="{{price}}" bindinput='input'></input>
+        <text> 元</text>
+      </view>
+    </view>
+
+    <view class='info'>
+      <text class='name'>时间</text>
+      <view class='input'>
+        <input name="dayCost" type="digit" placeholder="请输入天数如12天" data-type="dayCost" value="{{dayCost}}" bindinput='input'></input>
+        <text> 天</text>
+      </view>
+    </view>
+  </view>
+
+  <action-bar>
+    <view class="service-price">
+      <block wx:if="{{price}}">
+        服务金额:<text>{{price}}</text>
+      </block>
+    </view>
+    <button class="submit" form-type="submit">提交订单</button>
+  </action-bar>
+
+</form>
+
+
 

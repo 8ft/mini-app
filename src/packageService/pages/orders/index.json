@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "project-card": "/components/project/card/index",
+    "service-card": "/components/service/card/index",
     "tabs": "/components/common/tabs/index",
     "nodata": "/components/nodata/nodata"
   }
