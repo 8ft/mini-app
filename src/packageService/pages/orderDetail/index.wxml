@@ -1,0 +1,70 @@
+
+<nav-bar title="订单详情"></nav-bar>
+
+<view class="order-status" wx:if="{{progress!==undifined}}">
+    <progress percent="{{progress}}" stroke-width="5rpx" backgroundColor="#EDEDED" activeColor="#0083FF"/>
+    <view class="steps progress{{progress}}">
+        <view class="step"><text class="iconfont icon-dagou"></text></view>
+        <view class="step"><text class="iconfont icon-dagou"></text></view>
+        <view class="step"><text class="iconfont icon-dagou"></text></view>
+        <view class="step"><text class="iconfont icon-dagou"></text></view>
+    </view>
+    <view class="step-names progress{{progress}}">
+        <view>购买服务</view>
+        <view>托管服务金</view>
+        <view>服务中</view>
+        <view>验收打款</view>
+    </view>
+</view>
+
+<view wx:else>
+
+</view>
+
+
+<view class="order-infos">
+    <view class="title">订单信息</view>
+    <view class="service">
+        <image lazy-load="true" mode='aspectFill' src="{{detail.coverFileUrl}}"></image>
+        <view class="name">{{detail.productName}}</view>
+        <view class="price">{{detail.price}}</view>
+    </view>
+    <view class="info">
+        <view>订单编号</view>
+        <text>{{detail.businessNo}}</text>
+    </view>
+    <view class="info">
+        <view>创建时间</view>
+        <text>{{detail.createTime}}</text>
+    </view>
+    <view class="info" wx:if="{{detail.deliveryTime}}">
+        <view>交付时间</view>
+        <text>{{detail.deliveryTime}}</text>
+    </view>
+</view>
+
+<view class="order-infos">
+    <view class="title">卖家信息</view>
+    <view class="info">
+        <view>昵称</view>
+        <text>{{detail.sellerNickName}}</text>
+    </view>
+    <view class="info" wx:if="{{detail.sellerUserMobile}}">
+        <view>联系电话</view>
+        <text>{{detail.sellerUserMobile}}</text>
+    </view>
+    <view class="info" wx:if="{{detail.sellerWechat}}">
+        <view>微信</view>
+        <text>{{detail.sellerWechat}}</text>
+    </view>
+    <view class="info connect">
+        <view>联系卖家</view>
+        <text class="iconfont icon-kefu"></text>
+        <text>发送消息</text>
+    </view>
+</view>
+
+<view class="order-infos">
+    <view class="title">服务需求</view>
+    <view class="requirement">{{detail.requirements}}</view>
+</view>

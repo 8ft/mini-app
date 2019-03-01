@@ -134,6 +134,8 @@ Page(observer({
       linkWeixin: data.wechat||''
     })
     if (res.code !== 0) return
-    
+    wx.redirectTo({
+      url: `/packageService/pages/orderDetail/index?id=${res.data.id}`
+    })
   }
 }))

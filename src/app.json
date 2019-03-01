@@ -72,7 +72,8 @@
         "pages/service/index",
         "pages/store/index",
         "pages/buy/index",
-        "pages/orders/index"
+        "pages/orders/index",
+        "pages/orderDetail/index"
       ]
     }
   ],

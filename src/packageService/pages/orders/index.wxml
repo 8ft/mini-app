@@ -2,11 +2,9 @@
   <tabs slot="addones" tabs="{{tabsCn}}" active="{{tabIndex}}" bindchange="switchList"></tabs>
 </nav-bar>
 
-<service-card wx:for="{{orders}}" appearance="order" data="{{item}}" index="{{index}}"></service-card>
+<service-card wx:for="{{orders}}" appearance="order" data="{{item}}" index="{{index}}" bindupdate="refresh"></service-card>
 
-<!-- <block wx:elif="{{!loading}}">
-  <nodata text="{{typeIndex===0?'还没有项目哦，快去发布OR申请~':'还没有申请过项目呢~'}}"></nodata>
-</block> -->
+<nodata wx:if="{{!loading&&orders.length===0}}"></nodata>
 
 
 

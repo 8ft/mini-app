@@ -45,7 +45,7 @@
       <button class="action" data-action="close" catchtap="_update" wx:if="{{activeActions[data.businessState].close}}">关闭</button>
       <navigator class="action" hover-class="none" url="/packageService/pages/pay/index?id={{data.id}}" wx:if="{{activeActions[data.businessState].pay}}">付款</navigator>
       <navigator class="action" hover-class="none" url="/packageService/pages/payBack/index?id={{data.id}}" wx:if="{{activeActions[data.businessState].payBack}}">申请退款</navigator>
-      <button class="action" data-action="comfirm" catchtap="_update" wx:if="{{activeActions[data.businessState].comfirm}}">确认验收</button>
+      <button class="action" catchtap="_comfirm" wx:if="{{activeActions[data.businessState].comfirm}}">确认验收</button>
     </view>
 
 </navigator>
