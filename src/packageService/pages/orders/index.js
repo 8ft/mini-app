@@ -12,12 +12,13 @@ Page({
     nomore: false
   },
 
-  onLoad: function () {
-    this.getOrders()
-  },
-
   onShow: function () {
-
+    if(this.data.orders.length===0){
+      this.getOrders()
+    }else if( wx.getStorageSync('update_order')){
+      wx.removeStorageSync('update_order')
+      this.refresh()
+    }
   },
 
   refresh: function () {

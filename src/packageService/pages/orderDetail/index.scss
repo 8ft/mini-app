@@ -1,7 +1,7 @@
 @import '../../../assets/wxss/var.scss';  
 
-.order-status{background: #fff;margin-top:24rpx;padding:0 30rpx 54rpx;position: relative;
-    progress{padding:72rpx 0;}
+.status-progressing{background: #fff;margin-top:24rpx;padding:0 30rpx 54rpx;position: relative;
+    progress{padding:72rpx 0;margin-bottom:56rpx;}
     .steps,.step-names{display: flex;align-items: center;justify-content:space-between;width:100%;height: 149rpx;box-sizing:border-box;position: absolute;left:0;top:0;z-index: 1;padding:0 30rpx;
         .step{width:26rpx;height: 26rpx;border:3rpx solid #fff;background: #0083FF;border-radius:50%;text-align: center;
             .iconfont{color:#fff;font-size: 20rpx;visibility: hidden;vertical-align: middle;}
@@ -32,6 +32,20 @@
         &.progress33 view:nth-last-of-type(n+3){color:$black;}
         &.progress66 view:nth-last-of-type(n+2){color:$black;}
         &.progress100 view{color:$black;}
+    }
+
+    .info{color:$gray;font-size: 26rpx;
+        text{font-size: 41rpx;color:$red;}
+    }
+
+    .action{margin-top:26rpx;width:122rpx;height:52rpx;line-height: 52rpx;border:$border;font-size: $m;color:$black;text-align: center;}
+}
+
+.status-done{background-image: linear-gradient(to right , #0D70FF, #5D9FFF);padding:30rpx;color:#fff;
+    .info{font-size: 26rpx;line-height:74rpx;
+        text{font-size: 41rpx;}
+        text.iconfont{font-size: 26rpx;}
+        navigator{display:inline;color:#FFF000;}
     }
 }
 

@@ -1,7 +1,7 @@
 
 <nav-bar title="订单详情"></nav-bar>
 
-<view class="order-status" wx:if="{{progress!==undifined}}">
+<view class="status-progressing" wx:if="{{progress>=0}}">
     <progress percent="{{progress}}" stroke-width="5rpx" backgroundColor="#EDEDED" activeColor="#0083FF"/>
     <view class="steps progress{{progress}}">
         <view class="step"><text class="iconfont icon-dagou"></text></view>
@@ -15,10 +15,36 @@
         <view>服务中</view>
         <view>验收打款</view>
     </view>
+
+    <view class="info">当前订单状态：<text>{{detail.businessStateName}}</text></view>
+
+    <view wx:if="{{detail.businessState===0}}" class="info">请与卖家联系尽快确认订单</view>
+
+    <block wx:if="{{detail.businessState===1}}">
+        <view class="info">如果双方已确定价格，你可以付款，金额将托管至巨牛汇担保交易。</view>
+        <view class="info">如有价格或交付时间变动，请联系卖家进行修改。</view>
+    </block>
+
+    <block wx:if="{{detail.businessState===2}}">
+        <view class="info">如果卖家迟迟未完成服务，你可以联系卖家尽快完成服务。</view>
+        <view class="info">若你遇到问题请与卖家协商处理，若无法解决可申请退款。</view>
+    </block>
+
+    <block wx:if="{{detail.businessState===3}}">
+        <view class="info">如果已收到服务，且对服务满意，你可以确认验收平台将打款给卖家。</view>
+        <view class="info">如果对本次服务不满意请与卖家协商解决，若有问题可申请 退款。</view>
+    </block>
+
+    <button class="action" data-action="delete" bindtap="update" wx:if="{{activeActions[detail.businessState].delete}}">删除</button>
+    <button class="action" data-action="close" bindtap="update" wx:if="{{activeActions[detail.businessState].close}}">关闭</button>
+    <navigator class="action" hover-class="none" url="/packageService/pages/pay/index?id={{detail.id}}" wx:if="{{activeActions[detail.businessState].pay}}">付款</navigator>
+    <navigator class="action" hover-class="none" url="/packageService/pages/payBack/index?id={{detail.id}}" wx:if="{{activeActions[detail.businessState].payBack}}">申请退款</navigator>
+    <button class="action" bindtap="comfirm" wx:if="{{activeActions[detail.businessState].comfirm}}">确认验收</button>
 </view>
 
-<view wx:else>
-
+<view wx:else class="status-done">
+    <view class="info">当前订单状态:<text>{{detail.businessStateName}}</text></view>
+    <view class="info">已关闭交易,<navigator hover-class="none" url="">点击选择其他心仪服务<text class="iconfont icon-xiayiye"></text></navigator></view>
 </view>
 
 
