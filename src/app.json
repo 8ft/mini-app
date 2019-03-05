@@ -73,7 +73,8 @@
         "pages/store/index",
         "pages/buy/index",
         "pages/orders/index",
-        "pages/orderDetail/index"
+        "pages/orderDetail/index",
+        "pages/refund/index"
       ]
     }
   ],

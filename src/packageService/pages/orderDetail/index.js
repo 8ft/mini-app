@@ -1,6 +1,5 @@
 const app = getApp()
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
-const observer = require('../../../libs/observer').observer
 
 const actionApis={
   delete:'/store/productOrderInfo/delete',
@@ -15,22 +14,18 @@ const progress={
   3:100
 }
 
-Page(observer({
-  props: {
-    stores: app.stores
-  },
+Page({
 
   data: {
     id:'',
-    character:'',
     detail:null,
     progress:0,
 
     activeActions: {
       0: { close: true },
       1: { close: true, pay: true },
-      2: { payBack: true },
-      3: { payBack: true, comfirm: true },
+      2: { refund: true },
+      3: { refund: true, comfirm: true },
       4: { delete: true },
       5: { delete: true }
     }
@@ -41,6 +36,12 @@ Page(observer({
       id:options.id
     })
     this.getDetail()
+  },
+
+  onShow:function(){
+    if( wx.getStorageSync('update_order')){
+      this.getDetail()
+    }
   },
 
   update: async function (e,act) {
@@ -73,6 +74,16 @@ Page(observer({
     if (res.data.productName.length > 30) {
       res.data.productName = res.data.productName.substring(0,30) + '...'
     }
+
+    res.data.refundRejectTime=res.data.refundRejectTime.slice(0,-3)
+    res.data.refundApplyTime=res.data.refundApplyTime.slice(0,-3)
+    res.data.createTime=res.data.createTime.slice(0,-3)
+    res.data.cancelTime=res.data.cancelTime.slice(0,-3)
+    res.data.paymentTime=res.data.paymentTime.slice(0,-3)
+    res.data.deliveryTime=res.data.deliveryTime.slice(0,-3)
+    res.data.acceptanceTime=res.data.acceptanceTime.slice(0,-3)
+    res.data.acceptancePayTime=res.data.acceptancePayTime.slice(0,-3)
+
     this.setData({
       detail:res.data,
       progress:progress[res.data.businessState]>=0?progress[res.data.businessState]:-1
@@ -81,4 +92,4 @@ Page(observer({
  
   download: app.download
 
-}))
+})

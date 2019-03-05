@@ -37,9 +37,9 @@
     .info{color:$gray;font-size: 26rpx;
         text{font-size: 41rpx;color:$red;}
     }
-
-    .action{margin-top:26rpx;width:122rpx;height:52rpx;line-height: 52rpx;border:$border;font-size: $m;color:$black;text-align: center;}
 }
+
+.action{margin-top:26rpx;width:122rpx;height:52rpx;line-height: 52rpx;border:$border;font-size: $m;color:$black;text-align: center;}
 
 .status-done{background-image: linear-gradient(to right , #0D70FF, #5D9FFF);padding:30rpx;color:#fff;
     .info{font-size: 26rpx;line-height:74rpx;
@@ -49,9 +49,9 @@
     }
 }
 
-.order-infos{background: #fff;padding:12rpx 30rpx;color:$black;margin-top:20rpx;
-    .title{line-height: 77rpx;font-size: $xl;border-bottom: $border;}
-    .service{padding-top:30rpx;padding-left:180rpx;position: relative;height: 160rpx;
+.order-infos{background: #fff;padding:0 30rpx;color:$black;margin-top:20rpx;
+    .title{font-size: $xl;border-bottom: $border;padding:35rpx 0 23rpx;margin-bottom:30rpx;}
+    .service{padding-left:180rpx;position: relative;height: 160rpx;margin-bottom:38rpx;
         image{width:160rpx;height: 160rpx;border-radius: 10rpx;position: absolute;left:0;bottom:0;}
         .name{margin-top:14rpx;font-size: 26rpx; }
         .price{font-size:38rpx;position: absolute;bottom:15rpx;left:180rpx;
@@ -59,11 +59,18 @@
             &::after{content:'/套';font-size:$m;}}
     }
 
-    .info{display: flex;align-items: center;height: 68rpx;font-size:$l;
+    .info{display: flex;align-items: flex-start;font-size:$l;padding-bottom:38rpx;
         view{color:$gray;flex:1;}
+        text{display:inline-block;max-width: 400rpx;}
         .iconfont{color:$darkBlue;font-size: 36rpx;margin-right:16rpx;}
-        &.connect{height: 87rpx;border-top: $border;}
+        &.action-bar{border-top: $border;align-items: center;height: 88rpx;padding: 0;}
+        .action{margin:0;}
     }
+
     .requirement{font-size: 26rpx;margin-top: 36rpx;padding-bottom: 47rpx;}
+
+    &.refund{background: #fff;padding:28rpx 30rpx 0;}
 }
+
+
 

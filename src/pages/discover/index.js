@@ -8,8 +8,6 @@ Page(observer({
   },
 
   data: {
-    pageIndex: 0,
-
     banners: null,
     hasNew: 0,
     types: [],
@@ -64,6 +62,12 @@ Page(observer({
     }
   },
 
+  onLoad:function(options){
+    if(options.page){
+      this.switchPage({detail:{index:options.page}})
+    }
+  },
+
   onShow: function () {
     if (this.data.pageIndex === 0) {
       this.getMyAttentionStats()
@@ -102,7 +106,7 @@ Page(observer({
   },
 
   switchPage: function (e) {
-    const pageIndex = e.detail.index
+    const pageIndex =e.detail.index
 
     if (pageIndex === 1 && !this.data.cities) {
       this.getFilter()

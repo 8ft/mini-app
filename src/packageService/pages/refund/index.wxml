@@ -1,0 +1,30 @@
+<nav-bar title="申请退款"></nav-bar>
+
+
+<view class="service-card">
+  <view class="service-name">{{orderInfo.productName}}</view>
+  <image lazy-load="true" mode='aspectFill' src="{{orderInfo.coverFileUrl}}"></image>
+  <navigator class="store-entrance" hover-class="none" url="/packageService/pages/store/index?id={{orderInfo.storeId}}">
+    <text class="iconfont icon-dianpu"></text>
+    {{orderInfo.storeName}}
+    <text class="iconfont icon-xiayiye"></text>
+  </navigator>
+  <view class="service-type">服务分类：{{orderInfo.productTypeName}}/{{orderInfo.productSubtypeName}}</view>
+</view>
+
+<view class="input-box" style="padding-bottom:33rpx;">
+  <radio-group bindchange="radioChange">
+      <label wx:for="{{items}}">
+          <radio color="#0083FF" value="{{item.value}}" /> {{item.name}}
+      </label>
+  </radio-group>
+
+  <view class='desc' wx:if="{{reson===''}}">
+    <textarea value="{{desc}}" data-type="desc" bindinput='input' maxlength="{{inputLen}}"></textarea>
+    <text class='placeholder' wx:if="{{desc.length<=0}}">请输入退款理由 </text>
+  </view>
+</view>
+
+<action-bar>
+  <button class='btn-one' bindtap="refund">确认</button>
+</action-bar>

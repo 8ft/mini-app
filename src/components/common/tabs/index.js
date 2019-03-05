@@ -12,7 +12,6 @@ Component({
   properties: {
     active: {
       type: Number,
-      value:0,
       observer(newVal, oldVal, changedPath) {
         this._selectTab(newVal)
       }
@@ -42,7 +41,9 @@ Component({
       this.windowWidth = wx.getSystemInfoSync().windowWidth
     },
     ready: function () {
-      this._selectTab(0)
+      if(!this.properties.active){
+        this._selectTab(0)
+      }
     }
   },
 
@@ -83,6 +84,8 @@ Component({
           animationData: this.animation.width(width).translateX(x).step().export(),
           scrollLeft: x - this.windowWidth / 2 + width / 2
         })
+
+        this.triggerEvent('change', { index: toActiveIndex })
 
         timeoutId = setTimeout(() => {
           processing = false
