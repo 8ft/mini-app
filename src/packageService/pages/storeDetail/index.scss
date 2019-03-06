@@ -1,0 +1,18 @@
+@import '../../../assets/wxss/var.scss';
+
+scroll-view{width:690rpx;background:#fff;box-sizing: border-box;padding:56rpx 39rpx;margin:22rpx auto 0;border-radius:20rpx;
+    image{width:196rpx;height: 196rpx;margin:0 auto 35rpx;border-radius: 50%;display: block;}
+    .store-name{font-weight: 600;color:$black;font-size: 38rpx;margin-bottom: 56rpx;text-align: center;}
+    .store-desc{font-size: 28rpx;color:$lightBlack;}
+}
+
+.action-bar .bar{padding:0 30rpx;box-sizing: border-box;}
+.store-info{flex: 1;height:91rpx;font-size: 26rpx;line-height: 91rpx;
+    image{width:91rpx;height: 91rpx;border-radius: 50%;margin-right: 18rpx;vertical-align: middle;}
+    text{margin-right: 37rpx;display:inline-block;vertical-align: middle;}
+}
+.action{padding-left: 50rpx;text-align:center;
+    .iconfont{font-size: 35rpx;margin-bottom:10rpx;}
+    .name{font-size: 26rpx;line-height: 26rpx;}
+    &.lighten{color:$red;}
+}

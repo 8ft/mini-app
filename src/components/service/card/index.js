@@ -20,8 +20,8 @@ Component({
     activeActions: {
       0: { close: true },
       1: { close: true, pay: true },
-      2: { payBack: true },
-      3: { payBack: true, comfirm: true },
+      2: { refund: true },
+      3: { refund: true, comfirm: true },
       4: { delete: true },
       5: { delete: true }
     }

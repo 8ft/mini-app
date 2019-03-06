@@ -85,8 +85,6 @@ Component({
           scrollLeft: x - this.windowWidth / 2 + width / 2
         })
 
-        this.triggerEvent('change', { index: toActiveIndex })
-
         timeoutId = setTimeout(() => {
           processing = false
           if (toActiveArr.length > 0) {

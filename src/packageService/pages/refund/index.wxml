@@ -3,7 +3,7 @@
 
 <view class="service-card">
   <view class="service-name">{{orderInfo.productName}}</view>
-  <image lazy-load="true" mode='aspectFill' src="{{orderInfo.coverFileUrl}}"></image>
+  <image mode='aspectFill' src="{{orderInfo.coverFileUrl}}"></image>
   <navigator class="store-entrance" hover-class="none" url="/packageService/pages/store/index?id={{orderInfo.storeId}}">
     <text class="iconfont icon-dianpu"></text>
     {{orderInfo.storeName}}

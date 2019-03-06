@@ -71,10 +71,12 @@
       "pages": [
         "pages/service/index",
         "pages/store/index",
+        "pages/storeDetail/index",
         "pages/buy/index",
         "pages/orders/index",
         "pages/orderDetail/index",
-        "pages/refund/index"
+        "pages/refund/index",
+        "pages/pay/index"
       ]
     }
   ],

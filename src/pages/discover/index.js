@@ -64,7 +64,11 @@ Page(observer({
 
   onLoad:function(options){
     if(options.page){
-      this.switchPage({detail:{index:options.page}})
+      this.switchPage(null,parseInt(options.page))
+    }else{
+      this.setData({
+        pageIndex:0
+      })
     }
   },
 
@@ -105,8 +109,8 @@ Page(observer({
     }
   },
 
-  switchPage: function (e) {
-    const pageIndex =e.detail.index
+  switchPage: function (e,page) {
+    const pageIndex =page||e.detail.index
 
     if (pageIndex === 1 && !this.data.cities) {
       this.getFilter()

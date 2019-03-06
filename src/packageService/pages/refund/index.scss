@@ -1,11 +1,10 @@
 @import '../../../assets/wxss/var.scss';  
 
 .service-card{position:relative;font-size:26rpx;color:$black;width:690rpx;height:280rpx;padding:87rpx 30rpx 33rpx 212rpx;box-sizing:border-box;background:#fff;margin:20rpx auto 0;border-radius:8rpx;
-    .service-name{margin-bottom:32rpx;min-height:80rpx;padding-top:10rpx;}
+    .service-name{margin-bottom:32rpx;min-height:60rpx;line-height:30rpx;padding-top:10rpx;}
     .iconfont{font-size:inherit;}
     .store-entrance{position:absolute;left:0;top:0;font-size:$m;display:inlin-block;line-height:90rpx;text-indent:30rpx;}
     image{position:absolute;left:30rpx;top:87rpx;width:160rpx;height:160rpx;border-radius:10rpx;}
-    .service-name{min-height:60rpx;line-height:30rpx;}
     .service-type{color:$gray;font-size:$m;}}
 
 .input-box{padding:46rpx 30rpx;background: #fff;margin:20rpx auto;font-size:$xl;color:$lightBlack;width:690rpx;box-sizing:border-box;

@@ -1,0 +1,28 @@
+<nav-bar title="{{isMyself?'我的店铺':'TA的店铺'}}" bindready="getNavHeight"></nav-bar>
+
+<scroll-view
+    style="height:{{scrollViewHeight}}px" 
+    scroll-y="true" 
+    enable-back-to-top="true"> 
+    
+    <image mode="aspectFill" src="{{detail.storeLogo}}"></image>
+    <view class="store-name">{{detail.storeName}}</view>
+    <view class="store-desc">{{detail.storeDesc}}</view>
+
+</scroll-view>
+
+<action-bar>
+  <view class="store-info">
+      <image mode="aspectFill" src="{{detail.storeLogo}}"></image>
+      <text>成交量{{detail.tradeNums}}</text>
+      <text>收藏数{{detail.collectNums}}</text>
+  </view>
+  <view class="action {{detail.collectFlag==1?'lighten':''}}" bindtap="collect">
+      <view class="iconfont icon-{{detail.collectFlag==1?'yishoucang':'shoucang1'}}"></view>
+      <view class="name">收藏</view>
+  </view>
+   <view class="action" bindtap="download">
+      <view class="iconfont icon-kefu"></view>
+      <view class="name">联系TA</view>
+  </view>
+</action-bar>

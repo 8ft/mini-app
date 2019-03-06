@@ -1,0 +1,33 @@
+<nav-bar title="订单信息"></nav-bar>
+
+<view class="service-card">
+  <view class="service-name">{{orderInfo.productName}}</view>
+  <image mode='aspectFill' src="{{orderInfo.coverFileUrl}}"></image>
+  <navigator class="store-entrance" hover-class="none" url="/packageService/pages/store/index?id={{orderInfo.storeId}}">
+    <text class="iconfont icon-dianpu"></text>
+    {{orderInfo.storeName}}
+    <text class="iconfont icon-xiayiye"></text>
+  </navigator>
+  <view class="service-type">服务时间：{{orderInfo.deliveryDays}}天</view>
+  <view class="service-price">{{orderInfo.price}}</view>
+</view>
+
+<view style="line-height:77rpx;text-indent:32rpx;">选择支付方式</view>
+
+<view class="pay-ways">
+  <radio-group>
+      <label>
+          <image mode='aspectFill' src="/assets/img/wxzf@3x.png"></image>
+          <text>微信支付</text>
+          <radio color="#0083FF" checked="{{true}}"/>
+      </label>
+  </radio-group>
+  <view class="tip">支付的金额将托管给巨牛汇平台，服务完成后平台支付给卖家。</view>
+</view>
+
+<action-bar>
+    <view class="final-price">
+        服务金额:<text>{{orderInfo.price}}</text>
+    </view>
+    <button class="submit" bindtap="pay">确认支付</button>
+  </action-bar>
