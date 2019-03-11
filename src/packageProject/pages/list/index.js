@@ -16,7 +16,11 @@ Page(observer({
       { name: '最近一月', begin: '' }
     ],
 
-    typeIndex:-1,
+    projectTypes: {
+      parent: '',
+      selected: {}
+    },
+
     budgetIndex:-1,
     cycleIndex:-1,
     timeIndex:0,
@@ -78,11 +82,9 @@ Page(observer({
   },
 
   refresh: function () {
-    this.setData({
-      pageIndex: 1,
-      projects: [],
-      nomore: false
-    })
+    this.data.pageIndex=1
+    this.data.projects=[]
+    this.data.nomore=false
     this.getProjects()
   },
 
@@ -144,7 +146,7 @@ Page(observer({
       dicts=data.dicts
 
     let res = await app.request.post('/project/projectInfo/getList', {
-      projectType: data.typeIndex<0?'':dicts[0].dictList[data.typeIndex].dictValue,
+      projectType: this.data.projectTypes.selected.dictValue || '',
       priceBudget: data.budgetIndex<0?'':dicts[1].dictList[data.budgetIndex].dictValue,
       projectCycle: data.cycleIndex<0?'':dicts[2].dictList[data.cycleIndex].dictValue,
       beginTime:data.time[data.timeIndex].begin,
@@ -176,14 +178,20 @@ Page(observer({
     wx.stopPullDownRefresh()
   },
 
+  scrollToProjectTypes: function (e) {
+    this.setData({
+      'projectTypes.parent': 'project' + e.currentTarget.dataset.code
+    })
+  },
+
   filter:function(e){
     let data=e.currentTarget.dataset
     switch(data.type){
-      case 'type':
+      case 'projectTypes':
         this.setData({
-          typeIndex:data.index
+          'projectTypes.selected': data.item
         })
-      break;
+        break;
       case 'budget':
         this.setData({
           budgetIndex: data.index
@@ -201,12 +209,7 @@ Page(observer({
         break;
     }
 
-    this.setData({
-      nomore: false,
-      pageIndex: 1,
-      projects: []
-    })
-    this.getProjects()
+    this.refresh()
     this.close()
   },
 

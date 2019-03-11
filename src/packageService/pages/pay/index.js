@@ -25,7 +25,7 @@ Page({
 
   pay:async function(){
     let res = await app.request.post('/order/payOrder/businessPrepay', {
-        tradeChannel:33, 
+        tradeChannel:34, 
         businessOrderType:26, 
         businessOrderId: this.data.orderInfo.id,
         openId:wx.getStorageSync('openid')

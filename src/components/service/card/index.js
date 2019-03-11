@@ -43,6 +43,12 @@ Component({
       this.triggerEvent('update', { index: this.properties.index, action: action })
     },
 
+    _jump:function(e){
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url
+      })
+    },
+
     _comfirm: function () {
       wx.showModal({
         title: '确认验收',

@@ -2,6 +2,7 @@
     <tabs slot="nav" under-line-ratio="{{.7}}" tabs="{{['博客','人才库','服务']}}" active="{{pageIndex}}" bindchange="switchPage"></tabs>
 </nav-bar>
 
+
 <block wx:if="{{pageIndex===0}}">
     <view style="background:#fff;padding-top:20rpx;">
         <swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
@@ -21,6 +22,8 @@
         </view>
     </view>
 </block>
+
+
 
 <block wx:elif="{{pageIndex===1}}">
     <view class="filter-place-holder"></view>
@@ -48,12 +51,10 @@
     <popup active="{{activeFilter==='sortWay'}}" margin="{{popupTop}}" bindhide='closePopup'>
         <list-item wx:for="{{sortWay.list}}" data-item="{{item}}" data-type="sortWay" bindtap="filter" name="{{item.text}}" active="{{sortWay.selected.text===item.text}}"></list-item>
     </popup>
-
     <popup active="{{activeFilter==='exp'}}" margin="{{popupTop}}" bindhide='closePopup'>
         <list-item data-item="{text:'不限',value:''}" data-type="exp" bindtap="filter" name="不限" active="{{!exp.selected.text}}"></list-item>
         <list-item wx:for="{{exp.list}}" data-item="{{item}}" data-type="exp" bindtap="filter" name="{{item.text}}" active="{{exp.selected.text===item.text}}"></list-item>
     </popup>
-
     <popup active="{{activeFilter==='jobTypes'}}" margin="{{popupTop}}" bindhide='closePopup'>
         <view class="job-types">
              <view class="parent">
@@ -73,6 +74,8 @@
     </popup>
 </block>
 
+
+
 <block wx:else>
     <view class="filter-place-holder"></view>
     <view class='filter service' style="top:{{navHeight}};">
@@ -87,13 +90,15 @@
     </view>
 
     <view class="services">
-        <service-card wx:for="{{services.list}}" data="{{item}}"></service-card>
+        <block wx:if="{{services.list.length>0}}">
+            <service-card wx:for="{{services.list}}" data="{{item}}"></service-card>
+        </block>
+        <nodata wx:else></nodata>
     </view>
 
     <popup active="{{activeFilter==='service_sortWay'}}" margin="{{popupTop}}" bindhide='closePopup'>
         <list-item wx:for="{{service_sortWay.list}}" data-item="{{item}}" data-type="service_sortWay" bindtap="filter" name="{{item.text}}" active="{{service_sortWay.selected.text===item.text}}"></list-item>
     </popup>
-
     <popup active="{{activeFilter==='serviceTypes'}}" margin="{{popupTop}}" bindhide='closePopup'>
         <view class="job-types">
              <view class="parent">

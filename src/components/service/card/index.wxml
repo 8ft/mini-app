@@ -43,8 +43,8 @@
       <view class="status">{{data.businessStateName}}</view>
       <button class="action" data-action="delete" catchtap="_update" wx:if="{{activeActions[data.businessState].delete}}">删除</button>
       <button class="action" data-action="close" catchtap="_update" wx:if="{{activeActions[data.businessState].close}}">关闭</button>
-      <navigator class="action" hover-class="none" url="/packageService/pages/pay/index?id={{data.id}}" >付款</navigator>
-      <navigator class="action" hover-class="none" url="/packageService/pages/refund/index?id={{data.id}}" wx:if="{{activeActions[data.businessState].refund}}">申请退款</navigator>
+      <button class="action" data-url="/packageService/pages/pay/index?id={{data.id}}" catchtap="_jump" wx:if="{{activeActions[data.businessState].pay}}">付款</button>
+      <button class="action" data-url="/packageService/pages/refund/index?id={{data.id}}" catchtap="_jump" wx:if="{{activeActions[data.businessState].refund}}">申请退款</button>
       <button class="action" catchtap="_comfirm" wx:if="{{activeActions[data.businessState].comfirm}}">确认验收</button>
     </view>
 </navigator>

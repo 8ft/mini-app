@@ -1,7 +1,8 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "service-card": "/components/service/card/index",
     "tabs": "/components/common/tabs/index",
-    "nodata": "/components/nodata/nodata"
+    "nodata": "/components/common/nodata/index"
   }
 }

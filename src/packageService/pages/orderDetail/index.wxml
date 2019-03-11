@@ -31,11 +31,13 @@
         <view class="info">如果对本次服务不满意请与卖家协商解决，若有问题可申请 退款。</view>
     </block>
 
-    <button class="action" data-action="delete" bindtap="update" wx:if="{{activeActions[detail.businessState].delete}}">删除</button>
-    <button class="action" data-action="close" bindtap="update" wx:if="{{activeActions[detail.businessState].close}}">关闭</button>
-    <navigator class="action" hover-class="none" url="/packageService/pages/pay/index?id={{detail.id}}" wx:if="{{activeActions[detail.businessState].pay}}">付款</navigator>
-    <navigator class="action" hover-class="none" url="/packageService/pages/refund/index?id={{detail.id}}" wx:if="{{activeActions[detail.businessState].refund}}">申请退款</navigator>
-    <button class="action" bindtap="comfirm" wx:if="{{activeActions[detail.businessState].comfirm}}">确认验收</button>
+    <view class="actions">
+        <button class="action" data-action="delete" bindtap="update" wx:if="{{activeActions[detail.businessState].delete}}">删除</button>
+        <!-- <button class="action" data-action="close" bindtap="update" wx:if="{{activeActions[detail.businessState].close}}">关闭</button> -->
+        <navigator class="action" hover-class="none" url="/packageService/pages/pay/index?id={{detail.id}}" wx:if="{{activeActions[detail.businessState].pay}}">付款</navigator>
+        <navigator class="action" hover-class="none" url="/packageService/pages/refund/index?id={{detail.id}}" wx:if="{{activeActions[detail.businessState].refund}}">申请退款</navigator>
+        <button class="action" bindtap="comfirm" wx:if="{{activeActions[detail.businessState].comfirm}}">确认验收</button>
+    </view>
 </view>
 
 <view wx:else class="status-done">

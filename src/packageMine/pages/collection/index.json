@@ -7,6 +7,6 @@
         "expert-card":"/components/expert/card/index",
         "service-card":"/components/service/card/index",
         "store-card":"/components/store/card/index",
-        "nodata":"/components/nodata/nodata"
+        "nodata":"/components/common/nodata/index"
     }
 }

@@ -9,6 +9,7 @@
     "city":"/components/common/city/index",
     "popup": "/components/common/popup/index",
     "list-item": "/components/common/listItem/index",
-    "tabs": "/components/common/tabs/index"
+    "tabs": "/components/common/tabs/index",
+    "nodata":"/components/common/nodata/index"
   }
 }

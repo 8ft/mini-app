@@ -4,6 +4,6 @@
     "usingComponents": {
         "tabs":"/components/common/tabs/index",
         "blog-card":"/components/blog/card/index",
-        "nodata":"/components/nodata/nodata"
+        "nodata":"/components/common/nodata/index"
     }
 }

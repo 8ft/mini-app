@@ -3,7 +3,7 @@
   
   "usingComponents": {
     "tabs": "/components/common/tabs/index",
-    "nodata": "/components/nodata/nodata",
+    "nodata": "/components/common/nodata/index",
     "blog-card":"/components/blog/card/index",
     "action-bar": "/components/common/actionBar/index"
   }

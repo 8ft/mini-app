@@ -16,17 +16,13 @@ Page(observer({
     inputLen: -1
   },
 
-  onLoad: function (options) {
+  onLoad: function () {
     const data=wx.getStorageSync('serviceInfo')
     this.setData({
       serviceInfo:data.service,
       storeInfo:data.store,
-      id:options.id
+      id:data.service.id
     })
-  },
-
-  onUnload:function(){
-    wx.removeStorageSync('serviceInfo')
   },
 
   input: function (e) {

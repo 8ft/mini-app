@@ -8,10 +8,17 @@
   </nav-bar>
 
   <popup active="{{filter==='type'}}" margin="{{navHeight}}" bindhide='close'>
-    <view class='types'>
-      <list-item data-index="-1" data-type="type" bindtap="filter" name="全部" active="{{typeIndex===-1}}"></list-item>
-      <list-item wx:for="{{dicts[0].dictList}}" data-index="{{index}}" data-type="type" bindtap="filter" name="{{item.dictName}}" active="{{typeIndex===index}}"></list-item>
-    </view>
+      <view class="project-types">
+            <view class="parent">
+              <list-item wx:for="{{dicts[0].dictList}}" data-code="{{item.dictValue}}" bindtap="scrollToProjectTypes" name="{{item.dictName}}"></list-item>
+          </view>
+          <scroll-view scroll-y="true" scroll-into-view="{{projectTypes.parent}}" scroll-with-animation="true">
+              <list-item data-item="{dictName:'不限',dictValue:''}" data-type="projectTypes" bindtap="filter" name="不限" active="{{!projectTypes.selected.dictValue}}"></list-item>
+              <view id="project{{item.dictValue}}" wx:for="{{dicts[0].dictList}}">
+                  <list-item wx:for="{{item.dictList}}" wx:for-item="project" data-item="{{project}}" data-type="projectTypes" bindtap="filter" name="{{project.dictName}}" active="{{projectTypes.selected.dictValue===project.dictValue}}"></list-item>
+              </view>
+          </scroll-view>
+      </view>
   </popup>
 
   <popup active="{{filter==='budget'}}" margin="{{navHeight}}" bindhide='close'>

@@ -104,7 +104,7 @@ Page(observer({
       this.getBlogs()
     } else if (this.data.pageIndex === 1) {
       this.getExperts()
-    } else {
+    } else if(this.data.pageIndex===2){
       this.getServices()
     }
   },
@@ -398,5 +398,6 @@ Page(observer({
   }
 
 }))
+
 
 

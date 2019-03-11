@@ -2,6 +2,6 @@
   "usingComponents": {
     "project-card": "/components/project/card/index",
     "tabs": "/components/common/tabs/index",
-    "nodata": "/components/nodata/nodata"
+    "nodata": "/components/common/nodata/index"
   }
 }

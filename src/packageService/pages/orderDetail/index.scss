@@ -39,7 +39,8 @@
     }
 }
 
-.action{margin-top:26rpx;width:122rpx;height:52rpx;line-height: 52rpx;border:$border;font-size: $m;color:$black;text-align: center;}
+.actions{display: flex;align-items: center;}
+.action{margin-top:26rpx;width:122rpx;height:52rpx;line-height: 52rpx;border:$border;font-size: $m;color:$black;text-align: center;margin-right: 18rpx;}
 
 .status-done{background-image: linear-gradient(to right , #0D70FF, #5D9FFF);padding:30rpx;color:#fff;
     .info{font-size: 26rpx;line-height:74rpx;

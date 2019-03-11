@@ -1,0 +1,26 @@
+@import '../../../assets/wxss/var.scss';
+
+.tabs{display: flex;align-items:center;height:108rpx;border-top: $border;border-bottom:$border;background:#fff;color:$black;font-size:$m;padding-left:28rpx;
+    view{width:135rpx;line-height: 50rpx;border-radius: 25rpx;border:$border;text-align:center;margin-right:19rpx;
+        &.on{background: $darkBlue;color:#fff;border-color:$darkBlue;}
+    }
+}
+
+.comments{background: #fff;
+    .comment{padding:32rpx 30rpx;border-bottom:$border;
+        .user{height: 60rpx;font-size:$l;display:flex; align-items: center;
+            image{width:60rpx;height: 100%;border-radius: 50%;display: inline-block;margin-right:20rpx;}
+            text{flex: 1;}
+        }
+        .con{padding-left:80rpx;margin-top: 15rpx;}
+    }
+}
+
+.action-bar .bar{padding:0 30rpx;box-sizing: border-box;}
+.action{padding-right: 50rpx;text-align:center;
+    .iconfont{font-size: 35rpx;margin-bottom:10rpx;}
+    .name{font-size: 26rpx;line-height: 26rpx;}
+    &.lighten{color:$red;}
+}
+
+.buy{background: #FF8000;height: 88rpx;line-height:88rpx;color:#fff;flex: 1;font-size: $xl;border-radius: 4rpx;}    

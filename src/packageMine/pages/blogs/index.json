@@ -2,7 +2,7 @@
   "enablePullDownRefresh": true,
   
   "usingComponents": {
-    "nodata": "/components/nodata/nodata",
+    "nodata": "/components/common/nodata/index",
     "blog-card":"/components/blog/card/index"
   }
 }

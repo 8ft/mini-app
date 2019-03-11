@@ -2,6 +2,6 @@
     "enablePullDownRefresh": true,
     
     "usingComponents": {
-        "nodata":"/components/nodata/nodata"
+        "nodata":"/components/common/nodata/index"
     }
 }

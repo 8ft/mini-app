@@ -20,12 +20,10 @@ Page(observer({
     currentSwiper:1,
 
     hideNav: true,
-    tabIndex: 0,
     isMyself: false,
 
     id: '',
-    detail: null,
-    loading: false
+    detail: null
   },
 
   onLoad: function (options) {
@@ -41,7 +39,7 @@ Page(observer({
       }
     })
 
-    setInterval(()=>{
+    iid=setInterval(()=>{
       if(toScrollList.length>0){
         this.setData({
           tabIndex:toScrollList.pop()
@@ -53,6 +51,10 @@ Page(observer({
 
   onHide:function(){
     clearInterval(iid)
+  },
+
+  onUnload:function(){
+    wx.removeStorageSync('serviceInfo')
   },
 
   onPageScroll(e) {
@@ -112,8 +114,6 @@ Page(observer({
   },
 
   getDetail: async function () {
-    this.setData({ loading: true })
-
     let data = await app.request.post('/store/productBaseInfo/detail', {
       productId: this.data.id
     })
@@ -142,7 +142,6 @@ Page(observer({
 
     this.setData({
       isMyself: isMyself,
-      loading: false,
       detail: detail,
       storeInfo:data.data.storeInfo,
       comments: comments.data
@@ -173,14 +172,21 @@ Page(observer({
     }
   },
 
-  buy:function(){
-    if(app.checkLogin()){
-      wx.setStorageSync('serviceInfo',{
-        service:this.data.detail,
-        store:this.data.storeInfo
-      })
+  jump:function(e){
+    const page=e.currentTarget.dataset.page
+
+    wx.setStorageSync('serviceInfo',{
+      service:this.data.detail,
+      store:this.data.storeInfo
+    })
+
+    if(page==='buy'&&app.checkLogin()){
       wx.navigateTo({
-        url:`/packageService/pages/buy/index?id=${this.data.id}`
+        url:`/packageService/pages/buy/index`
+      })
+    }else{
+      wx.navigateTo({
+        url:`/packageService/pages/comments/index`
       })
     }
   },

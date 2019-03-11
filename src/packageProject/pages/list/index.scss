@@ -12,4 +12,8 @@ page{background:#fff;}
     &.on view::after{position:absolute;content:'';width:0;height:0;left:18rpx;top:50%;margin-top:-2.25rpx;border:10rpx solid transparent;border-top:0;border-bottom-color:#fff;}
     &.on view::before{position:absolute;content:'';width:0;height:0;left:18rpx;top:50%;margin-top:-4.25rpx;border:10rpx solid transparent;border-top:0;border-bottom-color:$darkBlue;}}
 
+.project-types{width:100%;background:#fff;display:flex;
+    .parent{width:280rpx;box-sizing:border-box;border-right:$border;}
+    scroll-view{width:490rpx;height:700rpx;white-space:nowrap;}}
+
 .types{background:#fff;line-height:80rpx;}

@@ -21,6 +21,14 @@ Page({
     }
   },
 
+  onPullDownRefresh: function () {
+    this.refresh()
+  },
+
+  onReachBottom: function () {
+    this.getOrders()
+  },
+
   refresh: function () {
     this.data.orders = []
     this.data.pageIndex = 1
@@ -68,6 +76,8 @@ Page({
       nomore: nomore,
       loading: false
     })
+
+    wx.stopPullDownRefresh()
   }
 
 })

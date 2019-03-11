@@ -1,7 +1,7 @@
 {
     "usingComponents": {
         "tabs": "/components/common/tabs/index",
-        "nodata": "/components/nodata/nodata",
+        "nodata": "/components/common/nodata/index",
         "action-bar": "/components/common/actionBar/index",
         "service-card":"/components/service/card/index",
         "popup": "/components/common/popup/index",

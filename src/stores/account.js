@@ -111,9 +111,9 @@ const account = function () {
     }
   }
 
-  this.refresh = () => {
-    this.userInfo = null
-    this.blogInfo = null
+  this.refresh = async() => {
+    await this.updateUserInfo()
+    this.updateBlogInfo()
   }
 
   mobx.autorun(() => {

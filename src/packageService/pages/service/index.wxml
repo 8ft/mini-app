@@ -17,12 +17,16 @@
         <text>成交量{{detail.tradeNums}}</text>
     </view>
     <view class="name">{{detail.productName}}</view>
+    <view class="tip" wx:if="{{detail.refuseReason}}">
+        <view class="msg">{{detail.refuseReason}}</view>
+        <view class="edit" bindtap="download">重新编辑<text class="iconfont icon-xiayiye"></text></view>
+    </view>
 </view>
 
 <view id="comments" class="comments" >
     <block wx:if="{{comments.count>0}}">
         <view class="title">买家评价({{comments.count}})
-            <navigator hover-class="none" url="">查看全部<text class="iconfont icon-xiayiye"></text></navigator>
+            <view data-page="comments" bindtap="jump">查看全部<text class="iconfont icon-xiayiye"></text></view>
         </view>
         <view class="comment" wx:for="{{comments.list}}">
             <view class="user">
@@ -54,5 +58,5 @@
       <view class="iconfont icon-{{detail.collectFlag==='1'?'yishoucang':'shoucang1'}}"></view>
       <view class="name">收藏</view>
   </view>
-  <button class="buy" disabled="{{detail.invalidFlag===0}}" bindtap="buy">购买服务</button>
+  <button class="buy" disabled="{{detail.invalidFlag===0}}" data-page="buy" bindtap="jump">{{detail.invalidFlag===0?'暂时无法购买':'购买服务'}}</button>
 </action-bar>
