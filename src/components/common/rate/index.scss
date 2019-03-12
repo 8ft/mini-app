@@ -1,0 +1,19 @@
+@import '../../../assets/wxss/var.scss'; 
+@import '../../../assets/font/icons.wxss'; 
+
+.rate{display: flex;align-items: center;
+    .name{font-size: 28rpx;color:$black;margin-right: 43rpx;}
+
+    .iconfont{color:$lightGray;display:inline-block;vertical-align: middle;
+        &.on{color:#FDDB56;}
+    }
+
+    .stars{position: relative;display:inline-block;
+        .star-cover{position: absolute;left:0;top:0;height:100%;overflow: hidden;padding:0;margin:0;white-space: nowrap;
+            .iconfont{color:#FDDB56;}
+        }
+    }
+
+    .result{font-size: $m;color:$gray;margin-left:59rpx;}
+}
+

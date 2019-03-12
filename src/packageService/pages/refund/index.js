@@ -9,10 +9,7 @@ Page({
         {name: '不想做了', value: '不想做了'},
         {name: '买错了', value: '买错了'},
         {name: '其他', value: ''}
-    ],
-    desc:'',
-    conLen: 0,
-    inputLen: -1
+    ]
   },
 
   onLoad:function(options){
@@ -42,8 +39,8 @@ Page({
     })
   },
 
-  refund:async function(){
-    if(!this.data.reason){
+  refund:async function(e){
+    if(!e.detail.value.reason){
         wx.showToast({
             title: '请输入退款理由',
             icon: 'none'
@@ -52,7 +49,7 @@ Page({
     }
     let res = await app.request.post('/store/productOrderInfo/applyForRefund', {
         productOrderId: this.orderInfo.id,
-        reason:this.data.reason
+        reason:e.detail.value.reason
       })
       if(res.code!==0)return
       wx.setStorageSync('update_order',true)

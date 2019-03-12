@@ -22,12 +22,13 @@ Page({
     progress:0,
 
     activeActions: {
-      0: { close: true },
-      1: { close: true, pay: true },
-      2: { refund: true },
-      3: { refund: true, comfirm: true },
-      4: { delete: true },
-      5: { delete: true }
+      0: { close: true },//待确认
+      1: { close: true, pay: true },//待支付
+      2: { refund: true },//服务中
+      3: { refund: true, comfirm: true },//待验收
+      4: { delete: true, rate: true },//已完成
+      5: { delete: true },//已关闭
+      11: { delete: true }//已退款
     }
   },
 

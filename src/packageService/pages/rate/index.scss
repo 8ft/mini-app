@@ -1,0 +1,17 @@
+@import '../../../assets/wxss/var.scss';  
+
+page{background: #fff;}
+
+.input-box{padding:17rpx 30rpx 0;font-size:$xl;color:$lightBlack;
+    textarea{display:block;box-sizing:border-box;width:100%;height:252rpx;margin-top:12rpx;padding:33rpx 0;font-size:$l;line-height:48rpx;border-top:$border;}
+}
+
+.overall-rating{border-top:10rpx solid #F2F2F2;font-size: 28rpx;
+    .title{font-weight: 500;color:#000033;text-align: center;margin:33rpx 0 56rpx;}
+    .rate{display: flex;align-items: center;justify-content:center;
+        view{text-align: center;margin:0 62.5rpx;
+            image{width:55rpx;height: 55rpx;margin-bottom:27rpx;display: block;}
+            text{color:$gray;}
+        }
+    }
+}

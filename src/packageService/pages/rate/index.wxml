@@ -1,0 +1,34 @@
+<nav-bar title="发表评价"></nav-bar>
+
+<form bindsubmit="submit">
+  <view class="input-box" style="padding-bottom:33rpx;">
+    <rate name="服务速度" height="74rpx" bindrate="rated"></rate>
+    <rate name="服务质量" height="74rpx" bindrate="rated"></rate>
+    <rate name="服务态度" height="74rpx" bindrate="rated"></rate>
+    <textarea name="comment" maxlength="200" placeholder="聊聊这次交易您的感受吧"></textarea>
+  </view>
+
+  <view class="overall-rating">
+    <view class="title">赏个好评吧~</view>
+    <view class="rate">
+      <view data-point="{{3}}" bindtap="overallRating">
+        <image mode="aspectFill" src="../../assets/img//hp{{overallScore===3?'1':'2'}}@3x.png"></image>
+        <text>好评</text>
+      </view>
+
+      <view data-point="{{2}}" bindtap="overallRating">
+        <image mode="aspectFill" src="../../assets/img//zp{{overallScore===2?'1':'2'}}@3x.png"></image>
+        <text>中评</text>
+      </view>
+
+      <view data-point="{{1}}" bindtap="overallRating">
+        <image mode="aspectFill" src="../../assets/img//cp{{overallScore===1?'1':'2'}}@3x.png"></image>
+        <text>差评</text>
+      </view>
+    </view>
+  </view>
+
+  <action-bar>
+    <button form-type="submit" class='btn-one'>发布</button>
+  </action-bar>
+</form>

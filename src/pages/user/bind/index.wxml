@@ -1,16 +1,19 @@
-<!--pages/user/login/index.wxml-->
-<view class='title'>验证手机号</view>
+<nav-bar title="验证手机号"></nav-bar>
 
-<text class='input-title'>手机</text>
-<view class='input'>
-  <input focus="true" type='number' placeholder='在这里输入手机号' maxlength='11' data-name="phone" bindinput='input'></input>
+<view class="con">
+  <text class='input-title'>手机</text>
+  <view class='input'>
+    <input focus="true" type='number' placeholder='在这里输入手机号' maxlength='11' data-name="phone" bindinput='input'></input>
+  </view>
+
+  <text class='input-title'>验证码</text>
+  <view class='input'>
+    <input type='number' placeholder='请输入验证码' data-name="code" bindinput='input'></input>
+    <button class='get-code' disabled="{{countDown!==60}}" bindtap='getCode'>{{getCodeTxt}}</button>
+  </view>
+
+  <button class='btn-one' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">完成</button>
 </view>
 
-<text class='input-title'>验证码</text>
-<view class='input'>
-  <input type='number' placeholder='请输入验证码' data-name="code" bindinput='input'></input>
-  <button class='get-code' disabled="{{countDown!==60}}" bindtap='getCode'>{{getCodeTxt}}</button>
-</view>
 
-<button class='btn-one' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">完成</button>
 

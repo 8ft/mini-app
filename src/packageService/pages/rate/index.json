@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "rate": "/components/common/rate/index",
+        "action-bar": "/components/common/actionBar/index"
+    }
+}

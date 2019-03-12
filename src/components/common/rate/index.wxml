@@ -1,0 +1,19 @@
+
+<view class="rate" style="height:{{height}};">
+  <view wx:if="{{name}}" class="name">{{name}}</view>
+
+  <!-- 仅展示，可精确到小数点 -->
+  <view wx:if="{{readonly}}" class="stars">
+      <view class="iconfont icon-yishoucang" style="font-size:{{size}}rpx;padding-right:{{margin}}rpx;" wx:for="{{max}}"></view>
+      <div class="star-cover" style="width:{{coverWidth}}px;">
+          <view class="iconfont icon-yishoucang" style="font-size:{{size}}rpx;padding-right:{{margin}}rpx;" wx:for="{{max}}"></view>
+      </div>
+  </view>
+
+  <!-- 用于评价，精确到整数 -->
+  <view wx:if="{{!readonly}}" class="iconfont icon-yishoucang {{value>=index?'on':''}}" style="font-size:{{size}}rpx;padding-right:{{margin}}rpx;" wx:for="{{max}}" data-point="{{index}}" bindtap="_rate"></view>
+
+  <view wx:if="{{results[value]}}" class="result">{{results[value]}}</view>
+</view>      
+
+ 

@@ -77,7 +77,8 @@
         "pages/orderDetail/index",
         "pages/refund/index",
         "pages/pay/index",
-        "pages/comments/index"
+        "pages/comments/index",
+        "pages/rate/index"
       ]
     }
   ],

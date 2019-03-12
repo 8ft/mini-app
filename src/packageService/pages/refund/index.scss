@@ -8,12 +8,8 @@
     .service-type{color:$gray;font-size:$m;}}
 
 .input-box{padding:46rpx 30rpx;background: #fff;margin:20rpx auto;font-size:$xl;color:$lightBlack;width:690rpx;box-sizing:border-box;
-    
     label{display: block;margin-bottom:28rpx;
         radio .wx-radio-input{width:40rpx;height:40rpx;font-size:30rpx;}
     } 
-
-    .desc{position:relative;background:#fff;width:100%;height:236rpx;
-        textarea,.placeholder{display:block;box-sizing:border-box;padding:27rpx $s;background:#fafafa;width:100%;height:100%;font-size:$l;line-height:48rpx;}
-        .placeholder{position:absolute;color:$lightGray;top:0;left:0;}}
+    textarea{display:block;width:100%;height:236rpx;box-sizing:border-box;padding:27rpx $s;background:#fafafa;font-size:$l;line-height:48rpx;}
 }
