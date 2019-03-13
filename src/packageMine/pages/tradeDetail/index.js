@@ -15,7 +15,7 @@ Page({
     this.getDetail(options.id)
   },
 
-  getDetail(oid){
+  async getDetail(oid){
     let res = await app.request.post('/order/payOrder/detail',{
       orderId: oid
     })
