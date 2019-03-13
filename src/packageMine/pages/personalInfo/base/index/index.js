@@ -21,7 +21,7 @@ Page(observer({
     cityBoxSwitch:false
   },
 
-  onLoad:function(){
+  onLoad(){
     this.getCity()
     const systemInfo=wx.getSystemInfoSync()
     const pixelRatio=systemInfo.windowWidth/750
@@ -31,7 +31,7 @@ Page(observer({
     })
   },
 
-  onShow:async function(){
+  async onShow(){
     if(this.data.dicts.length===0){
       const data=app.util.deepCopy(this.props.stores.account.userInfo.userBaseInfo)
       const dicts = await this.getDicts()
@@ -84,7 +84,7 @@ Page(observer({
     }
   },
 
-  getCity:async function(){
+  async getCity(){
     let res = await app.request.post('/dict/dictZone/getList', {})
     if (res.code !== 0) return
     this.setData({
@@ -92,19 +92,19 @@ Page(observer({
     })
   },
 
-  openCityBox:function(){
+  openCityBox(){
     this.setData({
       cityBoxSwitch:true
     })
   },
 
-  closeCityBox:function(){
+  closeCityBox(){
     this.setData({
       cityBoxSwitch:false
     })
   },
 
-  selectCity:function(e){
+  selectCity(e){
     const city=e.detail.city
     this.setData({
       city:city.zoneCode,
@@ -113,7 +113,7 @@ Page(observer({
     this.closeCityBox()
   },
 
-  getDicts: async function () {
+  async getDicts () {
     let res = await app.request.post('/dict/dictCommon/getDicts', {
       dictType: 'sex_type|join_type|job_type|work_experience',
       resultType: '1'
@@ -124,7 +124,7 @@ Page(observer({
     }
   },
 
-  select: function (e) {
+  select (e) {
     let index = e.detail.value
     let type = e.currentTarget.dataset.type
     let data = this.data.userBaseInfo
@@ -157,7 +157,7 @@ Page(observer({
     }
   },
 
-  input: function (e) {
+  input (e) {
     let inputType = e.currentTarget.dataset.type
     let val = e.detail.value.replace(/[ ]/g, "").replace(/[\r\n]/g, "")
     if(inputType==='daySalary'&&val==='0'){
@@ -168,7 +168,7 @@ Page(observer({
     })
   },
 
-  save:async function(){
+  async save(){
     if(this.hasNull())return
     let data=this.data.userBaseInfo
     let dicts=this.data.dicts
@@ -191,7 +191,7 @@ Page(observer({
     }
   },
 
-  hasNull:function(){
+  hasNull(){
     let data = this.data.userBaseInfo
     
     if(!data.nickName){

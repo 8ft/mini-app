@@ -11,7 +11,7 @@ Page({
     nomore:false
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     const systemInfo=wx.getSystemInfoSync()
     wx.createSelectorQuery().select('#baseInfo').fields({
       size: true
@@ -26,14 +26,14 @@ Page({
     this.getRecords()
   },
 
-  refresh:function(){
+  refresh(){
     this.data.pageIndex=1
     this.data.records=[]
     this.data.nomore=false
     this.getRecords()
   },
 
-  getWallet:async function(){
+  async getWallet(){
     let res = await app.request.post('/user/payFund/myPayFund')
     if (res.code !== 0) return
     this.setData({
@@ -41,7 +41,7 @@ Page({
     })
   },
 
-  getRecords:async function(){
+  async getRecords(){
     if(this.data.nomore)return
 
     let pageIndex = this.data.pageIndex

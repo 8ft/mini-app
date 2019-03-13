@@ -14,7 +14,7 @@ Page(observer({
     addedSkills:[]
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     let userSkills =app.util.deepCopy(this.props.stores.account.userInfo.userSkills)
     if (userSkills.length>0){
       userSkills=userSkills.map(item=>{
@@ -31,7 +31,7 @@ Page(observer({
     this.getDicts()
   },
 
-  getDicts: async function () {
+  async getDicts () {
     let res = await app.request.post('/dict/dictCommon/getDicts', {
       dictType: 'user_skill',
       resultType: '1'
@@ -45,7 +45,7 @@ Page(observer({
     }
   },
 
-  resetActive: function () {
+  resetActive () {
     let skills = this.data.skills
     skills = skills.map(skillType => {
       skillType.dictList = skillType.dictList.map(skill => {
@@ -61,7 +61,7 @@ Page(observer({
     })
   },
 
-  select: function (e) {
+  select (e) {
     let data = e.currentTarget.dataset
     let skill = this.data.skills[data.type].dictList[data.index]
     let addedSkills = this.data.addedSkills
@@ -99,7 +99,7 @@ Page(observer({
     })
   },
 
-  input: function (e) {
+  input (e) {
     let val = e.detail.value.replace(/[ ]/g, "").replace(/[\r\n]/g, "")
     if (/^[\u4e00-\u9fa5]+$/.test(val)&&val.length>8){
       wx.showToast({
@@ -116,7 +116,7 @@ Page(observer({
     })
   },
 
-  add:function(){
+  add(){
     let name=this.data.newSkill
     if (!name){
       wx.showToast({
@@ -144,7 +144,7 @@ Page(observer({
     })
   },
 
-  del:function(e){
+  del(e){
     let index=e.currentTarget.dataset.index
     let addedSkills = this.data.addedSkills
 
@@ -156,7 +156,7 @@ Page(observer({
     this.resetActive()
   },
 
-  save:async function(){
+  async save(){
     let res = await app.request.post('/user/userAuth/completeUserSkill', {
       userSkillInfos: JSON.stringify(this.data.addedSkills)
     })

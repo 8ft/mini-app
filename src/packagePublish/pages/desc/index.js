@@ -16,7 +16,7 @@ Page({
     height:''
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     const systemInfo=wx.getSystemInfoSync()
     let cache = app.globalData.publishDataCache.desc
     this.setData({
@@ -29,14 +29,14 @@ Page({
     })
   },
 
-  onUnload: function () {
+  onUnload () {
     if(this.data.imgs.length===0){
       this.data.batchNo=''
     }
     app.globalData.publishDataCache.desc = this.data
   },
 
-  input:function(e){
+  input(e){
     let input = e.detail.value
     let validInput = input.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "")
     let conLen = validInput.length
@@ -61,19 +61,19 @@ Page({
     })
   },
 
-  hideDemo:function(){
+  hideDemo(){
     this.setData({
       demoShow:false
     })
   },
 
-  showDemo:function(){
+  showDemo(){
     this.setData({
       demoShow: true
     })
   },
 
-  chooseImage: function () {
+  chooseImage () {
     let count = 3 - this.data.imgs.length
     wx.chooseImage({
       count: count,
@@ -94,7 +94,7 @@ Page({
     })
   },
 
-  delImg:async function(e){
+  async delImg(e){
     let res = await app.request.post('/public/file/delete', {
       fileId: this.data.imgs[e.currentTarget.dataset.index].fileId
     })
@@ -107,7 +107,7 @@ Page({
     }
   },
 
-  preview:function(e){
+  preview(e){
     let curUrl=e.currentTarget.dataset.url
     let urls=this.data.imgs.map(img=>{
       return img.url

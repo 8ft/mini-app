@@ -49,7 +49,7 @@ Page(observer({
     loading:true
   },
 
-  onLoad:function(options){
+  onLoad(options){
     const systemInfo=wx.getSystemInfoSync()
     const pixelRatio=systemInfo.windowWidth/750
     const fixedHeight=/iPhone X/.test(systemInfo.model)?34:0
@@ -62,18 +62,18 @@ Page(observer({
     })
   },
 
-  onShow:function(){
+  onShow(){
     this.getDetail()
   },
 
-  onShareAppMessage: function () {
+  onShareAppMessage () {
     return {
       title: '接包发包专业平台',
       path: `pages/blog/detail/index?id=${this.data.id}&uid=${this.data.uid}`
     }
   },
 
-  openBox:async function(e){
+  async openBox(e){
     const index=e.currentTarget.dataset.index
     if(index!==this.data.cIndex){
       this.setData({
@@ -99,13 +99,13 @@ Page(observer({
     })
   },
 
-  closeBox:function(){
+  closeBox(){
     this.setData({
       boxSwitch:false
     })
   },
 
-  scrollToComments:function(){
+  scrollToComments(){
     if(this.data.commentsPostion===0){
       const query = wx.createSelectorQuery()
       query.select('#comments').fields({
@@ -127,7 +127,7 @@ Page(observer({
     }
   },
 
-  follow:async function(){
+  async follow(){
     if(app.checkLogin()){
       const res = await app.request.post('/blog/attentionInfo/follow',{
         attentionUserId:this.data.detail.updateUserId
@@ -140,7 +140,7 @@ Page(observer({
     }
   },
 
-  collect:async function(){
+  async collect(){
     if(app.checkLogin()){
       const res = await app.request.post('/blog/favorite/save',{
         articleId:this.data.id
@@ -153,7 +153,7 @@ Page(observer({
     }
   },
 
-  getDetail: async function () {
+  async getDetail () {
     this.setData({loading:true})
 
     let detail = await app.request.post('/blog/article/detail',{
@@ -192,7 +192,7 @@ Page(observer({
     })
   },
 
-  getReplies: async function () {
+  async getReplies () {
     let nomore = this.data.nomore
     if(nomore)return
 

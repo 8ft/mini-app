@@ -18,7 +18,7 @@ Page(observer({
     loading:true,
   },
 
-  onLoad:function (options) {
+  onLoad (options) {
     this.setData({
       'tags[0]':{
         name:'全部标签',
@@ -29,22 +29,22 @@ Page(observer({
     this.getBlogTags()
   },
 
-  refresh:function(){
+  refresh(){
     this.data.pageIndex=1
     this.data.nomore=false
     this.data.blogs=[]
     this.getBlogs()
   },
 
-  onPullDownRefresh:function(){
+  onPullDownRefresh(){
     this.refresh()
   },
 
-  onReachBottom:function(){
+  onReachBottom(){
     this.getBlogs()
   },
 
-  switchTag:function(e){
+  switchTag(e){
     const index = e.currentTarget.dataset.index
     this.setData({
       tagIndex:index,
@@ -57,7 +57,7 @@ Page(observer({
     }
   },
 
-  getBlogTags: async function (){
+  async getBlogTags (){
     let res = await app.request.post('/blog/catalog/getList',{
       userId: this.props.stores.account.userInfo.userId,
       pageIndex:1,
@@ -70,7 +70,7 @@ Page(observer({
     this.getBlogs()
   },
 
-  getBlogs: async function (){
+  async getBlogs (){
     let nomore = this.data.nomore
     if (nomore)return
     this.setData({

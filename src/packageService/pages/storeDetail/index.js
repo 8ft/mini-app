@@ -13,14 +13,14 @@ Page(observer({
     detail: null
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     this.setData({
       id: options.id
     })
     this.getDetail()
   },
 
-  getNavHeight: function (e) {
+  getNavHeight (e) {
     const systemInfo=wx.getSystemInfoSync()
     const ratio=systemInfo.windowWidth/750
     this.setData({
@@ -28,7 +28,7 @@ Page(observer({
     })
   },
 
-  getDetail: async function () {
+  async getDetail () {
     this.setData({ loading: true })
 
     let data = await app.request.post('/store/storeBaseInfo/getStoreInfo', {
@@ -49,7 +49,7 @@ Page(observer({
     })
   },
 
-  collect:async function(){
+  async collect(){
     if(app.checkLogin()){
       const res = await app.request.post('/store/collectionInfo/collect',{
         businessId:this.data.id,

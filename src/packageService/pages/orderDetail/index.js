@@ -32,20 +32,20 @@ Page({
     }
   },
 
-  onLoad:function(options){
+  onLoad(options){
     this.setData({
       id:options.id
     })
     this.getDetail()
   },
 
-  onShow:function(){
+  onShow(){
     if( wx.getStorageSync('update_order')){
       this.getDetail()
     }
   },
 
-  update: async function (e,act) {
+  async update (e,act) {
     const action=act||e.currentTarget.dataset.action
     const res = await app.request.post(actionApis[action], {
       productOrderId: this.data.detail.id
@@ -55,7 +55,7 @@ Page({
     wx.setStorageSync('update_order',true)
   },
 
-  comfirm: function () {
+  comfirm () {
     wx.showModal({
       title: '确认验收',
       content: '请仔细验收卖家提供的服务，确认验收后平台将本次服务金额支付给卖家！',
@@ -67,7 +67,7 @@ Page({
     })
   },
 
-  getDetail: async function (){
+  async getDetail (){
     let res = await app.request.post('/store/productOrderInfo/detail', {
       productOrderId: this.data.id
     })

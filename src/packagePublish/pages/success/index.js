@@ -3,7 +3,7 @@ Page({
     no:''
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     this.setData({
       no:options.no
     })

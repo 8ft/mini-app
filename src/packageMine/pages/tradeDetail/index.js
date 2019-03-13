@@ -11,11 +11,11 @@ Page({
     detail:null
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     this.getDetail(options.id)
   },
 
-  getDetail:async function(oid){
+  getDetail(oid){
     let res = await app.request.post('/order/payOrder/detail',{
       orderId: oid
     })

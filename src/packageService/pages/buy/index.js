@@ -16,7 +16,7 @@ Page(observer({
     inputLen: -1
   },
 
-  onLoad: function () {
+  onLoad () {
     const data=wx.getStorageSync('serviceInfo')
     this.setData({
       serviceInfo:data.service,
@@ -25,7 +25,7 @@ Page(observer({
     })
   },
 
-  input: function (e) {
+  input (e) {
     const inputType = e.currentTarget.dataset.type
     let input = e.detail.value
     let validInput = input.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "")
@@ -75,7 +75,7 @@ Page(observer({
     }
   },
 
-  formSubmit: async function (e) {
+  async formSubmit (e) {
     if (!this.data.desc) {
       wx.showToast({
         title: '请输入需求描述',

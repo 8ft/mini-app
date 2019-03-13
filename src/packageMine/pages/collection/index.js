@@ -37,11 +37,11 @@ Page(observer({
     loading: true
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     this.getExperts()
   },
 
-  onShow: function () {
+  onShow () {
     if (this.data.typeIndex !== 1) return
     const articleAmount = this.data.articles.amount
     const latest_articleAmount = this.props.stores.account.blogInfo.favoriteNum
@@ -57,11 +57,11 @@ Page(observer({
     }
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh () {
     this.refresh()
   },
 
-  onReachBottom: function () {
+  onReachBottom () {
     switch (this.data.typeIndex) {
       case 0:
         this.getExperts()
@@ -78,7 +78,7 @@ Page(observer({
     }
   },
 
-  refresh: function () {
+  refresh () {
     switch (this.data.typeIndex) {
       case 0:
         if (this.data.experts.list.length > 0) {
@@ -123,7 +123,7 @@ Page(observer({
     }
   },
 
-  switchList: function (e) {
+  switchList (e) {
     const index = e.detail.index
 
     if (index === 1 && this.data.services.list.length === 0) {
@@ -139,7 +139,7 @@ Page(observer({
     })
   },
 
-  updateExpertCard: function (e) {
+  updateExpertCard (e) {
     const data = e.detail
     if (data.remark !== undefined) {
       this.setData({
@@ -157,21 +157,21 @@ Page(observer({
     }
   },
 
-  updateServiceCard: function (e) {
+  updateServiceCard (e) {
     const data = e.detail
     this.setData({
       [`services.list[${data.index}].collectFlag`]: data.flag
     })
   },
 
-  updateStoreCard: function (e) {
+  updateStoreCard (e) {
     const data = e.detail
     this.setData({
       [`stores.list[${data.index}].collectFlag`]: data.flag
     })
   },
 
-  getExperts: async function () {
+  async getExperts () {
     let nomore = this.data.experts.nomore
     if (nomore) return
     this.setData({
@@ -200,7 +200,7 @@ Page(observer({
     wx.stopPullDownRefresh()
   },
 
-  getServices: async function (type) {
+  async getServices (type) {
     let data = type === 1 ? this.data.services : this.data.stores
     let nomore = data.nomore
     if (nomore) return
@@ -251,7 +251,7 @@ Page(observer({
     wx.stopPullDownRefresh()
   },
 
-  getArticles: async function () {
+  async getArticles () {
     let nomore = this.data.articles.nomore
     if (nomore) return
     this.setData({

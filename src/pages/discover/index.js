@@ -62,7 +62,7 @@ Page(observer({
     }
   },
 
-  onLoad:function(options){
+  onLoad(options){
     if(options.page){
       this.switchPage(null,parseInt(options.page))
     }else{
@@ -72,7 +72,7 @@ Page(observer({
     }
   },
 
-  onShow: function () {
+  onShow () {
     if (this.data.pageIndex === 0) {
       this.getMyAttentionStats()
     }
@@ -95,11 +95,11 @@ Page(observer({
     })
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh () {
     this.refresh()
   },
 
-  onReachBottom: function () {
+  onReachBottom () {
     if (this.data.pageIndex === 0) {
       this.getBlogs()
     } else if (this.data.pageIndex === 1) {
@@ -109,7 +109,7 @@ Page(observer({
     }
   },
 
-  switchPage: function (e,page) {
+  switchPage (e,page) {
     const pageIndex =page||e.detail.index
 
     if (pageIndex === 1 && !this.data.cities) {
@@ -125,7 +125,7 @@ Page(observer({
     })
   },
 
-  refresh: function () {
+  refresh () {
     switch (this.data.pageIndex) {
       case 0:
         this.data.blogs = {
@@ -156,7 +156,7 @@ Page(observer({
     }
   },
 
-  getBanner: async function () {
+  async getBanner () {
     let res = await app.request.post('/blog/carouselConfig/getList')
     if (res.code === 0) {
       this.setData({
@@ -165,7 +165,7 @@ Page(observer({
     }
   },
 
-  getBlogTypes: async function () {
+  async getBlogTypes () {
     let res = await app.request.post('/blog/category/getAvailableList', {
       scope: 1
     })
@@ -176,7 +176,7 @@ Page(observer({
     }
   },
 
-  getMyAttentionStats: async function () {
+  async getMyAttentionStats () {
     if (!this.props.stores.account.logged_in) return
     let res = await app.request.post('/blog/attentionInfo/myAttentionStats', {}, false, true)
     if (res.code === 0) {
@@ -186,7 +186,7 @@ Page(observer({
     }
   },
 
-  getBlogs: async function () {
+  async getBlogs () {
     let nomore = this.data.blogs.nomore
     if (nomore) return
 
@@ -221,7 +221,7 @@ Page(observer({
     wx.stopPullDownRefresh()
   },
 
-  getExperts: async function () {
+  async getExperts () {
     const data = this.data
     let nomore = data.experts.nomore
     if (nomore) return
@@ -251,7 +251,7 @@ Page(observer({
     wx.stopPullDownRefresh()
   },
 
-  selectFilter: function (e) {
+  selectFilter (e) {
     if (this.data.activeFilter) {
       this.setData({
         activeFilter: ''
@@ -263,13 +263,13 @@ Page(observer({
     }
   },
 
-  closePopup: function () {
+  closePopup () {
     this.setData({
       activeFilter: ''
     })
   },
 
-  filter: function (e) {
+  filter (e) {
     let data = e.currentTarget.dataset
     switch (data.type) {
       case 'sortWay':
@@ -303,7 +303,7 @@ Page(observer({
     this.closePopup()
   },
 
-  selectCity: function (e) {
+  selectCity (e) {
     this.setData({
       selectedCity: e.detail.city
     })
@@ -311,7 +311,7 @@ Page(observer({
     this.closePopup()
   },
 
-  getFilter: async function () {
+  async getFilter () {
     let res = await app.request.post('/user/talent/searchCondition')
     let cities = await app.request.post('/dict/dictZone/talentAreaList')
     let jobTypes = await app.request.post('/dict/dictCommon/getDicts', {
@@ -330,23 +330,23 @@ Page(observer({
     }
   },
 
-  scrollToJobTypes: function (e) {
+  scrollToJobTypes (e) {
     this.setData({
       'jobTypes.parent': 'job' + e.currentTarget.dataset.code
     })
   },
 
-  updateExpert: function (e) {
+  updateExpert (e) {
     this.setData({
       [`experts.list[${e.detail.index}].followFlag`]: e.detail.flag
     })
   },
 
-  bannerJump: function (e) {
+  bannerJump (e) {
     app.bannerJump(e)
   },
 
-  getServiceTypes:async function () {
+  async getServiceTypes () {
     let res = await app.request.post('/dict/dictCommon/getDicts', {
       dictType: 'product_type',
       resultType: '1'
@@ -359,13 +359,13 @@ Page(observer({
     }
   },
 
-  scrollToServiceTypes: function (e) {
+  scrollToServiceTypes (e) {
     this.setData({
       'serviceTypes.parent': 'service' + e.currentTarget.dataset.code
     })
   },
 
-  getServices: async function () {
+  async getServices () {
     let nomore = this.data.services.nomore
     if (nomore) return
 

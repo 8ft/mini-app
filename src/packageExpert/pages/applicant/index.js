@@ -15,11 +15,11 @@ Page({
     }
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
       this.getApplicant(options.id)
   },
 
-  getApplicant:async function(id){
+  async getApplicant(id){
     let res = await app.request.post('/project/projectRelation/getApplyList', {
       pageIndex: this.data.pageIndex,
       projectId:id

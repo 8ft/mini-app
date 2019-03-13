@@ -27,12 +27,12 @@ Component({
   },
 
   lifetimes: {
-    attached:function(){
+    attached(){
       this.setData({
         top: wx.getSystemInfoSync().statusBarHeight
       })
     },
-    ready: function () {
+    ready () {
       wx.createSelectorQuery().in(this).select('#navBar').fields({
         size: true
       }, size => {
@@ -45,7 +45,7 @@ Component({
   },
 
   methods: {
-    back:function(){
+    back(){
       wx.navigateBack()
     }
   }

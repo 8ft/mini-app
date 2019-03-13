@@ -26,13 +26,13 @@ Page(observer({
     detail: null
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     this.setData({
       id: options.id
     })
   },
 
-  onShow:function(){
+  onShow(){
     this.props.stores.toRefresh.refresh('service-index',async(exist)=>{
       if(this.data.detail===null||exist){
         this.getDetail()
@@ -49,11 +49,11 @@ Page(observer({
     },350)
   },
 
-  onHide:function(){
+  onHide(){
     clearInterval(iid)
   },
 
-  onUnload:function(){
+  onUnload(){
     wx.removeStorageSync('serviceInfo')
   },
 
@@ -80,19 +80,19 @@ Page(observer({
     }
   },
 
-  onSwiperChange:function(e){
+  onSwiperChange(e){
     this.setData({
       currentSwiper:e.detail.current+1
     })
   },
 
-  getNavHeight: function (e) {
+  getNavHeight (e) {
     this.setData({
       navHeight: e.detail.height
     })
   },
 
-  tabChange: function (e) {
+  tabChange (e) {
     scrolling=true
     const index = e.detail.index
     let scrollTop = 0
@@ -113,7 +113,7 @@ Page(observer({
     }, 350)
   },
 
-  getDetail: async function () {
+  async getDetail () {
     let data = await app.request.post('/store/productBaseInfo/detail', {
       productId: this.data.id
     })
@@ -159,7 +159,7 @@ Page(observer({
     })
   },
 
-  collect:async function(){
+  async collect(){
     if(app.checkLogin()){
       const res = await app.request.post('/store/collectionInfo/collect',{
         businessId:this.data.detail.id,
@@ -172,7 +172,7 @@ Page(observer({
     }
   },
 
-  jump:function(e){
+  jump(e){
     const page=e.currentTarget.dataset.page
 
     wx.setStorageSync('serviceInfo',{

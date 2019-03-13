@@ -19,7 +19,7 @@ Page(observer({
    loading:true
   },
 
-  onLoad:function(options){
+  onLoad(options){
     const systemInfo=wx.getSystemInfoSync()
     this.setData({
       navHeight: `${100+systemInfo.statusBarHeight*750/systemInfo.windowWidth}rpx`,
@@ -28,7 +28,7 @@ Page(observer({
     })
   },
 
-  onShow:function(){
+  onShow(){
     this.props.stores.toRefresh.refresh('blog_list',exist=>{
       if(this.data.types.length===0){
         this.getBlogTypes()
@@ -39,22 +39,22 @@ Page(observer({
     })
   },
 
-  onPullDownRefresh:function(){
+  onPullDownRefresh(){
     this.refresh()
   },
 
-  onReachBottom:function(){
+  onReachBottom(){
     this.getBlogs()
   },
 
-  refresh:function(){
+  refresh(){
     this.data.pageIndex=1
     this.data.blogs=[]
     this.data.nomore=false
     this.getBlogs()
   },
 
-  switchList:function(e){
+  switchList(e){
     let index=e.detail.index
     this.setData({
       typeIndex:index,
@@ -63,7 +63,7 @@ Page(observer({
     this.refresh()
   },
 
-  getBlogTypes:async function(){
+  async getBlogTypes(){
     let res = await app.request.post('/blog/category/getAvailableList',{
       scope:1
     })
@@ -78,7 +78,7 @@ Page(observer({
     }
   },
 
-  getBlogs: async function (){
+  async getBlogs (){
     let nomore = this.data.nomore
     if (nomore)return
 

@@ -41,14 +41,14 @@ Page(observer({
     }
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     this.setData({
       id: options.id
     })
     this.getServiceTypes()
   },
 
-  onShow:function(){
+  onShow(){
     this.props.stores.toRefresh.refresh('service-store',async(exist)=>{
       if(this.data.detail===null||exist){
         this.getDetail()
@@ -56,7 +56,7 @@ Page(observer({
     })
   },
 
-  getNavHeight: function (e) {
+  getNavHeight (e) {
     const systemInfo=wx.getSystemInfoSync()
     const ratio=systemInfo.windowWidth/750
     const scrollViewHeight=systemInfo.windowHeight-e.detail.height-150*ratio
@@ -66,15 +66,15 @@ Page(observer({
     })
   },
 
-  tabChange:function(e){
+  tabChange(e){
     this.switchPage(e.detail.index)
   },
 
-  onSwiperChange:function(e){
+  onSwiperChange(e){
     this.switchPage(e.detail.current)
   },
 
-  switchPage:function(index){
+  switchPage(index){
     if(index===this.data.tabIndex)return
     this.setData({
       tabIndex:index
@@ -84,7 +84,7 @@ Page(observer({
     }
   },
 
-  getDetail: async function () {
+  async getDetail () {
     this.setData({ loading: true })
 
     let data = await app.request.post('/store/storeBaseInfo/getStoreInfo', {
@@ -105,7 +105,7 @@ Page(observer({
     })
   },
 
-  collect:async function(){
+  async collect(){
     if(app.checkLogin()){
       const res = await app.request.post('/store/collectionInfo/collect',{
         businessId:this.data.id,
@@ -118,7 +118,7 @@ Page(observer({
     }
   },
 
-  filter: function (e) {
+  filter (e) {
     let data = e.currentTarget.dataset
     switch (data.type) {
       case 'sortWay':
@@ -145,7 +145,7 @@ Page(observer({
     })
   },
 
-  selectFilter: function (e) {
+  selectFilter (e) {
     if (this.data.activeFilter) {
       this.setData({
         activeFilter: ''
@@ -157,7 +157,7 @@ Page(observer({
     }
   },
 
-  sortServicesByPrice:function(){
+  sortServicesByPrice(){
     this.setData({
       'services.sort':priceSortWays[this.data.services.sort].next
     })
@@ -170,13 +170,13 @@ Page(observer({
     this.getServices()
   },
 
-  scrollToServiceTypes: function (e) {
+  scrollToServiceTypes (e) {
     this.setData({
       'serviceTypes.parent': 'service' + e.currentTarget.dataset.code
     })
   },
 
-  getServiceTypes:async function () {
+  async getServiceTypes () {
     let res = await app.request.post('/dict/dictCommon/getDicts', {
       dictType: 'product_type',
       resultType: '1'
@@ -189,7 +189,7 @@ Page(observer({
     }
   },
 
-  getServices: async function () {
+  async getServices () {
     const isPageServices=this.data.tabIndex===1
     let data =isPageServices?this.data.services:this.data.latest
     let nomore = data.nomore

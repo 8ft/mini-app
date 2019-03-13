@@ -26,7 +26,7 @@ Page(observer({
     }
   },
 
-  onShareAppMessage: function (res) {
+  onShareAppMessage (res) {
     let detail = this.data.detail
     if(!detail)return
     return {
@@ -34,13 +34,13 @@ Page(observer({
     }
   },
 
-  onLoad:function(options){
+  onLoad(options){
     this.setData({
       no:options.no
     })
   },
 
-  onShow: function () {
+  onShow () {
     this.props.stores.toRefresh.refresh('project_detail',(exist)=>{
       if(!this.data.detail){
         this.getDetail()
@@ -50,11 +50,11 @@ Page(observer({
     })
   },
 
-  onPullDownRefresh:function(){
+  onPullDownRefresh(){
     this.getDetail()
   },
 
-  getDetail: async function (){
+  async getDetail (){
     let res = await app.request.post('/project/projectInfo/detail', {
       projectNo: this.data.no
     })
@@ -107,7 +107,7 @@ Page(observer({
     })
   },
 
-  getCooperation:async function(id){
+  async getCooperation(id){
     let res = await app.request.post('/project/projectComfirm/detail', {
       projectId: id
     })
@@ -116,7 +116,7 @@ Page(observer({
     return res.data
   },
 
-  getApplyInfo: async function (pid,uid) {
+  async getApplyInfo (pid,uid) {
     let res = await app.request.post('/project/projectApply/detail', {
       projectId: pid,
       userId: uid
@@ -125,7 +125,7 @@ Page(observer({
     return res.data
   },
 
-  getApplyUsers: async function (id){
+  async getApplyUsers (id){
     let res = await app.request.post('/project/projectRelation/getApplyList', {
       pageSize: 3,
       projectId: id
@@ -134,7 +134,7 @@ Page(observer({
     return res.data
   },
 
-  apply:async function(){
+  async apply(){
     if(!app.checkLogin())return
 
     switch (this.props.stores.account.userInfo.userState){
@@ -180,7 +180,7 @@ Page(observer({
     }
   },
 
-  preview: function () {
+  preview () {
     wx.previewImage({
       urls: this.data.imgs.map(img => {
         return img.url
@@ -188,7 +188,7 @@ Page(observer({
     })
   },
 
-  viewFile: function (e) {
+  viewFile (e) {
     let data = e.currentTarget.dataset
 
     if (/\.txt/.test(data.url)) {
@@ -227,10 +227,10 @@ Page(observer({
     }
   },
 
-  openDoc: function (doc) {
+  openDoc (doc) {
     wx.openDocument({
       filePath: doc,
-      fail: function (res) {
+      fail (res) {
         wx.showToast({
           title: '打开文档失败',
           icon: 'none'
@@ -239,7 +239,7 @@ Page(observer({
     })
   },
 
-  call:function(e){
+  call(e){
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.phone,
     })

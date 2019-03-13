@@ -23,7 +23,7 @@ Page(observer({
     id:''
   },
 
-  onLoad:async function (options) {
+  async onLoad (options) {
     let dicts = await this.getDicts()
     let tradeType = dicts[0].dictName
 
@@ -69,7 +69,7 @@ Page(observer({
     })
   },
 
-  getDicts: async function () {
+  async getDicts () {
     let res = await app.request.post('/dict/dictCommon/getDicts', {
       dictType: 'industry_type',
       resultType: '1'
@@ -81,7 +81,7 @@ Page(observer({
     }
   },
 
-  select: function (e) {
+  select (e) {
     let index = e.detail.value
     this.setData({
       industryIndex: index,
@@ -89,7 +89,7 @@ Page(observer({
     })
   },
 
-  input: function (e) {
+  input (e) {
     let inputType = e.currentTarget.dataset.type
     let val = e.detail.value.replace(/[ ]/g, "").replace(/[\r\n]/g, "")
     switch (inputType) {
@@ -130,7 +130,7 @@ Page(observer({
     }
   },
 
-  chooseImage: function () {
+  chooseImage () {
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
@@ -145,7 +145,7 @@ Page(observer({
     })
   },
 
-  save: async function () {
+  async save () {
     let data=this.data
     if(!data.name){
       wx.showToast({

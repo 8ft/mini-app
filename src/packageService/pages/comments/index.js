@@ -9,7 +9,7 @@ Page({
     loading: true
   },
 
-  onLoad: function () {
+  onLoad () {
     const data=wx.getStorageSync('serviceInfo')
     this.setData({
       serviceInfo:data.service
@@ -17,29 +17,29 @@ Page({
     this.getComments()
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh () {
     this.refresh()
   },
 
-  onReachBottom: function () {
+  onReachBottom () {
     this.getComments()
   },
 
-  refresh: function () {
+  refresh () {
     this.data.pageIndex=1
     this.data.comments=[]
     this.data.nomore=false
     this.getComments()
   },
 
-  tabChange:function(e){
+  tabChange(e){
     this.setData({
       tab:e.currentTarget.dataset.tab
     })
     this.refresh()
   },
 
-  getComments: async function () {
+  async getComments () {
     let nomore = this.data.nomore
     if (nomore) return
     this.setData({
@@ -72,7 +72,7 @@ Page({
     wx.stopPullDownRefresh()
   },
 
-  collect:async function(){
+  async collect(){
     if(app.checkLogin()){
       const res = await app.request.post('/store/collectionInfo/collect',{
         businessId:this.data.serviceInfo.id,
@@ -85,7 +85,7 @@ Page({
     }
   },
 
-  buy:function(){
+  buy(){
     if(app.checkLogin()){
       wx.navigateTo({
         url:`/packageService/pages/buy/index`

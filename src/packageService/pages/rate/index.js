@@ -9,13 +9,13 @@ Page({
     // inputLen: -1
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     this.setData({
       id: options.id
     })
   },
 
-  // input: function (e) {
+  // input (e) {
   //   let input = e.detail.value
   //   let validInput = input.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "")
   //   let conLen = validInput.length
@@ -62,13 +62,13 @@ Page({
     }
   },
 
-  overallRating: function (e) {
+  overallRating (e) {
     this.setData({
       overallScore: e.currentTarget.dataset.point
     })
   },
 
-  submit: async function (e) {
+  async submit (e) {
     if (!this.data.speedScore) {
       wx.showToast({
         title: '请评价服务速度',

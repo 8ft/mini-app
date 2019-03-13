@@ -9,7 +9,7 @@ Page({
     contactAddress:''
   },
 
-  onLoad:async function (options) {
+  async onLoad (options) {
     let res = await app.request.post('/public/aboutUs/getInfo', {})
     if (res.code === 0) {
       this.setData({

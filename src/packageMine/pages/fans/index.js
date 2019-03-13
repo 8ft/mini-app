@@ -15,7 +15,7 @@ Page(observer({
     loading:true
    },
  
-   onLoad:function(options){
+   onLoad(options){
     const myId=wx.getStorageSync('account').userId
     const curId=options.id
     
@@ -26,22 +26,22 @@ Page(observer({
     this.getExperts()
    },
 
-  onPullDownRefresh:function(){
+  onPullDownRefresh(){
     this.refresh()
   },
 
-  onReachBottom:function(){
+  onReachBottom(){
     this.getExperts()
   },
 
-  refresh:function(){
+  refresh(){
     this.data.pageIndex=1
     this.data.experts=[]
     this.data.nomore=false
     this.getExperts()
   },
 
-  follow:async function(e){
+  async follow(e){
     const index=e.currentTarget.dataset.index
     const target=this.data.experts[index]
     const res = await app.request.post('/blog/attentionInfo/follow',{
@@ -54,7 +54,7 @@ Page(observer({
     })
   },
 
-  getExperts: async function (){
+  async getExperts (){
     let nomore = this.data.nomore
     if (nomore)return
     this.setData({

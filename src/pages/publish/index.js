@@ -27,7 +27,7 @@ Page(observer({
     showCollector:false
   },
    
-  onShow:function(){
+  onShow(){
       this.props.stores.toRefresh.refresh('publish',(exist)=>{
         if(this.data.dicts.length===0){
           this.getDicts()
@@ -41,7 +41,7 @@ Page(observer({
       })
   },
 
-  getDicts:async function(){
+  async getDicts(){
     let res = await app.request.post('/dict/dictCommon/getDicts', {
       dictType: 'project_type|price_budget|project_cycle|cooperate_type',
       resultType: '1'
@@ -55,7 +55,7 @@ Page(observer({
     }
   },
 
-  toSkills:function(){
+  toSkills(){
     const skills = app.globalData.publishDataCache.skills
     if (!skills||skills.length===0){
       wx.showToast({
@@ -69,7 +69,7 @@ Page(observer({
     }
   },
 
-  select:function(e){
+  select(e){
     let index
     let data=e.currentTarget.dataset
     if(e.type==='change'){
@@ -110,7 +110,7 @@ Page(observer({
     }
   },
 
-  saveSkillData:function(){
+  saveSkillData(){
     this.setData({
       needsSkillsCn:''
     })
@@ -122,7 +122,7 @@ Page(observer({
     })
   },
 
-  input: function (e) {
+  input (e) {
     let inputType = e.currentTarget.dataset.type
     let val = e.detail.value.replace(/[ ]/g, "").replace(/[\r\n]/g, "")
     switch (inputType) {
@@ -139,7 +139,7 @@ Page(observer({
     }
   },
 
-  publish:async function(){
+  async publish(){
     let data = this.data
     if (!data.pName) {
       wx.showToast({
@@ -188,7 +188,7 @@ Page(observer({
     }
   },
 
-  refresh:function(){
+  refresh(){
     this.setData({
       typeIndex: 0,
       subTypeIndex: 0,
@@ -214,11 +214,11 @@ Page(observer({
     }
   },
 
-  updateUserInfo:function(){
+  updateUserInfo(){
     this.props.stores.account.updateUserInfo()
   },
 
-  hideCollector:function(){
+  hideCollector(){
     this.setData({
       showCollector:false
     })

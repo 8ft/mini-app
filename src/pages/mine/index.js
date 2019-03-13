@@ -11,7 +11,7 @@ Page(observer({
     sex:''
   },
 
-  onShareAppMessage: function () {
+  onShareAppMessage () {
     return {
       title: '接包发包专业平台',
       path: 'pages/tabBar/project/index',
@@ -19,11 +19,11 @@ Page(observer({
     }
   },
 
-  onPullDownRefresh:function(){
+  onPullDownRefresh(){
     this.props.stores.account.refresh()
   },
 
-  onShow:function(){
+  onShow(){
     if(!this.props.stores.account.userInfo)return
     const sex=this.props.stores.account.userInfo.userBaseInfo.sex
     if(this.data.sex!=sex){
@@ -33,7 +33,7 @@ Page(observer({
     }
   },
 
-  go:function(e){
+  go(e){
     if (!app.checkLogin()) return 
     const url=e.currentTarget.dataset.url
     if(url!==undefined){
@@ -45,7 +45,7 @@ Page(observer({
     }
   },
 
-  logout:function(){
+  logout(){
     wx.showModal({
       title: '提示',
       content: '确定要退出吗',

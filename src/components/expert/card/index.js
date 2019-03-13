@@ -26,7 +26,7 @@ Component({
   methods:{
     _download:app.download,
 
-    _collect:async function(){
+    async _collect(){
       if(!app.checkLogin())return
       let res = await app.request.post('/user/talent/followTalent', {
         action:this.properties.data.followFlag===0?1:0,
@@ -36,25 +36,25 @@ Component({
       this.triggerEvent('collect', { index: this.properties.index,flag:this.properties.data.followFlag===0?1:0})
     },
 
-    _addRemark:function(){
+    _addRemark(){
       if(this.properties.data.talentRemark)return
       this._openRemarkBox()
     },
 
-    _openRemarkBox:function(){
+    _openRemarkBox(){
       this.setData({
         showRemarkBox:true
       })
     },
 
-    _closeRemarkBox:function(){
+    _closeRemarkBox(){
       this.setData({
         remark:this.properties.data.talentRemark,
         showRemarkBox:false
       })
     },
 
-    _delRemark:function(){
+    _delRemark(){
       this._remark('')
     },
 
@@ -62,7 +62,7 @@ Component({
       this._remark(e.detail.value.textarea)
     },
 
-    _remark:async function(remark){
+    async _remark(remark){
       let res = await app.request.post('/user/talent/followTalent', {
         action:1,
         talentRemark:remark,

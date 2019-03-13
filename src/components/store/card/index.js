@@ -11,13 +11,13 @@ Component({
   methods:{
     _download:app.download,
 
-    _toStore:function(){
+    _toStore(){
       wx.navigateTo({
         url:`/packageService/pages/store/index?id=${this.properties.data.id}`
       })
     },
 
-    _collect:async function(){
+    async _collect(){
       if(!app.checkLogin())return
       const res = await app.request.post('/store/collectionInfo/collect',{
         businessId:this.properties.data.id,

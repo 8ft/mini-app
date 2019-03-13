@@ -25,7 +25,7 @@ Component({
   },
 
   lifetimes: {
-    attached: function () {
+    attached () {
       const animation = wx.createAnimation({
         duration: 300,
         timingFunction: 'ease',
@@ -33,7 +33,7 @@ Component({
       this.animation = animation
       this.windowWidth = wx.getSystemInfoSync().windowWidth
     },
-    ready: function () {
+    ready () {
       if(!this.properties.active){
         this._selectTab(0)
       }
@@ -41,13 +41,13 @@ Component({
   },
 
   pageLifetimes: {
-    hide: function () {
+    hide () {
       clearTimeout(timeoutId)
     }
   },
 
   methods: {
-    _tabClick: function (e) {
+    _tabClick (e) {
       let index = e.currentTarget.dataset.index
       if (index !== this.data.active) {
         this.setData({
@@ -56,7 +56,7 @@ Component({
         this.triggerEvent('change', { index: index })
       }
     },
-    _selectTab: function (tabIndex) {
+    _selectTab (tabIndex) {
       const query = wx.createSelectorQuery().in(this)
       query.select('#scrollView').scrollOffset()
       query.select(`#tab${tabIndex}`).boundingClientRect()

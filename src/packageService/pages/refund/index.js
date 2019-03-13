@@ -12,7 +12,7 @@ Page({
     ]
   },
 
-  onLoad:function(options){
+  onLoad(options){
     this.setData({
       id:options.id
     })
@@ -25,7 +25,7 @@ Page({
     })
   },
 
-  getDetail: async function (){
+  async getDetail (){
     let res = await app.request.post('/store/productOrderInfo/detail', {
       productOrderId: this.data.id
     })
@@ -39,7 +39,7 @@ Page({
     })
   },
 
-  refund:async function(e){
+  async refund(e){
     if(!e.detail.value.reason){
         wx.showToast({
             title: '请输入退款理由',

@@ -21,7 +21,7 @@ App({
     }
   },
 
-  checkLogin: function () {
+  checkLogin () {
     if (!this.stores.account.logged_in) {
       wx.navigateTo({
         url: '/pages/user/wxLogin/index',
@@ -31,7 +31,7 @@ App({
     }
   },
 
-  bannerJump: function (e) {
+  bannerJump (e) {
     let obj = e.currentTarget.dataset.obj
     if (obj.menuType !== undefined) {
       switch (obj.menuType) {
@@ -56,7 +56,7 @@ App({
     }
   },
 
-  download: function () {
+  download () {
     wx.showModal({
       title: '温馨提示',
       content: '请前往应用市场搜索下载"巨牛汇APP"进行后续操作',

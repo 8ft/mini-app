@@ -17,14 +17,14 @@ Page(observer({
     disagree:false
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     this.setData({
       id:options.id,
       budget: options.budget
     })
   },
 
-  input: function (e) {
+  input (e) {
     const inputType = e.currentTarget.dataset.type
     let input = e.detail.value
     let validInput = input.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "")
@@ -63,13 +63,13 @@ Page(observer({
     }
   },
 
-  setAgree:function(){
+  setAgree(){
     this.setData({
       disagree:!this.data.disagree
     })
   },
 
-  send: async function () {
+  async send () {
     if (!app.checkLogin()) return 
     let data = this.data
     if (!data.price) {

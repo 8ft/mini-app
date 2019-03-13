@@ -25,13 +25,13 @@ Component({
   },
 
   methods: {
-    _locate:function(e){
+    _locate(e){
       this.setData({
         scrollTo:e.currentTarget.dataset.letter
       })
     },
 
-    _select:function(e){
+    _select(e){
       this.triggerEvent('select', { city: e.currentTarget.dataset.city})
     },
 

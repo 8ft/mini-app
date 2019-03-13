@@ -10,7 +10,7 @@ Component({
     }
   },
 
-  attached:function(){
+  attached(){
     this.setData({
       isIPX:/iPhone X/.test(wx.getSystemInfoSync().model)
     })

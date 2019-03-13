@@ -86,7 +86,7 @@ Page(observer({
     }
   },
 
-  onShow:function(){
+  onShow(){
     if(!this.props.stores.account.logged_in)return 
     this.props.stores.toRefresh.refresh('work',(exist)=>{
       if (this.data.scrollViewHeight===0){
@@ -104,7 +104,7 @@ Page(observer({
     })
   },
 
-  refresh:function(){
+  refresh(){
     if (this.data.typeIndex === 0) {
       this.data.myPublish.pageIndex=1
       this.data.myPublish.nomore=false
@@ -118,7 +118,7 @@ Page(observer({
     }
   },
 
-  switchList:function(e){
+  switchList(e){
     let index = e.detail.index
     this.setData({
       typeIndex: index
@@ -126,7 +126,7 @@ Page(observer({
     this.refresh()
   },
 
-  switchState:function(e){
+  switchState(e){
     const index = e.currentTarget.dataset.index
     if(this.data.typeIndex===0){
       this.setData({
@@ -140,7 +140,7 @@ Page(observer({
     this.refresh()
   },
 
-  getMyPublish:async function(){
+  async getMyPublish(){
     this.setData({
       loading:true
     })
@@ -175,7 +175,7 @@ Page(observer({
     })
   },
 
-  getMyApply:async function(){
+  async getMyApply(){
     this.setData({
       loading: true
     })

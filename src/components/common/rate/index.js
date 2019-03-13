@@ -35,7 +35,7 @@ Component({
   },
 
   lifetimes: {
-    created: function () {
+    created () {
       this.ratio = wx.getSystemInfoSync().windowWidth / 750
     }
   },

@@ -12,7 +12,7 @@ Page({
     nomore: false
   },
 
-  onShow: function () {
+  onShow () {
     if(this.data.orders.length===0){
       this.getOrders()
     }else if( wx.getStorageSync('update_order')){
@@ -21,22 +21,22 @@ Page({
     }
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh () {
     this.refresh()
   },
 
-  onReachBottom: function () {
+  onReachBottom () {
     this.getOrders()
   },
 
-  refresh: function () {
+  refresh () {
     this.data.orders = []
     this.data.pageIndex = 1
     this.data.nomore = false
     this.getOrders()
   },
 
-  switchList: function (e) {
+  switchList (e) {
     let index = e.detail.index
     this.setData({
       tabIndex: index
@@ -44,7 +44,7 @@ Page({
     this.refresh()
   },
 
-  getOrders: async function () {
+  async getOrders () {
     let nomore = this.data.nomore
     if (nomore) return
     this.setData({

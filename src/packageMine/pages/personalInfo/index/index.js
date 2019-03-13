@@ -8,18 +8,18 @@ Page(observer({
     stores: app.stores
   },
 
-  onShow:function(){
+  onShow(){
     app.checkLogin()
   },
 
-  onUnload:function(){
+  onUnload(){
     app.globalData.editUserInfoCache={
       jobTypes: {},
       city:{}
     }
   },
 
-  preview: function (e) {
+  preview (e) {
     let curUrl = e.currentTarget.dataset.url
     if(!curUrl)return
     wx.previewImage({
@@ -27,7 +27,7 @@ Page(observer({
     })
   },
 
-  copyLink: function (e) {
+  copyLink (e) {
     const link = e.currentTarget.dataset.link
     if (!link) return
     wx.setClipboardData({
@@ -35,7 +35,7 @@ Page(observer({
     })
   },  
 
-  chooseImage:function(){
+  chooseImage(){
     if (this.props.stores.account.userInfo.userState === 1)return
     wx.chooseImage({
       count:1,
@@ -48,7 +48,7 @@ Page(observer({
     })
   },
 
-  updateAvatar:async function(no){
+  async updateAvatar(no){
     let res = await app.request.post('/user/userAuth/submitNickname', {
       nickName: this.props.stores.account.userInfo.nickName,
       userAvatar: no
@@ -57,7 +57,7 @@ Page(observer({
     this.props.stores.account.updateUserInfo()
   },
 
-  delWorks:function(e){
+  delWorks(e){
     wx.showModal({
       title: '提示',
       content: '确定要删除吗',
@@ -78,7 +78,7 @@ Page(observer({
     })
   },
 
-  submit:async function(){
+  async submit(){
     let user = this.props.stores.account.userInfo
     if (!(Object.keys(user.userBaseInfo).length > 0)) {
       wx.showToast({

@@ -6,14 +6,14 @@ Page({
     id:''
   },
 
-  onLoad:function(options){
+  onLoad(options){
     this.setData({
       id:options.id
     })
     this.getDetail()
   },
 
-  getDetail: async function (){
+  async getDetail (){
     let res = await app.request.post('/store/productOrderInfo/detail', {
       productOrderId: this.data.id
     })
@@ -23,7 +23,7 @@ Page({
     })
   },
 
-  pay:async function(){
+  async pay(){
     let res = await app.request.post('/order/payOrder/businessPrepay', {
         tradeChannel:34, 
         businessOrderType:26, 

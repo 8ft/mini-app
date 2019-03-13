@@ -7,7 +7,7 @@ Page({
     needSkillsCn:[]
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     this.setData({
       skills: app.globalData.publishDataCache.skills,
       needSkills: app.globalData.publishDataCache.needSkills,
@@ -15,13 +15,13 @@ Page({
     })
   },
 
-  onUnload:function(){
+  onUnload(){
     app.globalData.publishDataCache.needSkills=this.data.needSkills
     app.globalData.publishDataCache.needSkillsCn = this.data.needSkillsCn
     app.globalData.publishDataCache.skills =this.data.skills
   },
 
-  select:function(e){
+  select(e){
     let code = e.currentTarget.dataset.code
     let name = e.currentTarget.dataset.name
     let needSkills = this.data.needSkills

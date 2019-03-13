@@ -14,7 +14,7 @@ Page(observer({
     iv:''
   },
 
-  onLoad: function () {
+  onLoad () {
     wx.login({
       success: async res => {
         let data = await app.request.get('/weixin/mini/getOpenId', {
@@ -33,7 +33,7 @@ Page(observer({
     }
   },
 
-  bindGetUserInfo:function(e) {
+  bindGetUserInfo(e) {
     if (e.detail.encryptedData) {
       this.setData({
         encryptedData: e.detail.encryptedData,
@@ -48,7 +48,7 @@ Page(observer({
     }
   },
 
-  preLogin:async function(){
+  async preLogin(){
     const oid=this.data.oid
     let uid=this.data.uid
    

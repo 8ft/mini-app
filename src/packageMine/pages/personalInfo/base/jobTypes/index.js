@@ -8,7 +8,7 @@ Page({
     selectJobTypesCn: []
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     const data = app.globalData.editUserInfoCache.jobTypes
     let list=data.list
     let selectJobTypes=[]
@@ -35,7 +35,7 @@ Page({
     })
   },
 
-  onUnload: function () {
+  onUnload () {
     let value=''
     let valueCn=''
 
@@ -51,7 +51,7 @@ Page({
     }
   },
 
-  select: function (e) {
+  select (e) {
     let selectJobTypes = this.data.selectJobTypes,
       selectJobTypesCn = this.data.selectJobTypesCn
 

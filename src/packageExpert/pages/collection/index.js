@@ -10,29 +10,29 @@ Page({
     loading:true,
   },
 
-  onLoad:function (options) {
+  onLoad (options) {
     this.setData({
       uid:options.id
     })
     this.getCollection()
   },
 
-  refresh:function(){
+  refresh(){
     this.data.pageIndex=1
     this.data.nomore=false
     this.data.list=[]
     this.getCollection()
   },
 
-  onPullDownRefresh:function(){
+  onPullDownRefresh(){
     this.refresh()
   },
 
-  onReachBottom:function(){
+  onReachBottom(){
     this.getCollection()
   },
 
-  getCollection: async function (){
+  async getCollection (){
     let nomore = this.data.nomore
     if (nomore)return
     this.setData({

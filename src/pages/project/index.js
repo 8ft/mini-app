@@ -7,7 +7,7 @@ Page(observer({
     stores: app.stores
   },
 
-  onShareAppMessage: function (res) {
+  onShareAppMessage (res) {
     return {
       title: '接包发包专业平台'
     }
@@ -22,7 +22,7 @@ Page(observer({
    nomore: false
   },
 
-  onShow:function(){
+  onShow(){
     this.props.stores.toRefresh.refresh('index',async(exist)=>{
       if(this.data.banners===null){
         this.getBanner()
@@ -34,24 +34,24 @@ Page(observer({
     })
   },
 
-  onPullDownRefresh:function(){
+  onPullDownRefresh(){
     this.getBanner()
     this.getBlogs()
     this.refresh()
   },
 
-  onReachBottom:function(){
+  onReachBottom(){
     this.getProjects()
   },
 
-  refresh:function(){
+  refresh(){
     this.data.pageIndex=1
     this.data.projects=[]
     this.data.nomore=false
     this.getProjects()
   },
 
-  getBlogs:async function(){
+  async getBlogs(){
     let res = await app.request.post('/blog/carouselConfig/getList')
     if(res.code===0){
       this.setData({
@@ -60,7 +60,7 @@ Page(observer({
     }
   },
 
-  getBanner:async function(){
+  async getBanner(){
     let res = await app.request.post('/public/appActivityMenu/getList', {
       menuClass: 'home_banner',
       clientVersion: '1.0.0'
@@ -74,7 +74,7 @@ Page(observer({
     }
   },
 
-  getProjects: async function (){
+  async getProjects (){
     let nomore = this.data.nomore
     if (nomore)return
 
@@ -106,7 +106,7 @@ Page(observer({
     wx.stopPullDownRefresh()
   },
 
-  bannerJump:function(e){
+  bannerJump(e){
     app.bannerJump(e)
   }
 

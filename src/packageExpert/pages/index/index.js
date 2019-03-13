@@ -26,7 +26,7 @@ Page(observer({
     loading:true
   },
 
-  onLoad:function (options) {
+  onLoad (options) {
     const myId=wx.getStorageSync('account').userId
     const curId=options.id
     const isMyself=myId===curId
@@ -40,23 +40,23 @@ Page(observer({
     this.getUserInfo()
   },
 
-  onShareAppMessage: function () {
+  onShareAppMessage () {
     return {
       title: `${this.data.user.nickName}的主页`
     }
   },
 
-  onPullDownRefresh:function(){
+  onPullDownRefresh(){
     this.getUserInfo()
   },
 
-  onReachBottom:function(){
+  onReachBottom(){
     if(this.data.typeIndex===1){
       this.getBlogs()
     }
   },
 
-  copyLink:function(e){
+  copyLink(e){
     const link = e.currentTarget.dataset.link
     if (!link) return
     wx.setClipboardData({
@@ -64,7 +64,7 @@ Page(observer({
     })
   },  
 
-  viewImage: function (e) {
+  viewImage (e) {
     const curUrl = e.currentTarget.dataset.url
     if (!curUrl) return
     wx.previewImage({
@@ -72,7 +72,7 @@ Page(observer({
     })
   },
 
-  switchList:async function(e){
+  async switchList(e){
     const index = e.detail.index
     if(index===1&&this.data.tags.length<=1){
       await this.getBlogTags()
@@ -83,7 +83,7 @@ Page(observer({
     })
   },
 
-  switchTag:function(e){
+  switchTag(e){
     const index = e.currentTarget.dataset.index
 
     this.setData({
@@ -99,7 +99,7 @@ Page(observer({
     }
   },
 
-  getUserInfo: async function () {
+  async getUserInfo () {
     let userInfo
     if(this.data.isMyself){
       userInfo=app.util.deepCopy(this.props.stores.account.userInfo)
@@ -158,7 +158,7 @@ Page(observer({
     wx.stopPullDownRefresh()
   },
 
-  getBlogTags: async function (){
+  async getBlogTags (){
     let res = await app.request.post('/blog/catalog/getList',{
       userId: this.data.uid,
       pageIndex:1,
@@ -172,7 +172,7 @@ Page(observer({
     }) 
   },
 
-  getBlogs: async function (){
+  async getBlogs (){
     let nomore = this.data.nomore
     if (nomore)return
 

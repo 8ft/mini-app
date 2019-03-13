@@ -29,13 +29,13 @@ Component({
   },
 
   methods: {
-    _toStore: function () {
+    _toStore () {
       wx.navigateTo({
         url: `/packageService/pages/store/index?id=${this.properties.data.storeId}`
       })
     },
 
-    _update: async function (e, act) {
+    async _update (e, act) {
       const action = act || e.currentTarget.dataset.action
       const res = await app.request.post(actionApis[action], {
         productOrderId: this.properties.data.id
@@ -44,13 +44,13 @@ Component({
       this.triggerEvent('update', { index: this.properties.index, action: action })
     },
 
-    _jump: function (e) {
+    _jump (e) {
       wx.navigateTo({
         url: e.currentTarget.dataset.url
       })
     },
 
-    _comfirm: function () {
+    _comfirm () {
       wx.showModal({
         title: '确认验收',
         content: '请仔细验收卖家提供的服务，确认验收后平台将本次服务金额支付给卖家！',
@@ -62,7 +62,7 @@ Component({
       })
     },
 
-    _collect: async function () {
+    async _collect () {
       const res = await app.request.post('/store/collectionInfo/collect', {
         businessId: this.properties.data.id,
         type: 1

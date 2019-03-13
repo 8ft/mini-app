@@ -27,7 +27,7 @@ Component({
     }
   },
 
-  attached:function(){
+  attached(){
     let user = wx.getStorageSync('account')
     if (user) {
       this.setData({
@@ -37,7 +37,7 @@ Component({
   },
 
   methods:{
-    _toApplicant:function(){
+    _toApplicant(){
       wx.navigateTo({
         url:`/packageExpert/pages/applicant/index?id=${this.data.project.id}`
       })

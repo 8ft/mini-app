@@ -16,7 +16,7 @@ Page(observer({
     userInfo:null
   },
 
-  input: function (e) {
+  input (e) {
     let inputName = e.currentTarget.dataset.name
     let val = e.detail.value
     switch (inputName) {
@@ -33,7 +33,7 @@ Page(observer({
     }
   },
 
-  getCode: async function () {
+  async getCode () {
     let phone = this.data.phone
     if (!app.util.validatePhone(phone)) return
     let res = await app.request.post('/public/validateCode/sendValidateCode', {
@@ -43,7 +43,7 @@ Page(observer({
     if (res.code===0) this.countDown()
   },
 
-  countDown: function () {
+  countDown () {
     let tid = setTimeout(() => {
       let countDown = this.data.countDown
       if (countDown > 1) {
@@ -78,7 +78,7 @@ Page(observer({
     }
   },
 
-  bind:async function(){
+  async bind(){
     let phone=this.data.phone
     if(!app.util.validatePhone(phone))return
 

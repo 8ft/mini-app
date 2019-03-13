@@ -18,7 +18,7 @@ Component({
   },
 
   methods: {
-    _hide:function(){
+    _hide(){
       this.triggerEvent('hide')
       this.setData({
         active: false

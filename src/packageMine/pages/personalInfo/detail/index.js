@@ -16,7 +16,7 @@ Page(observer({
     demoShow: false
   },
 
-  onLoad: function (options) {
+  onLoad (options) {
     const systemInfo=wx.getSystemInfoSync()
 
     let input = this.props.stores.account.userInfo.userIntro
@@ -37,7 +37,7 @@ Page(observer({
     })
   },
 
-  save:async function(){
+  async save(){
     if (this.data.conLen<100){
       wx.showToast({
         title: '详细介绍至少100字哦',
@@ -54,7 +54,7 @@ Page(observer({
     }
   },
 
-  input: function (e) {
+  input (e) {
     let input = e.detail.value
     let validInput = input.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "")
     let conLen = validInput.length
@@ -79,13 +79,13 @@ Page(observer({
     })
   },
 
-  hideDemo: function () {
+  hideDemo () {
     this.setData({
       demoShow: false
     })
   },
 
-  showDemo: function () {
+  showDemo () {
     this.setData({
       demoShow: true
     })

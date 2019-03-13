@@ -17,7 +17,7 @@ Component({
   },
 
   methods: {
-    _input: function (e) {
+    _input (e) {
       let inputType = e.currentTarget.dataset.type
       let val = e.detail.value.replace(/[\s\r\n]/g, "")
       let disable=this.data.disable
@@ -55,7 +55,7 @@ Component({
       })
     },
 
-    _save:async function(){
+    async _save(){
       let res = await app.request.post('/user/userAuth/completeUserContact', {
         qq: this.data.qq,
         wechat: this.data.wechat
@@ -70,7 +70,7 @@ Component({
       this._hide()
     },
 
-    _hide: function () {
+    _hide () {
       this.triggerEvent('hide')
       this.setData({
         show: false

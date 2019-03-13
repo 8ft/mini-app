@@ -33,13 +33,13 @@ Page(observer({
     nomore: false
   },
 
-  onShareAppMessage: function (res) {
+  onShareAppMessage (res) {
     return {
       title: '好项目很多，人才库告急！'
     }
   },
 
-  onLoad:async function (options) {
+  async onLoad (options) {
     this.data.time.map(item=>{
       item.begin=this.getDate(item.name)||''
     })
@@ -52,7 +52,7 @@ Page(observer({
     }
   },
 
-  onShow:function(){
+  onShow(){
     this.props.stores.toRefresh.refresh('project_list',async(exist)=>{
       if(this.data.dicts.length===0){
         await this.getDicts()
@@ -63,7 +63,7 @@ Page(observer({
     })
   },
 
-  onReady:function(){
+  onReady(){
     wx.createSelectorQuery().select('#navBar').fields({
       size: true
     }, res => {
@@ -73,22 +73,22 @@ Page(observer({
     }).exec()
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh () {
     this.refresh()
   },
 
-  onReachBottom: function () {
+  onReachBottom () {
     this.getProjects()
   },
 
-  refresh: function () {
+  refresh () {
     this.data.pageIndex=1
     this.data.projects=[]
     this.data.nomore=false
     this.getProjects()
   },
 
-  getDate:function(daysAgo){
+  getDate(daysAgo){
     let date = new Date(),
       curYear = date.getFullYear(),
       curMonth = date.getMonth() + 1,
@@ -121,7 +121,7 @@ Page(observer({
       }
   },
 
-  getDicts: async function () {
+  async getDicts () {
     let res = await app.request.post('/dict/dictCommon/getDicts', {
       dictType: 'project_type|price_budget|project_cycle',
       resultType: '1'
@@ -134,7 +134,7 @@ Page(observer({
     }
   },
 
-  getProjects: async function () {
+  async getProjects () {
     this.setData({
       loading:true
     })
@@ -178,13 +178,13 @@ Page(observer({
     wx.stopPullDownRefresh()
   },
 
-  scrollToProjectTypes: function (e) {
+  scrollToProjectTypes (e) {
     this.setData({
       'projectTypes.parent': 'project' + e.currentTarget.dataset.code
     })
   },
 
-  filter:function(e){
+  filter(e){
     let data=e.currentTarget.dataset
     switch(data.type){
       case 'projectTypes':
@@ -213,7 +213,7 @@ Page(observer({
     this.close()
   },
 
-  select: function (e) {
+  select (e) {
     if(this.data.filter){
       this.setData({
         filter:''
@@ -224,7 +224,7 @@ Page(observer({
       })
     }
   },
-  close:function(){
+  close(){
     this.setData({
       filter: ''
     })

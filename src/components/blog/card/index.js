@@ -37,7 +37,7 @@ Component({
   },
 
   methods:{
-    goDetail:function(e){
+    goDetail(e){
       this.setData({
         'data.viewNum':this.properties.data.viewNum+=1
       })
