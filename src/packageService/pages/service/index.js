@@ -33,11 +33,19 @@ Page(observer({
   },
 
   onShow(){
-    this.props.stores.toRefresh.refresh('service-index',async(exist)=>{
+    this.props.stores.toRefresh.refresh('service_index',async(exist)=>{
       if(this.data.detail===null||exist){
+        wx.removeStorageSync('serviceInfo')
         this.getDetail()
       }
     })
+
+    const serviceInfo=wx.getStorageSync('serviceInfo').service
+    if(serviceInfo&&serviceInfo.collectFlag!==this.data.detail.collectFlag){
+      this.setData({
+        'detail.collectFlag':serviceInfo.collectFlag
+      })
+    }
 
     iid=setInterval(()=>{
       if(toScrollList.length>0){
@@ -169,6 +177,7 @@ Page(observer({
       this.setData({
         'detail.collectFlag':this.data.detail.collectFlag==='0'?'1':'0'
       })
+      this.props.stores.toRefresh.updateList('collect')
     }
   },
 

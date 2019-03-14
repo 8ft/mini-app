@@ -59,6 +59,10 @@
         <view>退款理由</view>
         <text>{{detail.refundReason}}</text>
     </view>
+    <view class="info" wx:if="{{detail.refundTime}}">
+        <view>退款时间</view>
+        <text>{{detail.refundTime}}</text>
+    </view>
     <view class="info" wx:if="{{detail.refundRejectTime}}">
         <view>拒绝退款时间</view>
         <text>{{detail.refundRejectTime}}</text>
@@ -67,7 +71,7 @@
         <view>拒绝理由</view>
         <text>{{detail.refundRejectReason}}</text>
     </view>
-    <view class="info action-bar">
+    <view class="info action-bar" wx:if="{{detail.refundRejectTime}}">
         <button class="action" bindtap="download">联系客服</button>
     </view>
 </view>

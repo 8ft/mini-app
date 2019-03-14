@@ -33,7 +33,7 @@
                 <image lazy-load="{{true}}" mode="aspectFill" src="{{item.createUserAvatar||'/assets/img/default/avatar.png'}}"></image>
                 <text>{{item.createNickName}}</text>
             </view>
-            <view class="con">{{item.content}}</view>
+            <text class="con">{{item.content}}</text>
         </view>
     </block>
     <view class="no-comments" wx:else>暂无评价</view>

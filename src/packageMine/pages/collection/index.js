@@ -37,24 +37,16 @@ Page(observer({
     loading: true
   },
 
-  onLoad (options) {
+  onLoad () {
     this.getExperts()
   },
 
   onShow () {
-    if (this.data.typeIndex !== 1) return
-    const articleAmount = this.data.articles.amount
-    const latest_articleAmount = this.props.stores.account.blogInfo.favoriteNum
-
-    if (articleAmount && articleAmount !== latest_articleAmount) {
-      this.setData({
-        'articles.amount': latest_articleAmount,
-        'articles.pageIndex': 1,
-        'articles.nomore': false,
-        'articles.list': []
-      })
-      this.getArticles()
-    }
+    this.props.stores.toRefresh.refresh('mine_collection',async(exist)=>{
+      if(exist){
+        this.refresh()
+      }
+    })
   },
 
   onPullDownRefresh () {

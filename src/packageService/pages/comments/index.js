@@ -10,9 +10,8 @@ Page({
   },
 
   onLoad () {
-    const data=wx.getStorageSync('serviceInfo')
     this.setData({
-      serviceInfo:data.service
+      serviceInfo:wx.getStorageSync('serviceInfo').service
     })
     this.getComments()
   },
@@ -82,6 +81,12 @@ Page({
       this.setData({
         'serviceInfo.collectFlag':this.data.serviceInfo.collectFlag==='0'?'1':'0'
       })
+      
+      let serviceInfo=wx.getStorageSync('serviceInfo')
+      serviceInfo.service.collectFlag=this.data.serviceInfo.collectFlag
+      wx.setStorageSync('serviceInfo',serviceInfo)
+
+      this.props.stores.toRefresh.updateList('collect')
     }
   },
 

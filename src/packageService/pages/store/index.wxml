@@ -2,7 +2,7 @@
     <view slot="nav" class="store-name">{{detail.storeName}}</view>
     <view slot="addones" class="store-desc">
         <view>{{detail.storeDesc}}</view>
-        <navigator hover-class="none" url="/packageService/pages/storeDetail/index?id={{id}}">更多</navigator>
+        <text bindtap="jump">更多</text>
     </view>
     <tabs slot="addones" class="{{hideNav?'hidden':''}}" under-line-ratio="{{.5}}" tabs="{{['首页','所有服务','最新']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
 </nav-bar>

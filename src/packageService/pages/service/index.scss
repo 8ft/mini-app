@@ -41,7 +41,7 @@ scroll-view{width:100%;}
             image{width:60rpx;height: 100%;border-radius: 50%;display: inline-block;margin-right:20rpx;}
             text{flex: 1;}
         }
-        .con{padding-left:80rpx;margin-top: 15rpx;}
+        .con{padding-left:80rpx;margin-top: 15rpx;display:block;}
     }
     .no-comments{color:$black;font-size: $xl;font-weight:500;text-indent: 26rpx;line-height: 120rpx;}
 }

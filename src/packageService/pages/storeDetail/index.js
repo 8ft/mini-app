@@ -8,16 +8,20 @@ Page(observer({
   },
 
   data: {
-    id: '',
     isMyself: false,
     detail: null
   },
 
-  onLoad (options) {
-    this.setData({
-      id: options.id
+  onShow(){
+    this.props.stores.toRefresh.refresh('service_store',async(exist)=>{
+      if(this.data.detail===null){
+        this.setData({
+          detail:wx.getStorageSync('storeInfo')
+        })
+      }else if(exist){
+        this.getDetail()
+      }
     })
-    this.getDetail()
   },
 
   getNavHeight (e) {
@@ -32,7 +36,7 @@ Page(observer({
     this.setData({ loading: true })
 
     let data = await app.request.post('/store/storeBaseInfo/getStoreInfo', {
-      storeId: this.data.id
+      storeId: wx.getStorageSync('storeInfo').id
     })
     if (data.code !== 0) return
 
@@ -47,18 +51,24 @@ Page(observer({
       loading: false,
       detail: detail
     })
+    wx.setStorageSync('storeInfo',detail)
   },
 
   async collect(){
     if(app.checkLogin()){
       const res = await app.request.post('/store/collectionInfo/collect',{
-        businessId:this.data.id,
+        businessId:this.data.detail.id,
         type:0
       })
       if(res.code!==0)return
+
+      const collectFlag=this.data.detail.collectFlag===0?1:0
       this.setData({
-        'detail.collectFlag':this.data.detail.collectFlag==0?1:0
+        'detail.collectFlag':collectFlag,
+        'detail.collectNums':this.data.detail.collectNums+=collectFlag?1:-1
       })
+      wx.setStorageSync('storeInfo',this.data.detail)
+      this.props.stores.toRefresh.updateList('collect')
     }
   },
   

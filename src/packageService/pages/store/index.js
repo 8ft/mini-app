@@ -49,11 +49,24 @@ Page(observer({
   },
 
   onShow(){
-    this.props.stores.toRefresh.refresh('service-store',async(exist)=>{
+    this.props.stores.toRefresh.refresh('service_store',async(exist)=>{
       if(this.data.detail===null||exist){
+        wx.removeStorageSync('storeInfo')
         this.getDetail()
       }
     })
+
+    const storeInfo=wx.getStorageSync('storeInfo')
+    if(storeInfo&&storeInfo.collectFlag!==this.data.detail.collectFlag){
+      this.setData({
+        'detail.collectFlag':storeInfo.collectFlag,
+        'detail.collectNums':storeInfo.collectNums
+      })
+    }
+  },
+
+  onUnload(){
+    wx.removeStorageSync('storeInfo')
   },
 
   getNavHeight (e) {
@@ -112,9 +125,13 @@ Page(observer({
         type:0
       })
       if(res.code!==0)return
+
+      const collectFlag=this.data.detail.collectFlag===0?1:0
       this.setData({
-        'detail.collectFlag':this.data.detail.collectFlag==0?1:0
+        'detail.collectFlag':collectFlag,
+        'detail.collectNums':this.data.detail.collectNums+=collectFlag?1:-1
       })
+      this.props.stores.toRefresh.updateList('collect')
     }
   },
 
@@ -241,6 +258,13 @@ Page(observer({
       }
     }
     wx.stopPullDownRefresh()
+  },
+
+  jump(){
+    wx.setStorageSync('storeInfo',this.data.detail)
+    wx.navigateTo({
+      url:'/packageService/pages/storeDetail/index'
+    })
   },
   
   download:app.download

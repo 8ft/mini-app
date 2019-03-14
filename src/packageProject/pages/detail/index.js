@@ -209,9 +209,9 @@ Page(observer({
       wx.showLoading({
         title: '下载文档中'
       })
-      let url = data.url.replace('http:', 'https:')
+      
       wx.downloadFile({
-        url: url,
+        url: data.url.replace('http:', 'https:'),
         success: res => {
           const filePath = res.tempFilePath
           docTemps.push(filePath)

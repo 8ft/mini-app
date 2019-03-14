@@ -150,6 +150,7 @@ Page(observer({
       this.setData({
         'detail.favoriteState':this.data.detail.favoriteState===0?1:0
       })
+      this.props.stores.toRefresh.updateList('collect')
     }
   },
 

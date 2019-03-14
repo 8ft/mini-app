@@ -77,7 +77,7 @@
   <view><text class="iconfont icon-xiaochengxukaifa"></text><text>{{detail.projectTypeCn}}/{{detail.projectSubtypeCn}}</text></view>
   <view wx:if="{{detail.projectSkillCn}}"><text class="iconfont icon-Html"></text><text>{{detail.projectSkillCn}}</text></view>
   <view wx:if="{{detail.companyName}}"><text class="iconfont icon-gongsi"></text><text>{{detail.companyName}}</text></view>
-  <view><text class="iconfont icon-qingxiang"></text><text>{{detail.cooperaterCn}}</text></view>
+  <view wx:if="{{detail.cooperater!=='1'}}"><text class="iconfont icon-qingxiang"></text><text>{{detail.cooperaterCn}}</text></view>
   <view><text class="iconfont icon-shijian"></text><text>{{detail.createTime}}发布</text></view>
 </view>
 
