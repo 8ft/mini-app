@@ -118,8 +118,8 @@
     }
   },
   "window": {
-    "navigationBarTextStyle":"black",
-    "navigationStyle":"custom",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
     "backgroundTextStyle": "dark"
   },
   "tabBar": {

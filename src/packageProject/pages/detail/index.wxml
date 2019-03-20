@@ -175,3 +175,5 @@
 <action-bar wx:if="{{(detail.projectState==12||detail.projectState==13)&&character==='publisher'}}">
   <button class='btn-one' bindtap="download">修改项目</button>
 </action-bar>
+
+

@@ -7,7 +7,7 @@
     </view>
 </nav-bar>
 
-<view class="comments" >
+<view class="comments">
     <view class="comment" wx:for="{{comments}}">
         <view class="user">
             <image lazy-load="{{true}}" mode="aspectFill" src="{{item.createUserAvatar||'/assets/img/default/avatar.png'}}"></image>
