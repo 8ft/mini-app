@@ -21,7 +21,7 @@ Page({
 
   radioChange(e) {
     this.setData({
-        reson:e.detail.value
+        reason:e.detail.value
     })
   },
 
@@ -40,7 +40,14 @@ Page({
   },
 
   async refund(e){
-    if(!e.detail.value.reason){
+    if(this.data.reason===undefined){
+      wx.showToast({
+        title: '请选择退款理由',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.reason===''&&!e.detail.value.reason){
         wx.showToast({
             title: '请输入退款理由',
             icon: 'none'
@@ -48,8 +55,8 @@ Page({
         return
     }
     let res = await app.request.post('/store/productOrderInfo/applyForRefund', {
-        productOrderId: this.orderInfo.id,
-        reason:e.detail.value.reason
+        productOrderId: this.data.id,
+        reason:this.data.reason||e.detail.value.reason
       })
       if(res.code!==0)return
       wx.setStorageSync('update_order',true)

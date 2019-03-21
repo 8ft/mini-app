@@ -12,12 +12,10 @@
 </view>
 
 <view class="base-info">
-    <view class="price">
-        {{detail.price}}
-        <text>成交量{{detail.tradeNums}}</text>
-    </view>
+    <view class="service-price {{detail.price?'priced':''}}">{{detail.price}}<text>{{detail.price?'/'+detail.priceUnitCn:detail.priceUnitCn}}</text></view>
+    <view class="volume">成交量{{detail.tradeNums}}</view>
     <view class="name">{{detail.productName}}</view>
-    <view class="tip" wx:if="{{detail.refuseReason}}">
+    <view class="tip" wx:if="{{isMyself&&detail.refuseReason}}">
         <view class="msg">{{detail.refuseReason}}</view>
         <view class="edit" bindtap="download">重新编辑<text class="iconfont icon-xiayiye"></text></view>
     </view>
@@ -45,7 +43,7 @@
     <template is="entry" data="{{...detail.productDesc}}" />
 </view>
 
-<action-bar>
+<action-bar wx:if="{{!isMyself}}">
   <navigator class="action" hover-class="none" url="/packageService/pages/store/index?id={{detail.storeId}}">
       <view class="iconfont icon-dianpu"></view>
       <view class="name">店铺</view>
@@ -58,5 +56,5 @@
       <view class="iconfont icon-{{detail.collectFlag==='1'?'yishoucang':'shoucang1'}}"></view>
       <view class="name">收藏</view>
   </view>
-  <button class="buy" disabled="{{detail.invalidFlag===0}}" data-page="buy" bindtap="jump">{{detail.invalidFlag===0?'暂时无法购买':'购买服务'}}</button>
+  <button class="buy" disabled="{{detail.invalidFlag!=0}}" data-page="buy" bindtap="jump">{{detail.invalidFlag==0?'购买服务':'暂时无法购买'}}</button>
 </action-bar>

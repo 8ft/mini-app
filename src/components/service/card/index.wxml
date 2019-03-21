@@ -2,7 +2,7 @@
 <navigator wx:if="{{appearance==='normal'}}" class="service-card {{appearance}}" hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
   <view class="service-name">{{data.productName}}</view>
   <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
-  <view class="service-info"><text class="service-price">{{data.price}}</text>成交量{{data.tradeNums}}</view>
+  <view class="service-info"><text class="service-price {{data.price?'priced':''}}">{{data.price}}<text>{{data.price?'/'+data.priceUnitCn:data.priceUnitCn}}</text></text>成交量{{data.tradeNums}}</view>
   <view class="service-info">{{data.storeName}}</view>
   <view class="store-entrance" catchtap="_toStore"><text>进店</text><text class="iconfont icon-xiayiye"></text></view>
 </navigator>
@@ -13,8 +13,8 @@
 <navigator wx:if="{{appearance==='goods'}}" class="service-card {{appearance}}" hover-class="none" url="/packageService/pages/service/index?id={{data.id}}">
   <image lazy-load="true" mode='aspectFill' src="{{data.coverFileUrl}}"></image>
   <view class="service-name">{{data.productName}}</view>
-  <text class="service-price">{{data.price}}</text>
-  <text class="service-tradeNums">成交量{{data.tradeNums}}</text>
+  <view class="service-price {{data.price?'priced':''}}">{{data.price}}<text>{{data.price?'/'+data.priceUnitCn:data.priceUnitCn}}</text></view>
+  <view class="service-tradeNums">成交量{{data.tradeNums}}</view>
 </navigator>
 
 
@@ -28,7 +28,7 @@
     {{data.storeName}}
     <text class="iconfont icon-xiayiye"></text>
   </view>
-  <view class="service-price">{{data.price}}</view>
+  <view class="service-price {{data.price?'priced':''}}">{{data.price}}<text>{{data.price?'/'+data.priceUnitCn:data.priceUnitCn}}</text></view>
   <view class="collect" catchtap="_collect">
     <text class="iconfont icon-{{data.collectFlag=='1'?'yishoucang':'shoucang1'}}"></text>
     {{data.collectFlag=='1'?'已收藏':'收藏'}}
@@ -46,7 +46,7 @@
       {{data.storeName}}
       <text class="iconfont icon-xiayiye"></text>
     </view>
-    <view class="service-price">{{data.price}}</view>
+    <view class="service-price {{data.price?'priced':''}}">{{data.price}}</view>
 
     <view class="action-bar">
       <view class="status">{{data.businessStateName}}</view>
@@ -55,7 +55,7 @@
       <button class="action" data-url="/packageService/pages/pay/index?id={{data.id}}" catchtap="_jump" wx:if="{{activeActions[data.businessState].pay}}">付款</button>
       <button class="action" data-url="/packageService/pages/refund/index?id={{data.id}}" catchtap="_jump" wx:if="{{activeActions[data.businessState].refund}}">申请退款</button>
       <button class="action" data-url="/packageService/pages/rate/index?id={{data.id}}" catchtap="_jump" wx:if="{{activeActions[data.businessState].rate&&!data.appraiseFlag}}">评价</button>
-      <button class="action" catchtap="_comfirm" wx:if="{{activeActions[data.businessState].comfirm}}">确认验收</button>
+      <button class="action" data-action="comfirm" catchtap="_update" wx:if="{{activeActions[data.businessState].comfirm}}">确认验收</button>
     </view>
 </navigator>
 

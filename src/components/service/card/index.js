@@ -1,9 +1,19 @@
 const app = getApp()
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
-const actionApis = {
-  delete: '/store/productOrderInfo/delete',
-  close: '/store/productOrderInfo/cancelProductOrder',
-  comfirm: '/store/productOrderInfo/acceptProductOrder'
+const actions = {
+  delete: {
+    msg: '确定要删除订单吗',
+    api: '/store/productOrderInfo/delete'
+  },
+  close: {
+    msg: '确定要关闭订单吗',
+    api: '/store/productOrderInfo/cancelProductOrder'
+  },
+  comfirm: {
+    title: '确认验收',
+    msg: '请仔细验收卖家提供的服务，确认验收后平台将本次服务金额支付给卖家！',
+    api: '/store/productOrderInfo/acceptProductOrder'
+  }
 }
 
 Component({
@@ -29,40 +39,36 @@ Component({
   },
 
   methods: {
-    _toStore () {
+    _toStore() {
       wx.navigateTo({
         url: `/packageService/pages/store/index?id=${this.properties.data.storeId}`
       })
     },
 
-    async _update (e, act) {
-      const action = act || e.currentTarget.dataset.action
-      const res = await app.request.post(actionApis[action], {
-        productOrderId: this.properties.data.id
-      })
-      if (res.code !== 0) return
-      this.triggerEvent('update', { index: this.properties.index, action: action })
-    },
-
-    _jump (e) {
-      wx.navigateTo({
-        url: e.currentTarget.dataset.url
-      })
-    },
-
-    _comfirm () {
+    _update(e) {
+      const action = e.currentTarget.dataset.action
       wx.showModal({
-        title: '确认验收',
-        content: '请仔细验收卖家提供的服务，确认验收后平台将本次服务金额支付给卖家！',
-        success: res => {
+        title: actions[action].title || '提示',
+        content: actions[action].msg,
+        success: async res => {
           if (res.confirm) {
-            this._update('comfirm')
+            const result = await app.request.post(actions[action].api, {
+              productOrderId: this.properties.data.id
+            })
+            if (result.code !== 0) return
+            this.triggerEvent('update', { index: this.properties.index, action: action })
           }
         }
       })
     },
 
-    async _collect () {
+    _jump(e) {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url
+      })
+    },
+
+    async _collect() {
       const res = await app.request.post('/store/collectionInfo/collect', {
         businessId: this.properties.data.id,
         type: 1

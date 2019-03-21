@@ -16,11 +16,11 @@ scroll-view{width:100%;}
 }
 
 .base-info{background: #fff;padding:28rpx 32rpx 50rpx;position: relative;
-    .price{color:$red;font-size: 38rpx;line-height:32rpx;
-        &::before{content:'￥';font-size: $m;}
-        &::after{content:'/单';font-size: $m;}
-        text{position:absolute;top:28rpx;right:32rpx;color:$gray;font-size: $l;line-height:32rpx;}
+    .service-price{color:$red;font-size: 38rpx;line-height:32rpx;
+        &.priced::before{content:'￥';font-size: $m;}
+        text{font-size: $m;}
     }
+    .volume{position:absolute;top:28rpx;right:32rpx;color:$gray;font-size: $l;line-height:32rpx;}
     .name{color:$lightBlack;font-size: 30rpx;font-weight: 500;margin-top: 33rpx;}
     .tip{position: absolute;top:90%;left:30rpx;z-index: 1;background: rgba(51,51,51,.88);color:#fff;width:460rpx;border-radius: 20rpx;padding:37rpx 22rpx 0;font-size: $m;
         .edit{text-align: right;line-height: 60rpx;

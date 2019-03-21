@@ -37,7 +37,7 @@
         <navigator class="action" hover-class="none" url="/packageService/pages/pay/index?id={{detail.id}}" wx:if="{{activeActions[detail.businessState].pay}}">付款</navigator>
         <navigator class="action" hover-class="none" url="/packageService/pages/refund/index?id={{detail.id}}" wx:if="{{activeActions[detail.businessState].refund}}">申请退款</navigator>
         <navigator class="action" hover-class="none" url="/packageService/pages/rate/index?id={{detail.id}}" wx:if="{{activeActions[detail.businessState].rate&&!detail.appraiseFlag}}">评价</navigator>
-        <button class="action" bindtap="comfirm" wx:if="{{activeActions[detail.businessState].comfirm}}">确认验收</button>
+        <button class="action" data-action="comfirm" bindtap="update" wx:if="{{activeActions[detail.businessState].comfirm}}">确认验收</button>
     </view>
 </view>
 
@@ -71,18 +71,19 @@
         <view>拒绝理由</view>
         <text>{{detail.refundRejectReason}}</text>
     </view>
-    <view class="info action-bar" wx:if="{{detail.refundRejectTime}}">
+    <view class="info action-bar" wx:if="{{detail.refundState===10||detail.refundState===12}}">
         <button class="action" bindtap="download">联系客服</button>
     </view>
 </view>
 
 <view class="order-infos">
+    
     <view class="title">订单信息</view>
-    <view class="service">
+    <navigator class="service" hover-class="none" url="/packageService/pages/service/index?id={{detail.productId}}">
         <image lazy-load="true" mode='aspectFill' src="{{detail.coverFileUrl}}"></image>
         <view class="name">{{detail.productName}}</view>
         <view class="price">{{detail.price}}</view>
-    </view>
+    </navigator>
     <view class="info">
         <view>订单编号</view>
         <text>{{detail.businessNo}}</text>

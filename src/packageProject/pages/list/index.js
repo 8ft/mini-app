@@ -63,14 +63,10 @@ Page(observer({
     })
   },
 
-  onReady(){
-    wx.createSelectorQuery().select('#navBar').fields({
-      size: true
-    }, res => {
-      this.setData({
-        navHeight:`${res.height}px`
-      })
-    }).exec()
+  setNavHeight(e){
+    this.setData({
+      navHeight:`${e.detail.height}px`
+    })
   },
 
   onPullDownRefresh () {

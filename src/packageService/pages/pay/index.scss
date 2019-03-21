@@ -7,8 +7,7 @@
     image{position:absolute;left:30rpx;top:87rpx;width:160rpx;height:160rpx;border-radius:10rpx;}
     .service-type{color:$gray;font-size:$m;margin-bottom:20rpx;}
     .service-price{color:$red;font-size:38rpx;
-        &::before{content:'￥';font-size:$m;}
-        &::after{content:'/套';font-size:$m;}}
+        &::before{content:'￥';font-size:$m;}}
 }
 
 .pay-ways{padding:0 30rpx 0 128rpx;background: #fff;font-size:$xl;color:$lightBlack;

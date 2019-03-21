@@ -29,14 +29,14 @@
     <view class='info'>
       <text class='name'>手机</text>
       <view class='input'>
-        <input name="phone" type="number" maxlength='11' value="{{props.stores.account.account.telephone||''}}" placeholder="请输入手机号码"></input>
+        <input name="phone" type="number" maxlength='11' value="{{props.stores.account.userInfo.userMobile||''}}" placeholder="请输入手机号码"></input>
       </view>
     </view>
     
     <view class='info'>
       <text class='name'>微信</text>
       <view class='input'>
-        <input name="wechat" placeholder='请输入微信号' maxlength='20'></input>
+        <input name="wechat" placeholder='请输入微信号' maxlength='20' value="{{props.stores.account.userInfo.userBaseInfo.wechat||''}}"></input>
       </view>
     </view>
   </view>

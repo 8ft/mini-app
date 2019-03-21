@@ -14,7 +14,7 @@ Page(observer({
   },
 
   data: {
-    tabIndex: 0,
+    tabIndex:0,
     isMyself: false,
 
     id: '',
@@ -92,7 +92,7 @@ Page(observer({
     this.setData({
       tabIndex:index
     })
-    if((index===1&&this.data.services.list.length===0)||(index===2&&this.data.latest.list.length===0)){
+    if((index===this.data.indexOf_pageAll&&this.data.services.list.length===0)||(index===this.data.indexOf_pageLatest&&this.data.latest.list.length===0)){
       this.getServices()
     }
   },
@@ -111,11 +111,19 @@ Page(observer({
       isMyself = this.props.stores.account.userInfo.userId === detail.userId
     }
 
+    const hasHomePage=detail.homepage?0:1
     this.setData({
       isMyself: isMyself,
       loading: false,
-      detail: detail
+      detail: detail,
+      hasHomePage:hasHomePage,
+      indexOf_pageAll:1-hasHomePage,
+      indexOf_pageLatest:2-hasHomePage
     })
+
+    if(hasHomePage===1){
+      this.getServices()
+    }
   },
 
   async collect(){
@@ -207,7 +215,7 @@ Page(observer({
   },
 
   async getServices () {
-    const isPageServices=this.data.tabIndex===1
+    const isPageServices=this.data.tabIndex===this.data.indexOf_pageAll
     let data =isPageServices?this.data.services:this.data.latest
     let nomore = data.nomore
     if (nomore) return

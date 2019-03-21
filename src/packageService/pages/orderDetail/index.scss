@@ -35,7 +35,7 @@
     }
 
     .info{color:$gray;font-size: 26rpx;
-        text{font-size: 41rpx;color:$red;}
+        text{font-size: 41rpx;color:$red;font-weight: 500;}
     }
 }
 
@@ -56,8 +56,7 @@
         image{width:160rpx;height: 160rpx;border-radius: 10rpx;position: absolute;left:0;bottom:0;}
         .name{margin-top:14rpx;font-size: 26rpx; }
         .price{font-size:38rpx;position: absolute;bottom:15rpx;left:180rpx;
-            &::before{content:'￥';font-size:$m;}
-            &::after{content:'/套';font-size:$m;}}
+            &::before{content:'￥';font-size:$m;}}
     }
 
     .info{display: flex;align-items: flex-start;font-size:$l;padding-bottom:38rpx;

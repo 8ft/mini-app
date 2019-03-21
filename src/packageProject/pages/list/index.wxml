@@ -1,4 +1,4 @@
-  <nav-bar id="navBar" title="项目">
+  <nav-bar title="项目" bindready="setNavHeight">
     <view slot="addones" class='filter border-b border-t'>
       <view class="filter-item {{filter==='type'?'on':''}}" data-name="type" bindtap="select">{{dicts[0].dictList[typeIndex].dictName||'类型'}}<view></view></view>
       <view class="filter-item {{filter==='budget'?'on':''}}" data-name="budget" bindtap="select">{{dicts[1].dictList[budgetIndex].dictName||'预算'}}<view></view></view>
