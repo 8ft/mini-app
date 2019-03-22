@@ -5,8 +5,7 @@ Page({
   data: {
     tab:'',
     pageIndex:1,
-    nomore:false,
-    loading: true
+    nomore:false
   },
 
   onLoad () {
@@ -41,9 +40,6 @@ Page({
   async getComments () {
     let nomore = this.data.nomore
     if (nomore) return
-    this.setData({
-      loading: true
-    })
 
     let pIndex = this.data.pageIndex
     let res = await app.request.post('/store/productAppraiseRecord/getList', {

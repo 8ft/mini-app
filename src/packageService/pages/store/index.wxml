@@ -66,7 +66,7 @@
     </swiper-item>
 </swiper>
 
-<action-bar wx:if="{{!isMyself}}">
+<action-bar wx:if="{{detail&&!isMyself}}">
   <view class="store-info">
       <image mode="aspectFill" src="{{detail.storeLogo}}"></image>
       <text>成交量{{detail.tradeNums}}</text>

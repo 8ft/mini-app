@@ -33,8 +33,6 @@ Page(observer({
   },
 
   async getDetail () {
-    this.setData({ loading: true })
-
     let data = await app.request.post('/store/storeBaseInfo/getStoreInfo', {
       storeId: wx.getStorageSync('storeInfo').id
     })
@@ -48,7 +46,6 @@ Page(observer({
 
     this.setData({
       isMyself: isMyself,
-      loading: false,
       detail: detail
     })
     wx.setStorageSync('storeInfo',detail)

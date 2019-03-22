@@ -143,7 +143,7 @@
     </view>
 </view>
 
-<view class="order-infos">
+<view class="order-infos" wx:if="{{detail.requirements}}">
     <view class="title">服务需求</view>
     <view class="requirement">{{detail.requirements}}</view>
 </view>

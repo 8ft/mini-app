@@ -5,8 +5,11 @@
 
 .userinfo{position:relative;background:#fff;padding:46rpx 40rpx;
     .nickName{font-size:48rpx;color:$black;display:flex;align-items:center;
-        text{display:block;max-width:50%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}}
-    .state{line-height:$xxl;padding:0 20rpx;text-align:center;font-size:$s;color:#fff;background:#fa5a32;border-radius:99rpx;margin-left:10rpx;}
+        .name{display:block;max-width:50%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}}
+    .state{line-height:$xxl;padding:0 16rpx;text-align:center;font-size:$s;color:#fff;background:#fa5a32;border-radius:99rpx;margin-left:10rpx;
+        text{display: inline-block;vertical-align: middle;}
+        .iconfont{margin-right: 8rpx;font-size:$s;}
+    }
     navigator{text-align:center;margin-top:30rpx;margin-bottom:45rpx;color:$lightBlack;border-radius:8rpx;background:#f2f2f2;width:114rpx;height:50rpx;line-height:50rpx;font-size:26rpx;}
     .avatar{position:absolute;top:$m;right:40rpx;width:140rpx;height:140rpx;border-radius:50%;}
     .info{position:relative;padding-left:240rpx;font-size:$l;line-height:58rpx;color:$lightBlack;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}

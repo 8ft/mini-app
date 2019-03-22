@@ -4,8 +4,8 @@
 
 <view class="userinfo">
   <view class='nickName'>
-    <text>{{props.stores.account.userInfo.nickName}}</text>
-    <view class='state' wx:if="{{props.stores.account.userInfo.userState===1}}">审核中</view>
+    <view class="name">{{props.stores.account.userInfo.nickName}}</view>
+    <view class='state' wx:if="{{props.stores.account.userInfo.userState===1}}"><text class="iconfont icon-daishenhe"></text><text>审核中</text></view>
   </view>
   <image class='avatar' src="{{props.stores.account.userInfo.userAvatar||'/assets/img/default/avatar.png'}}" bindtap='chooseImage'></image>
   <navigator wx:if="{{props.stores.account.userInfo.userState!==1}}" url="/packageMine/pages/personalInfo/base/index/index"><text class="iconfont icon-bianji-"></text>编辑</navigator>

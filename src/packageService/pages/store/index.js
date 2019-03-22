@@ -19,7 +19,6 @@ Page(observer({
 
     id: '',
     detail: null,
-    loading: false,
 
     activeFilter: '',
     serviceTypes: {
@@ -98,8 +97,6 @@ Page(observer({
   },
 
   async getDetail () {
-    this.setData({ loading: true })
-
     let data = await app.request.post('/store/storeBaseInfo/getStoreInfo', {
       storeId: this.data.id
     })
@@ -114,7 +111,6 @@ Page(observer({
     const hasHomePage=detail.homepage?0:1
     this.setData({
       isMyself: isMyself,
-      loading: false,
       detail: detail,
       hasHomePage:hasHomePage,
       indexOf_pageAll:1-hasHomePage,
@@ -219,9 +215,6 @@ Page(observer({
     let data =isPageServices?this.data.services:this.data.latest
     let nomore = data.nomore
     if (nomore) return
-    this.setData({
-      loading: true
-    })
 
     let pIndex = data.pageIndex
     let res = await app.request.post('/store/productBaseInfo/getList', {
@@ -248,8 +241,7 @@ Page(observer({
           })),
           'services.pageIndex': pIndex,
           'services.nomore': nomore,
-          'services.sort':data.sort,
-          loading: false
+          'services.sort':data.sort
         })
       }else{
         this.setData({
@@ -260,8 +252,7 @@ Page(observer({
             return service
           })),
           'latest.pageIndex': pIndex,
-          'latest.nomore': nomore,
-          loading: false
+          'latest.nomore': nomore
         })
       }
     }

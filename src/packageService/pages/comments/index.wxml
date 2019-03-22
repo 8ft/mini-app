@@ -17,7 +17,7 @@
     </view>
 </view>
 
-<action-bar>
+<action-bar wx:if="{{serviceInfo&&!isMyself}}">
   <navigator class="action" hover-class="none" url="/packageService/pages/store/index?id={{serviceInfo.storeId}}">
       <view class="iconfont icon-dianpu"></view>
       <view class="name">店铺</view>
