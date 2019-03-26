@@ -6,11 +6,10 @@
 .name{color:$black;padding:34rpx 0 0;line-height:60rpx;}
 .part view[class^='status']{display:inline-block;line-height:$xl;padding:0 10rpx;text-align:center;font-size:$s;color:#fff;border-radius:99rpx;margin-left:10rpx;vertical-align:middle;}
 
-.status1,.status10,.status14{background:$blue;}
-.status2,.status5,.status6,.status7{background:$green;}
+.status1,.status4,.status5{background:$blue;}
+.status2,.status6,.status7{background:$green;}
 .status3,.status9,.status13{background:#fc7561;}  
-.status4{background:#ffb54c;}
-.status8{background:$lightGreen;}
+.status8,.status10,.status14{background:$lightGreen;}
 .status11,.status12{background:#ccc;}
 
 .price{color:#fc5b32;line-height:38rpx;padding:18rpx 0 $l;}

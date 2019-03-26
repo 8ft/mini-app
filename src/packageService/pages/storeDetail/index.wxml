@@ -1,4 +1,4 @@
-<nav-bar title="{{isMyself?'我的店铺':'TA的店铺'}}" bindready="getNavHeight"></nav-bar>
+<nav-bar title="{{props.stores.account.userInfo.userId===detail.userId?'我的店铺':'TA的店铺'}}" bindready="getNavHeight"></nav-bar>
 
 <scroll-view
     style="height:{{scrollViewHeight}}px" 

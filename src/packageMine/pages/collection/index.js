@@ -123,6 +123,8 @@ Page(observer({
     } else if (index === 2 && this.data.stores.list.length === 0) {
       this.getServices(0)
     } else if (index === 3 && this.data.articles.list.length === 0 && this.props.stores.account.blogInfo.favoriteNum > 0) {
+
+      
       this.getArticles()
     }
 
@@ -280,6 +282,7 @@ Page(observer({
         loading: false
       })
     }
+
     wx.stopPullDownRefresh()
   }
 

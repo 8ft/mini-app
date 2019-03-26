@@ -4,6 +4,7 @@ const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
 Page({
   data: {
     id: '',
+    overallScore:3
     // desc: '',
     // conLen: 0,
     // inputLen: -1

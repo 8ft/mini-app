@@ -24,7 +24,7 @@
 <view id="comments" class="comments" >
     <block wx:if="{{comments.count>0}}">
         <view class="title">买家评价({{comments.count}})
-            <view data-page="comments" bindtap="jump">查看全部<text class="iconfont icon-xiayiye"></text></view>
+            <view data-page="comments" bindtap="jump" wx:if="{{comments.count>3}}">查看全部<text class="iconfont icon-xiayiye"></text></view>
         </view>
         <view class="comment" wx:for="{{comments.list}}">
             <view class="user">

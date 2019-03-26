@@ -1,7 +1,12 @@
 const app = getApp()
 const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
+const observer = require('../../../libs/observer').observer
 
-Page({
+Page(observer({
+  props: {
+    stores: app.stores
+  },
+
   data: {
     tab:'',
     pageIndex:1,
@@ -13,6 +18,16 @@ Page({
       serviceInfo:wx.getStorageSync('serviceInfo').service
     })
     this.getComments()
+  },
+
+  onShow(){
+    let isMyself = false
+    if (this.props.stores.account.logged_in) {
+      isMyself = this.props.stores.account.userInfo.userId === this.data.serviceInfo.userId
+    }
+    this.setData({
+      isMyself:isMyself
+    })
   },
 
   onPullDownRefresh () {
@@ -95,4 +110,4 @@ Page({
   },
   
   download:app.download
-})
+}))

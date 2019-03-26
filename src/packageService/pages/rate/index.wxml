@@ -12,17 +12,17 @@
     <view class="title">赏个好评吧~</view>
     <view class="rate">
       <view data-point="{{3}}" bindtap="overallRating">
-        <image mode="aspectFill" src="../../assets/img//hp{{overallScore===3?'1':'2'}}@3x.png"></image>
+        <image mode="aspectFill" src="../../assets/img/hp{{overallScore===3?'1':'2'}}@3x.png"></image>
         <text>好评</text>
       </view>
 
       <view data-point="{{2}}" bindtap="overallRating">
-        <image mode="aspectFill" src="../../assets/img//zp{{overallScore===2?'1':'2'}}@3x.png"></image>
+        <image mode="aspectFill" src="../../assets/img/zp{{overallScore===2?'1':'2'}}@3x.png"></image>
         <text>中评</text>
       </view>
 
       <view data-point="{{1}}" bindtap="overallRating">
-        <image mode="aspectFill" src="../../assets/img//cp{{overallScore===1?'1':'2'}}@3x.png"></image>
+        <image mode="aspectFill" src="../../assets/img/cp{{overallScore===1?'1':'2'}}@3x.png"></image>
         <text>差评</text>
       </view>
     </view>

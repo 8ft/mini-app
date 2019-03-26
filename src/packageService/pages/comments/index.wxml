@@ -17,7 +17,7 @@
     </view>
 </view>
 
-<action-bar wx:if="{{serviceInfo&&!isMyself}}">
+<action-bar wx:if="{{!isMyself}}">
   <navigator class="action" hover-class="none" url="/packageService/pages/store/index?id={{serviceInfo.storeId}}">
       <view class="iconfont icon-dianpu"></view>
       <view class="name">店铺</view>
@@ -30,5 +30,5 @@
       <view class="iconfont icon-{{serviceInfo.collectFlag==='1'?'yishoucang':'shoucang1'}}"></view>
       <view class="name">收藏</view>
   </view>
-  <button class="buy" disabled="{{serviceInfo.invalidFlag===0}}" bindtap="buy">{{serviceInfo.invalidFlag===0?'暂时无法购买':'购买服务'}}</button>
+  <button class="buy" disabled="{{serviceInfo.invalidFlag!=0}}" bindtap="buy">{{serviceInfo.invalidFlag==0?'购买服务':'暂时无法购买'}}</button>
 </action-bar>

@@ -8,7 +8,6 @@ Page(observer({
   },
 
   data: {
-    isMyself: false,
     detail: null
   },
 
@@ -38,14 +37,7 @@ Page(observer({
     })
     if (data.code !== 0) return
 
-    let isMyself = false
-    let detail = data.data.storeInfo
-    if (this.props.stores.account.logged_in) {
-      isMyself = this.props.stores.account.userInfo.userId === detail.userId
-    }
-
     this.setData({
-      isMyself: isMyself,
       detail: detail
     })
     wx.setStorageSync('storeInfo',detail)

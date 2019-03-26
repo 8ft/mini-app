@@ -15,7 +15,6 @@ Page(observer({
 
   data: {
     tabIndex:0,
-    isMyself: false,
 
     id: '',
     detail: null,
@@ -97,20 +96,14 @@ Page(observer({
   },
 
   async getDetail () {
-    let data = await app.request.post('/store/storeBaseInfo/getStoreInfo', {
+    let res = await app.request.post('/store/storeBaseInfo/getStoreInfo', {
       storeId: this.data.id
     })
-    if (data.code !== 0) return
+    if (res.code !== 0) return
 
-    let isMyself = false
-    let detail = data.data.storeInfo
-    if (this.props.stores.account.logged_in) {
-      isMyself = this.props.stores.account.userInfo.userId === detail.userId
-    }
-
+    let detail = res.data.storeInfo
     const hasHomePage=detail.homepage?0:1
     this.setData({
-      isMyself: isMyself,
       detail: detail,
       hasHomePage:hasHomePage,
       indexOf_pageAll:1-hasHomePage,
