@@ -1,4 +1,4 @@
-<view class="action-bar {{isIPX?'ipx':''}} custom-class">
+<view class="action-bar custom-class">
   <view class='placeholder' wx:if="{{position!=='relative'}}"></view>
   <view class='bar' style="position:{{position}};">
     <slot></slot>

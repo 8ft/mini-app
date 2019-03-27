@@ -52,11 +52,10 @@ Page(observer({
   onLoad(options){
     const systemInfo=wx.getSystemInfoSync()
     const pixelRatio=systemInfo.windowWidth/750
-    const fixedHeight=/iPhone X/.test(systemInfo.model)?34:0
     const boxHeight=(systemInfo.windowHeight-100*pixelRatio-systemInfo.statusBarHeight)*.98
     this.setData({
       boxHeight:boxHeight,
-      scrollViewHeight: boxHeight- (180+fixedHeight)*pixelRatio,
+      scrollViewHeight: boxHeight- 180*pixelRatio,
       uid:options.uid||'',
       id:options.id
     })

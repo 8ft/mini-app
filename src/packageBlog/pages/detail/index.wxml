@@ -58,7 +58,7 @@
                 {{replies.length===0?'暂无回复':replies.length+'条回复'}}
             </view>
 
-            <scroll-view style="height:{{scrollViewHeight}}px;" scroll-y="true" scroll-top='0' bindscrolltolower="getReplies">
+            <scroll-view style="height:{{scrollViewHeight}}px;padding-bottom: env(safe-area-inset-bottom);box-sizing:border-box;" scroll-y="true" scroll-top='0' bindscrolltolower="getReplies">
                 <view class="comment">
                     <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{comments[cIndex].createUserId}}">
                         <image lazy-load="true" mode='aspectFill' src="{{comments[cIndex].userAvatar}}"></image>

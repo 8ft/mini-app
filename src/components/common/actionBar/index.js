@@ -8,11 +8,5 @@ Component({
       type:String,
       value:'fixed'
     }
-  },
-
-  attached(){
-    this.setData({
-      isIPX:/iPhone X/.test(wx.getSystemInfoSync().model)
-    })
   }
 })
