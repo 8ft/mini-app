@@ -32,7 +32,7 @@
   // Define the runtime globally (as expected by generated code) as either
   // module.exports (if we're in a module) or a new, empty object.
   runtime = global.regeneratorRuntime = inModule ? module.exports : {};
-
+  
   function wrap(innerFn, outerFn, self, tryLocsList) {
     // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
     var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;

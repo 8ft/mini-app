@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "popup": "/components/common/popup/index",
+    "action-bar":"/components/common/actionBar/index"
+  }
+}

@@ -1,8 +1,8 @@
 const app = getApp()
-const regeneratorRuntime = require('../../libs/regenerator-runtime.js')
-const observer = require('../../libs/observer').observer
+const regeneratorRuntime=app.regeneratorRuntime
 
-Page(observer({
+
+Page(app.observer({
   props: {
     stores: app.stores
   },
@@ -14,7 +14,7 @@ Page(observer({
   onShareAppMessage () {
     return {
       title: '接包发包专业平台',
-      path: 'pages/tabBar/project/index',
+      path: 'pages/project/index',
       imageUrl:'/assets/img/share.png'
     }
   },

@@ -1,9 +1,5 @@
-// pages/expert/applicant/index.js
-
-//获取应用实例
 const app = getApp()
-//引入async await依赖库
-const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
+const regeneratorRuntime=app.regeneratorRuntime
 
 Page({
   data: {

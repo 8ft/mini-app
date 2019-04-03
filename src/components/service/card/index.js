@@ -1,5 +1,6 @@
 const app = getApp()
-const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
+const regeneratorRuntime=app.regeneratorRuntime
+
 const actions = {
   delete: {
     msg: '确定要删除订单吗',

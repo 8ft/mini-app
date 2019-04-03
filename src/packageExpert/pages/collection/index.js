@@ -1,5 +1,5 @@
 const app = getApp()
-const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
+const regeneratorRuntime=app.regeneratorRuntime
 
 Page({
   data: {
@@ -56,8 +56,8 @@ Page({
     
       this.setData({
         list: this.data.list.concat(res.data.list.map(blog=>{
-          if(blog.articleBrief.length>76){
-            blog.articleBrief=blog.articleBrief.substring(0,76)+'...'
+          if(blog.articleBrief.length>50){
+            blog.articleBrief=blog.articleBrief.substring(0,50)+'...'
           }
           blog.createTime=app.util.formatTime(blog.createTime,'blogCard')
           return blog

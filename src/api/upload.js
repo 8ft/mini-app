@@ -1,7 +1,6 @@
 const config = require('config.js')
 
 const uploadFile = (file, category, batch) => {
-
   return new Promise((resolve, reject) => {
     wx.uploadFile({
       url: `${config.host}/public/file/upload`,
@@ -27,7 +26,6 @@ const uploadFile = (file, category, batch) => {
         }
       }
     })
-
   })
 }
 

@@ -1,8 +1,12 @@
+const regeneratorRuntime = require('./libs/regenerator-runtime.js')
+const observer = require('./libs/observer').observer
 const request = require('./api/request.js')
 const util = require('./utils/util.js')
 const stores = require('./stores/index')
 
 App({
+  regeneratorRuntime:regeneratorRuntime,
+  observer:observer,
   stores: stores,
   request: request,
   util: util,

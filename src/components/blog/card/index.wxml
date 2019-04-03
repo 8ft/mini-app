@@ -1,12 +1,28 @@
 
 <view class='blog custom-class' hover-class="none" data-url="/packageBlog/pages/detail/index?id={{data.id}}&uid={{data.updateUserId}}" bindtap="goDetail">
-  <view wx:if="{{showAuthor}}" class="author">
-    <image lazy-load="true" mode='aspectFill' src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>{{data.nickName}}
+  
+  <view class="no-img" wx:if="{{data.contentImgs.length===0}}">
+    <text class="title">{{data.articleTitle}}</text>
+    <text class="pre-view">{{data.articleBrief}}</text>
   </view>
-  <text class="title">{{data.articleTitle}}</text>
-  <text class="pre-view">{{data.articleBrief}}</text>
+
+  <view class="one-img" wx:elif="{{data.contentImgs.length>0&&data.contentImgs.length<=2}}">
+    <view>
+      <text class="title">{{data.articleTitle}}</text>
+      <text class="pre-view">{{data.articleBrief}}</text>
+    </view>
+    <image lazy-load="true" mode='aspectFill' src="{{data.contentImgs[0]}}"></image>
+  </view>
+
+  <view class="three-img" wx:elif="{{data.contentImgs.length>2}}">
+    <text class="title">{{data.articleTitle}}</text>
+    <view class="imgs">
+      <image wx:if="{{index<3}}" wx:for="{{data.contentImgs}}" lazy-load="true" mode='aspectFill' src="{{item}}"></image>
+    </view>
+  </view>
+  
   <view class="other-info">
-    <text class="publish-time">{{data.createTime}}<text wx:for="{{state}}">{{item}}</text></text>
+    <text class="publish-time">{{showAuthor?data.nickName+'    ':''}}{{data.createTime}}<text wx:for="{{state}}">{{item}}</text></text>
     <text><text class="iconfont icon-pinglun"></text>{{data.commentNum+'  '}}</text>
     <text><text class="iconfont icon-liulan"></text>{{data.viewNum}}</text>
   </view>

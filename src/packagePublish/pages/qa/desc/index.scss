@@ -1,0 +1,20 @@
+@import '../../../../assets/wxss/var.scss';  
+
+page{background:#fff;}
+textarea{width:690rpx;margin:0 auto;line-height:48rpx;font-size: $l;}
+.title{padding:52rpx 0 44rpx;border-bottom: $border;}
+.desc{padding:48rpx 0;}
+
+.imgs{display:flex;box-sizing:border-box;padding:0 40rpx;height:156rpx;
+    .add{width:156rpx;background:#f2f2f2;color:$gray;height:100%;display:flex;align-items:center;}
+    .add view{margin:0 auto;font-size:$m;margin-top:10rpx;text-align:center;}
+    .add view::before{content:'+';display:block;width:50rpx;height:50rpx;font-size:30rpx;border:1px solid #999;line-height:50rpx;border-radius:50%;text-align:center;margin:0 auto;}}
+
+.img{width:156rpx;height:100%;margin-right:40rpx;position:relative;
+    image{width:100%;height:100%;}
+    .del{position:absolute;top:-15rpx;right:-15rpx;width:30rpx;height:30rpx;line-height:30rpx;background:rgb(219, 218, 218);color:#fff;text-align:center;border-radius:50%;}}
+
+.actions{position: fixed;z-index:$topFloor;left:0;width:100%;height:90rpx;background:#fff;border-top:$border;display: flex;align-items: center;justify-content:space-between;padding:0 40rpx;box-sizing:border-box;
+    .iconfont{font-size: 48rpx;}
+    button{font-size:$l;width:120rpx;line-height:48rpx;color:#fff;border-radius: 99rpx;text-align: center;background:$darkBlue;}
+}

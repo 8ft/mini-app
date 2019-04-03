@@ -24,9 +24,12 @@
       "root": "packagePublish",
       "name": "publish",
       "pages": [
-        "pages/desc/index",
-        "pages/skills/index",
-        "pages/success/index"
+        "pages/project/index/index",
+        "pages/project/desc/index",
+        "pages/project/skills/index",
+        "pages/project/success/index",
+        "pages/qa/index/index",
+        "pages/qa/desc/index"
       ]
     },
     {

@@ -1,9 +1,8 @@
 const app = getApp()
-const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
-const upload = require('../../../api/upload.js')
+const regeneratorRuntime = app.regeneratorRuntime
+const upload=require('../../../../api/upload')
 
 Page({
-
   data: {
     content:'',
     inputLen:-1,

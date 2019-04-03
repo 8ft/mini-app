@@ -1,6 +1,6 @@
 const app = getApp()
-const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
-const observer = require('../../../libs/observer').observer
+const regeneratorRuntime=app.regeneratorRuntime
+
 const Towxml = require('../../../libs/towxml/main')
 const towxml=new Towxml()  
 const nodataCon = {
@@ -22,7 +22,7 @@ const nodataCon = {
   }
 }
 
-Page(observer({
+Page(app.observer({
   props: {
     stores: app.stores
   },
@@ -68,7 +68,7 @@ Page(observer({
   onShareAppMessage () {
     return {
       title: '接包发包专业平台',
-      path: `pages/blog/detail/index?id=${this.data.id}&uid=${this.data.uid}`
+      path: `packageBlog/pages/detail/index?id=${this.data.id}&uid=${this.data.uid}`
     }
   },
 

@@ -1,6 +1,6 @@
 const app = getApp()
-const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
-const observer = require('../../../libs/observer').observer
+const regeneratorRuntime=app.regeneratorRuntime
+
 const Towxml = require('../../../libs/towxml/main')
 const towxml = new Towxml()
 
@@ -11,7 +11,7 @@ let toScrollList=[]
 //手动点击切换标签,再动画完成之前,scrolling=true,阻止onPageScroll进行【根据滚动动态修改标签】
 let scrolling=false
 
-Page(observer({
+Page(app.observer({
   props: {
     stores: app.stores
   },

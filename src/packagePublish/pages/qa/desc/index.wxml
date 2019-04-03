@@ -1,0 +1,40 @@
+<nav-bar title="问题描述"></nav-bar>
+
+<textarea 
+  class="title" 
+  maxlength="{{titleLen}}" 
+  data-name="title"
+  bindinput="input" 
+  value="{{title}}" 
+  auto-height="{{true}}" 
+  show-confirm-bar="{{false}}"
+  placeholder="请简明写下你的问题标题，60字内"
+></textarea>
+
+<textarea 
+  class="desc" 
+  maxlength="200" 
+  data-name="desc"
+  bindinput="input" 
+  value="{{desc}}" 
+  auto-height="{{true}}" 
+  show-confirm-bar="{{false}}"
+  bindfocus="setFocusPostion"
+  bindblur="setBlurPostion"
+  placeholder="填写问题描述，表达越清楚，越容易更快获得回答"
+></textarea>
+
+
+<view class='imgs' hidden="{{imgs.length===0}}">
+  <view class='img' wx:for="{{imgs}}">
+    <image mode='aspectFill' src="{{item.url}}" data-url="{{item.url}}" bindtap='preview'></image>
+    <view class='del' data-index="{{index}}" bindtap='delImg'>X</view>
+  </view>
+  <view class='add' bindtap='chooseImage'><view>添加</view></view>
+</view>
+
+<view class="actions" style="bottom:{{keyboardHeight}}px;">
+  <view class="iconfont icon-tupian" bindtap="chooseImage"></view>
+  <button bindtap="save">保存</button>
+</view>
+

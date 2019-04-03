@@ -1,0 +1,32 @@
+@import '../../../../assets/wxss/var.scss';  
+
+page{background:#fff;}
+
+.con{padding:0 40rpx;}
+
+.info{display:flex;align-items:center;padding:46rpx 0 42rpx;border-bottom:$border;}
+.types{display:block;border-bottom:none;
+    .name{display:block;margin-bottom:30rpx;}}
+
+.name{font-size:$xl;color:$lightBlack;}
+.info.need .name::after{content:'*';color:red;font-size:40rpx;}
+.input{margin-left:20rpx;min-height:$xl;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+.arrow-right::before{border-left-color:$lightGray;}
+
+.tags{overflow: hidden;
+    view{line-height: 117rpx;font-size: $xl;color:$black;}
+    text{font-size:$m;display: inline-block;line-height: 55rpx;padding:0 30rpx;color:#BBBABA;background: #F8F9F9;border:1px solid #CDCDCD;border-radius:28rpx;margin-right:30rpx;margin-bottom:26rpx;
+        &.selected{color:#fff;background: $darkBlue;border-color:$darkBlue;}
+    }
+}
+
+.reward{width:100%;background:#fff;padding:59rpx 29rpx 94rpx;box-sizing:border-box;position: relative;
+    .title{line-height: $xl;font-size: $xl;color:$black;}
+    .tip{line-height: $m;font-size: $m;color:$gray;margin-top: 19rpx;margin-bottom: 44rpx;}
+    .iconfont{position:absolute;top:0;right:0;padding:61rpx 32rpx 45rpx;color:$gray;font-size: 27rpx;}
+    text{font-size:$m;display: inline-block;width:153rpx;line-height: 61rpx;text-align:center;color:#BBBABA;background: #F8F9F9;border:1px solid #CDCDCD;margin-right:26rpx;margin-bottom:26rpx;box-sizing:border-box;
+        &:nth-of-type(4n){margin-right: 0;}
+        &.selected{color:#fff;background: $darkBlue;border-color:$darkBlue;}
+    }
+}

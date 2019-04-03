@@ -12,7 +12,6 @@ const pages = {
   'login': [
     'index',
     'work',
-    'publish',
     'project_list',
     'project_detail',
     'blog_list',
@@ -24,7 +23,6 @@ const pages = {
   //登出
   'logout': [
     'index',
-    'publish',
     'discover'
   ],
 

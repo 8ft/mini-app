@@ -1,6 +1,6 @@
 const app = getApp()
-const regeneratorRuntime = require('../../../libs/regenerator-runtime.js')
-const observer = require('../../../libs/observer').observer
+const regeneratorRuntime=app.regeneratorRuntime
+
 
 const priceSortWays={
   'default':{val:1,next:'asc'},
@@ -8,7 +8,7 @@ const priceSortWays={
   'desc':{val:5,next:'default'},
 }
 
-Page(observer({
+Page(app.observer({
   props: {
     stores: app.stores
   },

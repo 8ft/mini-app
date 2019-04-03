@@ -1,0 +1,57 @@
+<nav-bar title="发起提问"></nav-bar>
+
+<view class="con">
+  <view class='info need'>
+    <text class='name'>问题类型</text>
+    <view class='input arrow-right'>
+      <picker 
+        mode="multiSelector"
+        bindchange="bindMultiPickerChange"
+        bindcolumnchange="bindMultiPickerColumnChange"
+        value="{{multiIndex}}"
+        range="{{objectMultiArray}}"
+        range-key="dictName"
+      >
+      {{objectMultiArray[1][multiIndex[1]].dictName}}
+      </picker>
+    </view>
+  </view>
+
+  <view class='info'>
+    <text class='name'>是否悬赏</text>
+    <view class='input arrow-right' bindtap='openRewardBox'>{{reward===0?'不悬赏':'￥'+reward}}</view>
+  </view>
+
+  <view class='info need'>
+    <text class='name'>问题描述</text>
+    <navigator class='input arrow-right' url="/packagePublish/pages/qa/desc/index" hover-class='none'>
+      <text wx:if="{{!questionDesc}}">请简明写下你的问题</text>
+      <text wx:else>{{questionDesc.title}}</text>
+    </navigator>
+  </view>
+
+  <view class="tags" hidden="{{tags[objectMultiArray[1][multiIndex[1]].dictValue].length===0}}">
+    <view class="title">勾选标签可以更清晰定位问题</view>
+    <text wx:for="{{tags[objectMultiArray[1][multiIndex[1]].dictValue]}}" class="{{item.selected?'selected':''}}" data-index="{{index}}" data-tag="{{item}}" bindtap="selectTag">{{item.dictName}}</text>
+  </view>
+</view>
+
+<popup position="bottom" active="{{popupRewardBox}}">
+  <view class="reward">
+    <view class="title">悬赏能快速解决问题</view>
+    <view class="tip">由你选出最佳答案，答题者获得相应的报酬</view>
+    <text class="{{selectedReward===item?'selected':''}}" wx:for="{{rewards}}" data-val="{{item}}" bindtap="selectReward">￥{{item}}</text>
+    <view class="iconfont icon-guanbi1" bindtap="closeRewardBox"></view>
+  </view>
+  <action-bar position="absolute">
+    <button class='btn-one' bindtap='setReward'>确认</button>
+  </action-bar>
+</popup>
+
+
+
+<action-bar>
+  <button class='btn-one' bindtap='publish'>发布</button>
+</action-bar>
+
+

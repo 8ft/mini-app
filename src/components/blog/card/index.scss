@@ -2,10 +2,21 @@
 @import '../../../assets/font/icons.wxss';
 
 .blog{padding:32rpx 30rpx 36rpx;border-bottom:$border;background:#fff;
-    .author{display:flex;align-items:center;color:$lightBlack;font-size:$m;height:44rpx;line-height:44rpx;
-        image{width:44rpx;height:44rpx;margin-right:19rpx;border-radius:50%;}}
-    .title{display:block;color:$black;font-size:$xl;line-height:48rpx;padding:20rpx 0;font-weight:bold;}
+
+    .title{display:block;color:$black;font-size:$xl;line-height:48rpx;font-weight:bold;margin-bottom:28rpx;}
     .pre-view{color:$gray;font-size:26rpx;line-height:40rpx;}
+
+    .one-img{display: flex;
+        view{flex:1;height:156rpx;overflow: hidden;}
+        image{width:224rpx;height:156rpx;margin-left:41rpx;}
+    }
+   
+    .three-img{
+        .imgs{display: flex;align-items: center;justify-content: space-between;
+            image{width:224rpx;height:156rpx;}
+        }
+    }
+    
     .other-info{display:flex;align-items:center;color:$gray;font-size:$m;margin-top:34rpx;
         .publish-time{flex:1;
             text{display:inline-block;padding:4rpx 8rpx;color:#f00;line-height:18rpx !important;border:1rpx solid #f00;border-radius:4rpx;margin-left:24rpx;font-size:18rpx;vertical-align:middle;}}

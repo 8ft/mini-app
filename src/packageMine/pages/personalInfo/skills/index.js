@@ -1,9 +1,9 @@
 
 const app = getApp()
-const regeneratorRuntime = require('../../../../libs/regenerator-runtime.js')
-const observer = require('../../../../libs/observer').observer
+const regeneratorRuntime=app.regeneratorRuntime
 
-Page(observer({
+
+Page(app.observer({
   props: {
     stores: app.stores
   },

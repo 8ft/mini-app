@@ -1,5 +1,5 @@
 const request = require('../api/request.js')
-const regeneratorRuntime = require('../libs/regenerator-runtime.js')
+const regeneratorRuntime=require('../libs/regenerator-runtime.js')
 const mobx = require('../libs/mobx')
 const stateCn = {
   0: '未完善',
