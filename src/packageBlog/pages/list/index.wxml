@@ -1,4 +1,4 @@
-<nav-bar wx:if="{{typesCn.length>0}}" title="栏目">
+<nav-bar wx:if="{{typesCn.length>0}}" title="栏目" bindready="getNavHeight">
   <tabs slot="addones" tabs="{{typesCn}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 </nav-bar>
 

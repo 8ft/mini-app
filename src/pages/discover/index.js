@@ -8,22 +8,68 @@ Page(app.observer({
   },
 
   data: {
+    tabIndex:0,
     banners: null,
     hasNew: 0,
-    types: [],
+    activeFilter: '',
 
+    //博客
+    types: [],
     blogs: {
       list: [],
       pageIndex: 1,
       nomore: false
     },
 
-    activeFilter: '',
+    //问答
+    qa: {
+      list: [],
+      pageIndex: 1,
+      nomore: false
+    },
+    qa_sortWay: {
+      selected:{text:'默认排序',value:''},
+      list: [
+        {text:'默认排序',value:''},
+        {text:'时间优先',value:'5'},
+        {text:'价格优先',value:'4'}
+      ]
+    },
+    qa_types: {
+      parent: '',
+      selected: {},
+      list: []
+    },
+    qa_priceIn: {
+      selected:{text:'不限',value:''},
+      list: [
+        {text:'不限',value:''},
+        {text:'5-20元',value:''},
+        {text:'50-100元',value:'5'},
+        {text:'200-300元',value:'4'}
+      ]
+    },
+    qa_status: {
+      selected:{text:'不限',value:''},
+      list: [
+        {text:'不限',value:''},
+        {text:'为解决',value:''},
+        {text:'已解决',value:'5'}
+      ]
+    },
+
+
+    //人才库
+    experts: {
+      list: [],
+      pageIndex: 1,
+      nomore: false
+    },
     sortWay: {
       selected: {},
       list: []
     },
-    jobTypes: {
+    job_types: {
       parent: '',
       selected: {},
       list: []
@@ -34,13 +80,8 @@ Page(app.observer({
     },
     selectedCity: {},
     cities: null,
-
-    experts: {
-      list: [],
-      pageIndex: 1,
-      nomore: false
-    },
-
+    
+    //服务
     services: {
       list: [],
       pageIndex: 1,
@@ -55,7 +96,7 @@ Page(app.observer({
         {text:'成交量优先',value:'1'},
       ]
     },
-    serviceTypes: {
+    service_types: {
       parent: '',
       selected: {},
       list: []
@@ -67,7 +108,7 @@ Page(app.observer({
       this.switchPage(null,parseInt(options.page))
     }else{
       this.setData({
-        pageIndex:0
+        tabIndex:0
       })
     }
   },
@@ -79,13 +120,6 @@ Page(app.observer({
 
     this.props.stores.toRefresh.refresh('discover', exist => {
       if (this.data.banners === null) {
-        const systemInfo=wx.getSystemInfoSync()
-        const navHeight = 100 + systemInfo.statusBarHeight * 750 / systemInfo.windowWidth
-        this.setData({
-          navHeight: `${navHeight}rpx`,
-          popupTop: `${navHeight + 80}rpx`
-        })
-
         this.getBanner()
         this.getBlogTypes()
         this.getBlogs()
@@ -95,38 +129,51 @@ Page(app.observer({
     })
   },
 
-  onPullDownRefresh () {
-    this.refresh()
-  },
-
-  onReachBottom () {
-    if (this.data.pageIndex === 0) {
-      this.getBlogs()
-    } else if (this.data.pageIndex === 1) {
-      this.getExperts()
-    } else if(this.data.pageIndex===2){
-      this.getServices()
-    }
-  },
-
-  switchPage (e,page) {
-    const pageIndex =page||e.detail.index
-
-    if (pageIndex === 1 && !this.data.cities) {
-      this.getFilter()
-      this.getExperts()
-    } else if (pageIndex === 2 && this.data.services.list.length === 0) {
-      this.getServiceTypes()
-      this.getServices()
-    }
-
+  getNavHeight (e) {
+    const systemInfo=wx.getSystemInfoSync()
+    const ratio=systemInfo.windowWidth/750
+    const scrollViewHeight=systemInfo.windowHeight-e.detail.height
     this.setData({
-      pageIndex: pageIndex
+      scrollViewHeight:scrollViewHeight,
+      allServicesScrollViewHeight:scrollViewHeight-80*ratio
     })
   },
 
+  tabChange(e){
+    this.switchPage(e.detail.index)
+  },
+
+  onSwiperChange(e){
+    this.switchPage(e.detail.current)
+  },
+
+  switchPage(index){
+    if(index===this.data.tabIndex)return
+    this.setData({
+      tabIndex:index
+    })
+   
+    if (index ===2 && !this.data.cities) {
+      this.getFilter()
+      this.getExperts()
+    } else if (index === 3 && this.data.services.list.length === 0) {
+      this.getServiceTypes()
+      this.getServices()
+    }
+  },
+
+  loadMore () {
+    if (this.data.tabIndex === 0) {
+      this.getBlogs()
+    } else if (this.data.tabIndex === 1) {
+      this.getExperts()
+    } else if(this.data.tabIndex===2){
+      this.getServices()
+    }
+  },
+
   refresh () {
-    switch (this.data.pageIndex) {
+    switch (this.data.tabIndex) {
       case 0:
         this.data.blogs = {
           list: [],
@@ -228,7 +275,7 @@ Page(app.observer({
 
     let pIndex = data.experts.pageIndex
     let res = await app.request.post('/user/talent/searchTalents', {
-      positionType: data.jobTypes.selected.dictValue || '',
+      positionType: data.job_types.selected.dictValue || '',
       workExperience: data.exp.selected.value || '',
       city: data.selectedCity.zoneCode || '',
       sortField: data.sortWay.selected.value || '',
@@ -282,14 +329,14 @@ Page(app.observer({
           'exp.selected': data.item
         })
         break;
-      case 'jobTypes':
+      case 'job_types':
         this.setData({
-          'jobTypes.selected': data.item
+          'job_types.selected': data.item
         })
         break;
-      case 'serviceTypes':
+      case 'service_types':
         this.setData({
-          'serviceTypes.selected': data.item
+          'service_types.selected': data.item
         })
         break;
       case 'service_sortWay':
@@ -314,16 +361,16 @@ Page(app.observer({
   async getFilter () {
     let res = await app.request.post('/user/talent/searchCondition')
     let cities = await app.request.post('/dict/dictZone/talentAreaList')
-    let jobTypes = await app.request.post('/dict/dictCommon/getDicts', {
+    let job_types = await app.request.post('/dict/dictCommon/getDicts', {
       dictType: 'job_type',
       resultType: '1'
     })
 
-    if (res.code === 0 && cities.code === 0 && jobTypes.code === 0) {
+    if (res.code === 0 && cities.code === 0 && job_types.code === 0) {
       this.setData({
         'sortWay.list': res.data.sortFieldOptions,
         'sortWay.selected': res.data.sortFieldOptions[0],
-        'jobTypes.list': jobTypes.data.data[0].dictList,
+        'job_types.list': job_types.data.data[0].dictList,
         'exp.list': this.data.exp.list.concat(res.data.workExperienceOptions),
         cities: cities.data.data
       })
@@ -332,7 +379,7 @@ Page(app.observer({
 
   scrollToJobTypes (e) {
     this.setData({
-      'jobTypes.parent': 'job' + e.currentTarget.dataset.code
+      'job_types.parent': 'job' + e.currentTarget.dataset.code
     })
   },
 
@@ -354,14 +401,14 @@ Page(app.observer({
 
     if (res.code === 0) {
       this.setData({
-        'serviceTypes.list': res.data.data[0].dictList
+        'service_types.list': res.data.data[0].dictList
       })
     }
   },
 
   scrollToServiceTypes (e) {
     this.setData({
-      'serviceTypes.parent': 'service' + e.currentTarget.dataset.code
+      'service_types.parent': 'service' + e.currentTarget.dataset.code
     })
   },
 
@@ -372,7 +419,7 @@ Page(app.observer({
     let pIndex = this.data.services.pageIndex
     let res = await app.request.post('/store/productBaseInfo/getList', {
       pageIndex: pIndex,
-      productSubtype:this.data.serviceTypes.selected.dictValue || '',
+      productSubtype:this.data.service_types.selected.dictValue || '',
       sortType:this.data.service_sortWay.selected.value
     })
 

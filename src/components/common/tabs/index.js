@@ -5,8 +5,11 @@ Component({
   properties: {
     active: {
       type: Number,
+      value:-1,
       observer(newVal, oldVal, changedPath) {
-        this._selectTab(newVal)
+        wx.nextTick(() => {
+          this._selectTab(newVal)
+        })
       }
     },
     tabs: Array,
@@ -34,7 +37,7 @@ Component({
       this.windowWidth = wx.getSystemInfoSync().windowWidth
     },
     ready () {
-      if(!this.properties.active){
+      if(this.properties.active===-1){
         this._selectTab(0)
       }
     }

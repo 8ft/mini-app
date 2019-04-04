@@ -1,7 +1,4 @@
 {
-  "navigationBarTitleText": "发现",
-  "enablePullDownRefresh": true,
-  
   "usingComponents": {
     "blog-card":"/components/blog/card/index",
     "expert-card":"/components/expert/card/index",

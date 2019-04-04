@@ -9,7 +9,6 @@ Page(app.observer({
 
   data: {
    typeId:'',
-   typeIndex:0,
    types: [],
    typesCn:[],
 
@@ -20,9 +19,7 @@ Page(app.observer({
   },
 
   onLoad(options){
-    const systemInfo=wx.getSystemInfoSync()
     this.setData({
-      navHeight: `${100+systemInfo.statusBarHeight*750/systemInfo.windowWidth}rpx`,
       typeId:options.id||'',
       typeIndex:parseInt(options.index)||0
     })
@@ -45,6 +42,12 @@ Page(app.observer({
 
   onReachBottom(){
     this.getBlogs()
+  },
+
+  getNavHeight (e) {
+    this.setData({
+      navHeight:e.detail.height
+    })
   },
 
   refresh(){
