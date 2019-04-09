@@ -1,5 +1,5 @@
 const app = getApp()
-const regeneratorRuntime=app.regeneratorRuntime
+const regeneratorRuntime = app.regeneratorRuntime
 
 
 Page(app.observer({
@@ -8,7 +8,7 @@ Page(app.observer({
   },
 
   data: {
-    tabIndex:0,
+    tabIndex: 0,
     banners: null,
     hasNew: 0,
     activeFilter: '',
@@ -28,11 +28,11 @@ Page(app.observer({
       nomore: false
     },
     qa_sortWay: {
-      selected:{text:'默认排序',value:''},
+      selected: { text: '默认排序', value: '' },
       list: [
-        {text:'默认排序',value:''},
-        {text:'时间优先',value:'5'},
-        {text:'价格优先',value:'4'}
+        { text: '默认排序', value: '' },
+        { text: '时间优先', value: '1' },
+        { text: '价格优先', value: '2' }
       ]
     },
     qa_types: {
@@ -41,20 +41,20 @@ Page(app.observer({
       list: []
     },
     qa_priceIn: {
-      selected:{text:'不限',value:''},
+      selected: { text: '不限', value: '' },
       list: [
-        {text:'不限',value:''},
-        {text:'5-20元',value:''},
-        {text:'50-100元',value:'5'},
-        {text:'200-300元',value:'4'}
+        { text: '不限', value: '' },
+        { text: '5-20元', value: '1' },
+        { text: '50-100元', value: '2' },
+        { text: '200-300元', value: '3' }
       ]
     },
     qa_status: {
-      selected:{text:'不限',value:''},
+      selected: { text: '不限', value: '' },
       list: [
-        {text:'不限',value:''},
-        {text:'为解决',value:''},
-        {text:'已解决',value:'5'}
+        { text: '不限', value: '' },
+        { text: '未解决', value: '0' },
+        { text: '已解决', value: '1' }
       ]
     },
 
@@ -80,7 +80,7 @@ Page(app.observer({
     },
     selectedCity: {},
     cities: null,
-    
+
     //服务
     services: {
       list: [],
@@ -88,12 +88,12 @@ Page(app.observer({
       nomore: false
     },
     service_sortWay: {
-      selected:{text:'默认排序',value:''},
+      selected: { text: '默认排序', value: '' },
       list: [
-        {text:'默认排序',value:''},
-        {text:'价格从高到低',value:'5'},
-        {text:'价格从低到高',value:'4'},
-        {text:'成交量优先',value:'1'},
+        { text: '默认排序', value: '' },
+        { text: '价格从高到低', value: '5' },
+        { text: '价格从低到高', value: '4' },
+        { text: '成交量优先', value: '1' },
       ]
     },
     service_types: {
@@ -103,17 +103,17 @@ Page(app.observer({
     }
   },
 
-  onLoad(options){
-    if(options.page){
-      this.switchPage(null,parseInt(options.page))
-    }else{
+  onLoad(options) {
+    if (options.page) {
+      this.switchPage(null, parseInt(options.page))
+    } else {
       this.setData({
-        tabIndex:0
+        tabIndex: 0
       })
     }
   },
 
-  onShow () {
+  onShow() {
     if (this.data.pageIndex === 0) {
       this.getMyAttentionStats()
     }
@@ -129,31 +129,33 @@ Page(app.observer({
     })
   },
 
-  getNavHeight (e) {
-    const systemInfo=wx.getSystemInfoSync()
-    const ratio=systemInfo.windowWidth/750
-    const scrollViewHeight=systemInfo.windowHeight-e.detail.height
+  getNavHeight(e) {
+    const systemInfo = wx.getSystemInfoSync()
+    const ratio = systemInfo.windowWidth / 750
+    const scrollViewHeight = systemInfo.windowHeight - e.detail.height
     this.setData({
-      scrollViewHeight:scrollViewHeight,
-      allServicesScrollViewHeight:scrollViewHeight-80*ratio
+      scrollViewHeight: scrollViewHeight,
+      allServicesScrollViewHeight: scrollViewHeight - 80 * ratio
     })
   },
 
-  tabChange(e){
+  tabChange(e) {
     this.switchPage(e.detail.index)
   },
 
-  onSwiperChange(e){
+  onSwiperChange(e) {
     this.switchPage(e.detail.current)
   },
 
-  switchPage(index){
-    if(index===this.data.tabIndex)return
+  switchPage(index) {
+    if (index === this.data.tabIndex) return
     this.setData({
-      tabIndex:index
+      tabIndex: index
     })
-   
-    if (index ===2 && !this.data.cities) {
+
+    if (index === 1 && this.data.qa_types.list.length===0) {
+      this.getQa()
+    } else if (index === 2 && !this.data.cities) {
       this.getFilter()
       this.getExperts()
     } else if (index === 3 && this.data.services.list.length === 0) {
@@ -162,17 +164,19 @@ Page(app.observer({
     }
   },
 
-  loadMore () {
+  loadMore() {
     if (this.data.tabIndex === 0) {
       this.getBlogs()
     } else if (this.data.tabIndex === 1) {
+      this.getQa()
+    } else if (this.data.tabIndex === 2) {
       this.getExperts()
-    } else if(this.data.tabIndex===2){
+    } else if (this.data.tabIndex === 3) {
       this.getServices()
     }
   },
 
-  refresh () {
+  refresh() {
     switch (this.data.tabIndex) {
       case 0:
         this.data.blogs = {
@@ -185,6 +189,14 @@ Page(app.observer({
         this.getBlogs()
         break;
       case 1:
+        this.data.qa = {
+          list: [],
+          pageIndex: 1,
+          nomore: false
+        }
+        this.getQa()
+        break;
+      case 2:
         this.data.experts = {
           list: [],
           pageIndex: 1,
@@ -192,7 +204,7 @@ Page(app.observer({
         }
         this.getExperts()
         break;
-      case 2:
+      case 3:
         this.data.services = {
           list: [],
           pageIndex: 1,
@@ -203,7 +215,7 @@ Page(app.observer({
     }
   },
 
-  async getBanner () {
+  async getBanner() {
     let res = await app.request.post('/blog/carouselConfig/getList')
     if (res.code === 0) {
       this.setData({
@@ -212,7 +224,7 @@ Page(app.observer({
     }
   },
 
-  async getBlogTypes () {
+  async getBlogTypes() {
     let res = await app.request.post('/blog/category/getAvailableList', {
       scope: 1
     })
@@ -223,7 +235,7 @@ Page(app.observer({
     }
   },
 
-  async getMyAttentionStats () {
+  async getMyAttentionStats() {
     if (!this.props.stores.account.logged_in) return
     let res = await app.request.post('/blog/attentionInfo/myAttentionStats', {}, false, true)
     if (res.code === 0) {
@@ -233,7 +245,7 @@ Page(app.observer({
     }
   },
 
-  async getBlogs () {
+  async getBlogs() {
     let nomore = this.data.blogs.nomore
     if (nomore) return
 
@@ -268,7 +280,53 @@ Page(app.observer({
     wx.stopPullDownRefresh()
   },
 
-  async getExperts () {
+  async getQa() {
+    const data = this.data
+    let nomore = data.qa.nomore
+    if (nomore) return
+
+    let pIndex = data.qa.pageIndex
+    let res = await app.request.post('/qa/question/query/getQuestionList', {
+      sortBy: data.qa_sortWay.selected.value || '',
+      stateCond: data.qa_status.selected.value || '',
+      subType: data.qa_types.selected.dictValue || '',
+      rewardCond: data.qa_priceIn.selected.value || '',
+      workExperience: data.exp.selected.value || '',
+      pageIndex: pIndex
+    })
+
+    if (res.code === 0) {
+      if (res.data.page > pIndex) {
+        pIndex++
+      } else {
+        nomore = true
+      }
+
+      let newData={
+        'qa.list': data.qa.list.concat(res.data.list.map((qa) => {
+          if(qa.skillTag){
+            qa.skillTag = qa.skillTag.split('|')
+          }
+          return qa
+        })),
+        'qa.pageIndex': pIndex,
+        'qa.nomore': nomore
+      }
+      
+      if(data.qa_types.list.length===0){
+        const qa_types = await app.request.post('/dict/dictCommon/getDicts', {
+          dictType: 'job_type',
+          resultType: '1'
+        })
+        newData['qa_types.list']=qa_types.data.data[0].dictList
+      }
+
+      this.setData(newData)
+    }
+    wx.stopPullDownRefresh()
+  },
+
+  async getExperts() {
     const data = this.data
     let nomore = data.experts.nomore
     if (nomore) return
@@ -298,7 +356,7 @@ Page(app.observer({
     wx.stopPullDownRefresh()
   },
 
-  selectFilter (e) {
+  selectFilter(e) {
     if (this.data.activeFilter) {
       this.setData({
         activeFilter: ''
@@ -310,15 +368,37 @@ Page(app.observer({
     }
   },
 
-  closePopup () {
+  closePopup() {
     this.setData({
       activeFilter: ''
     })
   },
 
-  filter (e) {
+  filter(e) {
     let data = e.currentTarget.dataset
     switch (data.type) {
+      case 'qa_sortWay':
+        this.setData({
+          'qa_sortWay.selected': data.item
+        })
+        break;
+      case 'qa_types':
+        this.setData({
+          'qa_types.selected': data.item
+        })
+        break;
+      case 'qa_priceIn':
+        this.setData({
+          'qa_priceIn.selected': data.item
+        })
+        break;
+      case 'qa_status':
+        this.setData({
+          'qa_status.selected': data.item
+        })
+        break;
+
+
       case 'sortWay':
         this.setData({
           'sortWay.selected': data.item
@@ -334,6 +414,8 @@ Page(app.observer({
           'job_types.selected': data.item
         })
         break;
+
+
       case 'service_types':
         this.setData({
           'service_types.selected': data.item
@@ -350,7 +432,7 @@ Page(app.observer({
     this.closePopup()
   },
 
-  selectCity (e) {
+  selectCity(e) {
     this.setData({
       selectedCity: e.detail.city
     })
@@ -358,7 +440,7 @@ Page(app.observer({
     this.closePopup()
   },
 
-  async getFilter () {
+  async getFilter() {
     let res = await app.request.post('/user/talent/searchCondition')
     let cities = await app.request.post('/dict/dictZone/talentAreaList')
     let job_types = await app.request.post('/dict/dictCommon/getDicts', {
@@ -377,23 +459,23 @@ Page(app.observer({
     }
   },
 
-  scrollToJobTypes (e) {
+  scrollToJobTypes(e) {
     this.setData({
       'job_types.parent': 'job' + e.currentTarget.dataset.code
     })
   },
 
-  updateExpert (e) {
+  updateExpert(e) {
     this.setData({
       [`experts.list[${e.detail.index}].followFlag`]: e.detail.flag
     })
   },
 
-  bannerJump (e) {
+  bannerJump(e) {
     app.bannerJump(e)
   },
 
-  async getServiceTypes () {
+  async getServiceTypes() {
     let res = await app.request.post('/dict/dictCommon/getDicts', {
       dictType: 'product_type',
       resultType: '1'
@@ -406,21 +488,21 @@ Page(app.observer({
     }
   },
 
-  scrollToServiceTypes (e) {
+  scrollToServiceTypes(e) {
     this.setData({
       'service_types.parent': 'service' + e.currentTarget.dataset.code
     })
   },
 
-  async getServices () {
+  async getServices() {
     let nomore = this.data.services.nomore
     if (nomore) return
 
     let pIndex = this.data.services.pageIndex
     let res = await app.request.post('/store/productBaseInfo/getList', {
       pageIndex: pIndex,
-      productSubtype:this.data.service_types.selected.dictValue || '',
-      sortType:this.data.service_sortWay.selected.value
+      productSubtype: this.data.service_types.selected.dictValue || '',
+      sortType: this.data.service_sortWay.selected.value
     })
 
     if (res.code === 0) {

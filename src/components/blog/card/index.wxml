@@ -1,5 +1,5 @@
 
-<view class='blog custom-class' hover-class="none" data-url="/packageBlog/pages/detail/index?id={{data.id}}&uid={{data.updateUserId}}" bindtap="goDetail">
+<view class='blog custom-class' data-url="/packageBlog/pages/detail/index?id={{data.id}}&uid={{data.updateUserId}}" bindtap="goDetail">
   
   <view class="no-img" wx:if="{{data.contentImgs.length===0}}">
     <text class="title">{{data.articleTitle}}</text>

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "blog-card":"/components/blog/card/index",
+    "qa-card":"/components/qa/card/index",
     "expert-card":"/components/expert/card/index",
     "service-card":"/components/service/card/index",
     "city":"/components/common/city/index",

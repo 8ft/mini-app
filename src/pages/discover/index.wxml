@@ -43,15 +43,15 @@
                 <view></view>
             </view>
             <view class="filter-item {{activeFilter==='qa_types'?'on':''}}" data-name="qa_types" bindtap="selectFilter">
-                <text>{{qa_types.selected.text}}</text>
+                <text>{{qa_types.selected.dictName&&qa_types.selected.dictName!=='不限'?qa_types.selected.dictName:'类型'}}</text>
                 <view></view>
             </view>
             <view class="filter-item {{activeFilter==='qa_priceIn'?'on':''}}" data-name="qa_priceIn" bindtap="selectFilter">
-                <text>{{qa_priceIn.selected.text}}</text>
+                <text>{{qa_priceIn.selected.text==='不限'?'价格':qa_priceIn.selected.text}}</text>
                 <view></view>
             </view>
             <view class="filter-item {{activeFilter==='qa_status'?'on':''}}" data-name="qa_status" bindtap="selectFilter">
-                <text>{{qa_status.selected.text}}</text>
+                <text>{{qa_status.selected.text==='不限'?'状态':qa_status.selected.text}}</text>
                 <view></view>
             </view>
         </view>
@@ -59,15 +59,15 @@
         <popup active="{{activeFilter==='qa_sortWay'}}" margin="{{80}}" bindhide='closePopup'>
             <list-item wx:for="{{qa_sortWay.list}}" data-item="{{item}}" data-type="qa_sortWay" bindtap="filter" name="{{item.text}}" active="{{qa_sortWay.selected.text===item.text}}"></list-item>
         </popup>
-        <popup active="{{activeFilter==='job_types'}}" margin="{{80}}" bindhide='closePopup'>
+        <popup active="{{activeFilter==='qa_types'}}" margin="{{80}}" bindhide='closePopup'>
             <view class="job-types">
                 <view class="parent">
-                    <list-item wx:for="{{job_types.list}}" data-code="{{item.dictValue}}" bindtap="scrollToJobTypes" name="{{item.dictName}}"></list-item>
+                    <list-item wx:for="{{qa_types.list}}" data-code="{{item.dictValue}}" bindtap="scrollToJobTypes" name="{{item.dictName}}"></list-item>
                 </view>
-                <scroll-view scroll-y="true" scroll-into-view="{{job_types.parent}}" scroll-with-animation="true">
-                    <list-item data-item="{dictName:'不限',dictValue:''}" data-type="job_types" bindtap="filter" name="不限" active="{{!job_types.selected.dictValue}}"></list-item>
-                    <view id="job{{item.dictValue}}" wx:for="{{job_types.list}}">
-                        <list-item wx:for="{{item.dictList}}" wx:for-item="job" data-item="{{job}}" data-type="job_types" bindtap="filter" name="{{job.dictName}}" active="{{job_types.selected.dictValue===job.dictValue}}"></list-item>
+                <scroll-view scroll-y="true" scroll-into-view="{{qa_types.parent}}" scroll-with-animation="true">
+                    <list-item data-item="{dictName:'不限',dictValue:''}" data-type="qa_types" bindtap="filter" name="不限" active="{{!qa_types.selected.dictValue}}"></list-item>
+                    <view id="qa{{item.dictValue}}" wx:for="{{qa_types.list}}">
+                        <list-item wx:for="{{item.dictList}}" wx:for-item="qa" data-item="{{qa}}" data-type="qa_types" bindtap="filter" name="{{qa.dictName}}" active="{{qa_types.selected.dictValue===qa.dictValue}}"></list-item>
                     </view>
                 </scroll-view>
             </view>
@@ -86,7 +86,7 @@
             bindscrolltoupper="refresh"
             bindscrolltolower="loadMore"
             enable-back-to-top="true">
-            <expert-card wx:for="{{experts.list}}" index="{{index}}" data="{{item}}" bindcollect="updateExpert"></expert-card>
+            <qa-card wx:for="{{qa.list}}" qa="{{item}}"></qa-card>
         </scroll-view>
     </swiper-item>
 
