@@ -12,7 +12,7 @@ Page({
   },
 
   onLoad(options) {
-    const cache = wx.getStorageSync('qaCache')
+    const cache = wx.getStorageSync('questionCache')
     if(!cache)return 
     this.setData(cache)
   },
@@ -41,7 +41,7 @@ Page({
       return
     }
 
-    wx.setStorageSync('qaCache', this.data)
+    wx.setStorageSync('questionCache', this.data)
     wx.navigateBack()
   },
 

@@ -1,55 +1,56 @@
 
 <block wx:if="{{props.stores.account.logged_in}}">
-  <nav-bar returnable="{{false}}">
-    <tabs slot="nav" under-line-ratio="{{.5}}" tabs="{{['我的项目','申请项目']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
-    
-    <scroll-view slot="addones" class='types' scroll-x="true">
-      <!--我的项目-->
-      <block wx:if="{{typeIndex===0}}">
-        <view class="type {{myPublish.currentState===index?'active':''}}" wx:for="{{myPublish.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
-      </block>
-      <!--申请项目-->
-      <block wx:else>
-        <view class="type {{myApply.currentState===index?'active':''}}" wx:for="{{myApply.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
-      </block>
-    </scroll-view>
+  <nav-bar returnable="{{false}}" bindready="getNavHeight">
+    <tabs slot="nav" under-line-ratio="{{.5}}" tabs="{{['我的项目','申请项目']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
   </nav-bar>
 
  
+  <swiper bindchange="onSwiperChange" current="{{tabIndex}}" duration="300" style="height:{{swiperHeight}}px;">
 
-  <view id="projects" style="height:{{scrollViewHeight}}px">
-    <!--我的项目-->
-      <scroll-view wx:if="{{typeIndex===0&&myPublish.projects.length>0}}"
-        class='projects' 
-        style="height:{{scrollViewHeight}}px" 
-        scroll-y="true" 
-        upper-threshold="-80" 
-        enable-back-to-top="true"
-        bindscrolltoupper='refresh' 
-        bindscrolltolower="getMyPublish"> 
+      <!--我的项目-->
+      <swiper-item>
+        <scroll-view slot="addones" class='types' scroll-x="true">
+            <view class="type {{myPublish.currentState===index?'active':''}}" wx:for="{{myPublish.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
+        </scroll-view>
 
-        <project-card wx:for="{{myPublish.projects}}" project="{{item}}"></project-card>
-      </scroll-view>
+        <scroll-view 
+          class='projects' 
+          style="height:{{scrollViewHeight}}px" 
+          scroll-y="true" 
+          upper-threshold="-80" 
+          enable-back-to-top="true"
+          bindscrolltoupper='refresh' 
+          bindscrolltolower="getMyPublish"> 
+          <block wx:if="{{myPublish.projects.length>0}}">
+            <project-card wx:for="{{myPublish.projects}}" project="{{item}}"></project-card>
+          </block>
+          <nodata wx:elif="{{!loading}}" text="还没有项目哦，快去发布OR申请~"></nodata>
+        </scroll-view>
+      </swiper-item>
 
-    <!--申请项目-->
-      <scroll-view wx:elif="{{typeIndex===1&&myApply.projects.length>0}}"
-        class='projects'
-        style="height:{{scrollViewHeight}}px" 
-        scroll-y="true" 
-        scroll-top='0' 
-        upper-threshold="-80" 
-        enable-back-to-top="true"
-        bindscrolltoupper='refresh' 
-        bindscrolltolower="getMyApply"> 
+      <!--申请项目-->
+      <swiper-item>
+         <scroll-view slot="addones" class='types' scroll-x="true">
+            <view class="type {{myApply.currentState===index?'active':''}}" wx:for="{{myApply.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
+        </scroll-view>
 
-        <project-card wx:for="{{myApply.projects}}" project="{{item}}"></project-card>
-      </scroll-view>
+        <scroll-view 
+          class='projects'
+          style="height:{{scrollViewHeight}}px" 
+          scroll-y="true" 
+          scroll-top='0' 
+          upper-threshold="-80" 
+          enable-back-to-top="true"
+          bindscrolltoupper='refresh' 
+          bindscrolltolower="getMyApply"> 
+          <block wx:if="{{myApply.projects.length>0}}">
+            <project-card wx:for="{{myApply.projects}}" project="{{item}}"></project-card>
+          </block>
+          <nodata wx:elif="{{!loading}}" text="还没有申请过项目呢~"></nodata>
+        </scroll-view>
+      </swiper-item>
 
-      <block wx:elif="{{!loading}}">
-        <nodata text="{{typeIndex===0?'还没有项目哦，快去发布OR申请~':'还没有申请过项目呢~'}}"></nodata>
-      </block>
-
-  </view>
+  </swiper>
 </block>
 
 <block wx:else>

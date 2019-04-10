@@ -2,6 +2,9 @@
 
 page{background:#fff;}
 
-.icon{display:block;width:185rpx;height:233rpx;margin:153rpx auto 80rpx;}
-.txt{font-size:$xxl;color:$lightBlack;line-height:48rpx;text-align:center;display:block;margin-bottom:80rpx;}
-.btn{display:block;width:630rpx;height:96rpx;line-height:96rpx;background:$darkBlue;border-radius:4rpx;color:#fff;text-align:center;margin:0 auto;font-size:$xl;}
+.icon{display:block;width:185rpx;height:233rpx;margin:121rpx auto 95rpx;}
+.txt{font-size:$xxl;color:$black;font-size:36rpx;font-weight:500;text-align:center;display:block;margin-bottom:142rpx;}
+.btn{display:block;width:630rpx;height:96rpx;line-height:96rpx;background:$darkBlue;border-radius:4rpx;color:#fff;text-align:center;margin:0 auto;font-size:$xl;margin-bottom:34rpx;
+    &.light{background: #E5F2FF;color:$darkBlue;}
+}
+.call{width:100%;position: fixed;bottom:40rpx;left:0;text-align: center;color:$lightBlack;font-size: 26rpx;}

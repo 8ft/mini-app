@@ -8,7 +8,7 @@ Page(app.observer({
   },
 
   data: {
-    scrollViewHeight:0,
+    swiperHeight:0,
     typeIndex:0,
     iconName: {
       '01': 'kaifa',
@@ -89,14 +89,7 @@ Page(app.observer({
   onShow(){
     if(!this.props.stores.account.logged_in)return 
     this.props.stores.toRefresh.refresh('work',(exist)=>{
-      if (this.data.scrollViewHeight===0){
-        wx.createSelectorQuery().select('#projects').fields({
-          rect: true
-        }, res => {
-          this.setData({
-            scrollViewHeight: wx.getSystemInfoSync().windowHeight - res.top
-          })
-        }).exec()
+      if (this.data.swiperHeight===0){
         this.getMyPublish()
       }else if(exist){
         this.refresh()
@@ -118,12 +111,35 @@ Page(app.observer({
     }
   },
 
-  switchList(e){
-    let index = e.detail.index
+  getNavHeight(e) {
+    const systemInfo = wx.getSystemInfoSync()
+    const ratio = systemInfo.windowWidth / 750
+    const swiperHeight = systemInfo.windowHeight - e.detail.height
     this.setData({
-      typeIndex: index
+      swiperHeight:swiperHeight,
+      scrollViewHeight: swiperHeight- 80 * ratio
     })
-    this.refresh()
+  },
+
+  tabChange(e) {
+    this.switchPage(e.detail.index)
+  },
+
+  onSwiperChange(e) {
+    this.switchPage(e.detail.current)
+  },
+
+  switchPage(index) {
+    if (index === this.data.tabIndex) return
+    this.setData({
+      tabIndex: index
+    })
+
+    if (index === 0 && this.data.myPublish.projects.length===0) {
+      this.getMyPublish()
+    } else if (index === 1 && this.data.myApply.projects.length===0) {
+      this.getMyApply()
+    } 
   },
 
   switchState(e){

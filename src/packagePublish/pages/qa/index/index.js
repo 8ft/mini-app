@@ -20,15 +20,15 @@ Page(app.observer({
   },
 
   onShow() {
-    const questionDesc = wx.getStorageSync('qaCache')
-    if(!questionDesc)return 
+    const question = wx.getStorageSync('questionCache')
+    if(!question)return 
     this.setData({
-      questionDesc:questionDesc
+      question:question
     })
   },
 
   onUnload() {
-    wx.removeStorageSync('qaCache')
+    wx.removeStorageSync('questionCache')
   },
 
   async getDicts() {
@@ -125,52 +125,55 @@ Page(app.observer({
   },
 
   async publish() {
-    let data = this.data
-    if (!data.pName) {
-      wx.showToast({
-        title: '请输入项目名称',
-        icon: 'none'
+    // let question = this.data.question||{}
+    // if (!question.title) {
+    //   wx.showToast({
+    //     title: '请输入问题标题',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+
+    // if(!question.desc){
+    //   wx.showToast({
+    //     title: '请输入问题描述',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+
+
+    // let descArr=question.desc.split(/[\r\n]/)
+    // let html=''
+
+    // descArr.forEach(p=>{
+    //   html+=`<p>${p}</p>`
+    // })
+
+    // if(question.imgs.length>0){
+    //   question.imgs.forEach(img=>{
+    //     html+=`<image width="100%" src="${img.url}"/>`
+    //   })
+    // }
+    // console.log(html)
+
+    // let res = await app.request.post('/qa/question/save', {
+    //   questionName:desc.title,
+    //   questionType:this.data.objectMultiArray[0][this.data.multiIndex[0]].dictValue,
+    //   subType:this.data.objectMultiArray[1][this.data.multiIndex[1]].dictValue,
+    //   // skillCode:,
+    //   rewardAmountYuan:this.data.reward,
+    //   content:desc.desc,
+    //   contentBatchNo:desc.batchNo
+    // })
+
+    // if (res.code === 0) {
+    //   // this.refresh()
+      wx.navigateTo({
+        // url: `/packagePublish/pages/qa/success/index?no=${res.data.projectNo}`
+        url: '/packagePublish/pages/qa/success/index'
       })
-      return
-    }
-
-    let desc = data.desc.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "")
-    if (desc.length < 50) {
-      wx.showToast({
-        title: '项目描述最少50字',
-        icon: 'none'
-      })
-      return
-    }
-
-    let dicts = data.dicts
-    let res = await app.request.post('/project/projectInfo/save', {
-      projectCycle: dicts[2].dictList[data.cycleIndex].dictValue,
-      projectBudget: dicts[1].dictList[data.budgetIndex].dictValue,
-      projectDesc: desc,
-      projectSkill: app.globalData.publishDataCache.needSkills.join('|'),
-      projectType: dicts[0].dictList[data.typeIndex].dictValue,
-      projectSubtype: dicts[0].dictList[data.typeIndex].dictList[data.subTypeIndex].dictValue,
-      cooperater: dicts[3].dictList[data.cooperaterIndex].dictValue,
-      companyName: data.cName,
-      projectName: data.pName,
-      fileBatchNo: app.globalData.publishDataCache.desc.batchNo || ''
-    })
-
-    if (res.code === 0) {
-      this.refresh()
-
-      let userBaseInfo = this.props.stores.account.userInfo.userBaseInfo
-      if (!(userBaseInfo.qq || userBaseInfo.wechat)) {
-        this.setData({
-          showCollector: true
-        })
-      } else {
-        wx.navigateTo({
-          url: `/packagePublish/pages/qa/success/index?no=${res.data.projectNo}`,
-        })
-      }
-    }
+    // }
   },
 
   refresh() {
@@ -201,12 +204,6 @@ Page(app.observer({
 
   updateUserInfo() {
     this.props.stores.account.updateUserInfo()
-  },
-
-  hideCollector() {
-    this.setData({
-      showCollector: false
-    })
   }
 
 }))

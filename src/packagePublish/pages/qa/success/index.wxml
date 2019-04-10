@@ -1,5 +1,7 @@
 <nav-bar></nav-bar>
 
 <image class='icon' src="/assets/img/icon/success.png"></image>
-<text class='txt'>感谢发布项目，我们会在24小时内\n反馈审核结果</text>
+<text class='txt'>恭喜您发布成功</text>
 <navigator open-type='redirect' class='btn' url="/packageProject/pages/detail/index?no={{no}}">查看项目</navigator>
+<navigator open-type='redirect' class='btn light' url="/packageProject/pages/detail/index?no={{no}}">再问一个</navigator>
+<view class="call" bindtap="call">客服电话：0592-2226199</view>
