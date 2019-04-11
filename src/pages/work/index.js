@@ -10,12 +10,6 @@ Page(app.observer({
   data: {
     swiperHeight:0,
     typeIndex:0,
-    iconName: {
-      '01': 'kaifa',
-      '02': 'sheji',
-      '03': 'yunying',
-      '04': 'chanpin'
-    },
 
     pageSize:10,
     loading:true,

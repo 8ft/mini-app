@@ -29,7 +29,8 @@
         "pages/project/skills/index",
         "pages/project/success/index",
         "pages/qa/index/index",
-        "pages/qa/desc/index"
+        "pages/qa/desc/index",
+        "pages/qa/success/index"
       ]
     },
     {
@@ -48,7 +49,8 @@
         "pages/follow/index",
         "pages/fans/index",
         "pages/blogs/index",
-        "pages/collection/index"
+        "pages/collection/index",
+        "pages/qas/index"
       ]
     },
     {
@@ -56,6 +58,13 @@
       "name": "blog",
       "pages": [
         "pages/list/index",
+        "pages/detail/index"
+      ]
+    },
+    {
+      "root": "packageQa",
+      "name": "qa",
+      "pages": [
         "pages/detail/index"
       ]
     },

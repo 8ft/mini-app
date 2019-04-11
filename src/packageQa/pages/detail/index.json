@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "nodata": "/components/common/nodata/index",
+        "action-bar": "/components/common/actionBar/index",
+        "popup": "/components/common/popup/index"
+    }
+}

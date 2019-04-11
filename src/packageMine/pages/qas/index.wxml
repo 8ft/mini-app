@@ -1,0 +1,61 @@
+
+<block wx:if="{{props.stores.account.logged_in}}">
+  <nav-bar bindready="getNavHeight">
+    <tabs slot="nav" under-line-ratio="{{.5}}" tabs="{{['提问','回答']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
+  </nav-bar>
+
+ 
+  <swiper bindchange="onSwiperChange" current="{{tabIndex}}" duration="300" style="height:{{swiperHeight}}px;">
+
+      <!--提问-->
+      <swiper-item>
+        <scroll-view slot="addones" class='types' scroll-x="true">
+            <view class="type {{myQuestions.currentState===index?'active':''}}" wx:for="{{myQuestions.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
+        </scroll-view>
+
+        <scroll-view 
+          class='projects' 
+          style="height:{{scrollViewHeight}}px" 
+          scroll-y="true" 
+          upper-threshold="-80" 
+          enable-back-to-top="true"
+          bindscrolltoupper='refresh' 
+          bindscrolltolower="getMyPublish"> 
+          <block wx:if="{{myQuestions.list.length>0}}">
+            <qa-card wx:for="{{myQuestions.list}}" qa="{{item}}"></qa-card>
+          </block>
+          <nodata wx:elif="{{!loading&&myQuestions.list.length===0}}" text="还没有项目哦，快去发布OR申请~"></nodata>
+        </scroll-view>
+      </swiper-item>
+
+      <!--回答-->
+      <swiper-item>
+         <scroll-view slot="addones" class='types' scroll-x="true">
+            <view class="type {{myAnswers.currentState===index?'active':''}}" wx:for="{{myAnswers.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
+        </scroll-view>
+
+        <scroll-view 
+          class='projects'
+          style="height:{{scrollViewHeight}}px" 
+          scroll-y="true" 
+          scroll-top='0' 
+          upper-threshold="-80" 
+          enable-back-to-top="true"
+          bindscrolltoupper='refresh' 
+          bindscrolltolower="getMyApply"> 
+          <block wx:if="{{myAnswers.list.length>0}}">
+            <qa-card wx:for="{{myAnswers.list}}" qa="{{item}}"></qa-card>
+          </block>
+          <nodata wx:elif="{{!loading&myAnswers.list.length===0}}" text="还没有申请过项目呢~"></nodata>
+        </scroll-view>
+      </swiper-item>
+
+  </swiper>
+</block>
+
+<block wx:else>
+  <nodata text='登录了就能开始处理工作了喔~' login="true"></nodata>
+</block>
+
+
+

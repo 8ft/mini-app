@@ -5,12 +5,20 @@
     <label wx:if="{{qa.skillTag.length>0}}" wx:for="{{qa.skillTag}}">{{item}}</label>
   </view>
   <view class="other-info">
-    <image mode="aspectFill" src="http://image.dev.juniuhui.com/user/avatar/20181031/efe28d10ef244a2fbcce27a30c7313fc-orig.jpg"></image>
-    <image mode="aspectFill" src="http://image.dev.juniuhui.com/user/avatar/20190223/ee38e92a56b94cd48bb4f49670118d9c-orig.jpg"></image>
-    <image mode="aspectFill" src="http://image.dev.juniuhui.com/user/avatar/20190301/4d490556b14144c9b72668eb05f13dc5-orig.jpg"></image>
-    <image mode="aspectFill" src="http://image.dev.juniuhui.com/user/avatar/20180710/502fe36cddf54196b6ef19fa6e6f3b87.png"></image>
-    <view class="comments" style="margin-left:{{imgsWidth}}rpx;">等6人参与了讨论</view>
-    <view class="iconfont icon-liulan"></view>
-    <view class='read'>{{qa.viewNum}}</view>
+    <block wx:if="{{qa.answerUsers.length>0}}">
+      <image wx:for="{{qa.answerUsers}}" mode="aspectFill" src="{{item.userAvatar}}"></image>
+      <view class="tip" style="margin-left:{{imgsWidth}}rpx;">{{qa.answerUsers.length>1?'等'+qa.answerUsers.length+'人':''}}参与了讨论</view>
+    </block>
+
+    <block wx:elif="{{qa.answerUsers.length===0}}">
+      <image mode="aspectFill" src="{{qa.userAvatar}}"></image>
+      <view class="tip" style="margin-left:70rpx;">{{qa.nickName}}发起提问</view>
+    </block>
+
+    <view wx:if="{{qa.questionState===10||qa.questionState===20}}" class="status">{{qa.questionStateName}}</view>
+    <block wx:elif="{{qa.questionState!==10&&qa.questionState!==20}}">
+      <view class="iconfont icon-liulan"></view>
+      <view class='read'>{{qa.viewNum}}</view>
+    </block>
   </view>
 </view>

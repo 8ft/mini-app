@@ -2,6 +2,6 @@
 
 <image class='icon' src="/assets/img/icon/success.png"></image>
 <text class='txt'>恭喜您发布成功</text>
-<navigator open-type='redirect' class='btn' url="/packageProject/pages/detail/index?no={{no}}">查看项目</navigator>
-<navigator open-type='redirect' class='btn light' url="/packageProject/pages/detail/index?no={{no}}">再问一个</navigator>
+<navigator open-type='redirect' class='btn' url="/packagePublish/pages/qa/detail/index?id={{id}}&uid={{uid}}">查看项目</navigator>
+<navigator open-type='redirect' class='btn light' url="/packagePublish/pages/qa/index/index">再问一个</navigator>
 <view class="call" bindtap="call">客服电话：0592-2226199</view>

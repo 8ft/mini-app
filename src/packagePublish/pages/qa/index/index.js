@@ -125,80 +125,50 @@ Page(app.observer({
   },
 
   async publish() {
-    // let question = this.data.question||{}
-    // if (!question.title) {
-    //   wx.showToast({
-    //     title: '请输入问题标题',
-    //     icon: 'none'
-    //   })
-    //   return
-    // }
-
-    // if(!question.desc){
-    //   wx.showToast({
-    //     title: '请输入问题描述',
-    //     icon: 'none'
-    //   })
-    //   return
-    // }
-
-
-    // let descArr=question.desc.split(/[\r\n]/)
-    // let html=''
-
-    // descArr.forEach(p=>{
-    //   html+=`<p>${p}</p>`
-    // })
-
-    // if(question.imgs.length>0){
-    //   question.imgs.forEach(img=>{
-    //     html+=`<image width="100%" src="${img.url}"/>`
-    //   })
-    // }
-    // console.log(html)
-
-    // let res = await app.request.post('/qa/question/save', {
-    //   questionName:desc.title,
-    //   questionType:this.data.objectMultiArray[0][this.data.multiIndex[0]].dictValue,
-    //   subType:this.data.objectMultiArray[1][this.data.multiIndex[1]].dictValue,
-    //   // skillCode:,
-    //   rewardAmountYuan:this.data.reward,
-    //   content:desc.desc,
-    //   contentBatchNo:desc.batchNo
-    // })
-
-    // if (res.code === 0) {
-    //   // this.refresh()
-      wx.navigateTo({
-        // url: `/packagePublish/pages/qa/success/index?no=${res.data.projectNo}`
-        url: '/packagePublish/pages/qa/success/index'
+    let question = this.data.question||{}
+    if (!question.title) {
+      wx.showToast({
+        title: '请输入问题标题',
+        icon: 'none'
       })
-    // }
-  },
+      return
+    }
 
-  refresh() {
-    this.setData({
-      typeIndex: 0,
-      subTypeIndex: 0,
-      budgetIndex: 0,
-      cycleIndex: 0,
-      cooperaterIndex: 0,
-      pName: '',
-      cName: '',
-      needsSkillsCn: '',
-      desc: ''
+    if(!question.desc){
+      wx.showToast({
+        title: '请输入问题描述',
+        icon: 'none'
+      })
+      return
+    }
+
+    let descArr=question.desc.split(/[\r\n]/)
+    let html=''
+
+    descArr.forEach(p=>{
+      html+=`<p>${p}</p>`
     })
 
-    app.globalData.publishDataCache = {
-      skills: this.data.dicts[0].dictList[0].dictList[0].dictList.map(item => {
-        item.selected = false
-        return item
-      }),
-      needSkills: [],
-      needSkillsCn: [],
-      desc: {
-        content: ''
-      }
+    if(question.imgs.length>0){
+      question.imgs.forEach(img=>{
+        html+=`<image width="100%" src="${img.url}"/>`
+      })
+    }
+
+    let res = await app.request.post('/qa/question/save', {
+      questionName:question.title,
+      questionType:this.data.objectMultiArray[0][this.data.multiIndex[0]].dictValue,
+      subType:this.data.objectMultiArray[1][this.data.multiIndex[1]].dictValue,
+      // skillCode:,
+      rewardAmountYuan:this.data.reward,
+      content:html,
+      contentBatchNo:question.batchNo
+    })
+
+    if (res.code === 0) {
+      wx.redirectTo({
+        url: `/packagePublish/pages/qa/success/index?id=${res.data.id}&uid=${res.data.userId}`
+      })
     }
   },
 

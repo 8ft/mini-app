@@ -23,7 +23,7 @@
         <text>{{props.stores.account.blogInfo.fansNum}}</text>
         <text>粉丝</text>
     </navigator>
-    <navigator hover-class="none" url="/packageMine/pages/blogs/index">
+    <navigator hover-class="none" url="/packageMine/pages/qas/index">
         <text>{{props.stores.account.blogInfo.articleNum}}</text>
         <text>问答</text>
     </navigator>

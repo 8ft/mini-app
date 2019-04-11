@@ -86,6 +86,7 @@
             bindscrolltoupper="refresh"
             bindscrolltolower="loadMore"
             enable-back-to-top="true">
+            <image mode="widthFix" class="ad" src="/assets/img/qa.png"></image>
             <qa-card wx:for="{{qa.list}}" qa="{{item}}"></qa-card>
         </scroll-view>
     </swiper-item>

@@ -1,11 +1,8 @@
 Page({
-  data: {
-    no:''
-  },
-
   onLoad (options) {
     this.setData({
-      no:options.no
+      id:options.id,
+      uid:options.uid
     })
   },
 

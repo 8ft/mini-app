@@ -3,8 +3,8 @@ Component({
     qa:{
       type:Object,
       observer(newVal, oldVal, changedPath) {
-        // const num=parseInt(newVal.answerNum)
-        const num=4
+        const num=newVal.answerUsers.length
+        if(num===0)return
         this.setData({
           imgsWidth:num*40+30
         })

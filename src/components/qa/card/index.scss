@@ -18,9 +18,10 @@
             &:nth-of-type(4){z-index: 1;left:120rpx;}
         }
 
-        .comments{flex: 1;color:$lightBlack;}
+        .tip{flex: 1;color:$lightBlack;}
         .iconfont{font-size: 28rpx;margin-right:11rpx;color:$gray;}
         .read{color:$gray;}
+        .status{padding:0 10rpx;border-radius: 6rpx;color:$red;border:1rpx solid $red;font-size: $s;line-height: 26rpx;}
     }
 }
 

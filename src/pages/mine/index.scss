@@ -16,7 +16,10 @@
     
     .blog{display:flex;align-items:center;text-align:center;font-size:44rpx;color:$lightBlack;padding:18rpx 0 28rpx;background:#fff;width:100%;
         navigator{flex:1;line-height:64rpx;display:block;
-            &:nth-of-type(n+1){border-left:$border;}}
+            &:nth-of-type(1){border-right:$border;}
+            &:nth-of-type(3){border-left:$border;}
+            &:nth-of-type(4){border-left:$border;}
+        }
         text{display:block;
             &:nth-of-type(1){line-height:44rpx;margin-bottom:15rpx;}
             &:nth-of-type(2){font-size:$m;line-height:$m;line-height:$m;color:$gray;}}}

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "qa-card": "/components/qa/card/index",
+    "tabs": "/components/common/tabs/index",
+    "nodata": "/components/common/nodata/index"
+  }
+}
