@@ -163,8 +163,8 @@ Page(app.observer({
     this.setData({
       'myQuestions.pageIndex': myQuestions.pageIndex,
       'myQuestions.list':myQuestions.list.concat(res.data.list.map(question => {
-        if(question.skillCode){
-          question.skillCode = question.skillCode.split('|')
+        if(question.skillTag){
+          question.skillTag = [question.subTypeName].concat(question.skillTag.split('|'))
         }
         return question
       })),

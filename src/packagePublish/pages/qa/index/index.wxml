@@ -24,10 +24,7 @@
 
   <view class='info need'>
     <text class='name'>问题描述</text>
-    <navigator class='input arrow-right' url="/packagePublish/pages/qa/desc/index" hover-class='none'>
-      <text wx:if="{{!question}}">请简明写下你的问题</text>
-      <text wx:else>{{question.title}}</text>
-    </navigator>
+    <navigator class='input arrow-right' url="/packagePublish/pages/qa/desc/index" hover-class='none'>{{question?question.title:'请简明写下你的问题'}}</navigator>
   </view>
 
   <view class="tags" hidden="{{tags[objectMultiArray[1][multiIndex[1]].dictValue].length===0}}">

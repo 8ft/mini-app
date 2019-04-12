@@ -3,7 +3,7 @@
 
 .qa{position:relative;padding:42rpx 28rpx 35rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;margin-bottom:20rpx;
     .title{font-weight:600;font-size:34rpx;color:black;
-        text{display:inline-block;vertical-align: middle;}
+        text{vertical-align: middle;}
         .reward{padding:0 15rpx;background: #FFC034;color:#fff;border-radius:99rpx;line-height: 35rpx;font-size: $s;margin-right: 20rpx;}
     }
     .tags{width:100%;padding:24rpx 0 28rpx;height:40rpx;overflow: hidden;zoom:1;

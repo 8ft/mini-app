@@ -47,7 +47,7 @@ Page({
 
   setFocusPostion(e) {
     this.setData({
-      keyboardHeight: e.detail.height
+      keyboardHeight: e.detail.height||0
     })
   },
 
@@ -59,7 +59,7 @@ Page({
 
   input(e) {
     const name = e.currentTarget.dataset.name
-    const maxLen=(name==='title'?10:200)
+    const maxLen=(name==='title'?60:500)
 
     let input = e.detail.value
     if(name==='title'){

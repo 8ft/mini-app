@@ -1,6 +1,6 @@
-@import '../../../../assets/wxss/var.scss'; 
-@import '../../../../libs/towxml/style/main.wxss';
-@import '../../../../libs/towxml/style/theme/light.wxss';
+@import '../../../assets/wxss/var.scss'; 
+@import '../../../libs/towxml/style/main.wxss';
+@import '../../../libs/towxml/style/theme/light.wxss';
 
 page{background:#fff;}
 .title{font-size:48rpx;color:$black;font-weight:600;line-height:60rpx;padding:38rpx 30rpx 0;}

@@ -12,7 +12,8 @@ Page(app.observer({
 
     reward:0,
     selectedReward:0,
-    rewards:[5,10,15,20,50,100,200,0]
+    rewards:[5,10,15,20,50,100,200,0],
+    selectedTags:[]
   },
 
   onLoad() {
@@ -117,10 +118,28 @@ Page(app.observer({
   },
 
   selectTag(e){
+    
     const index=e.currentTarget.dataset.index
     const val=this.data.objectMultiArray[1][this.data.multiIndex[1]].dictValue
+
+    let selected=!this.data.tags[val][index].selected
+    if(this.data.selectedTags.length===5&&selected){
+      wx.showToast({
+        icon:'none',
+        title:'最多只能选择5个标签哦'
+      })
+      return 
+    } 
+    
+    if(selected){
+      this.data.selectedTags.push(this.data.tags[val][index].dictValue)
+    }else{
+      this.data.selectedTags.splice(this.data.selectedTags.indexOf(this.data.tags[val][index].dictValue),1)
+    }
+    
     this.setData({
-      [`tags.${val}[${index}].selected`]:this.data.tags[val][index].selected?false:true
+      [`tags.${val}[${index}].selected`]:selected,
+      selectedTags:this.data.selectedTags
     })
   },
 
@@ -155,11 +174,16 @@ Page(app.observer({
       })
     }
 
+    let skills=''
+    if(this.data.selectedTags.length>0){
+      skills=this.data.selectedTags.join('|')
+    }
+
     let res = await app.request.post('/qa/question/save', {
       questionName:question.title,
       questionType:this.data.objectMultiArray[0][this.data.multiIndex[0]].dictValue,
       subType:this.data.objectMultiArray[1][this.data.multiIndex[1]].dictValue,
-      // skillCode:,
+      skillCode:skills,
       rewardAmountYuan:this.data.reward,
       content:html,
       contentBatchNo:question.batchNo

@@ -4,21 +4,17 @@ const regeneratorRuntime=app.regeneratorRuntime
 const Towxml = require('../../../libs/towxml/main')
 const towxml=new Towxml()  
 const nodataCon = {
-  '-1':{
-    img:'',
-    text:'文章已删除'
-  },
-  0: {
+  10: {
     img:'blog_audit',
-    text:"别急呀！文章正在审核中...\n通过后即可查看，请稍后再试"
+    text:"别急呀！问题正在审核中...\n通过后即可查看，请稍后再试"
   },
-  2: {
+  20: {
     img:'blog_illegal',
-    text:'内容审核不通过'
+    text:'问题审核不通过'
   },
-  3:{
+  22:{
     img:'blog_xiajia',
-    text:'文章已下架'
+    text:'问题已下架'
   }
 }
 
@@ -36,7 +32,7 @@ Page(app.observer({
     comments:[],
     commentsPostion:0,
 
-    replies:[],
+    comments:[],
     nomore:false,
     pageIndex:1,
 
@@ -77,17 +73,9 @@ Page(app.observer({
         cIndex:index
       })
 
-      if(this.data.replies.length>0){
-        this.setData({
-          replies:[],
-          pageIndex:1,
-          nomore:false
-        })
-      }
-
       const comment=this.data.comments[index]
-      if(comment.replyNum>0){
-        await this.getReplies()
+      if(comment.replyNum>0&&!comment.replies){
+        await this.getComments(comment.id,index)
       }
     }
 
@@ -169,6 +157,7 @@ Page(app.observer({
     }
 
     this.setData({
+      active:detail.data.questionState===11||detail.data.questionState===12,
       isMyself:isMyself,
       loading:false,
       detail:detail.data
@@ -183,35 +172,54 @@ Page(app.observer({
     this.setData({
       article: wxml
     })
+
+    if(detail.data.answerNum>0){
+      this.getComments()
+    }
   },
 
-  async getReplies () {
+  async getComments (answerId,index) {
     let nomore = this.data.nomore
-    if(nomore)return
+    if(nomore&&!answerId)return
 
-    let pIndex=this.data.pageIndex
-    let res = await app.request.post('/blog/comment/getList',{
-      articleId:this.data.id,
-      comments:2,
-      replyId:this.data.comments[this.data.cIndex].id,
-      pageIndex:pIndex
+    let pIndex=!answerId?this.data.pageIndex:1
+    const pageSize=!answerId?10:100
+    let res = await app.request.post('/qa/answer/listAnswers',{
+      questionId:this.data.id,
+      answerId:answerId||'',
+      pageIndex:pIndex,
+      pageSize:pageSize
     })
     if (res.code !== 0) return
 
-    if (res.data.page > pIndex){
-      pIndex++
-    }else{
-      nomore=true
+    if(!answerId){
+      if (res.data.page > pIndex){
+        pIndex++
+      }else{
+        nomore=true
+      }
     }
 
-    this.setData({
-      nomore:nomore,
-      pageIndex:pIndex,
-      replies:this.data.replies.concat(res.data.list.map(item=>{
-        item.createTime=app.util.formatTime(item.createTime,'blogComment')
-        return item
-      }))
-    })
+    let obj
+    if(answerId){
+      obj={
+        [`comments[${index}].replies`]:res.data.list.map(item=>{
+          item.createTime=app.util.formatTime(item.createTime,'blogComment')
+          return item
+        })
+      }
+    }else{
+      obj={
+        nomore:nomore,
+        pageIndex:pIndex,
+        comments:this.data.comments.concat(res.data.list.map(item=>{
+          item.createTime=app.util.formatTime(item.createTime,'blogComment')
+          return item
+        }))
+      }
+    }
+
+    this.setData(obj)
   },
 
   download:app.download
