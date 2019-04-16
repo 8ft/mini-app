@@ -2,7 +2,8 @@ Page({
   onLoad (options) {
     this.setData({
       id:options.id,
-      uid:options.uid
+      uid:options.uid,
+      reward:options.reward||''
     })
   },
 

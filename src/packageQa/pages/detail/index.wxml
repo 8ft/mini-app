@@ -39,6 +39,7 @@
                 <view class="other">{{item.createTime}}
                     <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-index="{{index}}">{{item.replyNum}}条回复</view>
                     <text bindtap="openBox" data-index="{{index}}">回复</text>
+                    <text bindtap="openBox" data-index="{{index}}">举报</text>
                 </view>
             </view>
         </block>

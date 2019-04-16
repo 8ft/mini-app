@@ -50,7 +50,7 @@
         "pages/fans/index",
         "pages/blogs/index",
         "pages/collection/index",
-        "pages/qas/index"
+        "pages/qa/index"
       ]
     },
     {
@@ -65,7 +65,8 @@
       "root": "packageQa",
       "name": "qa",
       "pages": [
-        "pages/detail/index"
+        "pages/detail/index",
+        "pages/pay/index"
       ]
     },
     {

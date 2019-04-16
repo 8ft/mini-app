@@ -12,7 +12,7 @@ Page(app.observer({
 
     reward:0,
     selectedReward:0,
-    rewards:[5,10,15,20,50,100,200,0],
+    rewards:[5,10,15,20,50,100,200,0,0.01],
     selectedTags:[]
   },
 
@@ -189,7 +189,21 @@ Page(app.observer({
       contentBatchNo:question.batchNo
     })
 
-    if (res.code === 0) {
+    if (res.code !== 0) return
+
+    this.props.stores.account.ask(1)
+
+    if(this.data.reward>0){
+      wx.setStorageSync('question',{
+        id:res.data.id,
+        uid:res.data.userId,
+        title:question.title,
+        reward:this.data.reward
+      })
+      wx.redirectTo({
+        url: '/packageQa/pages/pay/index?from=publish'
+      })
+    }else{
       wx.redirectTo({
         url: `/packagePublish/pages/qa/success/index?id=${res.data.id}&uid=${res.data.userId}`
       })

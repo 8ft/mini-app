@@ -1,0 +1,26 @@
+<nav-bar title="订单信息"></nav-bar>
+
+<view class="question">
+  <view class="title">{{question.title}}</view>
+  <view class="reward">悬赏金额：<text>{{question.reward+'元'}}</text></view>
+</view>
+
+<view style="line-height:77rpx;text-indent:32rpx;">选择支付方式</view>
+
+<view class="pay-ways">
+  <radio-group>
+      <label>
+          <image mode='aspectFill' src="/assets/img/wxzf@3x.png"></image>
+          <text>微信支付</text>
+          <radio color="#0083FF" checked="{{true}}"/>
+      </label>
+  </radio-group>
+  <view class="tip">支付的金额将托管给巨牛汇平台，由你选出最佳答案后平台支付给回答方。</view>
+</view>
+
+<action-bar>
+    <view class="final-price">
+        悬赏金额:<text>{{question.reward}}</text>
+    </view>
+    <button class="submit" bindtap="pay">确认支付</button>
+  </action-bar>

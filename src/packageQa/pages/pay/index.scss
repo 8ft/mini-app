@@ -1,0 +1,27 @@
+@import '../../../assets/wxss/var.scss';  
+
+.question{padding:40rpx 30rpx 50rpx;background: #fff;
+    .title{font-size: $xxl;color:$black;font-weight: 500;}
+    .reward{font-size:$xl;font-weight:400;color:$lightBlack;margin-top:50rpx;
+        text{font-weight: 500;color:$red;font-size: 38rpx;}
+    }
+}
+
+.pay-ways{padding:0 30rpx 0 128rpx;background: #fff;font-size:$xl;color:$lightBlack;
+    
+    label{display: flex; align-items: center;height: 100rpx;position: relative;border-bottom:$border;
+        image{width:48rpx;height:48rpx;position:absolute;left:-96rpx;top:26rpx;}
+        text{flex:1;}
+        radio .wx-radio-input{width:40rpx;height:40rpx;font-size:30rpx;}
+    } 
+
+    .tip{font-size: $m;color:$gray;padding:32rpx 30rpx 26rpx 0;}
+}
+
+.final-price{flex:1;text-align: right;font-size:$m;
+    text{color:$red;font-size:38rpx;margin-left:10rpx;
+        &::before{content:'￥';font-size:$m;}
+    }
+}
+
+.submit{background: #FF8000;height: 98rpx;line-height:98rpx;color:#fff;width:208rpx;font-size: $xl;border-radius: 4rpx;margin:0 30rpx;}

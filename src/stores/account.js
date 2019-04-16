@@ -58,6 +58,10 @@ const account = function () {
     this.blogInfo.favoriteNum += diff
   }
 
+  this.ask = diff => {
+    this.blogInfo.questionNum += diff
+  }
+
   this.login = async (app, oid, uid) => {
     const res = await request.post('/user/userThirdpartInfo/login', {
       thirdpartIdentifier: oid,

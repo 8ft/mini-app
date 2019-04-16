@@ -1,7 +1,8 @@
 <nav-bar></nav-bar>
 
 <image class='icon' src="/assets/img/icon/success.png"></image>
-<text class='txt'>恭喜您发布成功</text>
-<navigator open-type='redirect' class='btn' url="/packageQa/pages/detail/index?id={{id}}&uid={{uid}}">查看问答</navigator>
+<view class='txt'>恭喜您发布成功</view>
+<view class='tip' wx:if="{{reward}}">问答悬赏金额暂时由平台担保</view>
+<navigator style="margin-top:142rpx;" open-type='redirect' class='btn' url="/packageQa/pages/detail/index?id={{id}}&uid={{uid}}">查看问答</navigator>
 <navigator open-type='redirect' class='btn light' url="/packagePublish/pages/qa/index/index">再问一个</navigator>
 <view class="call" bindtap="call">客服电话：0592-2226199</view>

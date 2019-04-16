@@ -7,7 +7,7 @@
   <view class="other-info">
     <block wx:if="{{qa.answerUsers.length>0}}">
       <image wx:for="{{qa.answerUsers}}" mode="aspectFill" src="{{item.userAvatar}}"></image>
-      <view class="tip" style="margin-left:{{imgsWidth}}rpx;">{{qa.answerUsers.length>1?'等'+qa.answerUsers.length+'人':''}}参与了讨论</view>
+      <view class="tip" style="margin-left:{{imgsWidth}}rpx;">{{qa.answerUsers.length>4?'等'+qa.answerUsers.length+'人':''}}参与了讨论</view>
     </block>
 
     <block wx:elif="{{qa.answerUsers.length===0}}">

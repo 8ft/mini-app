@@ -13,7 +13,7 @@ Component({
         const num=newVal.answerUsers.length
         if(num===0)return
         this.setData({
-          imgsWidth:num*40+30
+          imgsWidth:(num>4?4:num)*40+30
         })
       }
     }
