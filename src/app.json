@@ -113,7 +113,8 @@
       "packages": [
         "blog",
         "expert",
-        "service"
+        "service",
+        "qa"
       ]
     },
     "pages/mine/index": {

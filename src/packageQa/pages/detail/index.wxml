@@ -3,6 +3,7 @@
 <block wx:if="{{active||isMyself}}">
     <view class="title">{{detail.questionName}}</view>
 
+
     <navigator class="author" hover-class="none" url="/packageExpert/pages/index/index?id={{detail.updateUserId}}">
         <image mode='aspectFill' src="{{detail.userAvatar||'/assets/img/default/avatar.png'}}"></image> 
         <view class="info">
@@ -12,9 +13,10 @@
         <button class="share" wx:if="{{isMyself&&active}}" open-type="share" catchtap='onShareAppMessage'>分享</button>
         <button wx:elif="{{active}}" class="{{detail.followFlag===1?'followed':''}}" hover-class="none" catchtap="follow">{{detail.followFlag===1?'已关注':'+关注'}}</button>
     </navigator>
+
     
     <view class="html">
-        <view wx:if="{{detail.articleState===20}}" class="xiajia">
+        <view wx:if="{{detail.questionState===20}}" class="xiajia">
             <image mode='aspectFill' src="/assets/img/discover/xiajia.png"></image> 
             <text>{{detail.questionAudit.auditRemark}}</text>
         </view>
@@ -27,48 +29,119 @@
         </view>
     </view>
 
-    <view id="comments" class="comments">
-        <view class="title">评论</view>
-        <block wx:if="{{comments.length>0}}">
-            <view class="comment" wx:for="{{comments}}">
-                <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{item.createUserId}}">
+
+    <view id="answers" class="answers">
+        <block wx:if="{{lists.best.length>0}}">
+             <view class="title">回答</view>
+             <view class="comment" wx:for="{{lists.best}}">
+                <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{item.userId}}">
                     <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
-                    <view class="name">{{item.createUserName}}</view>
+                    <view class="top-line">
+                        <view class="name">{{item.nickName}}</view>
+                        <view class="like {{item.praiseFlag?'on':''}}" data-belongs="best" data-id="{{item.id}}" data-index="{{index}}" catchtap="like">
+                            <text class="iconfont icon-dianzan"></text>
+                            <text>{{item.praiseNum}}</text>
+                        </view>
+                    </view>
                 </navigator>
                 <text class="con">{{item.content}}</text>
                 <view class="other">{{item.createTime}}
-                    <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-index="{{index}}">{{item.replyNum}}条回复</view>
-                    <text bindtap="openBox" data-index="{{index}}">回复</text>
-                    <text bindtap="openBox" data-index="{{index}}">举报</text>
+                    <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-belongs="best" data-index="{{index}}">{{item.replyNum}}条回复</view>
+                    <text bindtap="openBox" data-belongs="best" data-index="{{index}}">回复</text>
+                    <text bindtap="openBox" data-belongs="best" data-index="{{index}}" wx:if="{{item.userId!==props.stores.account.userInfo.userId}}">举报</text>
                 </view>
             </view>
         </block>
-        <nodata wx:elif="{{!loading}}" img='comment' text='还没有人回答哦~等你来发挥~'></nodata>
+        
+        <block wx:if="{{lists.hots.length>0}}">
+            <view class="title">热门回答</view>
+            <view class="comment" wx:for="{{lists.hots}}">
+                <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{item.userId}}">
+                    <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
+                    <view class="top-line">
+                        <view class="name">{{item.nickName}}</view>
+                        <view class="take" data-id="{{item.id}}" catchtap="take" wx:if="{{isMyself&&detail.questionState===11&&item.userId!==props.stores.account.userInfo.userId}}">
+                            <text class="iconfont icon-caina"></text>
+                            <text>采纳</text>
+                        </view>
+                        <view class="like {{item.praiseFlag?'on':''}}" data-belongs="hots" data-id="{{item.id}}" data-index="{{index}}" catchtap="like">
+                            <text class="iconfont icon-dianzan"></text>
+                            <text>{{item.praiseNum}}</text>
+                        </view>
+                    </view>
+                </navigator>
+                <text class="con">{{item.content}}</text>
+                <view class="other">{{item.createTime}}
+                    <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-belongs="hots" data-index="{{index}}">{{item.replyNum}}条回复</view>
+                    <text bindtap="openBox" data-belongs="hots" data-index="{{index}}">回复</text>
+                    <text bindtap="openBox" data-belongs="hots" data-index="{{index}}" wx:if="{{item.userId!==props.stores.account.userInfo.userId}}">举报</text>
+                </view>
+            </view>
+        </block>
+        
+        <block wx:if="{{lists.answers.length>0}}">
+            <view class="title">最新回答</view>
+            <view class="comment" wx:for="{{lists.answers}}">
+                <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{item.userId}}">
+                    <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
+                    <view class="top-line">
+                        <view class="name">{{item.nickName}}</view>
+                        <view class="take" data-id="{{item.id}}" catchtap="take" wx:if="{{isMyself&&detail.questionState===11&&item.userId!==props.stores.account.userInfo.userId}}">
+                            <text class="iconfont icon-caina"></text>
+                            <text>采纳</text>
+                        </view>
+                        <view class="like {{item.praiseFlag?'on':''}}" data-belongs="answers" data-id="{{item.id}}" data-index="{{index}}" catchtap="like">
+                            <text class="iconfont icon-dianzan"></text>
+                            <text>{{item.praiseNum}}</text>
+                        </view>
+                    </view>
+                </navigator>
+                <text class="con">{{item.content}}</text>
+                <view class="other">{{item.createTime}}
+                    <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-belongs="answers" data-index="{{index}}">{{item.replyNum}}条回复</view>
+                    <text bindtap="openBox" data-belongs="answers" data-index="{{index}}">回复</text>
+                    <text bindtap="openBox" data-belongs="answers" data-index="{{index}}" wx:if="{{item.userId!==props.stores.account.userInfo.userId}}">举报</text>
+                </view>
+            </view>
+        </block>
+
+        <block wx:if="{{!loading&&lists.answers.length===0}}" >
+            <view class="title">回答</view>
+            <nodata img='comment' text='还没有人回答哦~等你来发挥~'></nodata>
+        </block>
     </view>
 
+
+
     <popup position="bottom" active="{{boxSwitch}}">
-        <view class="comments-box" style="height:{{boxHeight}}px;"> 
+        <view class="answers-box" style="height:{{boxHeight}}px;"> 
             <view class="header">
                 <view class="iconfont icon-guanbi1" bindtap="closeBox"></view>
-                {{comments[cIndex].replyNum===0?'暂无回复':comments[cIndex].replyNum+'条回复'}}
+                {{lists[belongs][cIndex].replyNum===0?'暂无回复':lists[belongs][cIndex].replyNum+'条回复'}}
             </view>
 
             <scroll-view style="height:{{scrollViewHeight}}px;padding-bottom: env(safe-area-inset-bottom);box-sizing:border-box;" scroll-y="true" scroll-top='0' bindscrolltolower="getReplies">
                 <view class="comment">
-                    <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{comments[cIndex].userId}}">
-                        <image lazy-load="true" mode='aspectFill' src="{{comments[cIndex].userAvatar}}"></image>
-                        <view class="name">{{comments[cIndex].nickName}}</view>
+                    <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{lists[belongs][cIndex].userId}}">
+                        <image lazy-load="true" mode='aspectFill' src="{{lists[belongs][cIndex].userAvatar}}"></image>
+                        <view class="name">{{lists[belongs][cIndex].nickName}}</view>
                     </navigator>
-                    <text class="con">{{comments[cIndex].content}}</text>
-                    <view class="other">{{comments[cIndex].createTime}}</view>
+                    <text class="con">{{lists[belongs][cIndex].content}}</text>
+                    <view class="other">{{lists[belongs][cIndex].createTime}}</view>
                 </view>
 
-                <view class="comments">
-                    <view class="title">{{comments[cIndex].replyNum===0?'抢先':''}}评论</view>
-                    <view class="comment" hidden="{{comments[cIndex].replyNum===0}}" wx:for="{{comments[cIndex].replies}}">
+                <view class="answers">
+                    <view class="title">{{lists[belongs][cIndex].replyNum===0?'抢先':''}}评论</view>
+                    <view class="comment" hidden="{{lists[belongs][cIndex].replyNum===0}}" wx:for="{{lists[belongs][cIndex].replies}}">
                         <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{item.userId}}">
                             <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
-                            <view class="name">{{item.nickName}}</view>
+                            <view class="top-line">
+                                <view class="name">{{item.nickName}}</view>
+                                <view class="like {{item.praiseFlag?'on':''}}" data-id="{{item.id}}" data-index="{{index}}" catchtap="like">
+                                    <text class="iconfont icon-dianzan"></text>
+                                    <text>{{item.praiseNum}}</text>
+                                </view>
+                            </view>
                         </navigator>
                         <text class="con">{{item.content}}</text>
                         <view class="other">{{item.createTime}}
@@ -86,12 +159,13 @@
         </view>
     </popup>
 
+
     <action-bar id="actionBar">
         <view class=".action-bar-con">
             <input placeholder="我要评论..." disabled="true" bindtap="download"/>
             <view wx:if="{{!isMyself}}" class="iconfont {{detail.collectFlag===1?'collected icon-yishoucang':'icon-shoucang1'}}" bindtap="collect"></view>
             <view class="iconfont icon-xiaoxi1" bindtap="scrollToComments"></view>
-            <text class="apply-num">{{detail.comments.count}}</text>
+            <text class="apply-num">{{detail.answers.count}}</text>
         </view>
     </action-bar>
 </block>

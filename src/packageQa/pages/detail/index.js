@@ -10,11 +10,11 @@ const nodataCon = {
   },
   20: {
     img:'blog_illegal',
-    text:'问题审核不通过'
+    text:'问题涉嫌违规，发起者正在完善中…'
   },
   22:{
     img:'blog_xiajia',
-    text:'问题已下架'
+    text:'好遗憾，该问题可能已经被关闭或删除了'
   }
 }
 
@@ -29,10 +29,13 @@ Page(app.observer({
     detail:null,
     article:{},
 
-    comments:[],
+    lists:{
+      best:[],
+      hots:[],
+      answers:[]
+    },
+   
     commentsPostion:0,
-
-    comments:[],
     nomore:false,
     pageIndex:1,
 
@@ -67,15 +70,18 @@ Page(app.observer({
   },
 
   async openBox(e){
+    const belongs=e.currentTarget.dataset.belongs
     const index=e.currentTarget.dataset.index
-    if(index!==this.data.cIndex){
+
+    if(index!==this.data.cIndex||belongs!==this.data.belongs){
       this.setData({
+        belongs:belongs,
         cIndex:index
       })
 
-      const comment=this.data.comments[index]
-      if(comment.replyNum>0&&!comment.replies){
-        await this.getComments(comment.id,index)
+      const answer=this.data.lists[belongs][index]
+      if(answer.replyNum>0&&!answer.replies){
+        await this.getComments(answer.id,belongs,index)
       }
     }
 
@@ -93,7 +99,7 @@ Page(app.observer({
   scrollToComments(){
     if(this.data.commentsPostion===0){
       const query = wx.createSelectorQuery()
-      query.select('#comments').fields({
+      query.select('#answers').fields({
         rect: true
       }, res => {
         wx.pageScrollTo({
@@ -112,30 +118,82 @@ Page(app.observer({
     }
   },
 
+  async take(e){
+    wx.showModal({
+      title: '提示',
+      confirmText:'提交',
+      confirmColor:'#4C87F9',
+      content: this.data.detail.rewardAmount>0?'请确认是否已解决你的问题，答案一经采纳后即同意将悬赏金额答谢给回答者':'请确认是否已解决你的问题，答案一经采纳后将无法撤销',
+      success: async res=> {
+        if (res.confirm) {
+          let res = await app.request.post('/qa/question/acceptQuestionAnswer', {
+            questionId:this.data.detail.id,
+            answerId:e.currentTarget.dataset.id
+          })
+          if (res.code === 0) {
+            this.data.lists={
+              best:[],
+              hots:[],
+              answer:[]
+            },
+            this.data.pageIndex=1
+            this.data.nomore=false
+            this.getAnswers()
+          }
+        }
+      }
+    })
+  },
+
+  async like(e){
+    if(app.checkLogin()){
+      const res = await app.request.post('/qa/answer/praise',{
+        answerId:e.currentTarget.dataset.id
+      })
+      if(res.code!==0)return
+
+      const index=e.currentTarget.dataset.index
+      const belongs=e.currentTarget.dataset.belongs
+      if(this.data.boxSwitch){
+        let answer=this.data.lists[belongs][cIndex].replies[index]
+        this.setData({
+          [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseNum`]:answer.praiseNum+(answer.praiseFlag?-1:1),
+          [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseFlag`]:!answer.praiseFlag
+        })
+      }else{
+        let answer=this.data.lists[belongs][index]
+        this.setData({
+          [`lists.${belongs}[${index}].praiseNum`]:answer.praiseNum+(answer.praiseFlag?-1:1),
+          [`lists.${belongs}[${index}].praiseFlag`]:!answer.praiseFlag
+        })
+      }
+    }
+  },
+
   async follow(){
     if(app.checkLogin()){
       const res = await app.request.post('/blog/attentionInfo/follow',{
-        attentionUserId:this.data.detail.updateUserId
+        attentionUserId:this.data.detail.userId
       })
       if(res.code!==0)return
-      this.props.stores.account.follow(this.data.detail.attentionState===0?1:-1)
+      this.props.stores.account.follow(this.data.detail.followFlag===0?1:-1)
       this.setData({
-        'detail.attentionState':this.data.detail.attentionState===0?1:0
+        'detail.followFlag':this.data.detail.followFlag===0?1:0
       })
     }
   },
 
   async collect(){
     if(app.checkLogin()){
-      const res = await app.request.post('/blog/favorite/save',{
-        articleId:this.data.id
+      const res = await app.request.post('/qa/question/collect',{
+        questionId:this.data.detail.id,
+        userId:this.props.stores.account.userInfo.userId,
+        collect:this.data.detail.collectFlag===0?1:0
       })
       if(res.code!==0)return
-      this.props.stores.account.collect(this.data.detail.favoriteState===0?1:-1)
       this.setData({
-        'detail.favoriteState':this.data.detail.favoriteState===0?1:0
+        'detail.collectFlag':this.data.detail.collectFlag===0?1:0
       })
-      this.props.stores.toRefresh.updateList('collect')
     }
   },
 
@@ -174,52 +232,66 @@ Page(app.observer({
     })
 
     if(detail.data.answerNum>0){
-      this.getComments()
+      this.getAnswers()
     }
   },
 
-  async getComments (answerId,index) {
+  async getAnswers () {
     let nomore = this.data.nomore
-    if(nomore&&!answerId)return
+    if(nomore)return
 
-    let pIndex=!answerId?this.data.pageIndex:1
-    const pageSize=!answerId?10:100
-    let res = await app.request.post('/qa/answer/listAnswers',{
+    let pIndex=this.data.pageIndex
+    let res = await app.request.post('/qa/answer/listMultiAnswers',{
       questionId:this.data.id,
-      answerId:answerId||'',
-      pageIndex:pIndex,
-      pageSize:pageSize
+      pageIndex:pIndex
     })
     if (res.code !== 0) return
 
-    if(!answerId){
-      if (res.data.page > pIndex){
-        pIndex++
-      }else{
-        nomore=true
-      }
-    }
-
-    let obj
-    if(answerId){
-      obj={
-        [`comments[${index}].replies`]:res.data.list.map(item=>{
+    if(pIndex===1){
+      this.setData({
+        'lists.best':this.data.lists.best.concat(res.data.best?res.data.best.map(item=>{
           item.createTime=app.util.formatTime(item.createTime,'blogComment')
           return item
-        })
-      }
+        }):[]),
+        'lists.hots':this.data.lists.hots.concat(res.data.hots?res.data.hots.map(item=>{
+          item.createTime=app.util.formatTime(item.createTime,'blogComment')
+          return item
+        }):[])
+      })
+    }
+   
+    if (res.data.answers.page > pIndex){
+      pIndex++
     }else{
-      obj={
-        nomore:nomore,
-        pageIndex:pIndex,
-        comments:this.data.comments.concat(res.data.list.map(item=>{
-          item.createTime=app.util.formatTime(item.createTime,'blogComment')
-          return item
-        }))
-      }
+      nomore=true
     }
 
-    this.setData(obj)
+    this.setData({
+      nomore:nomore,
+      pageIndex:pIndex,
+      'lists.answers':this.data.lists.answers.concat(res.data.answers.list.map(item=>{
+        item.createTime=app.util.formatTime(item.createTime,'blogComment')
+        return item
+      }))
+    })
+  },
+
+  async getComments (answerId,belongs,index) {
+    let res = await app.request.post('/qa/answer/listAnswers',{
+      questionId:this.data.id,
+      answerId:answerId,
+      pageIndex:1,
+      pageSize:100
+    })
+
+    if(res.code!==0)return
+   
+    this.setData({
+      [`lists.${belongs}[${index}].replies`]: res.data.list.map(item=>{
+        item.createTime=app.util.formatTime(item.createTime,'blogComment')
+        return item
+      })
+    })
   },
 
   download:app.download
