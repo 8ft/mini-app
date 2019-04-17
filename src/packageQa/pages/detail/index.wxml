@@ -107,7 +107,7 @@
 
         <block wx:if="{{!loading&&lists.answers.length===0}}" >
             <view class="title">回答</view>
-            <nodata img='comment' text='还没有人回答哦~等你来发挥~'></nodata>
+            <nodata text='还没有人回答哦~等你来发挥~'></nodata>
         </block>
     </view>
 

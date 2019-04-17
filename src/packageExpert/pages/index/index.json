@@ -5,6 +5,7 @@
     "tabs": "/components/common/tabs/index",
     "nodata": "/components/common/nodata/index",
     "blog-card":"/components/blog/card/index",
+    "qa-card":"/components/qa/card/index",
     "action-bar": "/components/common/actionBar/index"
   }
 }

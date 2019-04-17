@@ -2,6 +2,7 @@
 <view class='nodata'>
   <image mode='widthFix' src="/assets/img/nodata/{{img||'default'}}.png"></image>
   <text>{{text}}</text>
+  <slot></slot>
   <navigator wx:if="{{login}}" url='/pages/user/wxLogin/index' hover-class='none'>登录</navigator>
 </view>
 

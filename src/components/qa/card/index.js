@@ -1,12 +1,12 @@
 Component({
   properties: {
-    qa:{
+    data:{
       type:Object,
       observer(newVal, oldVal, changedPath) {
         if(!newVal.questionName)return
         if(newVal.questionName.length>36){
           this.setData({
-            'qa.questionName':newVal.questionName.substring(0,30)+'...'
+            'data.questionName':newVal.questionName.substring(0,30)+'...'
           })
         }
 
@@ -16,6 +16,10 @@ Component({
           imgsWidth:(num>4?4:num)*40+30
         })
       }
+    },
+    appearance: {
+      type: String,
+      value: 'normal'
     }
    
   },
@@ -27,7 +31,7 @@ Component({
   methods:{
     goDetail(e){
       this.setData({
-        'qa.viewNum':this.properties.qa.viewNum+=1
+        'data.viewNum':this.properties.data.viewNum+=1
       })
       wx.navigateTo({
         url: e.currentTarget.dataset.url

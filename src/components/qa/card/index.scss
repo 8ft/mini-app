@@ -1,7 +1,9 @@
 @import '../../../assets/wxss/var.scss'; 
 @import '../../../assets/font/icons.wxss';
 
-.qa{position:relative;padding:42rpx 28rpx 35rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;margin-bottom:20rpx;
+.qa{position:relative;padding:42rpx 28rpx 35rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;margin:0 auto 20rpx;
+    &.collection{width:718rpx;border-radius: 20rpx;margin:20rpx auto;}
+
     .title{font-weight:600;font-size:34rpx;color:black;
         text{vertical-align: middle;}
         .reward{padding:0 15rpx;background: #FFC034;color:#fff;border-radius:99rpx;line-height: 35rpx;font-size: $s;margin-right: 20rpx;}

@@ -194,6 +194,7 @@ Page(app.observer({
       this.setData({
         'detail.collectFlag':this.data.detail.collectFlag===0?1:0
       })
+      this.props.stores.toRefresh.updateList('collect')
     }
   },
 

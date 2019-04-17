@@ -1,5 +1,5 @@
 const app = getApp()
-const regeneratorRuntime=app.regeneratorRuntime
+const regeneratorRuntime = app.regeneratorRuntime
 
 
 Page(app.observer({
@@ -8,7 +8,19 @@ Page(app.observer({
   },
 
   data: {
-    typeIndex: 0,
+    tabIndex: 0,
+
+    articles: {
+      list: [],
+      pageIndex: 1,
+      nomore: false
+    },
+
+    qas: {
+      list: [],
+      pageIndex: 1,
+      nomore: false
+    },
 
     experts: {
       list: [],
@@ -28,81 +40,76 @@ Page(app.observer({
       nomore: false
     },
 
-    articles: {
-      list: [],
-      pageIndex: 1,
-      nomore: false
-    },
-
     loading: true
   },
 
-  onLoad () {
-    this.getExperts()
+  onLoad() {
+    if (this.props.stores.account.blogInfo.favoriteNum > 0) {
+      this.getArticles()
+    }
   },
 
-  onShow () {
-    this.props.stores.toRefresh.refresh('mine_collection',async(exist)=>{
-      if(exist){
+  onShow() {
+    this.props.stores.toRefresh.refresh('mine_collection', async (exist) => {
+      if (exist) {
         this.refresh()
       }
     })
   },
 
-  onPullDownRefresh () {
-    this.refresh()
+  getNavHeight(e) {
+    const systemInfo = wx.getSystemInfoSync()
+    const ratio = systemInfo.windowWidth / 750
+    const scrollViewHeight = systemInfo.windowHeight - e.detail.height
+    this.setData({
+      scrollViewHeight: scrollViewHeight
+    })
   },
 
-  onReachBottom () {
-    switch (this.data.typeIndex) {
-      case 0:
-        this.getExperts()
-        break;
-      case 1:
-        this.getServices(1)
-        break;
-      case 2:
-        this.getServices(0)
-        break;
-      case 3:
-        this.getArticles()
-        break;
+  tabChange(e) {
+    this.switchPage(e.detail.index)
+  },
+
+  onSwiperChange(e) {
+    this.switchPage(e.detail.current)
+  },
+
+  switchPage(index) {
+    if (index === this.data.tabIndex) return
+    this.setData({
+      tabIndex: index
+    })
+
+    if (index === 0 && this.data.articles.list.length === 0 && this.props.stores.account.blogInfo.favoriteNum > 0) {
+      this.getArticles()
+    } else if (index === 1 && this.data.qas.list.length === 0) {
+      this.getQas()
+    } else if (index === 2 && this.data.experts.list.length === 0) {
+      this.getExperts()
+    } else if (index === 3 && this.data.services.list.length === 0) {
+      this.getServices(1)
+    } else if (index === 4 && this.data.stores.list.length === 0) {
+      this.getServices(0)
     }
   },
 
-  refresh () {
-    switch (this.data.typeIndex) {
+  loadMore() {
+    if (this.data.tabIndex === 0&&this.props.stores.account.blogInfo.favoriteNum > 0) {
+      this.getArticles()
+    } else if (this.data.tabIndex === 1) {
+      this.getQas()
+    } else if (this.data.tabIndex === 2) {
+      this.getExperts()
+    } else if (this.data.tabIndex === 3) {
+      this.getServices(1)
+    }else if (this.data.tabIndex === 4) {
+      this.getServices(0)
+    }
+  },
+
+  refresh() {
+    switch (this.data.tabIndex) {
       case 0:
-        if (this.data.experts.list.length > 0) {
-          this.data.experts = {
-            list: [],
-            pageIndex: 1,
-            nomore: false
-          }
-        }
-        this.getExperts()
-        break;
-      case 1:
-        if (this.data.services.list.length > 0) {
-          this.data.services = {
-            list: [],
-            pageIndex: 1,
-            nomore: false
-          }
-        }
-        this.getServices(1)
-        break;
-      case 2:
-        if (this.data.stores.list.length > 0) {
-          this.data.stores = {
-            list: [],
-            pageIndex: 1,
-            nomore: false
-          }
-        }
-        this.getServices(0)
-        break;
-      case 3:
         if (this.data.articles.list.length > 0) {
           this.data.articles = {
             list: [],
@@ -112,28 +119,51 @@ Page(app.observer({
         }
         this.getArticles()
         break;
+      case 1:
+        if (this.data.qas.list.length > 0) {
+          this.data.qas = {
+            list: [],
+            pageIndex: 1,
+            nomore: false
+          }
+        }
+        this.getQas()
+        break;
+      case 2:
+        if (this.data.experts.list.length > 0) {
+          this.data.experts = {
+            list: [],
+            pageIndex: 1,
+            nomore: false
+          }
+        }
+        this.getExperts()
+        break;
+      case 3:
+        if (this.data.services.list.length > 0) {
+          this.data.services = {
+            list: [],
+            pageIndex: 1,
+            nomore: false
+          }
+        }
+        this.getServices(1)
+        break;
+      case 4:
+        if (this.data.stores.list.length > 0) {
+          this.data.stores = {
+            list: [],
+            pageIndex: 1,
+            nomore: false
+          }
+        }
+        this.getServices(0)
+        break;
+
     }
   },
 
-  switchList (e) {
-    const index = e.detail.index
-
-    if (index === 1 && this.data.services.list.length === 0) {
-      this.getServices(1)
-    } else if (index === 2 && this.data.stores.list.length === 0) {
-      this.getServices(0)
-    } else if (index === 3 && this.data.articles.list.length === 0 && this.props.stores.account.blogInfo.favoriteNum > 0) {
-
-      
-      this.getArticles()
-    }
-
-    this.setData({
-      typeIndex: index
-    })
-  },
-
-  updateExpertCard (e) {
+  updateExpertCard(e) {
     const data = e.detail
     if (data.remark !== undefined) {
       this.setData({
@@ -151,21 +181,56 @@ Page(app.observer({
     }
   },
 
-  updateServiceCard (e) {
+  updateServiceCard(e) {
     const data = e.detail
     this.setData({
       [`services.list[${data.index}].collectFlag`]: data.flag
     })
   },
 
-  updateStoreCard (e) {
+  updateStoreCard(e) {
     const data = e.detail
     this.setData({
       [`stores.list[${data.index}].collectFlag`]: data.flag
     })
   },
 
-  async getExperts () {
+  async getQas() {
+    let nomore = this.data.experts.nomore
+    if (nomore) return
+    this.setData({
+      loading: true
+    })
+
+    let pIndex = this.data.qas.pageIndex
+    let res = await app.request.post('/qa/question/query/list', {
+      queryType: 4,
+      pageIndex: pIndex
+    })
+
+    if (res.code === 0) {
+      if (res.data.page > pIndex) {
+        pIndex++
+      } else {
+        nomore = true
+      }
+
+      this.setData({
+        'qas.list': this.data.qas.list.concat(res.data.list.map(qa => {
+          if (qa.skillTag) {
+            qa.skillTag = qa.skillTag.split('|')
+          }
+          return qa
+        })),
+        'qas.pageIndex': pIndex,
+        'qas.nomore': nomore,
+        loading: false
+      })
+    }
+    wx.stopPullDownRefresh()
+  },
+
+  async getExperts() {
     let nomore = this.data.experts.nomore
     if (nomore) return
     this.setData({
@@ -194,7 +259,7 @@ Page(app.observer({
     wx.stopPullDownRefresh()
   },
 
-  async getServices (type) {
+  async getServices(type) {
     let data = type === 1 ? this.data.services : this.data.stores
     let nomore = data.nomore
     if (nomore) return
@@ -245,7 +310,7 @@ Page(app.observer({
     wx.stopPullDownRefresh()
   },
 
-  async getArticles () {
+  async getArticles() {
     let nomore = this.data.articles.nomore
     if (nomore) return
     this.setData({

@@ -1,55 +1,54 @@
 <nav-bar title="{{pageTitle}}"></nav-bar>
 
-<view class="body">
-
-  <view class="part bg">
-    <view class='base-info'>
-      <view class="base" wx:if="{{user.userState===2||isMyself}}">
-        <image mode="aspectFill" class='avatar' src="{{user.userAvatar}}"></image>
-        <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
-        <view class='name'>{{user.nickName}}<text class="iconfont icon-{{user.userBaseInfo.sex===1?'nan':'nv'}}"></text></view>
-        <text class='p-title'>{{user.userBaseInfo.positionTitle}}</text>
-        <text class='price' wx:if="{{user.userBaseInfo.daySalary}}">{{user.userBaseInfo.daySalary}}元/天</text>
-        <view>
-          <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperienceCn}}</view>
-          <view class='info'><text class='iconfont icon-tuandui'></text>{{user.userBaseInfo.settleTypeCn}}</view>
-          <view class='info'><text class='iconfont icon-weizhi'></text>{{user.userBaseInfo.cityCn}}</view>
-        </view>
-      </view>
-
-      <view class="base" wx:else>
-        <image mode="aspectFill" class='avatar' src="{{user.userAvatar||'/assets/img/default/avatar.png'}}"></image>
-        <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
-        <view class='name'>{{user.nickName}}</view>
-        <view class='p-title'>未认证用户</view>
-        <!-- <view class='info city'><text class='iconfont icon-weizhi'></text>无法获得地址</view> -->
-        <view class='info city'>用户还未填写任何相关个人信息哦~</view>
-      </view>
-
-      <view class="blog">
-        <navigator hover-class="none" url="/packageMine/pages/follow/index?id={{user.userId}}">
-            <text>{{blogInfo.attentionNum}}</text>
-            <text>关注</text>
-        </navigator>
-        <navigator hover-class="none" url="/packageMine/pages/fans/index?id={{user.userId}}">
-            <text>{{blogInfo.fansNum}}</text>
-            <text>粉丝</text>
-        </navigator>
-        <navigator hover-class="none">
-            <text>{{user.finishOrderNums||0}}</text>
-            <text>成单量</text>
-        </navigator>
-        <!-- <navigator hover-class="none" url="/packageExpert/pages/collection/index?id={{user.userId}}">
-            <text>{{blogInfo.favoriteNum}}</text>
-            <text>收藏</text>
-        </navigator> -->
+<view class="part bg">
+  <view class='base-info'>
+    <view class="base" wx:if="{{user.userState===2||isMyself}}">
+      <image mode="aspectFill" class='avatar' src="{{user.userAvatar}}"></image>
+      <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
+      <view class='name'>{{user.nickName}}<text class="iconfont icon-{{user.userBaseInfo.sex===1?'nan':'nv'}}"></text></view>
+      <text class='p-title'>{{user.userBaseInfo.positionTitle}}</text>
+      <text class='price' wx:if="{{user.userBaseInfo.daySalary}}">{{user.userBaseInfo.daySalary}}元/天</text>
+      <view>
+        <view class='info'><text class='iconfont icon-shijian'></text>{{user.userBaseInfo.workExperienceCn}}</view>
+        <view class='info'><text class='iconfont icon-tuandui'></text>{{user.userBaseInfo.settleTypeCn}}</view>
+        <view class='info'><text class='iconfont icon-weizhi'></text>{{user.userBaseInfo.cityCn}}</view>
       </view>
     </view>
+
+    <view class="base" wx:else>
+      <image mode="aspectFill" class='avatar' src="{{user.userAvatar||'/assets/img/default/avatar.png'}}"></image>
+      <view wx:if="{{blogInfo.followed===1}}" class="followed">已关注</view>
+      <view class='name'>{{user.nickName}}</view>
+      <view class='p-title'>未认证用户</view>
+      <!-- <view class='info city'><text class='iconfont icon-weizhi'></text>无法获得地址</view> -->
+      <view class='info city'>用户还未填写任何相关个人信息哦~</view>
+    </view>
+
+    <view class="blog">
+      <navigator hover-class="none" url="/packageMine/pages/follow/index?id={{user.userId}}">
+          <text>{{blogInfo.attentionNum}}</text>
+          <text>关注</text>
+      </navigator>
+      <navigator hover-class="none" url="/packageMine/pages/fans/index?id={{user.userId}}">
+          <text>{{blogInfo.fansNum}}</text>
+          <text>粉丝</text>
+      </navigator>
+      <navigator hover-class="none">
+          <text>{{user.finishOrderNums||0}}</text>
+          <text>成单量</text>
+      </navigator>
+      <!-- <navigator hover-class="none" url="/packageExpert/pages/collection/index?id={{user.userId}}">
+          <text>{{blogInfo.favoriteNum}}</text>
+          <text>收藏</text>
+      </navigator> -->
+    </view>
   </view>
+</view>
 
-  <tabs under-line-ratio="{{.5}}" wx:if="{{blogInfo}}" tabs="{{['基础信息','文章('+blogInfo.articleNum+')']}}" active="{{typeIndex}}" bindchange="switchList"></tabs>
 
-  <block hidden="{{typeIndex===1}}" wx:if="{{typeIndex===0&&(user.userState===2||isMyself)}}">
+<tabs under-line-ratio="{{.5}}" wx:if="{{blogInfo}}" tabs="{{['基础信息','文章('+blogInfo.articleNum+')','提问','回答']}}" active="{{tabIndex}}" bindchange="switchList"></tabs>
+<view id="content">
+  <block wx:if="{{tabIndex===0&&(user.userState===2||isMyself)}}">
     <view class="part">
       <view class='title'>
         I
@@ -93,26 +92,60 @@
     </view>
   </block>
 
-  <block wx:elif="{{typeIndex===1}}">
-    <scroll-view class='blog-types' scroll-x="true">
-      <view class="type {{tagIndex===index?'active':''}}" wx:for="{{tags}}" data-index="{{index}}" bindtap='switchTag'>{{item.name+' '+item.articleNum}}</view>
-    </scroll-view>
-    <blog-card wx:for="{{blogs}}" data="{{item}}"></blog-card>
+  <block wx:elif="{{tabIndex===1}}">
+    <block wx:if="{{blogInfo.articleNum>0}}">
+      <scroll-view class='blog-types' scroll-x="true">
+        <view class="type {{blogs.tag===index?'active':''}}" wx:for="{{blogs.tags}}" data-page="blogs" data-index="{{index}}" bindtap='switchTag'>{{item.name+' '+item.articleNum}}</view>
+      </scroll-view>
+      <blog-card wx:for="{{blogs.list}}" data="{{item}}"></blog-card>
+    </block>
+    <view wx:else style="position:relative;height:{{nodataHeight}}px;">
+      <nodata></nodata>
+    </view>
   </block>
 
-  <view wx:else id="nodata" style="position:relative;height:{{nodataHeight}}px;">
+  <block wx:elif="{{tabIndex===2}}">
+    <block wx:if="{{blogInfo.questionNum>0}}">
+      <scroll-view class='blog-types' scroll-x="true">
+        <view class="type {{questions.tag===index?'active':''}}" wx:for="{{questions.tags}}" data-page="questions" data-index="{{index}}" bindtap='switchTag'>{{item.name}}</view>
+      </scroll-view>
+      <qa-card wx:for="{{questions.list}}" data="{{item}}"></qa-card>
+    </block>
+    <view wx:else style="position:relative;height:{{nodataHeight}}px;">
+      <nodata text="{{isMyself?'有疑问？就赶紧提问吧！':'TA还没有发起过提问哦！'}}">
+        <navigator class="btn-one" wx:if="{{isMyself}}" url='/packagePublish/qa/index/index' hover-class='none'>我要提问</navigator>
+      </nodata>
+    </view>
+  </block>
+
+  <block wx:elif="{{tabIndex===3}}">
+    <block wx:if="{{blogInfo.answerNum>0}}">
+      <scroll-view class='blog-types' scroll-x="true">
+        <view class="type {{answers.tag===index?'active':''}}" wx:for="{{answers.tags}}" data-page="answers" data-index="{{index}}" bindtap='switchTag'>{{item.name}}</view>
+      </scroll-view>
+      <qa-card wx:for="{{answers.list}}" data="{{item}}"></qa-card>
+    </block>
+    <view wx:else style="position:relative;height:{{nodataHeight}}px;">
+      <nodata text="{{isMyself?'还没回答过问题？赶紧发挥一下吧！':'TA还没有回答过提问哦！'}}">
+        <navigator class="btn-one" wx:if="{{isMyself}}" url='/packagePublish/qa/index/index' hover-class='none'>我要回答</navigator>
+      </nodata>
+    </view>
+  </block>
+
+  <view wx:else tyle="position:relative;height:{{nodataHeight}}px;">
     <nodata></nodata>
   </view>
-
-  <block wx:if="{{!isMyself}}">
-    <action-bar wx:if="{{from==='applicant'}}">
-      <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-      <button class='btn-two-third' bindtap="download">雇佣专家</button>
-    </action-bar>
-
-    <action-bar wx:elif="{{blogInfo.followed===1}}" >
-      <button class='btn-one' bindtap='download'><text class='iconfont icon-lianxi'></text>发送消息</button>
-    </action-bar>
-  </block>
-
 </view>
+
+
+<block wx:if="{{!isMyself}}">
+  <action-bar wx:if="{{from==='applicant'}}">
+    <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
+    <button class='btn-two-third' bindtap="download">雇佣专家</button>
+  </action-bar>
+
+  <action-bar wx:elif="{{blogInfo.followed===1}}" >
+    <button class='btn-one' bindtap='download'><text class='iconfont icon-lianxi'></text>发送消息</button>
+  </action-bar>
+</block>
+

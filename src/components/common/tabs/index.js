@@ -43,12 +43,6 @@ Component({
     }
   },
 
-  pageLifetimes: {
-    hide () {
-      clearTimeout(timeoutId)
-    }
-  },
-
   methods: {
     _tabClick (e) {
       let index = e.currentTarget.dataset.index

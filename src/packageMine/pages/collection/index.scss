@@ -1,8 +1,6 @@
 @import '../../../assets/wxss/var.scss';  
 
-.content{padding-bottom:100rpx;}
 .tabs{padding-top:20rpx;
-    scroll-view{text-align: center;}
-    .tab{margin:0 60rpx!important;font-size:32rpx!important;}
+    .tab{width:20%;font-size:32rpx!important;margin:0!important;}
 }
 .reset-blog-card{width:718rpx;box-sizing: border-box;border-radius:20rpx;margin: 24rpx auto 0;}
