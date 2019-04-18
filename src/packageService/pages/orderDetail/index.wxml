@@ -43,7 +43,7 @@
 
 <view wx:else class="status-done">
     <view class="info">当前订单状态：<text>{{detail.businessStateName}}</text></view>
-    <view class="info" wx:if="{{detail.businessState===5}}">已关闭交易,<navigator open-type="reLaunch" hover-class="none" url="/pages/discover/index?page=2">点击选择其他心仪服务<text class="iconfont icon-xiayiye"></text></navigator></view>
+    <view class="info" wx:if="{{detail.businessState===5}}">已关闭交易,<navigator open-type="reLaunch" hover-class="none" url="/pages/discover/index?page=3">点击选择其他心仪服务<text class="iconfont icon-xiayiye"></text></navigator></view>
     <view class="info" wx:if="{{detail.businessState===4}}">交易成功，平台已完成打款。 </view>
     <view class="info" wx:if="{{detail.businessState===10}}">请与卖家协商处理本次退款，若无法解决可拨打客服电话：0592-2226199或联系在线客服。</view>
     <view class="info" wx:if="{{detail.businessState===12}}">若对该订单有疑问，可拨打客服电话：0592-2226199寻求更多帮助或联系在线客服。 </view>

@@ -42,11 +42,5 @@ Component({
         this.triggerEvent('ready', { height: size.height })
       }).exec()
     }
-  },
-
-  methods: {
-    back(){
-      wx.navigateBack()
-    }
   }
 })

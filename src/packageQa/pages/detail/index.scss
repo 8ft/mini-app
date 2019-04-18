@@ -46,12 +46,31 @@ page{background:#fff;}
             &:last-of-type{flex:1;text-align:right;color:$gray;}
         }}}
 
-.action-bar{height:90rpx!important;}
+.report-box{width:630rpx;background: #fff;border-radius: 16rpx;position: relative;box-sizing:border-box;padding:48rpx 40rpx 0;color:$black;
+    .box-title{font-size: $xxl;text-align: center;}
+    .iconfont{position: absolute;top:0;right:0;font-size:30rpx;padding:24rpx;color:$gray;}
+    label{display: flex; align-items: center;height:32rpx;margin-top:44rpx;font-size: $xl;
+        text{flex:1;margin-left:24rpx;}
+        radio .wx-radio-input{width:32rpx;height:32rpx;font-size:28rpx;}
+    } 
+    textarea{width:502rpx;height:200rpx;padding:23rpx 24rpx;border:$border;margin-top:42rpx;font-size: 28rpx;}
+    .actions{display: flex;align-items: center;height:105rpx;
+        button{flex: 1;height:32rpx;line-height:32rpx;font-size:$xl;text-align:center;
+            &:last-of-type{border-left:$border;color:$darkBlue;}
+        }
+    }
+}
+
+.action-bar{height:100rpx!important;}
 .action-bar-con{display:flex;align-items:center;width:100%;height:100%;padding:0 40rpx 0 24rpx;box-sizing:border-box;
-    input{height:64rpx;font-size:$l;border-radius:6rpx;border:$border;text-indent:20rpx;flex:1;}
-    .iconfont{font-size:40rpx;margin-left:40rpx;}
-    .collected{color:$red;}
-    .apply-num{font-size:$l;color:$lightBlack;margin-left:16rpx;}}
+    input{height:62rpx;font-size:$l;border-radius:6rpx;border:$border;text-indent:20rpx;flex:1;}
+    button{margin-left:40rpx;text-align:center;line-height:auto;
+        .iconfont{font-size:40rpx;margin-bottom:6rpx;line-height:42rpx;color:$gray;}
+        .icon-weixin1{color:#63C895;}
+        .icon-pengyouquan1{color:#AEDB89;}
+        .collected{color:$red;}}
+        text{display:block;font-size: 12rpx;color:#585858;line-height: 12rpx;}
+    }
 
 .answers-box{position:relative;width:100%;box-sizing:border-box;background:#fff;border-radius:12rpx 12rpx 0 0;
     .header{text-align:center;height:90rpx;line-height:90rpx;position:relative;border-bottom:$border;font-size:$xxl;color:$black;

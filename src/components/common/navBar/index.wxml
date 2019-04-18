@@ -1,6 +1,11 @@
 <view id="navBar" class="nav-bar {{fixed?'fixed':''}}">
   <view class="nav-bar-default {{transparent?'transparent':''}}" style="padding-top:{{top}}px;">
-    <view class="iconfont icon-fanhui" catchtap='back' wx:if="{{returnable}}"></view>
+    
+    <view class="return" wx:if="{{returnable}}">
+      <navigator class="iconfont icon-fanhui" open-type="navigateBack" hover-class="none"></navigator>
+      <navigator class="iconfont icon-xiaochengxufangzi" open-type="reLaunch" hover-class="none" url="/pages/project/index"></navigator>
+    </view>
+
     <view class="nav-bar-title" wx:if="{{title}}">{{title}}</view>
     <slot name="nav"></slot>
   </view>

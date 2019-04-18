@@ -48,7 +48,7 @@
                 <view class="other">{{item.createTime}}
                     <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-belongs="best" data-index="{{index}}">{{item.replyNum}}条回复</view>
                     <text bindtap="openBox" data-belongs="best" data-index="{{index}}">回复</text>
-                    <text bindtap="openBox" data-belongs="best" data-index="{{index}}" wx:if="{{item.userId!==props.stores.account.userInfo.userId}}">举报</text>
+                    <text bindtap="openReportBox" data-belongs="best" data-id="{{item.id}}" wx:if="{{item.userId!==props.stores.account.userInfo.userId}}">举报</text>
                 </view>
             </view>
         </block>
@@ -74,7 +74,7 @@
                 <view class="other">{{item.createTime}}
                     <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-belongs="hots" data-index="{{index}}">{{item.replyNum}}条回复</view>
                     <text bindtap="openBox" data-belongs="hots" data-index="{{index}}">回复</text>
-                    <text bindtap="openBox" data-belongs="hots" data-index="{{index}}" wx:if="{{item.userId!==props.stores.account.userInfo.userId}}">举报</text>
+                    <text bindtap="openReportBox" data-belongs="hots" data-id="{{item.id}}" wx:if="{{item.userId!==props.stores.account.userInfo.userId}}">举报</text>
                 </view>
             </view>
         </block>
@@ -100,7 +100,7 @@
                 <view class="other">{{item.createTime}}
                     <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-belongs="answers" data-index="{{index}}">{{item.replyNum}}条回复</view>
                     <text bindtap="openBox" data-belongs="answers" data-index="{{index}}">回复</text>
-                    <text bindtap="openBox" data-belongs="answers" data-index="{{index}}" wx:if="{{item.userId!==props.stores.account.userInfo.userId}}">举报</text>
+                    <text bindtap="openReportBox" data-belongs="answers" data-id="{{item.id}}" wx:if="{{item.userId!==props.stores.account.userInfo.userId}}">举报</text>
                 </view>
             </view>
         </block>
@@ -160,12 +160,40 @@
     </popup>
 
 
+    <popup position="center" active="{{reportTargetId}}">
+        <form class="report-box" bindsubmit="confirm">
+            <view class="iconfont icon-guanbi1" bindtap="cancel"></view>
+            <view class="box-title">举报</view>
+            <radio-group bindchange="radioChange">
+                <label wx:for="{{reportTypes}}">
+                    <radio color="#0083FF" value="{{index}}" checked="{{selectedReportType==index}}"/>
+                    <text>{{item.name}}</text>
+                </label>
+            </radio-group>
+            <textarea name="desc" placeholder="{{reportTypes[selectedReportType].placeholder}}" value="{{reportDesc}}"></textarea>
+            <view class="actions">
+                <button bindtap="cancel">取消</button>
+                <button form-type="submit">确认</button>
+            </view>
+        </form>
+    </popup>
+
+
     <action-bar id="actionBar">
-        <view class=".action-bar-con">
+        <view class="action-bar-con">
             <input placeholder="我要评论..." disabled="true" bindtap="download"/>
-            <view wx:if="{{!isMyself}}" class="iconfont {{detail.collectFlag===1?'collected icon-yishoucang':'icon-shoucang1'}}" bindtap="collect"></view>
-            <view class="iconfont icon-xiaoxi1" bindtap="scrollToComments"></view>
-            <text class="apply-num">{{detail.answers.count}}</text>
+            <button wx:if="{{!isMyself}}" hover-class="none" bindtap="collect">
+                <view class="iconfont {{detail.collectFlag===1?'collected icon-yishoucang':'icon-shoucang1'}}"></view>
+                <text>收藏</text>
+            </button>
+            <button open-type="share" hover-class="none">
+                <view class="iconfont icon-weixin1"></view>
+                <text>分享至微信</text>
+            </button>
+            <button hover-class="none">
+                <view class="iconfont icon-pengyouquan1"></view>
+                <text>分享至朋友圈</text>
+            </button>
         </view>
     </action-bar>
 </block>

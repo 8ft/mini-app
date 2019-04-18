@@ -2,11 +2,18 @@
 @import '../../../assets/font/icons.scss'; 
 .nav-bar{width:100%;
   .nav-bar-default{position:relative;display:flex; align-items: center;background:#fff;width:100%;height:100rpx;
-    .icon-fanhui{height:58rpx;width:58rpx;line-height:58rpx;position: absolute;bottom: 21;left:16rpx;color:#333;text-align: center;z-index: $topFloor;}
+    .return{position: absolute;bottom: 18rpx;left:16rpx;z-index: $topFloor;width:174rpx;height:64rpx;box-sizing:border-box;border:$border;border-radius:99rpx;display:flex; align-items: center; justify-content: center;
+      .iconfont{font-size:34rpx;color:black;line-height: 34rpx;}
+      .icon-fanhui{border-right:$border;padding-right:20rpx;}
+      .icon-xiaochengxufangzi{padding-left:24rpx;}
+    }
+
     .nav-bar-title{flex:1;line-height:100rpx;font-size:36rpx;font-weight:500;color:#333;text-align:center;}
     &.transparent{background: transparent!important;
-      .icon-fanhui,.nav-bar-title{color:#fff;}
-      .icon-fanhui{background:rgba(0,0,0,.3);border-radius:50%;}
+      .nav-bar-title{color:#fff;}
+      .return{background:rgba(255,255,255,.7);border:none;
+        .icon-fanhui{border-color:$lightGray;}
+      }
     }
   }
   

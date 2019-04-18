@@ -1,5 +1,4 @@
-<nav-bar transparent="{{hideNav}}" bindready="getNavHeight">
-    <view slot="nav" class="store-name">{{detail.storeName}}</view>
+<nav-bar wx:if="{{detail.storeName}}" transparent="{{hideNav}}" bindready="getNavHeight" title="{{detail.storeName}}">
     <view slot="addones" class="store-desc">
         <view>{{detail.storeDesc}}</view>
         <text bindtap="jump">更多</text>

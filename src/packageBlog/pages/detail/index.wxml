@@ -92,7 +92,7 @@
     </popup>
 
     <action-bar id="actionBar">
-        <view class=".action-bar-con">
+        <view class="action-bar-con">
             <input placeholder="我要评论..." disabled="true" bindtap="download"/>
             <view wx:if="{{!isMyself}}" class="iconfont {{detail.favoriteState===1?'collected icon-yishoucang':'icon-shoucang1'}}" bindtap="collect"></view>
             <view class="iconfont icon-xiaoxi1" bindtap="scrollToComments"></view>

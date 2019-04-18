@@ -113,7 +113,7 @@
     </block>
     <view wx:else style="position:relative;height:{{nodataHeight}}px;">
       <nodata text="{{isMyself?'有疑问？就赶紧提问吧！':'TA还没有发起过提问哦！'}}">
-        <navigator class="btn-one" wx:if="{{isMyself}}" url='/packagePublish/qa/index/index' hover-class='none'>我要提问</navigator>
+        <navigator wx:if="{{isMyself}}" url='/packagePublish/qa/index/index' hover-class='none'>我要提问</navigator>
       </nodata>
     </view>
   </block>
@@ -127,7 +127,7 @@
     </block>
     <view wx:else style="position:relative;height:{{nodataHeight}}px;">
       <nodata text="{{isMyself?'还没回答过问题？赶紧发挥一下吧！':'TA还没有回答过提问哦！'}}">
-        <navigator class="btn-one" wx:if="{{isMyself}}" url='/packagePublish/qa/index/index' hover-class='none'>我要回答</navigator>
+        <navigator wx:if="{{isMyself}}" open-type="reLaunch" hover-class="none" url="/pages/discover/index?page=1">我要回答</navigator>
       </nodata>
     </view>
   </block>
