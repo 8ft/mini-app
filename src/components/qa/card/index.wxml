@@ -1,10 +1,14 @@
-<view class="qa {{appearance}}" data-url="/packageQa/pages/detail/index?id={{data.id}}&uid={{data.userId}}" bindtap="goDetail">
+<view class="qa {{appearance}}" data-url="/packageQa/pages/detail/index?id={{data.id}}&uid={{data.userId}}" bindtap="_goDetail">
   <view class='title'><text class='reward'>￥{{data.rewardAmountYuan}}元</text><text>{{data.questionName}}</text></view>
-  <view class='tags'>
-    <label class='type'>{{data.subTypeName}}</label>
-    <label wx:if="{{data.skillTag.length>0}}" wx:for="{{data.skillTag}}">{{item}}</label>
+  <view class="tags">
+    <view class='skills'>
+      <label class='type'>{{data.subTypeName}}</label>
+      <label wx:if="{{data.skillTag.length>0}}" wx:for="{{data.skillTag}}">{{item}}</label>
+    </view>
+    <view wx:if="{{activeUI[data.questionState].status}}" class="status">{{data.questionStateName}}</view>
   </view>
-  <view class="other-info">
+
+  <view class="other-info" wx:if="{{appearance!=='myQuestions'}}">
     <block wx:if="{{data.answerUsers.length>0}}">
       <image wx:for="{{data.answerUsers}}" mode="aspectFill" src="{{item.userAvatar}}"></image>
       <view class="tip" style="margin-left:{{imgsWidth}}rpx;">{{data.answerUsers.length>4?'等'+data.answerUsers.length+'人':''}}参与了讨论</view>
@@ -14,11 +18,12 @@
       <image mode="aspectFill" src="{{data.userAvatar}}"></image>
       <view class="tip" style="margin-left:70rpx;">{{data.nickName}}发起提问</view>
     </block>
-
-    <view wx:if="{{data.questionState===10||data.questionState===20}}" class="status">{{data.questionStateName}}</view>
-    <block wx:elif="{{data.questionState!==10&&data.questionState!==20}}">
+    
+    <block wx:if="{{appearance!=='myAnswers'&&activeUI[data.questionState].viewer}}">
       <view class="iconfont icon-liulan"></view>
       <view class='read'>{{data.viewNum}}</view>
     </block>
+    <view wx:if="{{appearance==='myAnswers'}}" class="del" catchtap="_delete">删除</view>
   </view>
+
 </view>

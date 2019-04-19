@@ -138,6 +138,14 @@ Page(app.observer({
     this.refresh()
   },
 
+  delete(e){
+    const index=e.currentTarget.dataset.index
+    this.data.myAnswers.list.splice(index,1)
+    this.setData({
+      'myAnswers.list':this.data.myAnswers.list
+    })
+  },
+
   async getMyQuestions(){
     this.setData({
       loading:true
@@ -197,8 +205,8 @@ Page(app.observer({
     this.setData({
       'myAnswers.pageIndex': myAnswers.pageIndex,
       'myAnswers.list': myAnswers.list.concat(res.data.list.map(answer => {
-        if(answer.skillCode){
-          answer.skillCode = answer.skillCode.split('|')
+        if(answer.skillTag){
+          answer.skillTag = [answer.subTypeName].concat(answer.skillTag.split('|'))
         }
         return answer
       })),

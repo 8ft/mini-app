@@ -8,10 +8,13 @@
         text{vertical-align: middle;}
         .reward{padding:0 15rpx;background: #FFC034;color:#fff;border-radius:99rpx;line-height: 35rpx;font-size: $s;margin-right: 20rpx;}
     }
-    .tags{width:100%;padding:24rpx 0 28rpx;height:40rpx;overflow: hidden;zoom:1;
-        label{display:block;float:left;padding:0 12rpx;margin-right:12rpx;margin-bottom:28rpx;font-size:$s;height:40rpx;line-height:40rpx;background:#f5f5f5;}
-        .type{color:$darkBlue;background:rgba(0, 131, 255, .1);}}
-    
+    .tags{display: flex;width:100%; align-items: center;padding:24rpx 0 28rpx;
+        .skills{height:40rpx;overflow: hidden;zoom:1;flex:1;
+            label{display:block;float:left;padding:0 12rpx;margin-right:12rpx;margin-bottom:28rpx;font-size:$s;height:40rpx;line-height:40rpx;background:#f5f5f5;}
+            .type{color:$darkBlue;background:rgba(0, 131, 255, .1);}}
+        .status{padding:0 10rpx;border-radius: 6rpx;color:$red;border:1rpx solid $red;font-size: $s;line-height: 26rpx;}
+    }
+
     .other-info{position:relative;display: flex;height: 54rpx;line-height: 54rpx;font-size:$m;align-items:center;
         image{width:46rpx;height:46rpx;border-radius: 50%;border:4rpx solid #fff;position:absolute;top:0;
             &:nth-of-type(1){z-index: 4;left:0;}
@@ -23,7 +26,7 @@
         .tip{flex: 1;color:$lightBlack;}
         .iconfont{font-size: 28rpx;margin-right:11rpx;color:$gray;}
         .read{color:$gray;}
-        .status{padding:0 10rpx;border-radius: 6rpx;color:$red;border:1rpx solid $red;font-size: $s;line-height: 26rpx;}
+        
     }
 }
 

@@ -1,22 +1,22 @@
-<nav-bar transparent="true"></nav-bar>
+<nav-bar transparent="true" bindready="getNavHeight"></nav-bar>
 
-<view id="baseInfo" class='base-info' style="padding-top:{{navHeight}};">
+<view id="baseInfo" class='base-info' style="padding-top:{{navHeight}}px;">
   <view class='title'>账户余额</view>
   <view class='left'>￥{{wallet.balance}}</view>
   <view class='totle'><text>历史收入</text>{{wallet.totalIncome}}元</view>
   <button bindtap='download'>提现<text class='iconfont icon-xiayiye'></text></button>
 </view>
 
-<block wx:if="{{records.length>0}}">
-  <scroll-view 
-          class='records' 
-          style="height:{{scrollViewHeight}}px" 
-          scroll-y="true" 
-          upper-threshold="-80" 
-          enable-back-to-top="true"
-          bindscrolltoupper='refresh' 
-          bindscrolltolower="getRecords"> 
+<scroll-view 
+  class='records' 
+  style="height:{{scrollViewHeight}}px" 
+  scroll-y="true" 
+  upper-threshold="-80" 
+  enable-back-to-top="true"
+  bindscrolltoupper='refresh' 
+  bindscrolltolower="getRecords"> 
 
+  <block wx:if="{{records.length>0}}">
     <navigator class='record' hover-class="none" wx:for="{{records}}" url="/packageMine/pages/tradeDetail/index?id={{item.id}}">
       <image src="../../assets/img/wallet/icon_tx@3x.png" wx:if="{{item.orderType===20}}"></image>
       <image src="../../assets/img/wallet/icon_sr@3x.png" wx:else></image>
@@ -29,11 +29,12 @@
         </view>
       </view>
     </navigator>
+  </block>
 
-  </scroll-view>
-</block>
+  <nodata wx:else text='您暂时还没有收支明细记录哦~'></nodata>
+</scroll-view>
 
-<block wx:else>
-  <nodata text='您暂时还没有收支明细记录哦~'></nodata>
-</block>
+
+
+
 

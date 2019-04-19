@@ -1,39 +1,42 @@
 
 const app = getApp()
-const regeneratorRuntime=app.regeneratorRuntime
+const regeneratorRuntime = app.regeneratorRuntime
 
 Page({
   data: {
-    scrollViewHeight:0,
-    wallet:null,
-    records:[],
-    pageIndex:1,
-    nomore:false
+    scrollViewHeight: 0,
+    wallet: null,
+    records: [],
+    pageIndex: 1,
+    nomore: false
   },
 
-  onLoad (options) {
-    const systemInfo=wx.getSystemInfoSync()
-    wx.createSelectorQuery().select('#baseInfo').fields({
-      size: true
-    }, res => {
-      this.setData({
-        navHeight: `${160+systemInfo.statusBarHeight*750/systemInfo.windowWidth}rpx`,
-        scrollViewHeight: systemInfo.windowHeight - res.height
-      })
-    }).exec()
-    
+  onLoad(options) {
     this.getWallet()
     this.getRecords()
   },
 
-  refresh(){
-    this.data.pageIndex=1
-    this.data.records=[]
-    this.data.nomore=false
+  refresh() {
+    this.data.pageIndex = 1
+    this.data.records = []
+    this.data.nomore = false
     this.getRecords()
   },
 
-  async getWallet(){
+  getNavHeight(e) {
+    const systemInfo = wx.getSystemInfoSync()
+    wx.createSelectorQuery().select('#baseInfo').fields({
+      size: true
+    }, res => {
+      const navHeight = e.detail.height + 20
+      this.setData({
+        navHeight: navHeight,
+        scrollViewHeight: systemInfo.windowHeight - navHeight - res.height
+      })
+    }).exec()
+  },
+
+  async getWallet() {
     let res = await app.request.post('/user/payFund/myPayFund')
     if (res.code !== 0) return
     this.setData({
@@ -41,13 +44,13 @@ Page({
     })
   },
 
-  async getRecords(){
-    if(this.data.nomore)return
+  async getRecords() {
+    if (this.data.nomore) return
 
     let pageIndex = this.data.pageIndex
-    let res = await app.request.post('/order/payOrder/myOrders',{
-      pageIndex:pageIndex,
-      fundFlag:1
+    let res = await app.request.post('/order/payOrder/myOrders', {
+      pageIndex: pageIndex,
+      fundFlag: 1
     })
     if (res.code !== 0) return
 
@@ -56,18 +59,18 @@ Page({
       return item
     })
 
-    list=list.filter(item=>{
-      return item.orderType!==22
+    list = list.filter(item => {
+      return item.orderType !== 22
     })
 
-    if (res.data.page === pageIndex){
+    if (res.data.page === pageIndex) {
       this.setData({
-        nomore:true,
+        nomore: true,
         records: this.data.records.concat(list)
       })
-    }else{
+    } else {
       this.setData({
-        pageIndex: pageIndex+1,
+        pageIndex: pageIndex + 1,
         records: this.data.records.concat(list)
       })
     }

@@ -11,8 +11,8 @@
     .nav-bar-title{flex:1;line-height:100rpx;font-size:36rpx;font-weight:500;color:#333;text-align:center;}
     &.transparent{background: transparent!important;
       .nav-bar-title{color:#fff;}
-      .return{background:rgba(255,255,255,.7);border:none;
-        .icon-fanhui{border-color:$lightGray;}
+      .return{background:rgba(255,255,255,.7);
+        .icon-fanhui{border-color:$lightGray;border-color:$gray;}
       }
     }
   }

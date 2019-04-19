@@ -24,7 +24,7 @@
         <text>粉丝</text>
     </navigator>
     <navigator hover-class="none" url="/packageMine/pages/qa/index">
-        <text>{{props.stores.account.blogInfo.questionNum}}</text>
+        <text>{{props.stores.account.blogInfo.questionNum+props.stores.account.blogInfo.answerNum}}</text>
         <text>问答</text>
     </navigator>
     <navigator hover-class="none" url="/packageMine/pages/blogs/index">

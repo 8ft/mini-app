@@ -153,7 +153,7 @@
 
             <action-bar position="absolute">
                 <view class=".action-bar-con">
-                    <input placeholder="我要评论..." disabled="true" bindtap="download"/>
+                    <input placeholder="我要回答..." disabled="true" bindtap="download"/>
                 </view>
             </action-bar>
         </view>
@@ -181,7 +181,7 @@
 
     <action-bar id="actionBar">
         <view class="action-bar-con">
-            <input placeholder="我要评论..." disabled="true" bindtap="download"/>
+            <input placeholder="我要回答..." disabled="true" bindtap="download"/>
             <button wx:if="{{!isMyself}}" hover-class="none" bindtap="collect">
                 <view class="iconfont {{detail.collectFlag===1?'collected icon-yishoucang':'icon-shoucang1'}}"></view>
                 <text>收藏</text>
