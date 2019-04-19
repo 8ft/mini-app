@@ -5,15 +5,15 @@ const Towxml = require('../../../libs/towxml/main')
 const towxml = new Towxml()
 const nodataCon = {
   10: {
-    img: 'blog_audit',
+    img: 'wzz',
     text: "别急呀！问题正在审核中...\n通过后即可查看，请稍后再试"
   },
   20: {
-    img: 'blog_illegal',
+    img: 'wfw',
     text: '问题涉嫌违规，发起者正在完善中…'
   },
   22: {
-    img: 'blog_xiajia',
+    img: 'wfw',
     text: '好遗憾，该问题可能已经被关闭或删除了'
   }
 }
