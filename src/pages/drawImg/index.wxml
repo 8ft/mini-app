@@ -1,0 +1,10 @@
+<nav-bar transparent="{{true}}"></nav-bar>
+
+<canvas canvas-id="canvas" style="width:{{canvasWidth}}px;height:{{canvasHeight}}px;"></canvas>
+
+<action-bar>
+  <view bindtap="save">
+      <view>保存</view>
+      <view>保存图片，立即叫上小伙伴们来围观吧~</view>
+  </view>
+</action-bar>

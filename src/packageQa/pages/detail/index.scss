@@ -3,7 +3,7 @@
 @import '../../../libs/towxml/style/theme/light.wxss';
 
 page{background:#fff;}
-.title{font-size:48rpx;color:$black;font-weight:600;line-height:60rpx;padding:38rpx 30rpx 0;}
+.title{font-size:48rpx;color:$black;font-weight:600;line-height:60rpx;padding:38rpx 30rpx 0;display: block;}
 
 .author{padding:40rpx 30rpx 54rpx;display:flex;align-items:center;
     image{width:64rpx;height:64rpx;border-radius:50%;margin-right:20rpx;}

@@ -1,7 +1,7 @@
 <nav-bar></nav-bar>
 
 <block wx:if="{{active||isMyself}}">
-    <view class="title">{{detail.questionName}}</view>
+    <text class="title">{{detail.questionName}}</text>
 
 
     <navigator class="author" hover-class="none" url="/packageExpert/pages/index/index?id={{detail.updateUserId}}">
