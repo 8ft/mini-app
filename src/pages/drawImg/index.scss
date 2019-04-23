@@ -1,5 +1,4 @@
 @import '../../assets/wxss/var.scss';  
 
-canvas {
-    margin: 200rpx auto;
-}
+.canvas-display {margin: 300rpx auto;}
+.canvas-real{position: fixed;top:0;left:-99999px;z-index: -2;}

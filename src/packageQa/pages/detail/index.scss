@@ -38,7 +38,14 @@ page{background:#fff;}
         }
     }
     
-    .con{display:block;font-size:$xl;color:$black;line-height:44rpx;margin-top:15rpx;}
+    .con{display:block;font-size:$xl;color:$black;line-height:44rpx;margin-top:15rpx;position: relative;
+        &.cut{height: 132rpx;overflow: hidden;
+            &::after{content: ' ...     ';background: #fff;line-height: 44rpx;position:absolute;right:0;bottom:0;}
+        }
+    }
+    .spread{color:#416499;}
+
+
     .other{display:flex;align-items:center;color:$gray;font-size:$m;margin-top:26rpx;
         view{font-size:$s;line-height:40rpx;padding:0 16rpx;text-align:center;color:$lightBlack;margin-left:42rpx;border-radius:99rpx;background:#f5f5f5;}
         text{font-size:$m;color:$darkBlue;

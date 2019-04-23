@@ -117,26 +117,22 @@ Page(app.observer({
     })
   },
 
-  scrollToComments() {
-    if (this.data.commentsPostion === 0) {
-      const query = wx.createSelectorQuery()
-      query.select('#answers').fields({
-        rect: true
-      }, res => {
-        wx.pageScrollTo({
-          scrollTop: res.top,
-          duration: 300
-        })
-        this.setData({
-          commentsPostion: res.top
-        })
-      }).exec()
+  spread(e){
+    const belongs=e.currentTarget.dataset.belongs
+    const index=e.currentTarget.dataset.index
+
+    if (this.data.boxSwitch) {
+      let answer = this.data.lists[belongs][this.data.cIndex].replies[index]
+      this.setData({
+        [`lists.${belongs}[${this.data.cIndex}].replies[${index}].spread`]: !answer.spread
+      })
     } else {
-      wx.pageScrollTo({
-        scrollTop: this.data.commentsPostion,
-        duration: 0
+      let answer = this.data.lists[belongs][index]
+      this.setData({
+        [`lists.${belongs}[${index}].spread`]: !answer.spread
       })
     }
+
   },
 
   async take(e) {
@@ -176,7 +172,7 @@ Page(app.observer({
       const index = e.currentTarget.dataset.index
       const belongs = e.currentTarget.dataset.belongs
       if (this.data.boxSwitch) {
-        let answer = this.data.lists[belongs][cIndex].replies[index]
+        let answer = this.data.lists[belongs][this.data.cIndex].replies[index]
         this.setData({
           [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseNum`]: answer.praiseNum + (answer.praiseFlag ? -1 : 1),
           [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseFlag`]: !answer.praiseFlag

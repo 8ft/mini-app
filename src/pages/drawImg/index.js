@@ -1,13 +1,23 @@
 Page({
   onLoad() {
-    this.ratio = wx.getSystemInfoSync().windowWidth / 750
+    const systemInfo = wx.getSystemInfoSync()
 
-    const ctx = wx.createCanvasContext('canvas')
-    
-    ctx.setFontSize(36*this.ratio)
-    this.drawText('如果只是做一款小程序可以流程，那么这样是否可以能够改变一些原来没有的东西呢，如果可以的这样子的 ？1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',ctx)
+    this.pixelRatio = systemInfo.pixelRatio
+    this.ratio_display = systemInfo.windowWidth / 750
+    this.ratio_real = systemInfo.windowWidth / 750 * this.pixelRatio
 
-    ctx.draw()
+    const ctx_real = wx.createCanvasContext('real')
+    const ctx_display = wx.createCanvasContext('display')
+
+    ctx_display.setFontSize(36 * this.ratio_display)
+    ctx_real.setFontSize(36 * this.ratio_real)
+
+    this.drawText('如果只是做一款小程序可以流程，那么这样是否可以能够改变一些原来没有的东西呢，如果可以的这样子的 ？', ctx_display, this.ratio_display)
+    this.drawText('如果只是做一款小程序可以流程，那么这样是否可以能够改变一些原来没有的东西呢，如果可以的这样子的 ？', ctx_real, this.ratio_real)
+
+    ctx_display.draw()
+    ctx_real.draw()
+
 
     // wx.chooseImage({
     //   success:res=> {
@@ -20,52 +30,57 @@ Page({
     // })
   },
 
-  drawText(str,ctx){
+  drawText(str, ctx, ratio) {
     let arr = []
-    const rowWidth=456*this.ratio
-    if (ctx.measureText(str).width>rowWidth){
-      let row=''
-      for(let i=0;i<str.length;i++){
+    const rowWidth = 456 * ratio
+    if (ctx.measureText(str).width > rowWidth) {
+      let row = ''
+      for (let i = 0; i < str.length; i++) {
         row += str[i]
-        if (ctx.measureText(row).width>rowWidth){
+        if (ctx.measureText(row).width > rowWidth) {
           arr.push(row.slice(0, -1))
           --i
-          row=''
-        }else if(i===str.length-1){
+          row = ''
+        } else if (i === str.length - 1) {
           arr.push(row)
         }
       }
-    }else{
+    } else {
       arr.push(str)
     }
 
-    const canvasWidth=590*this.ratio
-    const canvasHeight=(300+40*arr.length)*this.ratio
+    const canvasWidth = 590 * ratio
+    const canvasHeight = (300 + 40 * arr.length) * ratio
 
-    this.setData({
-      canvasWidth:canvasWidth,
-      canvasHeight:canvasHeight
-    })
-
-    ctx.setFillStyle('#4F7EF3')
-    ctx.fillRect(0, 0, canvasWidth,canvasHeight)
+    if (ratio === this.ratio_display) {
+      this.setData({
+        displayWidth: canvasWidth,
+        displayHeight: canvasHeight
+      })
+    } else {
+      this.setData({
+        canvasWidth: canvasWidth,
+        canvasHeight: canvasHeight
+      })
+    }
 
     ctx.setFillStyle('#fff')
-    arr.forEach((row,index)=>{
-      ctx.fillText(row, 66*this.ratio,163*this.ratio+40*this.ratio*index)
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight)
+
+    ctx.setFillStyle('black')
+    arr.forEach((row, index) => {
+      ctx.fillText(row, 66 * ratio, 163 * ratio + 40 * ratio * index)
     })
-    
+
   },
 
-  save(){
+  save() {
     wx.canvasToTempFilePath({
       x: 0,
       y: 0,
       width: this.data.canvasWidth,
       height: this.data.canvasHeight,
-      destWidth: 1080,
-      destHeight:this.data.canvasHeight/this.data.canvasWidth*1080,
-      canvasId: 'canvas',
+      canvasId: 'real',
       success(res) {
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
@@ -80,17 +95,17 @@ Page({
     })
   },
 
-  auth(){
+  auth() {
     wx.getSetting({
-      success:res=> {
+      success: res => {
         if (!res.authSetting['scope.writePhotosAlbum']) {
           wx.authorize({
             scope: 'scope.writePhotosAlbum',
-            success:()=> {
+            success: () => {
               this.save()
             }
           })
-        }else{
+        } else {
           this.save()
         }
       }

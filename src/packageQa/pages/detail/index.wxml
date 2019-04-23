@@ -70,7 +70,10 @@
                         </view>
                     </view>
                 </navigator>
-                <text class="con">{{item.content}}</text>
+
+                <text class="con {{item.content.length>54&&!item.spread?'cut':''}}">{{item.content}}</text>
+                <view class="spread" wx:if="{{item.content.length>54}}" data-belongs="hots" data-index="{{index}}" bindtap="spread">{{item.spread?'收起':'展开'}}</view>
+
                 <view class="other">{{item.createTime}}
                     <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-belongs="hots" data-index="{{index}}">{{item.replyNum}}条回复</view>
                     <text bindtap="openBox" data-belongs="hots" data-index="{{index}}">回复</text>
@@ -96,7 +99,10 @@
                         </view>
                     </view>
                 </navigator>
-                <text class="con">{{item.content}}</text>
+
+                <text class="con {{item.content.length>54&&!item.spread?'cut':''}}">{{item.content}}</text>
+                <view class="spread" wx:if="{{item.content.length>54}}" data-belongs="answers" data-index="{{index}}" bindtap="spread">{{item.spread?'收起':'展开'}}</view>
+
                 <view class="other">{{item.createTime}}
                     <view wx:if="{{item.replyNum>0}}" bindtap="openBox" data-belongs="answers" data-index="{{index}}">{{item.replyNum}}条回复</view>
                     <text bindtap="openBox" data-belongs="answers" data-index="{{index}}">回复</text>
@@ -143,7 +149,10 @@
                                 </view>
                             </view>
                         </navigator>
-                        <text class="con">{{item.content}}</text>
+
+                        <text class="con {{item.content.length>54&&!item.spread?'cut':''}}">{{item.content}}</text>
+                        <view class="spread" wx:if="{{item.content.length>54}}" data-index="{{index}}" bindtap="spread">{{item.spread?'收起':'展开'}}</view>
+
                         <view class="other">{{item.createTime}}
                             <text bindtap="download">回复</text>
                         </view>
@@ -201,5 +210,4 @@
 <block wx:else>
     <nodata wx:if="{{!loading}}" img="{{detail.nodata.img}}" text="{{detail.nodata.text}}"></nodata>
 </block>
-
 
