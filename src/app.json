@@ -1,6 +1,6 @@
 {
   "pages": [
-   
+    "pages/drawImg/index",
     "pages/project/index",
     "pages/work/index",
     "pages/publish/index",

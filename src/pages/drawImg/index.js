@@ -2,37 +2,25 @@ Page({
   onLoad() {
     const systemInfo = wx.getSystemInfoSync()
 
-    this.pixelRatio = systemInfo.pixelRatio
-    this.ratio_display = systemInfo.windowWidth / 750
-    this.ratio_real = systemInfo.windowWidth / 750 * this.pixelRatio
+    this.ratio_display = 562 / 750 * systemInfo.windowWidth / 750//展示绘制比率
+    this.ratio_real = 1125 / 750//真实绘制比率
 
     const ctx_real = wx.createCanvasContext('real')
     const ctx_display = wx.createCanvasContext('display')
 
-    ctx_display.setFontSize(36 * this.ratio_display)
-    ctx_real.setFontSize(36 * this.ratio_real)
+    const question = '如果只是做一款小程序可以流程，那么这样是否可以能够改变一些原来没有的东西呢，如果可以的这样子的 ？'
 
-    this.drawText('如果只是做一款小程序可以流程，那么这样是否可以能够改变一些原来没有的东西呢，如果可以的这样子的 ？', ctx_display, this.ratio_display)
-    this.drawText('如果只是做一款小程序可以流程，那么这样是否可以能够改变一些原来没有的东西呢，如果可以的这样子的 ？', ctx_real, this.ratio_real)
-
-    ctx_display.draw()
-    ctx_real.draw()
-
-
-    // wx.chooseImage({
-    //   success:res=> {
-    //     ctx.moveTo(0,0)
-    //     ctx.drawImage(res.tempFilePaths[0], 30, 50, 220, 110)
-    //   },
-    //   complete(){
-    //     ctx.draw()
-    //   }
-    // })
+    this.draw(question, ctx_display, this.ratio_display)
+    this.draw(question, ctx_real, this.ratio_real)
   },
 
-  drawText(str, ctx, ratio) {
+  draw(str, ctx, ratio) {
+
     let arr = []
-    const rowWidth = 456 * ratio
+    const rowWidth = 587 * ratio
+    ctx.setFontSize(30 * ratio)
+    ctx.setTextBaseline('top')
+
     if (ctx.measureText(str).width > rowWidth) {
       let row = ''
       for (let i = 0; i < str.length; i++) {
@@ -49,8 +37,9 @@ Page({
       arr.push(str)
     }
 
-    const canvasWidth = 590 * ratio
-    const canvasHeight = (300 + 40 * arr.length) * ratio
+    //设置画布尺寸
+    const canvasWidth = 750 * ratio
+    const canvasHeight = (842 + 53 * arr.length) * ratio
 
     if (ratio === this.ratio_display) {
       this.setData({
@@ -64,14 +53,69 @@ Page({
       })
     }
 
-    ctx.setFillStyle('#fff')
+    //绘制海报区域
+    ctx.setFillStyle('#FBFBFB')
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
-    ctx.setFillStyle('black')
+    //绘制banner
+    ctx.drawImage('/assets/img/header@3x.png', 0, 0, canvasWidth, 335 * ratio)
+
+    //绘制问题区域
+    const left = 29 * ratio
+    const right = 721 * ratio
+    const top = 253 * ratio
+    const bottom = (253 + 262 + 53 * arr.length) * ratio
+    const radius = 10 * ratio
+
+    ctx.moveTo(left, top + radius)
+    ctx.quadraticCurveTo(left, top, left + radius, top)
+
+    ctx.lineTo(right - radius, top)
+    ctx.quadraticCurveTo(right, top, right, top + radius)
+
+    ctx.lineTo(right, bottom - radius)
+    ctx.quadraticCurveTo(right, bottom, right - radius, bottom)
+
+    ctx.lineTo(left + radius, bottom)
+    ctx.quadraticCurveTo(left, bottom, left, bottom - radius)
+
+    ctx.lineTo(left, top + radius)
+
+    ctx.setFillStyle('#fff')
+    ctx.setShadow(0, 2, 2, '#F6F6F6')
+    ctx.fill()
+
+    //绘制头像
+    ctx.save()
+    ctx.beginPath()
+    ctx.arc(116 * ratio, 339 * ratio, 35 * ratio, 0, 2 * Math.PI)
+    ctx.clip()
+    ctx.drawImage('/assets/img/wxzf@3x.png', 81 * ratio, 304 * ratio, 70 * ratio, 70 * ratio)
+    ctx.restore()
+
+    //绘制昵称
+    ctx.setFillStyle('#333333')
+    ctx.setTextAlign('left')
+    ctx.setFontSize(28 * ratio)
+    ctx.fillText('八疯兔', 177 * ratio, 312 * ratio)
+
+    ctx.setFontSize(18 * ratio)
+    ctx.fillText('我遇到了一个小难题，谁可以帮我解答一下？', 177 * ratio, 353 * ratio)
+
+    //绘制问题内容
+    ctx.setFontSize(30 * ratio)
     arr.forEach((row, index) => {
-      ctx.fillText(row, 66 * ratio, 163 * ratio + 40 * ratio * index)
+      ctx.fillText(row, 88 * ratio, (439 + 53 * index) * ratio)
     })
 
+    //绘制底部文案
+    ctx.setFontSize(22 * ratio)
+    ctx.setFillStyle('#666666')
+    ctx.setTextAlign('center')
+    ctx.fillText('快速解答这个问题，领取200元奖励', 375 * ratio, 914 * ratio)
+    ctx.fillText('长按小程序码  先到先得', 375 * ratio, 953 * ratio)
+
+    ctx.draw()
   },
 
   save() {
@@ -80,14 +124,16 @@ Page({
       y: 0,
       width: this.data.canvasWidth,
       height: this.data.canvasHeight,
+      destWidth: this.data.canvasWidth,
+      destHeight: this.data.canvasHeight,
       canvasId: 'real',
       success(res) {
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
           complete(result) {
             wx.showToast({
-              icon:'none',
-              title:result.errMsg
+              icon: 'none',
+              title: result.errMsg
             })
           }
         })

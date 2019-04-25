@@ -1,12 +1,10 @@
-<nav-bar transparent="{{true}}"></nav-bar>
-
+<nav-bar returnable="{{false}}" transparent="{{true}}"></nav-bar>
 
 <canvas class="canvas-real" canvas-id="real" style="width:{{canvasWidth}}px;height:{{canvasHeight}}px;"></canvas>
 <canvas class="canvas-display" canvas-id="display" style="width:{{displayWidth}}px;height:{{displayHeight}}px;"></canvas>
 
-<action-bar>
-  <view bindtap="auth">
-      <view>保存</view>
-      <!-- <view>保存图片，立即叫上小伙伴们来围观吧~</view> -->
-  </view>
-</action-bar>
+<view class="placeholder"></view>
+<view class="complete" bindtap="auth">
+    <view>保存</view>
+    <view>保存图片，立即叫上小伙伴们来围观吧~</view>
+</view>
