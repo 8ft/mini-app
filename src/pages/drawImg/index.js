@@ -1,13 +1,11 @@
 Page({
   onLoad() {
     const systemInfo = wx.getSystemInfoSync()
-
     this.ratio_display = 562 / 750 * systemInfo.windowWidth / 750//展示绘制比率
     this.ratio_real = 1125 / 750//真实绘制比率
 
     const ctx_real = wx.createCanvasContext('real')
     const ctx_display = wx.createCanvasContext('display')
-
     const question = '如果只是做一款小程序可以流程，那么这样是否可以能够改变一些原来没有的东西呢，如果可以的这样子的 ？'
 
     this.draw(question, ctx_display, this.ratio_display)
@@ -15,7 +13,6 @@ Page({
   },
 
   draw(str, ctx, ratio) {
-
     let arr = []
     const rowWidth = 587 * ratio
     ctx.setFontSize(30 * ratio)
@@ -57,8 +54,21 @@ Page({
     ctx.setFillStyle('#FBFBFB')
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
-    //绘制banner
-    ctx.drawImage('/assets/img/header@3x.png', 0, 0, canvasWidth, 335 * ratio)
+    //绘制banner   
+    const reward = '500'.split('')
+    const rewardLen = reward.length
+    const harfRewardWidth = 28 * rewardLen
+    const left_of_reward = 300 - harfRewardWidth
+
+    ctx.drawImage('/assets/img/drawImg/bg.png', 0, 0, canvasWidth, 335 * ratio)
+    ctx.drawImage('/assets/img/drawImg/w3.png', 212 * ratio, 147 * ratio, 310 * ratio, 71 * ratio)
+    ctx.drawImage('/assets/img/drawImg/w1.png', (186 - harfRewardWidth) * ratio, 83 * ratio, 111 * ratio, 58 * ratio)
+    ctx.drawImage('/assets/img/drawImg/w2.png', (300 + harfRewardWidth) * ratio, 83 * ratio, 273 * ratio, 58 * ratio)
+
+    reward.forEach((number, index) => {
+      ctx.drawImage(`/assets/img/drawImg/${number}.png`, (left_of_reward + 56 * index) * ratio, 64 * ratio, 56 * ratio, 75 * ratio)
+    })
+
 
     //绘制问题区域
     const left = 29 * ratio
