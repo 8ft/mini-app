@@ -17,7 +17,8 @@ const pages = {
     'blog_list',
     'discover',
     'service_store',
-    'service_index'
+    'service_index',
+    'qa_detail'
   ],
 
   //登出

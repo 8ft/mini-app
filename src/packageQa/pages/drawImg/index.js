@@ -1,5 +1,10 @@
 Page({
   onLoad() {
+    wx.showLoading({
+      title: '长图生成中..',
+      mask: true
+    })
+
     const systemInfo = wx.getSystemInfoSync()
     this.ratio_display = 562 / 750 * systemInfo.windowWidth / 750//展示绘制比率
     this.ratio_real = 1125 / 750//真实绘制比率
@@ -7,47 +12,38 @@ Page({
     const ctx_real = wx.createCanvasContext('real')
     const ctx_display = wx.createCanvasContext('display')
 
-    const qa = {
-      question: {
-        id: '',
-        state: 12,
-        reward: 50,
-        userName: '八疯兔',
-        userAvatar: 'http://image.dev.juniuhui.com/user/avatar/20190416/5a81947243404160aaddf07203e1acff-orig.png',
-        tip: '我遇到了一个小难题，谁可以帮我解答一下？',
-        content: 'webpack-bundle-analyzer分析打包时,发现同样的包,不同小版本会被多次打包,请问这种情况该如何优化'
-      },
-      answer: {
-        userName: '水电  卡萨#@￥3',
-        userAvatar: 'http://image.dev.juniuhui.com/user/avatar/20190416/5a81947243404160aaddf07203e1acff-orig.png',
-        tip: '我刚帮助解答一个难题，你要不要也来巨牛汇试试？',
-        content: '回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答回答'
-      }
-    }
-
+    const qa = wx.getStorageSync('qaData')
     if (qa.question.reward > 0) {
       qa.question.content = `【悬赏${qa.question.reward}】${qa.question.content}`
     }
 
-    wx.downloadFile({
-      url: qa.answer ? qa.answer.userAvatar : qa.question.userAvatar,
-      success: res => {
-        qa.avatar = res.tempFilePath
-        this.draw(qa, ctx_display, this.ratio_display)
-        this.draw(qa, ctx_real, this.ratio_real)
-      }
-    })
+    const avatarUrl = qa.answer ? qa.answer.userAvatar : qa.question.userAvatar
+    if (avatarUrl !== '/assets/img/default/avatar.png') {
+      wx.downloadFile({
+        url: avatarUrl,
+        success: res => {
+          qa.avatar = res.tempFilePath
+          this.draw(qa, ctx_display, this.ratio_display)
+          this.draw(qa, ctx_real, this.ratio_real)
+        }
+      })
+    } else {
+      qa.avatar = avatarUrl
+      this.draw(qa, ctx_display, this.ratio_display)
+      this.draw(qa, ctx_real, this.ratio_real)
+    }
   },
 
-
+  onUnload() {
+    wx.removeStorageSync('qaData')
+  },
 
 
   draw(qa, ctx, ratio) {
     ctx.setTextBaseline('top')
-
-    const questionLineHeight = 53
-    const answerLineHeight = 49
-    const hasReward = hasReward
+    const questionLineHeight = 52
+    const answerLineHeight = 46
+    const hasReward = qa.question.reward > 0
 
     //拆分内容成若干行,并设置canvas尺寸
     const canvasWidth = 750 * ratio
@@ -82,34 +78,30 @@ Page({
       })
     }
 
-
     //绘制海报区域
-    ctx.setFillStyle('#FBFBFB')
+    ctx.fillStyle = '#FBFBFB'
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
 
-
     //绘制banner   
-    ctx.drawImage('/assets/img/drawImg/bg.png', 0, 0, canvasWidth, 335 * ratio)
+    ctx.drawImage('../../assets/img/bg.png', 0, 0, canvasWidth, 335 * ratio)
 
     if (hasReward && qa.question.state !== 12) {
       const reward = `${qa.question.reward}`.split('')
       const rewardLen = reward.length
       const harfRewardWidth = 28 * rewardLen
       const left_of_reward = 300 - harfRewardWidth
-      ctx.drawImage('/assets/img/drawImg/w3.png', 212 * ratio, 147 * ratio, 310 * ratio, 71 * ratio)
-      ctx.drawImage('/assets/img/drawImg/w1.png', (186 - harfRewardWidth) * ratio, 83 * ratio, 111 * ratio, 58 * ratio)
-      ctx.drawImage('/assets/img/drawImg/w2.png', (300 + harfRewardWidth) * ratio, 83 * ratio, 273 * ratio, 58 * ratio)
+      ctx.drawImage('../../assets/img/w3.png', 212 * ratio, 147 * ratio, 310 * ratio, 71 * ratio)
+      ctx.drawImage('../../assets/img/w1.png', (186 - harfRewardWidth) * ratio, 83 * ratio, 111 * ratio, 58 * ratio)
+      ctx.drawImage('../../assets/img/w2.png', (300 + harfRewardWidth) * ratio, 83 * ratio, 273 * ratio, 58 * ratio)
 
       reward.forEach((number, index) => {
-        ctx.drawImage(`/assets/img/drawImg/${number}.png`, (left_of_reward + 56 * index) * ratio, 64 * ratio, 56 * ratio, 75 * ratio)
+        ctx.drawImage(`../../assets/img/${number}.png`, (left_of_reward + 56 * index) * ratio, 64 * ratio, 56 * ratio, 75 * ratio)
       })
     } else if (qa.question.state !== 12) {
-      ctx.drawImage('/assets/img/drawImg/t1.png', 98 * ratio, 73 * ratio, 578 * ratio, 147 * ratio)
+      ctx.drawImage('../../assets/img/t1.png', 98 * ratio, 73 * ratio, 578 * ratio, 147 * ratio)
     } else {
-      ctx.drawImage('/assets/img/drawImg/t2.png', 117 * ratio, 72 * ratio, 541 * ratio, 156 * ratio)
+      ctx.drawImage('../../assets/img/t2.png', 117 * ratio, 72 * ratio, 541 * ratio, 156 * ratio)
     }
-
-
 
     //绘制问题区域
     const left = 29 * ratio
@@ -136,7 +128,7 @@ Page({
 
     ctx.lineTo(left, top + radius)
 
-    ctx.setFillStyle('#fff')
+    ctx.fillStyle = '#fff'
     ctx.setShadow(0, 2, 2, '#F6F6F6')
     ctx.fill()
 
@@ -156,7 +148,7 @@ Page({
     //绘制昵称
     const userNameX = avatarX + 95 * ratio
     const userNameY = avatarY + 8 * ratio
-    ctx.setFillStyle('#333333')
+    ctx.fillStyle = '#333333'
     ctx.setTextAlign('left')
     ctx.setFontSize(28 * ratio)
     ctx.fillText(qa.answer ? qa.answer.userName : qa.question.userName, userNameX, userNameY)
@@ -169,7 +161,7 @@ Page({
     const questionY = qa.answer ? top + 51 * ratio : avatarY + 134 * ratio
     const iconWidth = (hasReward ? 26 : 29) * ratio
     const iconHeight = (hasReward ? 36 : 34) * ratio
-    ctx.drawImage(`/assets/img/drawImg/${hasReward ? 'reward' : 'hot'}.png`, avatarX, questionY, iconWidth, iconWidth)
+    ctx.drawImage(`../../assets/img/${hasReward ? 'reward' : 'hot'}.png`, avatarX, questionY, iconWidth, iconWidth)
 
     ctx.setFontSize(30 * ratio)
     questionWords.forEach((row, index) => {
@@ -192,26 +184,32 @@ Page({
 
     //绘制底部文案级二维码
     ctx.setFontSize(22 * ratio)
-    ctx.setFillStyle('#666666')
+    ctx.fillStyle = '#666666'
     ctx.setTextAlign('center')
 
     if (qa.answer) {
-      ctx.drawImage('/assets/img/drawImg/qr.png', 304 * ratio, canvasHeight - 260 * ratio, 144 * ratio, 144 * ratio)
+      ctx.drawImage('../../assets/img/qr.png', 304 * ratio, canvasHeight - 260 * ratio, 144 * ratio, 144 * ratio)
       ctx.fillText('长按小程序码 查看更多精彩回答', 375 * ratio, canvasHeight - 87 * ratio)
     } else if (hasReward) {
-      ctx.drawImage('/assets/img/drawImg/qr.png', 304 * ratio, canvasHeight - 293 * ratio, 144 * ratio, 144 * ratio)
+      ctx.drawImage('../../assets/img/qr.png', 304 * ratio, canvasHeight - 293 * ratio, 144 * ratio, 144 * ratio)
       ctx.fillText('快速解答这个问题，领取200元奖励', 375 * ratio, canvasHeight - 116 * ratio)
       ctx.fillText('长按小程序码  先到先得', 375 * ratio, canvasHeight - 77 * ratio)
     } else {
-      ctx.drawImage('/assets/img/drawImg/qr.png', 304 * ratio, canvasHeight - 293 * ratio, 144 * ratio, 144 * ratio)
+      ctx.drawImage('../../assets/img/qr.png', 304 * ratio, canvasHeight - 293 * ratio, 144 * ratio, 144 * ratio)
       ctx.fillText('只要能解答这个问题，我就承认你很牛~', 375 * ratio, canvasHeight - 116 * ratio)
       ctx.fillText('长按小程序码  参与讨论', 375 * ratio, canvasHeight - 77 * ratio)
     }
 
-    ctx.draw()
+    ctx.draw(false, res => {
+      if (ratio === this.ratio_real && res.errMsg === 'drawCanvas:ok') {
+        //由于setData是异步的，在此给个延迟，防止setData还未完成就进行保存
+        wx.hideLoading()
+        // setTimeout(()=>{
+        //   this.save()
+        // },1000)
+      }
+    })
   },
-
-
 
 
   contentBreak(content, type, ctx, ratio) {
@@ -224,6 +222,14 @@ Page({
     if (ctx.measureText(content).width > (type === 'question' ? firstRowWidth : rowWidth)) {
       let words = ''
       for (let i = 0; i < content.length; i++) {
+        if (/[\r\n]/.test(content[i])) {
+          if (words) {
+            newContent.push(words)
+          }
+          newContent.push('')
+          words = ''
+          continue
+        }
         words += content[i]
         if (ctx.measureText(words).width > ((newContent.length === 0 && type === 'question') ? firstRowWidth : rowWidth)) {
           newContent.push(words.slice(0, -1))
@@ -234,13 +240,11 @@ Page({
         }
       }
     } else {
-      newContent.push(words)
+      newContent.push(content)
     }
 
     return newContent
   },
-
-
 
 
   save() {
@@ -255,10 +259,11 @@ Page({
       success(res) {
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
-          complete(result) {
+          success() {
+            wx.hideLoading()
             wx.showToast({
-              icon: 'none',
-              title: result.errMsg
+              title: '已保存到相册',
+              duration: 3000
             })
           }
         })
@@ -266,24 +271,8 @@ Page({
     })
   },
 
-
-
-
-  auth() {
-    wx.getSetting({
-      success: res => {
-        if (!res.authSetting['scope.writePhotosAlbum']) {
-          wx.authorize({
-            scope: 'scope.writePhotosAlbum',
-            success: () => {
-              this.save()
-            }
-          })
-        } else {
-          this.save()
-        }
-      }
-    })
+  navigateBack() {
+    wx.navigateBack()
   }
 
 })

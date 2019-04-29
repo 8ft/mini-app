@@ -46,8 +46,8 @@ Page(app.observer({
     scrollViewHeight: 0,
     loading: true,
 
-    reportTargetId:'',
-    reportDesc:'',
+    reportTargetId: '',
+    reportDesc: '',
     selectedReportType: 0,
     reportTypes: [{
       val: 1,
@@ -80,7 +80,13 @@ Page(app.observer({
   },
 
   onShow() {
-    this.getDetail()
+    this.props.stores.toRefresh.refresh('qa_detail', (exist) => {
+      if (!this.data.detail) {
+        this.getDetail()
+      } else if (exist) {
+        this.getDetail()
+      }
+    })
   },
 
   onShareAppMessage() {
@@ -117,9 +123,9 @@ Page(app.observer({
     })
   },
 
-  spread(e){
-    const belongs=e.currentTarget.dataset.belongs
-    const index=e.currentTarget.dataset.index
+  spread(e) {
+    const belongs = e.currentTarget.dataset.belongs
+    const index = e.currentTarget.dataset.index
 
     if (this.data.boxSwitch) {
       let answer = this.data.lists[belongs][this.data.cIndex].replies[index]
@@ -312,10 +318,10 @@ Page(app.observer({
     })
   },
 
-  openReportBox(e){
+  openReportBox(e) {
     if (!app.checkLogin()) return
     this.setData({
-      reportTargetId:e.currentTarget.dataset.id
+      reportTargetId: e.currentTarget.dataset.id
     })
   },
 
@@ -329,40 +335,103 @@ Page(app.observer({
     this.setData({
       selectedReportType: 0,
       reportTargetId: '',
-      reportDesc:''
+      reportDesc: ''
     })
   },
 
   async confirm(e) {
-    const reportType=this.data.reportTypes[this.data.selectedReportType]
-    let desc=e.detail.value.desc.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "")
+    const reportType = this.data.reportTypes[this.data.selectedReportType]
+    let desc = e.detail.value.desc.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, "")
 
-    if(reportType.needDesc&&!desc){
+    if (reportType.needDesc && !desc) {
       wx.showToast({
-        title:'举报原因不能为空',
-        image:'/assets/img/discover/xiajia.png'
+        title: '举报原因不能为空',
+        image: '/assets/img/discover/xiajia.png'
       })
-      return 
-    }else if(desc.length>100){
+      return
+    } else if (desc.length > 100) {
       wx.showToast({
-        title:'举报原因最多100字',
-        image:'/assets/img/discover/xiajia.png'
+        title: '举报原因最多100字',
+        image: '/assets/img/discover/xiajia.png'
       })
-      return 
+      return
     }
 
-    let res=await app.request.post('/qa/illegal/report', {
+    let res = await app.request.post('/qa/illegal/report', {
       objectId: this.data.reportTargetId,
       objectType: 4,
-      illegalType:reportType.val,
-      illegalRemark:desc
+      illegalType: reportType.val,
+      illegalRemark: desc
     })
     if (res.code !== 0) return
 
     this.cancel()
     wx.showToast({
-      title:'举报成功',
-      icon:'none'
+      title: '举报成功',
+      icon: 'none'
+    })
+  },
+
+  auth() {
+    wx.getSetting({
+      success: res => {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success: res => {
+              this.toDrawImg()
+            },
+            fail: err => {
+              wx.showModal({
+                title: '',
+                content: '打开相册权限',
+                success: res => {
+                  if (res.confirm) {
+                    wx.openSetting({
+                      success: res => {
+                        if (res.authSetting['scope.writePhotosAlbum']) {
+                          this.toDrawImg()
+                        }
+                      }
+                    })
+                  }
+                }
+              })
+            }
+          })
+        } else {
+          this.toDrawImg()
+        }
+      }
+    })
+  },
+
+  toDrawImg() {
+    let detail=this.data.detail
+    const qaData={
+      question: {
+        state: detail.questionState,
+        reward: detail.rewardAmount,
+        userName: detail.nickName,
+        userAvatar: detail.userAvatar?detail.userAvatar.replace('http:','https:'):'/assets/img/default/avatar.png',
+        tip: '我遇到了一个小难题，谁可以帮我解答一下？',
+        content: detail.questionName
+      }
+    }
+
+    if(this.data.lists.best.length>0){
+      const answer=this.data.lists.best[0]
+      qaData.answer={
+        userName: answer.nickName,
+        userAvatar: answer.userAvatar?answer.userAvatar.replace('http:','https:'):'/assets/img/default/avatar.png',
+        tip: '我刚帮助解答一个难题，你要不要也来巨牛汇试试？',
+        content: answer.content
+      }
+    }
+    
+    wx.setStorageSync('qaData', qaData)
+    wx.navigateTo({
+      url: '/packageQa/pages/drawImg/index'
     })
   },
 

@@ -199,7 +199,7 @@
                 <view class="iconfont icon-weixin1"></view>
                 <text>分享至微信</text>
             </button>
-            <button hover-class="none">
+            <button hover-class="none" bindtap="toDrawImg">
                 <view class="iconfont icon-pengyouquan1"></view>
                 <text>分享至朋友圈</text>
             </button>

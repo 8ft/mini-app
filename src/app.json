@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/drawImg/index",
     "pages/project/index",
     "pages/work/index",
     "pages/publish/index",
@@ -67,7 +66,8 @@
       "name": "qa",
       "pages": [
         "pages/detail/index",
-        "pages/pay/index"
+        "pages/pay/index",
+        "pages/drawImg/index"
       ]
     },
     {
