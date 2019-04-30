@@ -23,7 +23,8 @@ Component({
     appearance: {
       type: String,
       value: 'normal'
-    }
+    },
+    index: Number
 
   },
 
@@ -47,6 +48,16 @@ Component({
       })
       if (res.code !==0) return
       this.triggerEvent('delete')
+    },
+
+    async _collect() {
+      const res = await app.request.post('/qa/question/collect', {
+        questionId: this.properties.data.id,
+        userId: wx.getStorageSync('account').userId,
+        collect: this.properties.data.collectFlag === 0 ? 1 : 0
+      })
+      if (res.code !== 0) return
+      this.triggerEvent('collect', { index: this.properties.index, flag: this.properties.data.collectFlag == 0 ? 1 : 0 })
     },
 
     _goDetail(e) {

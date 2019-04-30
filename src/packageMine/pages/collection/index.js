@@ -181,6 +181,13 @@ Page(app.observer({
     }
   },
 
+  updateQaCard(e) {
+    const data = e.detail
+    this.setData({
+      [`qas.list[${data.index}].collectFlag`]: data.flag
+    })
+  },
+
   updateServiceCard(e) {
     const data = e.detail
     this.setData({

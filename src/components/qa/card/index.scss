@@ -2,7 +2,11 @@
 @import '../../../assets/font/icons.wxss';
 
 .qa{position:relative;padding:42rpx 28rpx 35rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;margin:0 auto 20rpx;
-    &.collection{width:718rpx;border-radius: 20rpx;margin:20rpx auto;}
+
+    &.collection{width:718rpx;border-radius: 20rpx;margin:20rpx auto;
+        .collect{position:absolute;bottom:40rpx;right:30rpx;width:140rpx;height:52rpx;line-height:52rpx;border:2rpx solid rgba(229,229,229,1);font-size:$m;text-align:center;
+            .iconfont{margin-right:9rpx;
+                &.icon-yishoucang{color:$red;}}}}
 
     .title{font-weight:600;font-size:34rpx;color:black;
         text{vertical-align: middle;}

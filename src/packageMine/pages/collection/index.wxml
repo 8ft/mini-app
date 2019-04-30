@@ -27,7 +27,7 @@
             bindscrolltolower="loadMore"
             enable-back-to-top="true">
             
-              <qa-card wx:for="{{qas.list}}" appearance="collection" data="{{item}}"></qa-card>
+              <qa-card wx:for="{{qas.list}}" appearance="collection" index="{{index}}" data="{{item}}" bindcollect="updateQaCard"></qa-card>
               <nodata wx:if="{{!loading&&qas.list.length===0}}"></nodata>
         </scroll-view>
       </swiper-item>
