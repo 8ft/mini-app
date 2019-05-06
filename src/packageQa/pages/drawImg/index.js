@@ -203,10 +203,9 @@ Page({
     ctx.draw(false, res => {
       if (ratio === this.ratio_real && res.errMsg === 'drawCanvas:ok') {
         //由于setData是异步的，在此给个延迟，防止setData还未完成就进行保存
-        wx.hideLoading()
-        // setTimeout(()=>{
-        //   this.save()
-        // },1000)
+        setTimeout(()=>{
+          this.save()
+        },1000)
       }
     })
   },

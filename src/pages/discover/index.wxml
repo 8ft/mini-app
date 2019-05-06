@@ -62,7 +62,7 @@
         <popup active="{{activeFilter==='qa_types'}}" margin="{{80}}" bindhide='closePopup'>
             <view class="job-types">
                 <view class="parent">
-                    <list-item wx:for="{{qa_types.list}}" data-code="{{item.dictValue}}" bindtap="scrollToJobTypes" name="{{item.dictName}}"></list-item>
+                    <list-item wx:for="{{qa_types.list}}" data-code="{{item.dictValue}}" bindtap="scrollToQaTypes" name="{{item.dictName}}"></list-item>
                 </view>
                 <scroll-view scroll-y="true" scroll-into-view="{{qa_types.parent}}" scroll-with-animation="true">
                     <list-item data-item="{dictName:'不限',dictValue:''}" data-type="qa_types" bindtap="filter" name="不限" active="{{!qa_types.selected.dictValue}}"></list-item>
@@ -86,8 +86,11 @@
             bindscrolltoupper="refresh"
             bindscrolltolower="loadMore"
             enable-back-to-top="true">
-            <image mode="widthFix" class="ad" src="/assets/img/qa.png"></image>
-            <qa-card wx:for="{{qa.list}}" data="{{item}}"></qa-card>
+            <block wx:if="{{qa.list.length>0}}">
+                <image mode="widthFix" class="ad" src="/assets/img/qa.png"></image>
+                <qa-card wx:for="{{qa.list}}" data="{{item}}"></qa-card>
+            </block>
+            <nodata wx:else></nodata>
         </scroll-view>
     </swiper-item>
 

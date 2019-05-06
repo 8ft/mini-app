@@ -288,7 +288,7 @@ Page(app.observer({
     let pIndex = data.qa.pageIndex
     let res = await app.request.post('/qa/question/query/list', {
       queryType:1,
-      questionState:11,
+      questionState:'11|12',
       sortBy: data.qa_sortWay.selected.value || '',
       stateCond: data.qa_status.selected.value || '',
       subType: data.qa_types.selected.dictValue || '',
@@ -463,6 +463,12 @@ Page(app.observer({
   scrollToJobTypes(e) {
     this.setData({
       'job_types.parent': 'job' + e.currentTarget.dataset.code
+    })
+  },
+
+  scrollToQaTypes(e) {
+    this.setData({
+      'qa_types.parent': 'qa' + e.currentTarget.dataset.code
     })
   },
 

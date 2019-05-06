@@ -4,6 +4,11 @@ const request = require('./api/request.js')
 const util = require('./utils/util.js')
 const stores = require('./stores/index')
 
+const bannerJumpUrl={
+  'publish_project':'/packagePublish/pages/project/index/index',
+  'all_project':'/packageProject/pages/list/index'
+}
+
 App({
   regeneratorRuntime:regeneratorRuntime,
   observer:observer,
@@ -45,6 +50,9 @@ App({
           // })
           break;
         case 'click':
+           wx.navigateTo({
+            url: bannerJumpUrl[obj.menuUrl]
+          })
           break;
       }
     } else if (obj.type !== undefined) {

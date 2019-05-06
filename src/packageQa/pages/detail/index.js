@@ -169,7 +169,7 @@ Page(app.observer({
   },
 
   async like(e) {
-    if (app.checkLogin()) {
+    if (!e.currentTarget.dataset.flag&&app.checkLogin()) {
       const res = await app.request.post('/qa/answer/praise', {
         answerId: e.currentTarget.dataset.id
       })
@@ -183,6 +183,27 @@ Page(app.observer({
           [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseNum`]: answer.praiseNum + (answer.praiseFlag ? -1 : 1),
           [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseFlag`]: !answer.praiseFlag
         })
+
+        if(belongs!=='answers'){
+          const bid=e.currentTarget.dataset.bid
+          let indexOfAnswerInAnswers
+          this.data.lists.answers.forEach((answer,index)=>{
+            if(bid==answer.replyBatchId){
+              indexOfAnswerInAnswers=index
+            }
+          })
+          
+          let answerInAnswers=this.data.lists.answers[indexOfAnswerInAnswers]
+          if(!answerInAnswers.replies){
+            answerInAnswers.replies=this.data.lists[belongs][this.data.cIndex].replies
+          }
+          answerInAnswers.replies[index].praiseNum=answerInAnswers.replies[index].praiseNum + (answerInAnswers.replies[index].praiseFlag ? -1 : 1)
+          answerInAnswers.replies[index].praiseFlag=!answerInAnswers.replies[index].praiseFlag
+
+          this.setData({
+            [`lists.answers[${indexOfAnswerInAnswers}]`]:answerInAnswers
+          })
+        }
       } else {
         let answer = this.data.lists[belongs][index]
         this.setData({

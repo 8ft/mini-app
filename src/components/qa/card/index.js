@@ -6,26 +6,28 @@ Component({
     data: {
       type: Object,
       observer(newVal, oldVal, changedPath) {
-        if (!newVal.questionName) return
-        if (newVal.questionName.length > 36) {
-          this.setData({
-            'data.questionName': newVal.questionName.substring(0, 30) + '...'
-          })
+        let questionName=newVal.questionName
+        if (!questionName) return
+        
+        if (questionName.length > 36) {
+          questionName=questionName.substring(0, 30) + '...'
         }
 
-        const num = newVal.answerUsers.length
-        if (num === 0) return
+        const answerers = newVal.answerUsers.length
+        if (answerers === 0) return
+
         this.setData({
-          imgsWidth: (num > 4 ? 4 : num) * 40 + 30
+          'data.questionName': questionName,
+          imgsWidth: answerers * 40 + 30
         })
       }
+
     },
     appearance: {
       type: String,
       value: 'normal'
     },
     index: Number
-
   },
 
   data: {
@@ -38,8 +40,11 @@ Component({
       20: { status: true },//审核未通过
       21: { status: true },//已下架
       22: { status: true }//已关闭
-    }
+    },
+    showStatus:false
   },
+
+  
 
   methods: {
     async _delete(){

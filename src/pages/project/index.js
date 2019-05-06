@@ -67,7 +67,8 @@ Page(app.observer({
     if(res.code===0){
       this.setData({
         banners: res.data.filter(banner=>{
-          return banner.menuType==='show'
+          banner.iconImageUrl=banner.iconImageUrl.replace('http:','https:')
+          return banner.menuType!=='view'
         })
       })
     }

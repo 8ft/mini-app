@@ -38,7 +38,7 @@
                     <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
                     <view class="top-line">
                         <view class="name">{{item.nickName}}</view>
-                        <view class="like {{item.praiseFlag?'on':''}}" data-belongs="best" data-id="{{item.id}}" data-index="{{index}}" catchtap="like">
+                        <view class="like {{item.praiseFlag?'on':''}}" data-belongs="best" data-id="{{item.id}}" data-index="{{index}}" data-flag="{{item.praiseFlag}}" catchtap="like">
                             <text class="iconfont icon-dianzan"></text>
                             <text>{{item.praiseNum}}</text>
                         </view>
@@ -64,7 +64,7 @@
                             <text class="iconfont icon-caina"></text>
                             <text>采纳</text>
                         </view>
-                        <view class="like {{item.praiseFlag?'on':''}}" data-belongs="hots" data-id="{{item.id}}" data-index="{{index}}" catchtap="like">
+                        <view class="like {{item.praiseFlag?'on':''}}" data-belongs="hots" data-id="{{item.id}}" data-index="{{index}}" data-flag="{{item.praiseFlag}}" catchtap="like">
                             <text class="iconfont icon-dianzan"></text>
                             <text>{{item.praiseNum}}</text>
                         </view>
@@ -93,7 +93,7 @@
                             <text class="iconfont icon-caina"></text>
                             <text>采纳</text>
                         </view>
-                        <view class="like {{item.praiseFlag?'on':''}}" data-belongs="answers" data-id="{{item.id}}" data-index="{{index}}" catchtap="like">
+                        <view class="like {{item.praiseFlag?'on':''}}" data-belongs="answers" data-id="{{item.id}}" data-index="{{index}}" data-flag="{{item.praiseFlag}}" catchtap="like">
                             <text class="iconfont icon-dianzan"></text>
                             <text>{{item.praiseNum}}</text>
                         </view>
@@ -143,7 +143,7 @@
                             <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
                             <view class="top-line">
                                 <view class="name">{{item.nickName}}</view>
-                                <view class="like {{item.praiseFlag?'on':''}}" data-id="{{item.id}}" data-index="{{index}}" catchtap="like">
+                                <view class="like {{item.praiseFlag?'on':''}}" data-belongs="{{belongs}}" data-bid="{{item.replyBatchId}}" data-id="{{item.id}}" data-index="{{index}}" data-flag="{{item.praiseFlag}}" catchtap="like">
                                     <text class="iconfont icon-dianzan"></text>
                                     <text>{{item.praiseNum}}</text>
                                 </view>

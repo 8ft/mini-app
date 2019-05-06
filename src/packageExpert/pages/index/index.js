@@ -30,7 +30,7 @@ Page(app.observer({
       tags: [
         {name:'全部',val:''},
         {name:'已解决',val:'2'},
-        {name:'为解决',val:'1'}
+        {name:'未解决',val:'1'}
       ],
       list: [],
       pageIndex: 1,
@@ -42,7 +42,7 @@ Page(app.observer({
       tags: [
         {name:'全部',val:''},
         {name:'已解决',val:'2'},
-        {name:'为解决',val:'1'}
+        {name:'未解决',val:'1'}
       ],
       list: [],
       pageIndex: 1,
