@@ -5,10 +5,10 @@
       <label class='type'>{{data.subTypeName}}</label>
       <label wx:if="{{data.skillTag.length>0}}" wx:for="{{data.skillTag}}">{{item}}</label>
     </view>
-    <view wx:if="{{activeUI[data.questionState].status}}" class="status">{{data.questionStateName}}</view>
+    <view wx:if="{{activeUI_by_status[data.questionState].status&&activeUI_by_appearance[appearance].status}}" class="status">{{data.questionStateName}}</view>
   </view>
 
-  <view class="other-info" wx:if="{{appearance!=='myQuestions'}}">
+  <view class="other-info" wx:if="{{!(appearance==='myQuestions'&&data.answerUsers.length===0)}}">
     <block wx:if="{{data.answerUsers.length>0}}">
       <image wx:for="{{data.answerUsers}}" mode="aspectFill" src="{{item.userAvatar}}"></image>
       <view class="tip" style="margin-left:{{imgsWidth}}rpx;">{{data.answerUserNum>4?'等'+data.answerUserNum+'人':''}}参与了讨论</view>
@@ -19,12 +19,12 @@
       <view class="tip" style="margin-left:70rpx;">{{data.nickName}}发起提问</view>
     </block>
     
-    <block wx:if="{{appearance!=='myAnswers'&&appearance!=='collection'&&activeUI[data.questionState].viewer}}">
+    <block wx:if="{{activeUI_by_status[data.questionState].viewer&&activeUI_by_appearance[appearance].viewer}}">
       <view class="iconfont icon-liulan"></view>
       <view class='read'>{{data.viewNum}}</view>
     </block>
 
-    <view wx:if="{{appearance==='myAnswers'}}" class="del" catchtap="_delete">删除</view>
+    <view wx:if="{{ctiveUI_by_appearance[appearance].delete}}" class="del" catchtap="_delete">删除</view>
   </view>
 
    <view wx:if="{{appearance==='collection'}}" class="collect" catchtap="_collect">

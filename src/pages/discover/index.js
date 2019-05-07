@@ -105,7 +105,7 @@ Page(app.observer({
 
   onLoad(options) {
     if (options.page) {
-      this.switchPage(null, parseInt(options.page))
+      this.switchPage(parseInt(options.page))
     } else {
       this.setData({
         tabIndex: 0

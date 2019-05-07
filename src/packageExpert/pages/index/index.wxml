@@ -107,9 +107,9 @@
   <block wx:elif="{{tabIndex===2}}">
     <block wx:if="{{blogInfo.questionNum>0}}">
       <scroll-view class='blog-types' scroll-x="true">
-        <view class="type {{questions.tag===index?'active':''}}" wx:for="{{questions.tags}}" data-page="questions" data-index="{{index}}" bindtap='switchTag'>{{item.name}}</view>
+        <view class="type {{questions.tag===index?'active':''}}" wx:for="{{questions.tags[isMyself?'mine':'someone']}}" data-page="questions" data-index="{{index}}" bindtap='switchTag'>{{item.name}}</view>
       </scroll-view>
-      <qa-card wx:for="{{questions.list}}" appearance="personalPage" data="{{item}}"></qa-card>
+      <qa-card wx:for="{{questions.list}}" appearance="{{isMyself?'myQuestions':'theQuestions'}}" data="{{item}}"></qa-card>
     </block>
     <view wx:else style="position:relative;height:{{nodataHeight}}px;">
       <nodata img="kong" text="{{isMyself?'有疑问？就赶紧提问吧！':'TA还没有发起过提问哦！'}}">
@@ -121,9 +121,9 @@
   <block wx:elif="{{tabIndex===3}}">
     <block wx:if="{{blogInfo.answerNum>0}}">
       <scroll-view class='blog-types' scroll-x="true">
-        <view class="type {{answers.tag===index?'active':''}}" wx:for="{{answers.tags}}" data-page="answers" data-index="{{index}}" bindtap='switchTag'>{{item.name}}</view>
+        <view class="type {{answers.tag===index?'active':''}}" wx:for="{{answers.tags[isMyself?'mine':'someone']}}" data-page="answers" data-index="{{index}}" bindtap='switchTag'>{{item.name}}</view>
       </scroll-view>
-      <qa-card wx:for="{{answers.list}}" appearance="personalPage" data="{{item}}"></qa-card>
+      <qa-card wx:for="{{answers.list}}" appearance="{{isMyself?'myAnswers':'theAnswers'}}" data="{{item}}" data-index="{{index}}" binddelete="deleteQa"></qa-card>
     </block>
     <view wx:else style="position:relative;height:{{nodataHeight}}px;">
       <nodata img="kong" text="{{isMyself?'还没回答过问题？赶紧发挥一下吧！':'TA还没有回答过提问哦！'}}">

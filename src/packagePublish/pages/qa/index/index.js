@@ -12,7 +12,7 @@ Page(app.observer({
 
     reward:0,
     selectedReward:0,
-    rewards:[5,10,15,20,50,100,200,0,0.01],
+    rewards:[0,0.01,5,10,15,20,50,100,200],
     selectedTags:[]
   },
 
@@ -145,15 +145,8 @@ Page(app.observer({
 
   async publish() {
     let question = this.data.question||{}
-    if (!question.title) {
-      wx.showToast({
-        title: '请输入问题标题',
-        icon: 'none'
-      })
-      return
-    }
 
-    if(!question.desc){
+    if(!question.title||!question.desc){
       wx.showToast({
         title: '请输入问题描述',
         icon: 'none'

@@ -27,11 +27,43 @@ Page(app.observer({
 
     questions: {
       tag: 0,
-      tags: [
-        {name:'全部',val:''},
-        {name:'已解决',val:'2'},
-        {name:'未解决',val:'1'}
-      ],
+      tags:{
+        'someone':[
+          {name:'全部',val:'1|2'},
+          {name:'已解决',val:'2'},
+          {name:'未解决',val:'1'}
+        ],
+        'mine':[
+          {
+            name: '全部',
+            val: ''
+          },
+          {
+            name: '已解决',
+            val: '12'
+          },
+          {
+            name: '未解决',
+            val: '11'
+          },
+          {
+            name: '已关闭',
+            val: '0|22'
+          },
+          {
+            name: '审核中',
+            val: '10'
+          },
+          {
+            name: '未通过',
+            val: '20'
+          },
+          {
+            name: '已下架',
+            val: '13|21'
+          }
+        ]
+      },
       list: [],
       pageIndex: 1,
       nomore: false
@@ -39,11 +71,27 @@ Page(app.observer({
 
     answers: {
       tag: 0,
-      tags: [
-        {name:'全部',val:''},
-        {name:'已解决',val:'2'},
-        {name:'未解决',val:'1'}
-      ],
+      tags:{
+        'someone':[
+          {name:'全部',val:'1|2'},
+          {name:'已解决',val:'2'},
+          {name:'未解决',val:'1'}
+        ],
+        'mine':[
+          {
+            name: '全部',
+            val: ''
+          },
+          {
+            name: '已解决',
+            val: '12'
+          },
+          {
+            name: '未解决',
+            val: '11'
+          }
+        ]
+      },
       list: [],
       pageIndex: 1,
       nomore: false
@@ -249,6 +297,14 @@ Page(app.observer({
     wx.stopPullDownRefresh()
   },
 
+  deleteQa(e){
+    const index=e.currentTarget.dataset.index
+    this.data.answers.list.splice(index,1)
+    this.setData({
+      'answers.list':this.data.answers.list
+    })
+  },
+
   async getQas(page) {
     let nomore = this.data[page].nomore
     if (nomore) return
@@ -259,7 +315,7 @@ Page(app.observer({
     let pIndex = this.data[page].pageIndex
     let res = await app.request.post('/qa/question/query/list', {
       userId:this.data.user.userId,
-      stateCond:this.data[page].tags[this.data[page].tag].val,
+      stateCond:this.data[page].tags[this.data.isMyself?'mine':'someone'][this.data[page].tag].val,
       queryType: page==='questions'?2:3,
       pageIndex: pIndex
     })

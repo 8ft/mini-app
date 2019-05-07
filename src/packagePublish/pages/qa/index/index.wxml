@@ -1,6 +1,17 @@
 <nav-bar title="发起提问"></nav-bar>
 
 <view class="con">
+
+  <view class='info need'>
+    <text class='name'>问题描述</text>
+    <navigator class="input arrow-right {{question?'':'gray'}}" url="/packagePublish/pages/qa/desc/index" hover-class='none'>{{question?question.title:'请简明写下你的问题'}}</navigator>
+  </view>
+
+  <view class='info'>
+    <text class='name'>是否悬赏</text>
+    <view class='input arrow-right' bindtap='openRewardBox'>{{reward===0?'不悬赏':'￥'+reward}}</view>
+  </view>
+
   <view class='info need'>
     <text class='name'>问题类型</text>
     <view class='input arrow-right'>
@@ -15,16 +26,6 @@
       {{objectMultiArray[1][multiIndex[1]].dictName}}
       </picker>
     </view>
-  </view>
-
-  <view class='info'>
-    <text class='name'>是否悬赏</text>
-    <view class='input arrow-right' bindtap='openRewardBox'>{{reward===0?'不悬赏':'￥'+reward}}</view>
-  </view>
-
-  <view class='info need'>
-    <text class='name'>问题描述</text>
-    <navigator class='input arrow-right' url="/packagePublish/pages/qa/desc/index" hover-class='none'>{{question?question.title:'请简明写下你的问题'}}</navigator>
   </view>
 
   <view class="tags" hidden="{{tags[objectMultiArray[1][multiIndex[1]].dictValue].length===0}}">

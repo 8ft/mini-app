@@ -8,9 +8,9 @@
             .iconfont{margin-right:9rpx;
                 &.icon-yishoucang{color:$red;}}}}
 
-    .title{font-weight:600;font-size:34rpx;color:black;
+    .title{font-weight:500;font-size:34rpx;color:black;
         text{vertical-align: middle;}
-        .reward{padding:0 15rpx;background: #FFC034;color:#fff;border-radius:99rpx;line-height: 35rpx;font-size: $s;margin-right: 20rpx;}
+        .reward{padding:0 15rpx;line-height:35rpx;background: #FFC034;color:#fff;border-radius:99rpx;font-size: $s;margin-right: 16rpx;font-weight: 600;vertical-align: middle;}
     }
     .tags{display: flex;width:100%; align-items: center;padding:24rpx 0 28rpx;
         .skills{height:40rpx;overflow: hidden;zoom:1;flex:1;

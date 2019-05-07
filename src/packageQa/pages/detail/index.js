@@ -52,7 +52,7 @@ Page(app.observer({
     reportTypes: [{
       val: 1,
       needDesc: false,
-      name: '广告及垃圾信息',
+      name: '广告或垃圾信息',
       placeholder: '写下举报的详细描述(选填,100字内)'
     }, {
       val: 2,
@@ -154,12 +154,15 @@ Page(app.observer({
             answerId: e.currentTarget.dataset.id
           })
           if (res.code === 0) {
+            this.setData({
+              'detail.questionState':12
+            })
             this.data.lists = {
               best: [],
               hots: [],
-              answer: []
-            },
-              this.data.pageIndex = 1
+              answers: []
+            }
+            this.data.pageIndex = 1
             this.data.nomore = false
             this.getAnswers()
           }
@@ -169,7 +172,7 @@ Page(app.observer({
   },
 
   async like(e) {
-    if (!e.currentTarget.dataset.flag&&app.checkLogin()) {
+    if (!e.currentTarget.dataset.flag && app.checkLogin()) {
       const res = await app.request.post('/qa/answer/praise', {
         answerId: e.currentTarget.dataset.id
       })
@@ -177,34 +180,34 @@ Page(app.observer({
 
       const index = e.currentTarget.dataset.index
       const belongs = e.currentTarget.dataset.belongs
-      if (this.data.boxSwitch) {
+      if (this.data.boxSwitch) {//二级回复
         let answer = this.data.lists[belongs][this.data.cIndex].replies[index]
         this.setData({
           [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseNum`]: answer.praiseNum + (answer.praiseFlag ? -1 : 1),
           [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseFlag`]: !answer.praiseFlag
         })
 
-        if(belongs!=='answers'){
-          const bid=e.currentTarget.dataset.bid
+        if (belongs !== 'answers') {
+          const bid = e.currentTarget.dataset.bid
           let indexOfAnswerInAnswers
-          this.data.lists.answers.forEach((answer,index)=>{
-            if(bid==answer.replyBatchId){
-              indexOfAnswerInAnswers=index
+          this.data.lists.answers.forEach((answer, index) => {
+            if (bid == answer.replyBatchId) {
+              indexOfAnswerInAnswers = index
             }
           })
-          
-          let answerInAnswers=this.data.lists.answers[indexOfAnswerInAnswers]
-          if(!answerInAnswers.replies){
-            answerInAnswers.replies=this.data.lists[belongs][this.data.cIndex].replies
+
+          let answerInAnswers = this.data.lists.answers[indexOfAnswerInAnswers]
+          if (!answerInAnswers.replies) {
+            answerInAnswers.replies = this.data.lists[belongs][this.data.cIndex].replies
           }
-          answerInAnswers.replies[index].praiseNum=answerInAnswers.replies[index].praiseNum + (answerInAnswers.replies[index].praiseFlag ? -1 : 1)
-          answerInAnswers.replies[index].praiseFlag=!answerInAnswers.replies[index].praiseFlag
+          answerInAnswers.replies[index].praiseNum = answerInAnswers.replies[index].praiseNum + (answerInAnswers.replies[index].praiseFlag ? -1 : 1)
+          answerInAnswers.replies[index].praiseFlag = !answerInAnswers.replies[index].praiseFlag
 
           this.setData({
-            [`lists.answers[${indexOfAnswerInAnswers}]`]:answerInAnswers
+            [`lists.answers[${indexOfAnswerInAnswers}]`]: answerInAnswers
           })
         }
-      } else {
+      } else {//一级回复
         let answer = this.data.lists[belongs][index]
         this.setData({
           [`lists.${belongs}[${index}].praiseNum`]: answer.praiseNum + (answer.praiseFlag ? -1 : 1),
@@ -372,7 +375,7 @@ Page(app.observer({
       return
     } else if (desc.length > 100) {
       wx.showToast({
-        title: '举报原因最多100字',
+        title: '原因最多100字',
         image: '/assets/img/discover/xiajia.png'
       })
       return
@@ -428,28 +431,28 @@ Page(app.observer({
   },
 
   toDrawImg() {
-    let detail=this.data.detail
-    const qaData={
+    let detail = this.data.detail
+    const qaData = {
       question: {
         state: detail.questionState,
         reward: detail.rewardAmount,
         userName: detail.nickName,
-        userAvatar: detail.userAvatar?detail.userAvatar.replace('http:','https:'):'/assets/img/default/avatar.png',
+        userAvatar: detail.userAvatar ? detail.userAvatar.replace('http:', 'https:') : '/assets/img/default/avatar.png',
         tip: '我遇到了一个小难题，谁可以帮我解答一下？',
         content: detail.questionName
       }
     }
 
-    if(this.data.lists.best.length>0){
-      const answer=this.data.lists.best[0]
-      qaData.answer={
+    if (this.data.lists.best.length > 0) {
+      const answer = this.data.lists.best[0]
+      qaData.answer = {
         userName: answer.nickName,
-        userAvatar: answer.userAvatar?answer.userAvatar.replace('http:','https:'):'/assets/img/default/avatar.png',
+        userAvatar: answer.userAvatar ? answer.userAvatar.replace('http:', 'https:') : '/assets/img/default/avatar.png',
         tip: '我刚帮助解答一个难题，你要不要也来巨牛汇试试？',
         content: answer.content
       }
     }
-    
+
     wx.setStorageSync('qaData', qaData)
     wx.navigateTo({
       url: '/packageQa/pages/drawImg/index'

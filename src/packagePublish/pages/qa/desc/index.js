@@ -95,9 +95,8 @@ Page({
   },
 
   chooseImage() {
-    let count = 3 - this.data.imgs.length
     wx.chooseImage({
-      count: count,
+      count: 1,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: async res => {

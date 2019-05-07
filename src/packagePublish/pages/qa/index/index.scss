@@ -10,7 +10,9 @@ page{background:#fff;}
 
 .name{font-size:$xl;color:$lightBlack;}
 .info.need .name::after{content:'*';color:red;font-size:40rpx;}
-.input{margin-left:20rpx;min-height:$xl;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.input{margin-left:20rpx;min-height:$xl;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    &.gray{color:$gray;}
+}
 
 .arrow-right::before{border-left-color:$lightGray;}
 

@@ -29,7 +29,7 @@ Page(app.observer({
         },
         {
           dictName: '已关闭',
-          dictValue: '22'
+          dictValue: '0|22'
         },
         {
           dictName: '审核中',
@@ -38,6 +38,10 @@ Page(app.observer({
         {
           dictName: '未通过',
           dictValue: '20'
+        },
+        {
+          dictName: '已下架',
+          dictValue: '13|21'
         }
       ],
       currentState:0,
@@ -172,7 +176,7 @@ Page(app.observer({
       'myQuestions.pageIndex': myQuestions.pageIndex,
       'myQuestions.list':myQuestions.list.concat(res.data.list.map(question => {
         if(question.skillTag){
-          question.skillTag = [question.subTypeName].concat(question.skillTag.split('|'))
+          question.skillTag = question.skillTag.split('|')
         }
         return question
       })),

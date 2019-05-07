@@ -1,27 +1,23 @@
 const app = getApp()
-const regeneratorRuntime=app.regeneratorRuntime
+const regeneratorRuntime = app.regeneratorRuntime
 
 Component({
   properties: {
     data: {
       type: Object,
       observer(newVal, oldVal, changedPath) {
-        let questionName=newVal.questionName
+        let questionName = newVal.questionName
         if (!questionName) return
-        
-        if (questionName.length > 36) {
-          questionName=questionName.substring(0, 30) + '...'
-        }
 
-        const answerers = newVal.answerUsers.length
-        if (answerers === 0) return
+        if (questionName.length > 36) {
+          questionName = questionName.substring(0, 30) + '...'
+        }
 
         this.setData({
           'data.questionName': questionName,
-          imgsWidth: answerers * 40 + 30
+          imgsWidth: newVal.answerUsers.length * 40 + 30
         })
       }
-
     },
     appearance: {
       type: String,
@@ -31,7 +27,7 @@ Component({
   },
 
   data: {
-    activeUI: {
+    activeUI_by_status: {
       0: { status: true },//草稿,未提交,待支付
       10: { status: true },//提交,待审核
       11: { viewer: true },//审核通过,已发布
@@ -41,17 +37,30 @@ Component({
       21: { status: true },//已下架
       22: { status: true }//已关闭
     },
-    showStatus:false
+
+    activeUI_by_appearance: {
+      'theQuestions': { viewer: true },
+      'theAnswers': { viewer: true },
+      'collection': {},
+      'myQuestions': { status: true },
+      'myAnswers': { delete: true }
+    },
+
+    showStatus: false
   },
 
-  
+
 
   methods: {
-    async _delete(){
-      let res = await app.request.post('/qa/question/delete', {
-        questionId:this.properties.data.id
+    async _delete() {
+      let res = await app.request.post('/qa/answer/hideAnswerQuestion', {
+        questionId: this.properties.data.id
       })
-      if (res.code !==0) return
+      if (res.code !== 0) return
+      wx.showToast({
+        title: '删除成功',
+        icon: 'none'
+      })
       this.triggerEvent('delete')
     },
 
