@@ -2,8 +2,12 @@
   <view class="nav-bar-default {{transparent?'transparent':''}}" style="padding-top:{{top}}px;">
     
     <view class="return" wx:if="{{returnable}}">
-      <navigator class="iconfont icon-fanhui" open-type="navigateBack" hover-class="none"></navigator>
-      <navigator class="iconfont icon-xiaochengxufangzi" open-type="reLaunch" hover-class="none" url="/pages/project/index"></navigator>
+      <navigator class="back" open-type="navigateBack" hover-class="none">
+        <text class="iconfont icon-fanhui" open-type="navigateBack" hover-class="none"></text>
+      </navigator>
+      <navigator class="home" open-type="reLaunch" hover-class="none" url="/pages/project/index">
+        <text class="iconfont icon-xiaochengxufangzi" open-type="reLaunch" hover-class="none" url="/pages/project/index"></text>
+      </navigator>
     </view>
 
     <view class="nav-bar-title" wx:if="{{title}}">{{title}}</view>

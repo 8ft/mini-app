@@ -10,7 +10,7 @@
       <!--提问-->
       <swiper-item>
         <scroll-view slot="addones" class='types' scroll-x="true">
-            <view class="type {{myQuestions.currentState===index?'active':''}}" wx:for="{{myQuestions.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
+            <view class="type {{myQuestions.currentState==index?'active':''}}" wx:for="{{myQuestions.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
         </scroll-view>
 
         <scroll-view 
@@ -24,16 +24,17 @@
           <block wx:if="{{myQuestions.list.length>0}}">
             <qa-card wx:for="{{myQuestions.list}}" data="{{item}}" appearance="myQuestions"></qa-card>
           </block>
-          <nodata wx:elif="{{!loading&&myQuestions.list.length===0}}" text="有疑问？就赶紧提问吧!">
-            <navigator url='/packagePublish/qa/index/index' hover-class='none'>我要提问</navigator>
+          <nodata wx:elif="{{!props.stores.account.blogInfo.questionNum}}" text="有疑问？就赶紧提问吧!">
+            <navigator url='/packagePublish/pages/qa/index/index' hover-class='none'>我要提问</navigator>
           </nodata>
+          <nodata wx:elif="{{!loading}}"></nodata>
         </scroll-view>
       </swiper-item>
 
       <!--回答-->
       <swiper-item>
          <scroll-view slot="addones" class='types' scroll-x="true">
-            <view class="type {{myAnswers.currentState===index?'active':''}}" wx:for="{{myAnswers.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
+            <view class="type {{myAnswers.currentState==index?'active':''}}" wx:for="{{myAnswers.states}}" data-index="{{index}}" bindtap='switchState'>{{item.dictName}}</view>
         </scroll-view>
 
         <scroll-view 
@@ -48,9 +49,10 @@
           <block wx:if="{{myAnswers.list.length>0}}">
             <qa-card wx:for="{{myAnswers.list}}" data="{{item}}" appearance="myAnswers" data-index="{{index}}" binddelete="delete"></qa-card>
           </block>
-          <nodata wx:elif="{{!loading&myAnswers.list.length===0}}" text="还没回答过问题？赶紧发挥一下吧！">
+          <nodata wx:elif="{{!props.stores.account.blogInfo.answerNum}}" text="还没回答过问题？赶紧发挥一下吧！">
             <navigator open-type="reLaunch" hover-class="none" url="/pages/discover/index?page=1">我要回答</navigator>
           </nodata>
+          <nodata wx:elif="{{!loading}}"></nodata>
         </scroll-view>
       </swiper-item>
 

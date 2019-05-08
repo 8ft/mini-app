@@ -8,10 +8,21 @@ Page({
     descLen: -1,
     batchNo: '',
     imgs: [],
-    keyboardHeight: 0
+    keyboardHeight: 0,
+    autoHeight:true
   },
 
   onLoad(options) {
+    const query = wx.createSelectorQuery()
+    query.select('#desc').boundingClientRect()
+
+    query.exec(e => {
+      this.setData({
+        windowHeight:wx.getSystemInfoSync().windowHeight,
+        descTop:e[0].top
+      })
+    })
+
     const cache = wx.getStorageSync('questionCache')
     if(!cache)return 
     this.setData(cache)
@@ -47,7 +58,7 @@ Page({
 
   setFocusPostion(e) {
     this.setData({
-      keyboardHeight: e.detail.height||0
+      keyboardHeight:e.detail.height||0
     })
   },
 

@@ -100,7 +100,9 @@ Page(app.observer({
       parent: '',
       selected: {},
       list: []
-    }
+    },
+
+    loading:true
   },
 
   onLoad(options) {
@@ -285,6 +287,10 @@ Page(app.observer({
     let nomore = data.qa.nomore
     if (nomore) return
 
+    this.setData({
+      loading:true
+    })
+
     let pIndex = data.qa.pageIndex
     let res = await app.request.post('/qa/question/query/list', {
       queryType:1,
@@ -311,12 +317,13 @@ Page(app.observer({
           return qa
         })),
         'qa.pageIndex': pIndex,
-        'qa.nomore': nomore
+        'qa.nomore': nomore,
+        loading:false
       }
       
       if(data.qa_types.list.length===0){
         const qa_types = await app.request.post('/dict/dictCommon/getDicts', {
-          dictType: 'job_type',
+          dictType: 'project_type',
           resultType: '1'
         })
         newData['qa_types.list']=qa_types.data.data[0].dictList
@@ -531,6 +538,12 @@ Page(app.observer({
       })
     }
     wx.stopPullDownRefresh()
+  },
+
+  hideIntroduce(){
+    this.setData({
+      hideIntroduce:true
+    })
   }
 
 }))

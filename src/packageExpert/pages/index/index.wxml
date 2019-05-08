@@ -92,6 +92,8 @@
     </view>
   </block>
 
+
+
   <block wx:elif="{{tabIndex===1}}">
     <block wx:if="{{blogInfo.articleNum>0}}">
       <scroll-view class='blog-types' scroll-x="true">
@@ -104,37 +106,54 @@
     </view>
   </block>
 
+
+
   <block wx:elif="{{tabIndex===2}}">
     <block wx:if="{{blogInfo.questionNum>0}}">
       <scroll-view class='blog-types' scroll-x="true">
         <view class="type {{questions.tag===index?'active':''}}" wx:for="{{questions.tags[isMyself?'mine':'someone']}}" data-page="questions" data-index="{{index}}" bindtap='switchTag'>{{item.name}}</view>
       </scroll-view>
-      <qa-card wx:for="{{questions.list}}" appearance="{{isMyself?'myQuestions':'theQuestions'}}" data="{{item}}"></qa-card>
+      <qa-card wx:if="{{questions.list.length>0}}" wx:for="{{questions.list}}" appearance="{{isMyself?'myQuestions':'theQuestions'}}" data="{{item}}"></qa-card>
+      <view wx:if="{{!loading&&questions.list.length===0}}" style="position:relative;height:{{nodataHeight}}px;">
+        <nodata></nodata>
+      </view>
     </block>
-    <view wx:else style="position:relative;height:{{nodataHeight}}px;">
+    <view wx:elif="{{!loading}}" style="position:relative;height:{{nodataHeight}}px;">
       <nodata img="kong" text="{{isMyself?'有疑问？就赶紧提问吧！':'TA还没有发起过提问哦！'}}">
         <navigator wx:if="{{isMyself}}" url='/packagePublish/qa/index/index' hover-class='none'>我要提问</navigator>
       </nodata>
     </view>
   </block>
 
+
+
   <block wx:elif="{{tabIndex===3}}">
-    <block wx:if="{{blogInfo.answerNum>0}}">
+    <block wx:if="{{isMyself?props.stores.account.blogInfo.answerNum>0:blogInfo.answerNum>0}}">
       <scroll-view class='blog-types' scroll-x="true">
         <view class="type {{answers.tag===index?'active':''}}" wx:for="{{answers.tags[isMyself?'mine':'someone']}}" data-page="answers" data-index="{{index}}" bindtap='switchTag'>{{item.name}}</view>
       </scroll-view>
-      <qa-card wx:for="{{answers.list}}" appearance="{{isMyself?'myAnswers':'theAnswers'}}" data="{{item}}" data-index="{{index}}" binddelete="deleteQa"></qa-card>
+      <qa-card wx:if="{{answers.list.length>0}}" wx:for="{{answers.list}}" appearance="{{isMyself?'myAnswers':'theAnswers'}}" data="{{item}}" data-index="{{index}}" binddelete="deleteQa"></qa-card>
+      <view wx:if="{{!loading&&answers.list.length===0}}" style="position:relative;height:{{nodataHeight}}px;">
+        <nodata></nodata>
+      </view>
     </block>
-    <view wx:else style="position:relative;height:{{nodataHeight}}px;">
-      <nodata img="kong" text="{{isMyself?'还没回答过问题？赶紧发挥一下吧！':'TA还没有回答过提问哦！'}}">
-        <navigator wx:if="{{isMyself}}" open-type="reLaunch" hover-class="none" url="/pages/discover/index?page=1">我要回答</navigator>
+
+    <view wx:if="{{!isMyself&&!loading&&!blogInfo.answerNum}}" style="position:relative;height:{{nodataHeight}}px;">
+      <nodata img="kong" text="TA还没有回答过提问哦！"></nodata>
+    </view>
+
+    <view wx:if="{{isMyself&&!loading&&!props.stores.account.blogInfo.answerNum}}" style="position:relative;height:{{nodataHeight}}px;">
+      <nodata img="kong" text="还没回答过问题？赶紧发挥一下吧！">
+        <navigator open-type="reLaunch" hover-class="none" url="/pages/discover/index?page=1">我要回答</navigator>
       </nodata>
     </view>
+
   </block>
 
   <view wx:else tyle="position:relative;height:{{nodataHeight}}px;">
     <nodata></nodata>
   </view>
+
 </view>
 
 

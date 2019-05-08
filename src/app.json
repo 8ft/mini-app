@@ -67,7 +67,8 @@
       "pages": [
         "pages/detail/index",
         "pages/pay/index",
-        "pages/drawImg/index"
+        "pages/drawImg/index",
+        "pages/introduce/index"
       ]
     },
     {

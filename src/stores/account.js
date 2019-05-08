@@ -1,5 +1,5 @@
 const request = require('../api/request.js')
-const regeneratorRuntime=require('../libs/regenerator-runtime.js')
+const regeneratorRuntime = require('../libs/regenerator-runtime.js')
 const mobx = require('../libs/mobx')
 const stateCn = {
   0: '未完善',
@@ -62,6 +62,10 @@ const account = function () {
     this.blogInfo.questionNum += diff
   }
 
+  this.deleteAnswer = () => {
+    this.blogInfo.answerNum -= 1
+  }
+
   this.login = async (app, oid, uid) => {
     const res = await request.post('/user/userThirdpartInfo/login', {
       thirdpartIdentifier: oid,
@@ -115,7 +119,7 @@ const account = function () {
     }
   }
 
-  this.refresh = async() => {
+  this.refresh = async () => {
     await this.updateUserInfo()
     this.updateBlogInfo()
   }

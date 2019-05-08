@@ -29,9 +29,9 @@ Page(app.observer({
       tag: 0,
       tags:{
         'someone':[
-          {name:'全部',val:'1|2'},
-          {name:'已解决',val:'2'},
-          {name:'未解决',val:'1'}
+          {name:'全部',val:'11|12'},
+          {name:'已解决',val:'12'},
+          {name:'未解决',val:'11'}
         ],
         'mine':[
           {
@@ -73,9 +73,9 @@ Page(app.observer({
       tag: 0,
       tags:{
         'someone':[
-          {name:'全部',val:'1|2'},
-          {name:'已解决',val:'2'},
-          {name:'未解决',val:'1'}
+          {name:'全部',val:'11|12'},
+          {name:'已解决',val:'12'},
+          {name:'未解决',val:'11'}
         ],
         'mine':[
           {
@@ -89,6 +89,10 @@ Page(app.observer({
           {
             name: '未解决',
             val: '11'
+          },
+          {
+            name: '被采纳',
+            val: '12'
           }
         ]
       },
@@ -303,6 +307,7 @@ Page(app.observer({
     this.setData({
       'answers.list':this.data.answers.list
     })
+    this.props.stores.account.deleteAnswer()
   },
 
   async getQas(page) {
@@ -315,7 +320,7 @@ Page(app.observer({
     let pIndex = this.data[page].pageIndex
     let res = await app.request.post('/qa/question/query/list', {
       userId:this.data.user.userId,
-      stateCond:this.data[page].tags[this.data.isMyself?'mine':'someone'][this.data[page].tag].val,
+      questionState:this.data[page].tags[this.data.isMyself?'mine':'someone'][this.data[page].tag].val,
       queryType: page==='questions'?2:3,
       pageIndex: pIndex
     })
@@ -325,6 +330,16 @@ Page(app.observer({
         pIndex++
       } else {
         nomore = true
+      }
+
+      if(this.data.isMyself&&page==='answers'&&this.data[page].tag===1){
+        res.data.list=res.data.list.filter(qa=>{
+          return !qa.isBest
+        })
+      }else if(this.data.isMyself&&page==='answers'&&this.data[page].tag===3){
+        res.data.list=res.data.list.filter(qa=>{
+          return qa.isBest
+        })
       }
 
       this.setData({

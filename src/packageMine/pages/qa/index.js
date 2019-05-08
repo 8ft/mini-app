@@ -9,7 +9,7 @@ Page(app.observer({
 
   data: {
     swiperHeight:0,
-    typeIndex:0,
+    tabIndex:0,
 
     pageSize:10,
     loading:true,
@@ -63,6 +63,10 @@ Page(app.observer({
         {
           dictName: '未解决',
           dictValue: '11'
+        },
+        {
+          dictName: '已采纳',
+          dictValue: '12'
         }
       ],
       currentState: 0,
@@ -84,7 +88,7 @@ Page(app.observer({
   },
 
   refresh(){
-    if (this.data.typeIndex === 0) {
+    if (this.data.tabIndex === 0) {
       this.data.myQuestions.pageIndex=1
       this.data.myQuestions.nomore=false
       this.data.myQuestions.list=[]
@@ -130,7 +134,7 @@ Page(app.observer({
 
   switchState(e){
     const index = e.currentTarget.dataset.index
-    if(this.data.typeIndex===0){
+    if(this.data.tabIndex===0){
       this.setData({
         'myQuestions.currentState':index
       })
@@ -148,14 +152,18 @@ Page(app.observer({
     this.setData({
       'myAnswers.list':this.data.myAnswers.list
     })
+    this.props.stores.account.deleteAnswer()
   },
 
   async getMyQuestions(){
+    if(!this.props.stores.account.blogInfo.questionNum)return
+
+    let myQuestions = this.data.myQuestions
+    if (myQuestions.nomore) return 
     this.setData({
       loading:true
     })
-    let myQuestions = this.data.myQuestions
-    if (myQuestions.nomore) return 
+
     let res = await app.request.post('/qa/question/query/list', {
       queryType:'2',
       questionState: myQuestions.states[myQuestions.currentState].dictValue,
@@ -171,7 +179,7 @@ Page(app.observer({
         'myQuestions.nomore':true
       })
     }
-
+    
     this.setData({
       'myQuestions.pageIndex': myQuestions.pageIndex,
       'myQuestions.list':myQuestions.list.concat(res.data.list.map(question => {
@@ -185,11 +193,14 @@ Page(app.observer({
   },
 
   async getMyAnswers(){
+    if (!this.props.stores.account.blogInfo.answerNum) return 
+
+    let myAnswers = this.data.myAnswers
+    if (myAnswers.nomore) return 
     this.setData({
       loading: true
     })
-    let myAnswers = this.data.myAnswers
-    if (myAnswers.nomore) return
+
     let res = await app.request.post('/qa/question/query/list', {
       queryType:'3',
       questionState: myAnswers.states[myAnswers.currentState].dictValue,
@@ -203,6 +214,16 @@ Page(app.observer({
     } else {
       this.setData({
         'myAnswers.nomore': true
+      })
+    }
+
+    if(myAnswers.currentState===1){
+      res.data.list=res.data.list.filter(answer=>{
+        return !answer.isBest
+      })
+    }else if(myAnswers.currentState===3){
+      res.data.list=res.data.list.filter(answer=>{
+        return answer.isBest
       })
     }
 

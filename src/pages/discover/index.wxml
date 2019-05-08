@@ -87,10 +87,13 @@
             bindscrolltolower="loadMore"
             enable-back-to-top="true">
             <block wx:if="{{qa.list.length>0}}">
-                <image mode="widthFix" class="ad" src="/assets/img/qa.png"></image>
+                <navigator wx:if="{{!hideIntroduce}}" class="introduce" hover-class="none" url="/packageQa/pages/introduce/index">
+                    <image mode="widthFix" src="/assets/img/qa.png"></image>
+                    <view catchtap="hideIntroduce">X</view>
+                </navigator>
                 <qa-card wx:for="{{qa.list}}" data="{{item}}"></qa-card>
             </block>
-            <nodata wx:else></nodata>
+            <nodata wx:elif="{{!loading}}"></nodata>
         </scroll-view>
     </swiper-item>
 

@@ -12,7 +12,8 @@
 ></textarea>
 
 <textarea 
-  class="desc" 
+  id="desc"
+  class="desc"
   maxlength="200" 
   data-name="desc"
   bindinput="input" 
@@ -33,8 +34,9 @@
   <view class='add' bindtap='chooseImage'><view>添加</view></view>
 </view>
 
-<view class="actions" style="bottom:{{keyboardHeight}}px;">
-  <view class="iconfont icon-tupian" bindtap="chooseImage"></view>
+<view class="actions-placeholder"></view>
+<cover-view class="actions" style="bottom:{{keyboardHeight}}px;">
+  <cover-image class="picture" src="/assets/img/icon/picture.png" bindtap="chooseImage"></cover-image>
   <button bindtap="save">保存</button>
-</view>
+</cover-view>
 

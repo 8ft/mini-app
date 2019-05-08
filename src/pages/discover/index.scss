@@ -1,7 +1,11 @@
 @import '../../assets/wxss/var.scss';  
 
 
-.ad{width:100%;}
+.introduce{width:100%;position: relative;
+    image{width:100%;}
+    view{position: absolute;top:10rpx;right: 10rpx;width:30rpx;height: 30rpx;line-height: 30rpx;font-size:$s;background: rgba(255,255,255,.7);color:$gray;border-radius: 99rpx;text-align: center;}
+}
+
 
 .tabs{border:none!important;
     scroll-view{text-align:center;}

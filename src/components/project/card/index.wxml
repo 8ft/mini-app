@@ -2,7 +2,7 @@
 <navigator class="project{{project.relationType?' mine':''}}" hover-class="none" url="/packageProject/pages/detail/index?no={{project.projectNo}}">
   
   <view class='info'>
-    <view class='title'><view class="name">{{project.projectName}}</view><view class="urgent" wx:if="{{isPressing==1}}">加急</view></view>
+    <view class='title'><view class="name">{{project.projectName}}</view><view class="urgent" wx:if="{{project.isPressing===1}}">加急</view></view>
     <view class='tags'>
       <label class='type'>{{project.projectSubtype}}</label>
       <label wx:if="{{project.projectSkill.length>0}}" wx:for="{{project.projectSkill}}">{{item}}</label>

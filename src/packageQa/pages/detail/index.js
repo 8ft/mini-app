@@ -8,9 +8,17 @@ const nodataCon = {
     img: 'wzz',
     text: "别急呀！问题正在审核中...\n通过后即可查看，请稍后再试"
   },
+  13: {
+    img: 'wfw',
+    text: '好遗憾，该问题可能已经被关闭或删除了'
+  },
   20: {
     img: 'wfw',
     text: '问题涉嫌违规，发起者正在完善中…'
+  },
+  21: {
+    img: 'wfw',
+    text: '好遗憾，该问题可能已经被关闭或删除了'
   },
   22: {
     img: 'wfw',
@@ -90,8 +98,11 @@ Page(app.observer({
   },
 
   onShareAppMessage() {
+    const question=this.data.detail.questionName
+    const reward=parseInt(this.data.detail.rewardAmountYuan)
+
     return {
-      title: '接包发包专业平台',
+      title: `${reward>0?'【悬赏'+reward+'元】':'【你问我答】'}${question}`,
       path: `packageQa/pages/detail/index?id=${this.data.id}&uid=${this.data.uid}`
     }
   },
@@ -146,7 +157,7 @@ Page(app.observer({
       title: '提示',
       confirmText: '提交',
       confirmColor: '#4C87F9',
-      content: this.data.detail.rewardAmount > 0 ? '请确认是否已解决你的问题，答案一经采纳后即同意将悬赏金额答谢给回答者' : '请确认是否已解决你的问题，答案一经采纳后将无法撤销',
+      content: this.data.detail.rewardAmountYuan > 0 ? '请确认是否已解决你的问题，答案一经采纳后即同意将悬赏金额答谢给回答者' : '请确认是否已解决你的问题，答案一经采纳后将无法撤销',
       success: async res => {
         if (res.confirm) {
           let res = await app.request.post('/qa/question/acceptQuestionAnswer', {
@@ -155,7 +166,7 @@ Page(app.observer({
           })
           if (res.code === 0) {
             this.setData({
-              'detail.questionState':12
+              'detail.questionState': 12
             })
             this.data.lists = {
               best: [],
@@ -172,7 +183,7 @@ Page(app.observer({
   },
 
   async like(e) {
-    if (!e.currentTarget.dataset.flag && app.checkLogin()) {
+    if (!e.currentTarget.dataset.liked && app.checkLogin()) {
       const res = await app.request.post('/qa/answer/praise', {
         answerId: e.currentTarget.dataset.id
       })
@@ -180,15 +191,18 @@ Page(app.observer({
 
       const index = e.currentTarget.dataset.index
       const belongs = e.currentTarget.dataset.belongs
-      if (this.data.boxSwitch) {//二级回复
-        let answer = this.data.lists[belongs][this.data.cIndex].replies[index]
-        this.setData({
-          [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseNum`]: answer.praiseNum + (answer.praiseFlag ? -1 : 1),
-          [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseFlag`]: !answer.praiseFlag
-        })
 
+      if (this.data.boxSwitch) {//二级回复
+        let replies=this.data.lists[belongs][this.data.cIndex].replies
+        let reply=replies[index]
+        reply.praiseNum+=1
+        reply.praiseFlag=1
+
+        //如果不是通过最新回答点开，则需要修改最新回答中对应的数据
         if (belongs !== 'answers') {
           const bid = e.currentTarget.dataset.bid
+
+          //找到最新回答中对应的数据，并修改其点赞状态
           let indexOfAnswerInAnswers
           this.data.lists.answers.forEach((answer, index) => {
             if (bid == answer.replyBatchId) {
@@ -196,22 +210,27 @@ Page(app.observer({
             }
           })
 
-          let answerInAnswers = this.data.lists.answers[indexOfAnswerInAnswers]
-          if (!answerInAnswers.replies) {
-            answerInAnswers.replies = this.data.lists[belongs][this.data.cIndex].replies
+          if (!this.data.lists.answers[indexOfAnswerInAnswers].replies) {
+            this.setData({
+              [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseNum`]: reply.praiseNum,
+              [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseFlag`]: reply.praiseFlag,
+              [`lists.answers[${indexOfAnswerInAnswers}].replies`]: replies
+            })
+          } else {
+            this.setData({
+              [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseNum`]: reply.praiseNum,
+              [`lists.${belongs}[${this.data.cIndex}].replies[${index}].praiseFlag`]: reply.praiseFlag,
+              [`lists.answers[${indexOfAnswerInAnswers}].replies[${index}].praiseNum`]: reply.praiseNum,
+              [`lists.answers[${indexOfAnswerInAnswers}].replies[${index}].praiseFlag`]: reply.praiseFlag
+            })
           }
-          answerInAnswers.replies[index].praiseNum = answerInAnswers.replies[index].praiseNum + (answerInAnswers.replies[index].praiseFlag ? -1 : 1)
-          answerInAnswers.replies[index].praiseFlag = !answerInAnswers.replies[index].praiseFlag
-
-          this.setData({
-            [`lists.answers[${indexOfAnswerInAnswers}]`]: answerInAnswers
-          })
         }
+
       } else {//一级回复
         let answer = this.data.lists[belongs][index]
         this.setData({
-          [`lists.${belongs}[${index}].praiseNum`]: answer.praiseNum + (answer.praiseFlag ? -1 : 1),
-          [`lists.${belongs}[${index}].praiseFlag`]: !answer.praiseFlag
+          [`lists.${belongs}[${index}].praiseNum`]: answer.praiseNum + 1,
+          [`lists.${belongs}[${index}].praiseFlag`]: 1
         })
       }
     }
@@ -435,7 +454,7 @@ Page(app.observer({
     const qaData = {
       question: {
         state: detail.questionState,
-        reward: detail.rewardAmount,
+        reward: parseInt(detail.rewardAmountYuan),
         userName: detail.nickName,
         userAvatar: detail.userAvatar ? detail.userAvatar.replace('http:', 'https:') : '/assets/img/default/avatar.png',
         tip: '我遇到了一个小难题，谁可以帮我解答一下？',
