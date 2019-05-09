@@ -279,7 +279,7 @@ Page(app.observer({
         'blogs.nomore': nomore
       })
     }
-    wx.stopPullDownRefresh()
+    
   },
 
   async getQa() {
@@ -331,7 +331,7 @@ Page(app.observer({
 
       this.setData(newData)
     }
-    wx.stopPullDownRefresh()
+    
   },
 
   async getExperts() {
@@ -361,7 +361,7 @@ Page(app.observer({
         'experts.nomore': nomore
       })
     }
-    wx.stopPullDownRefresh()
+    
   },
 
   selectFilter(e) {
@@ -537,7 +537,7 @@ Page(app.observer({
         'services.nomore': nomore
       })
     }
-    wx.stopPullDownRefresh()
+    
   },
 
   hideIntroduce(){

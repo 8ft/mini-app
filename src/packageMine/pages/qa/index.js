@@ -62,10 +62,10 @@ Page(app.observer({
         },
         {
           dictName: '未解决',
-          dictValue: '11'
+          dictValue: '11|13|20|21|22'
         },
         {
-          dictName: '已采纳',
+          dictName: '被采纳',
           dictValue: '12'
         }
       ],
@@ -88,6 +88,7 @@ Page(app.observer({
   },
 
   refresh(){
+    if(this.data.loading)return
     if (this.data.tabIndex === 0) {
       this.data.myQuestions.pageIndex=1
       this.data.myQuestions.nomore=false
@@ -231,7 +232,7 @@ Page(app.observer({
       'myAnswers.pageIndex': myAnswers.pageIndex,
       'myAnswers.list': myAnswers.list.concat(res.data.list.map(answer => {
         if(answer.skillTag){
-          answer.skillTag = [answer.subTypeName].concat(answer.skillTag.split('|'))
+          answer.skillTag = answer.skillTag.split('|')
         }
         return answer
       })),

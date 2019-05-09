@@ -2,6 +2,7 @@
     "usingComponents": {
         "nodata": "/components/common/nodata/index",
         "action-bar": "/components/common/actionBar/index",
-        "popup": "/components/common/popup/index"
+        "popup": "/components/common/popup/index",
+        "img":"/components/common/img/index"
     }
 }

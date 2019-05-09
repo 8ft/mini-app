@@ -1,2 +1,2 @@
-<nav-bar></nav-bar>
+<nav-bar title="问答说明"></nav-bar>
 <image mode="widthFix" src="{{filePath}}"></image>

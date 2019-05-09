@@ -51,6 +51,7 @@ Page(app.observer({
   },
 
   refresh(){
+    if(this.data.loading)return
     this.data.pageIndex=1
     this.data.blogs=[]
     this.data.nomore=false

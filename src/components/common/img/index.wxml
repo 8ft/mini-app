@@ -1,0 +1,8 @@
+<image 
+  class="img"
+  mode="{{mode}}"
+  src="{{src}}"
+  lazy-load="{{lazy}}"
+  binderror="_error"
+>
+</image>

@@ -107,59 +107,50 @@ Page(app.observer({
     }
   },
 
-  refresh() {
+  refresh(e) {
+    if(this.data.loading)return
+    this.data.loading=true
     switch (this.data.tabIndex) {
       case 0:
-        if (this.data.articles.list.length > 0) {
-          this.data.articles = {
-            list: [],
-            pageIndex: 1,
-            nomore: false
-          }
+        this.data.articles = {
+          list: [],
+          pageIndex: 1,
+          nomore: false
         }
         this.getArticles()
         break;
       case 1:
-        if (this.data.qas.list.length > 0) {
-          this.data.qas = {
-            list: [],
-            pageIndex: 1,
-            nomore: false
-          }
+        this.data.qas = {
+          list: [],
+          pageIndex: 1,
+          nomore: false
         }
         this.getQas()
         break;
       case 2:
-        if (this.data.experts.list.length > 0) {
-          this.data.experts = {
-            list: [],
-            pageIndex: 1,
-            nomore: false
-          }
+        this.data.experts = {
+          list: [],
+          pageIndex: 1,
+          nomore: false
         }
         this.getExperts()
         break;
       case 3:
-        if (this.data.services.list.length > 0) {
-          this.data.services = {
-            list: [],
-            pageIndex: 1,
-            nomore: false
-          }
+        this.data.services = {
+          list: [],
+          pageIndex: 1,
+          nomore: false
         }
         this.getServices(1)
         break;
       case 4:
-        if (this.data.stores.list.length > 0) {
-          this.data.stores = {
-            list: [],
-            pageIndex: 1,
-            nomore: false
-          }
+        this.data.stores = {
+          list: [],
+          pageIndex: 1,
+          nomore: false
         }
         this.getServices(0)
         break;
-
     }
   },
 
@@ -203,7 +194,7 @@ Page(app.observer({
   },
 
   async getQas() {
-    let nomore = this.data.experts.nomore
+    let nomore = this.data.qas.nomore
     if (nomore) return
     this.setData({
       loading: true
@@ -234,7 +225,7 @@ Page(app.observer({
         loading: false
       })
     }
-    wx.stopPullDownRefresh()
+    
   },
 
   async getExperts() {
@@ -263,7 +254,7 @@ Page(app.observer({
         loading: false
       })
     }
-    wx.stopPullDownRefresh()
+    
   },
 
   async getServices(type) {
@@ -314,7 +305,7 @@ Page(app.observer({
       }
 
     }
-    wx.stopPullDownRefresh()
+    
   },
 
   async getArticles() {
@@ -355,7 +346,7 @@ Page(app.observer({
       })
     }
 
-    wx.stopPullDownRefresh()
+    
   }
 
 }))

@@ -163,7 +163,7 @@ Page(app.observer({
 
     if(question.imgs.length>0){
       question.imgs.forEach(img=>{
-        html+=`<image width="100%" src="${img.url}"/>`
+        html+=`<img width="100%" src="${img.url}"/>`
       })
     }
 

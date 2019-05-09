@@ -92,6 +92,7 @@ Page(app.observer({
   },
 
   refresh(){
+    if(this.data.loading)return
     if (this.data.typeIndex === 0) {
       this.data.myPublish.pageIndex=1
       this.data.myPublish.nomore=false

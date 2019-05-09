@@ -73,9 +73,9 @@ Page(app.observer({
       tag: 0,
       tags:{
         'someone':[
-          {name:'全部',val:'11|12'},
+          {name:'全部',val:''},
           {name:'已解决',val:'12'},
-          {name:'未解决',val:'11'}
+          {name:'未解决',val:'11|13|20|21|22'}
         ],
         'mine':[
           {
@@ -88,7 +88,7 @@ Page(app.observer({
           },
           {
             name: '未解决',
-            val: '11'
+            val: '11|13|20|21|22'
           },
           {
             name: '被采纳',
@@ -232,7 +232,8 @@ Page(app.observer({
         name: '全部标签',
         articleNum: blogInfo.data.articleNum,
         id: ''
-      }
+      },
+      loading:false
     })
 
     if (this.data.nodataHeight === 0) {

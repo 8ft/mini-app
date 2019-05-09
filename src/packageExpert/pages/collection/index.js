@@ -18,6 +18,7 @@ Page({
   },
 
   refresh(){
+    if(this.data.loading)return
     this.data.pageIndex=1
     this.data.nomore=false
     this.data.list=[]

@@ -4,7 +4,7 @@
     <view class='title'><text class='reward' wx:if="{{detail.rewardAmountYuan>0}}">￥{{detail.rewardAmountYuan}}元</text><text>{{detail.questionName}}</text></view>
 
     <navigator class="author" hover-class="none" url="/packageExpert/pages/index/index?id={{detail.updateUserId}}">
-        <image mode='aspectFill' src="{{detail.userAvatar||'/assets/img/default/avatar.png'}}"></image> 
+        <img type="avatar" mode='aspectFill' src="{{detail.userAvatar||'/assets/img/default/avatar.png'}}"></img>
         <view class="info">
             <text class="name">{{detail.nickName}}</text>
             <view class="other">发布时间{{detail.createTime+' · 阅读'+detail.viewNum}}</view>
@@ -198,7 +198,7 @@
                 <view class="iconfont icon-weixin1"></view>
                 <text>分享至微信</text>
             </button>
-            <button hover-class="none" bindtap="toDrawImg">
+            <button hover-class="none" bindtap="auth">
                 <view class="iconfont icon-pengyouquan1"></view>
                 <text>分享至朋友圈</text>
             </button>

@@ -10,12 +10,12 @@
 
   <view class="other-info" wx:if="{{!(appearance==='myQuestions'&&data.answerUsers.length===0)}}">
     <block wx:if="{{data.answerUsers.length>0}}">
-      <image wx:for="{{data.answerUsers}}" mode="aspectFill" src="{{item.userAvatar}}"></image>
+      <image wx:for="{{data.answerUsers}}" mode="aspectFill" src="{{item.userAvatar||'/assets/img/default/avatar.png'}}"></image>
       <view class="tip" style="margin-left:{{imgsWidth}}rpx;">{{data.answerUserNum>4?'等'+data.answerUserNum+'人':''}}参与了讨论</view>
     </block>
 
     <block wx:elif="{{data.answerUsers.length===0}}">
-      <image mode="aspectFill" src="{{data.userAvatar}}"></image>
+      <image mode="aspectFill" src="{{data.userAvatar||'/assets/img/default/avatar.png'}}"></image>
       <view class="tip" style="margin-left:70rpx;">{{data.nickName}}发起提问</view>
     </block>
     

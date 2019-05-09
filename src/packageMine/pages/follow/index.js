@@ -35,6 +35,7 @@ Page(app.observer({
   },
 
   refresh(){
+    if(this.data.loading)return
     this.data.pageIndex=1
     this.data.experts=[]
     this.data.nomore=false
