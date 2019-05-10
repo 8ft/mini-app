@@ -40,7 +40,8 @@ Page(app.observer({
       nomore: false
     },
 
-    loading: true
+    loading: true,
+    scrollY:true
   },
 
   onLoad() {
@@ -109,7 +110,8 @@ Page(app.observer({
 
   refresh(e) {
     if(this.data.loading)return
-    this.data.loading=true
+    this.setData({scrollY:false})
+    
     switch (this.data.tabIndex) {
       case 0:
         this.data.articles = {
@@ -222,7 +224,8 @@ Page(app.observer({
         })),
         'qas.pageIndex': pIndex,
         'qas.nomore': nomore,
-        loading: false
+        loading:false,
+        scrollY:true
       })
     }
     
@@ -251,7 +254,8 @@ Page(app.observer({
         'experts.list': this.data.experts.list.concat(res.data.list),
         'experts.pageIndex': pIndex,
         'experts.nomore': nomore,
-        loading: false
+        loading:false,
+        scrollY:true
       })
     }
     
@@ -288,7 +292,8 @@ Page(app.observer({
           })),
           'services.pageIndex': pIndex,
           'services.nomore': nomore,
-          loading: false
+          loading:false,
+          scrollY:true
         })
       } else {
         this.setData({
@@ -300,7 +305,8 @@ Page(app.observer({
           })),
           'stores.pageIndex': pIndex,
           'stores.nomore': nomore,
-          loading: false
+          loading:false,
+          scrollY:true
         })
       }
 
@@ -324,29 +330,27 @@ Page(app.observer({
       pageSize: 10
     })
 
-    if (res.code === 0) {
-      if (res.data.page > pIndex) {
-        pIndex++
-      } else {
-        nomore = true
-      }
-
-      this.setData({
-        'articles.list': this.data.articles.list.concat(res.data.list.map(blog => {
-          if (blog.articleBrief.length > 50) {
-            blog.articleBrief = blog.articleBrief.substring(0, 50) + '...'
-          }
-          blog.createTime = app.util.formatTime(blog.createTime, 'blogCard')
-          return blog
-        })),
-        'articles.pageIndex': pIndex,
-        'articles.nomore': nomore,
-        'articles.amount': res.data.count,
-        loading: false
-      })
+    if (res.code !== 0) return
+    if (res.data.page > pIndex) {
+      pIndex++
+    } else {
+      nomore = true
     }
 
-    
+    this.setData({
+      'articles.list': this.data.articles.list.concat(res.data.list.map(blog => {
+        if (blog.articleBrief.length > 50) {
+          blog.articleBrief = blog.articleBrief.substring(0, 50) + '...'
+        }
+        blog.createTime = app.util.formatTime(blog.createTime, 'blogCard')
+        return blog
+      })),
+      'articles.pageIndex': pIndex,
+      'articles.nomore': nomore,
+      'articles.amount': res.data.count,
+      loading:false,
+      scrollY:true
+    })
   }
 
 }))

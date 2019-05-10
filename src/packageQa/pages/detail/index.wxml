@@ -15,7 +15,7 @@
 
     
     <view class="html">
-        <view wx:if="{{detail.questionState===13||detail.questionState===21}}" class="xiajia">
+        <view wx:if="{{detail.questionState===13||detail.questionState===21||detail.questionState===20}}" class="xiajia">
             <image mode='aspectFill' src="/assets/img/discover/xiajia.png"></image> 
             <text>{{detail.questionAudit.auditRemark}}</text>
         </view>

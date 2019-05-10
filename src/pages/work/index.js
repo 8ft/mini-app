@@ -9,7 +9,7 @@ Page(app.observer({
 
   data: {
     swiperHeight:0,
-    typeIndex:0,
+    tabIndex:0,
 
     pageSize:10,
     loading:true,
@@ -93,7 +93,7 @@ Page(app.observer({
 
   refresh(){
     if(this.data.loading)return
-    if (this.data.typeIndex === 0) {
+    if (this.data.tabIndex === 0) {
       this.data.myPublish.pageIndex=1
       this.data.myPublish.nomore=false
       this.data.myPublish.projects=[]
@@ -139,7 +139,7 @@ Page(app.observer({
 
   switchState(e){
     const index = e.currentTarget.dataset.index
-    if(this.data.typeIndex===0){
+    if(this.data.tabIndex===0){
       this.setData({
         'myPublish.currentState':index
       })

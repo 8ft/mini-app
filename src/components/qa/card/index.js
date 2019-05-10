@@ -39,6 +39,7 @@ Component({
     },
 
     activeUI_by_appearance: {
+      'default':{viewer:true},
       'theQuestions': { viewer: true },
       'theAnswers': { viewer: true },
       'collection': {},

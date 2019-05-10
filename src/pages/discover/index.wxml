@@ -91,7 +91,7 @@
                     <image mode="widthFix" src="/assets/img/qa.png"></image>
                     <view catchtap="hideIntroduce">X</view>
                 </navigator>
-                <qa-card wx:for="{{qa.list}}" data="{{item}}"></qa-card>
+                <qa-card wx:for="{{qa.list}}" appearance="default" data="{{item}}"></qa-card>
             </block>
             <nodata wx:elif="{{!loading}}"></nodata>
         </scroll-view>
