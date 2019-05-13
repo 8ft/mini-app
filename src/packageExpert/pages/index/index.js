@@ -298,6 +298,8 @@ Page(app.observer({
         'blogs.nomore': nomore,
         loading: false
       })
+
+      
     }
     wx.stopPullDownRefresh()
   },

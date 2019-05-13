@@ -268,7 +268,8 @@ Page(app.observer({
     this.setData({ loading: true })
 
     let detail = await app.request.post('/qa/question/query/detail', {
-      questionId: this.data.id
+      questionId: this.data.id,
+      viewNum:1
     })
     if (detail.code !== 0) return
 
