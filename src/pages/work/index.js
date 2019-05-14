@@ -221,4 +221,21 @@ Page(app.observer({
     })
   }
 
+  ,
+  touchstart(e){
+    console.log(e)
+  }, 
+  touchend(e){
+    this.setData({
+      showLoading:true
+    })
+    setTimeout(()=>{
+      this.setData({
+        showLoading:false
+      })
+    },1000)
+    console.log(e)
+  }
+  
+
 }))

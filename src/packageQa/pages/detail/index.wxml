@@ -34,7 +34,7 @@
              <view class="title">回答</view>
              <view class="comment" wx:for="{{lists.best}}">
                 <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{item.userId}}">
-                    <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
+                    <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar||'/assets/img/default/avatar.png'}}"></image>
                     <view class="top-line">
                         <view class="name"><text>{{item.nickName}}</text><image class="icon-accept" mode='aspectFill' src="/assets/img/icon/accept.png"></image></view>
                         <view class="like {{item.praiseFlag?'on':''}}" data-belongs="best" data-id="{{item.id}}" data-index="{{index}}" data-liked="{{item.praiseFlag}}" catchtap="like">
@@ -56,7 +56,7 @@
             <view class="title">热门回答</view>
             <view class="comment" wx:for="{{lists.hots}}">
                 <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{item.userId}}">
-                    <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
+                    <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar||'/assets/img/default/avatar.png'}}"></image>
                     <view class="top-line">
                         <view class="name">{{item.nickName}}</view>
                         <view class="take" data-id="{{item.id}}" catchtap="take" wx:if="{{isMyself&&detail.questionState===11&&item.userId!==props.stores.account.userInfo.userId}}">
@@ -85,7 +85,7 @@
             <view class="title">最新回答</view>
             <view class="comment" wx:for="{{lists.answers}}">
                 <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{item.userId}}">
-                    <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
+                    <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar||'/assets/img/default/avatar.png'}}"></image>
                     <view class="top-line">
                         <view class="name">{{item.nickName}}</view>
                         <view class="take" data-id="{{item.id}}" catchtap="take" wx:if="{{isMyself&&detail.questionState===11&&item.userId!==props.stores.account.userInfo.userId}}">
@@ -128,7 +128,7 @@
             <scroll-view style="height:{{scrollViewHeight}}px;padding-bottom: env(safe-area-inset-bottom);box-sizing:border-box;" scroll-y="true" scroll-top='0' bindscrolltolower="getReplies">
                 <view class="comment">
                     <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{lists[belongs][cIndex].userId}}">
-                        <image lazy-load="true" mode='aspectFill' src="{{lists[belongs][cIndex].userAvatar}}"></image>
+                        <image lazy-load="true" mode='aspectFill' src="{{lists[belongs][cIndex].userAvatar||'/assets/img/default/avatar.png'}}"></image>
                         <view class="name">{{lists[belongs][cIndex].nickName}}</view>
                     </navigator>
                     <text class="con">{{lists[belongs][cIndex].content}}</text>
@@ -139,7 +139,7 @@
                     <view class="title">{{lists[belongs][cIndex].replyNum===0?'抢先':''}}评论</view>
                     <view class="comment" hidden="{{lists[belongs][cIndex].replyNum===0}}" wx:for="{{lists[belongs][cIndex].replies}}">
                         <navigator hover-class="none" url="/packageExpert/pages/index/index?id={{item.userId}}">
-                            <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar}}"></image>
+                            <image lazy-load="true" mode='aspectFill' src="{{item.userAvatar||'/assets/img/default/avatar.png'}}"></image>
                             <view class="top-line">
                                 <view class="name">{{item.nickName}}</view>
                                 <view class="like {{item.praiseFlag?'on':''}}" data-belongs="{{belongs}}" data-bid="{{item.replyBatchId}}" data-id="{{item.id}}" data-index="{{index}}" data-liked="{{item.praiseFlag}}" catchtap="like">

@@ -12,7 +12,7 @@ Page(app.observer({
 
     reward:0,
     selectedReward:0,
-    rewards:[0,0.01,5,10,15,20,50,100,200],
+    rewards:[0,5,10,15,20,50,100,200],
     selectedTags:[]
   },
 
