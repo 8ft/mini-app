@@ -107,6 +107,15 @@ class towxml {
 					data.attr.src = `${base}${data.attr.src}`;
 				};
 
+				// 处理以 // 开头src路径，手机无法显示
+				if(
+					data.attr && 
+					data.attr.src && 
+					data.attr.src.indexOf('//') === 0
+				){
+					data.attr.src = `https:${data.attr.src}`;
+				};
+
 				// 处理音频
 				if(data.type === 'audio'){
 					// 得到音频播放选项
@@ -154,39 +163,39 @@ class towxml {
 			};
 
 
-			// tagsAndAttrs.binds.forEach(item => {
-			// 	let aItem = item.split(':'),
-			// 		bindType = aItem[0],		// 事件绑定类型
-			// 		evenType = aItem[1];		// 事件类型
+			tagsAndAttrs.binds.forEach(item => {
+				let aItem = item.split(':'),
+					bindType = aItem[0],		// 事件绑定类型
+					evenType = aItem[1];		// 事件类型
 				
 
-			// 	// 检查，如果有添加自定义事件，则运行该事件
-			// 	app[`__${bindType}_${evenType}`] = (event)=>{
-			// 		let funName = `event_${bindType}_${evenType}`,
-			// 			timer = `${funName}_timer`,
-			// 			runFun = app[funName];
+				// 检查，如果有添加自定义事件，则运行该事件
+				app[`__${bindType}_${evenType}`] = (event)=>{
+					let funName = `event_${bindType}_${evenType}`,
+						timer = `${funName}_timer`,
+						runFun = app[funName];
 
-			// 		// 为audio标签绑定音频播放
-			// 		if(event && 
-			// 			event.type === 'tap' && 
-			// 			event.currentTarget &&
-			// 			event.currentTarget.dataset &&
-			// 			event.currentTarget.dataset._el &&
-			// 			event.currentTarget.dataset._el._e && 
-			// 			event.currentTarget.dataset._el._e.tagName === 'audio'){
-			// 			app.__audioPlayAndPause__(event);
-			// 		};
+					// 为audio标签绑定音频播放
+					if(event && 
+						event.type === 'tap' && 
+						event.currentTarget &&
+						event.currentTarget.dataset &&
+						event.currentTarget.dataset._el &&
+						event.currentTarget.dataset._el._e && 
+						event.currentTarget.dataset._el._e.tagName === 'audio'){
+						app.__audioPlayAndPause__(event);
+					};
 
-			// 		if(typeof runFun === 'function'){
+					if(typeof runFun === 'function'){
 
-			// 			// 由于小程序的事件绑定方式与冒泡机制问题，此处使用计时器以避免事件被同时多次调用
-			// 			clearTimeout(app[timer]);
-			// 			app[timer] = setTimeout(()=>{
-			// 				runFun(event)
-			// 			});
-			// 		};
-			// 	};
-			// });
+						// 由于小程序的事件绑定方式与冒泡机制问题，此处使用计时器以避免事件被同时多次调用
+						clearTimeout(app[timer]);
+						app[timer] = setTimeout(()=>{
+							runFun(event)
+						});
+					};
+				};
+			});
 			app[`__todo_checkboxChange`] = (event)=>{};
 		};
 		

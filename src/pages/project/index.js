@@ -50,6 +50,20 @@ Page(app.observer({
     this.getProjects()
   },
 
+  onPageScroll(e) {
+    let sTop=e.scrollTop
+
+    if (sTop > 1563 && !this.data.fixTabs) {
+      this.setData({
+        fixTabs: true
+      })
+    } else if (sTop <= 1563 &&this.data.fixTabs) {
+      this.setData({
+        fixTabs: false
+      })
+    }
+  },
+
   async getBlogs(){
     let res = await app.request.post('/blog/carouselConfig/getList')
     if(res.code===0){

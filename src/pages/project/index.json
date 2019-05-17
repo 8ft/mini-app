@@ -2,6 +2,7 @@
   "navigationBarTitleText": "巨牛汇",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "project-card":"/components/project/card/index"
+    "project-card":"/components/project/card/index",
+    "tabs":"/components/common/tabs/index"
   }
 }

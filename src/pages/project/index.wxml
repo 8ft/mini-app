@@ -1,4 +1,4 @@
-<nav-bar title="巨牛汇" returnable="{{false}}"></nav-bar>
+<nav-bar returnable="{{false}}" transparent="{{true}}"></nav-bar>
 
 <swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
   <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>
@@ -8,41 +8,30 @@
 
 <view class='types clearfix'>
   <navigator url='/packageProject/pages/list/index?type=-1' hover-class="none">
-    <view class='project-type-icon quanbu'>
-      <view class="iconfont icon-quanbu"></view>
-    </view>
-    <text>全部</text>
+    <image mode="aspectFill" src="/assets/img/icon/xm@3x.png"></image>
+    <text>项目</text>
   </navigator>
   <navigator url='/packageProject/pages/list/index?type=0' hover-class="none">
-    <view class='project-type-icon kaifa'>
-      <view class="iconfont icon-kaifa"></view>
-    </view>
-    <text>开发</text>
+    <image mode="aspectFill" src="/assets/img/icon/bk@3x.png"></image>
+    <text>博客</text>
   </navigator>
   <navigator url='/packageProject/pages/list/index?type=1' hover-class="none">
-    <view class='project-type-icon sheji'>
-      <view class="iconfont icon-sheji"></view>
-    </view>
-    <text>设计</text>
+    <image mode="aspectFill" src="/assets/img/icon/wd@3x.png"></image>
+    <text>问答</text>
   </navigator>
   <navigator url='/packageProject/pages/list/index?type=2' hover-class="none">
-    <view class='project-type-icon yunying'>
-      <view class="iconfont icon-yunying"></view>
-    </view>
-    <text>市场/运营</text>
+    <image mode="aspectFill" src="/assets/img/icon/rc@3x.png"></image>
+    <text>人才库</text>
   </navigator>
   <navigator url='/packageProject/pages/list/index?type=3' hover-class="none">
-    <view class='project-type-icon chanpin'>
-      <view class="iconfont icon-chanpin"></view>
-    </view>
-    <text>产品</text>
+    <image mode="aspectFill" src="/assets/img/icon/fw@3x.png"></image>
+    <text>服务</text>
   </navigator>
 </view>
 
 <view class="part">
    <view class='title'>
-    <view class="iconfont icon-zhangzishi"></view>
-    <text>今日涨姿势</text>
+    <text>博客</text>
     <navigator class='arrow-right' url="/packageBlog/pages/list/index?id=&index=0" hover-class="none">更多</navigator>
   </view>
 </view>
@@ -50,12 +39,9 @@
     <image wx:for="{{blogs}}" src="{{item.coverImage}}" data-obj="{{item}}" bindtap="bannerJump"></image>
 </scroll-view>
 
-<view class='part'>
-  <view class='title'>
-    <view class="iconfont icon-xiangmuku"></view>
-    <text>项目库</text>
+  <view class="title" >
+    <tabs fixed="{{fixTabs}}" under-line-ratio="{{.5}}" tabs="{{['全部','开放','设计','文案/运营','产品']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
     <navigator class='arrow-right' url='/packageProject/pages/list/index' hover-class="none">更多</navigator>
   </view>
   <project-card wx:if="{{projects.length>0}}" wx:for="{{projects}}" wx:for-item="project" project="{{project}}"></project-card>
-</view>
 

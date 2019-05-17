@@ -93,7 +93,7 @@
 }
 
 .h2w__main {
-    margin: 0 40rpx;
+    margin: 0 40rpx 40rpx 40rpx;
     padding-top: 40rpx;
 }
 
@@ -405,17 +405,17 @@
     font-family: "Apple Color Emoji", "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+/**内置元素**/
+image,
+video {
+    width: 100%;
+    margin: 10rpx auto;
+}
 
-.h2w image,
-.h2w video {
-        width: 100%;
-        margin: 10rpx auto;
-    }
+image {
+    height: auto;
+}
 
-    .h2w image {
-        height: auto;
-    }
-
-    .h2w video {
-        height: 220px;
-    }
+video {
+    height: 220px;
+}

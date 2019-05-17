@@ -3,6 +3,7 @@ const regeneratorRuntime=app.regeneratorRuntime
 
 const Towxml = require('../../../libs/towxml/main')
 const towxml=new Towxml()  
+
 const nodataCon = {
   '-1':{
     img:'',
@@ -129,12 +130,12 @@ Page(app.observer({
   async follow(){
     if(app.checkLogin()){
       const res = await app.request.post('/blog/attentionInfo/follow',{
-        attentionUserId:this.data.detail.updateUserId
+        attentionUserId:this.data.updateUserId
       })
       if(res.code!==0)return
-      this.props.stores.account.follow(this.data.detail.attentionState===0?1:-1)
+      this.props.stores.account.follow(this.data.attentionState===0?1:-1)
       this.setData({
-        'detail.attentionState':this.data.detail.attentionState===0?1:0
+        'detail.attentionState':this.data.attentionState===0?1:0
       })
     }
   },
@@ -145,9 +146,9 @@ Page(app.observer({
         articleId:this.data.id
       })
       if(res.code!==0)return
-      this.props.stores.account.collect(this.data.detail.favoriteState===0?1:-1)
+      this.props.stores.account.collect(this.data.favoriteState===0?1:-1)
       this.setData({
-        'detail.favoriteState':this.data.detail.favoriteState===0?1:0
+        'detail.favoriteState':this.data.favoriteState===0?1:0
       })
       this.props.stores.toRefresh.updateList('collect')
     }
@@ -171,16 +172,48 @@ Page(app.observer({
       isMyself=this.props.stores.account.userInfo.userId===this.data.uid
     }
 
+    const {
+      articleState,
+      articleTitle,
+      articleType,
+      userAvatar,
+      updateUserId,
+      nickName,
+      articleSourceTypeName,
+      createTime,
+      viewNum,
+      attentionState,
+      auditRemark,
+      articleTags,
+      favoriteState,
+      comments:{count}
+    }=detail.data
+
     this.setData({
       isMyself:isMyself,
       loading:false,
-      detail:detail.data,
+      
+      articleState,
+      articleTitle,
+      articleType,
+      userAvatar,
+      updateUserId,
+      nickName,
+      articleSourceTypeName,
+      createTime,
+      viewNum,
+      attentionState,
+      auditRemark,
+      articleTags,
+      favoriteState,
+      count,
+
       comments:detail.data.comments.list.map(item=>{
         item.createTime=app.util.formatTime(item.createTime,'blogComment')
         return item
       })
     })
-
+    
     //解析html
     let wxml = towxml.toJson(
       detail.data.content,               
@@ -190,7 +223,9 @@ Page(app.observer({
     this.setData({
       article: wxml
     })
+  
   },
+
 
   async getReplies () {
     let nomore = this.data.nomore
@@ -224,3 +259,5 @@ Page(app.observer({
   download:app.download
 
 }))
+
+
