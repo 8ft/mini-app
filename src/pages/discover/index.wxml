@@ -1,5 +1,5 @@
 <nav-bar returnable="{{false}}" bindready="getNavHeight">
-    <tabs slot="nav" under-line-ratio="{{.7}}" tabs="{{['博客','问答','人才库','服务']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
+    <tabs slot="nav" under-line-ratio="{{.7}}" tabs="{{['博客','问答','人才库','服务']}}" active="{{tabIndex}}" margin="46" bindchange="tabChange"></tabs>
 </nav-bar>
 
 <!-- 首页 -->

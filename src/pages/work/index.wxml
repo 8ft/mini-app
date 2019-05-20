@@ -1,7 +1,7 @@
 
 <block wx:if="{{props.stores.account.logged_in}}">
   <nav-bar returnable="{{false}}" bindready="getNavHeight">
-    <tabs slot="nav" under-line-ratio="{{.5}}" tabs="{{['我的项目','申请项目']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
+    <tabs slot="nav" under-line-ratio="{{.5}}" tabs="{{['我的项目','申请项目']}}" active="{{tabIndex}}" margin="65" bindchange="tabChange"></tabs>
   </nav-bar>
 
  

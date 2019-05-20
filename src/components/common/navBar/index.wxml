@@ -10,8 +10,11 @@
       </navigator>
     </view>
 
-    <view class="nav-bar-title" wx:if="{{title}}">{{title}}</view>
-    <slot name="nav"></slot>
+    <view class="nav-bar-content">
+      <view wx:if="{{title}}" class="nav-bar-title">{{title}}</view>
+      <slot name="nav"></slot>
+    </view>
+    
   </view>
   <slot name="addones"></slot>
 </view>

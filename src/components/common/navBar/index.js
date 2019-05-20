@@ -11,7 +11,10 @@ Component({
       type:Boolean,
       value:true
     },
-    title:String,
+    title:{
+      type:String,
+      value:''
+    },
     returnable:{
       type:Boolean,
       value:true

@@ -7,9 +7,8 @@
 }
 
 
-.tabs{border:none!important;
-    scroll-view{text-align:center;}
-    .tab{font-size:34rpx!important;margin:0 33rpx;color:$gray!important;}}
+.tabs{border:none!important;padding-left:44rpx;
+    .tab{font-size:34rpx!important;color:$gray!important;}}
 
 .banner{width:690rpx;height:295rpx;margin:0 auto 20rpx;border-radius:10rpx;
     image{border-radius:10rpx;width:100%;height:100%;}}

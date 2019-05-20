@@ -1,4 +1,4 @@
-<nav-bar returnable="{{false}}" transparent="{{true}}"></nav-bar>
+<nav-bar title="巨牛汇" returnable="{{false}}" bindready="getNavHeight"></nav-bar>
 
 <swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
   <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>
@@ -39,9 +39,25 @@
     <image wx:for="{{blogs}}" src="{{item.coverImage}}" data-obj="{{item}}" bindtap="bannerJump"></image>
 </scroll-view>
 
-  <view class="title" >
-    <tabs fixed="{{fixTabs}}" under-line-ratio="{{.5}}" tabs="{{['全部','开放','设计','文案/运营','产品']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
-    <navigator class='arrow-right' url='/packageProject/pages/list/index' hover-class="none">更多</navigator>
-  </view>
-  <project-card wx:if="{{projects.length>0}}" wx:for="{{projects}}" wx:for-item="project" project="{{project}}"></project-card>
 
+<view id="projectTags" class="projectTags">
+  <tabs under-line-ratio="{{.5}}" tabs="{{['全部','开放','设计','文案/运营','产品']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
+  <navigator class='arrow-right' url='/packageProject/pages/list/index' hover-class="none">更多</navigator>
+</view>
+
+<swiper bindchange="onSwiperChange" current="{{tabIndex}}" duration="300" style="height:{{swiperHeight}}px;">
+  <swiper-item>
+      <scroll-view 
+        class='projects' 
+        style="height:{{swiperHeight}}px" 
+        scroll-y="{{unlockScroll}}" 
+        bindscrolltolower="getBlogs"> 
+
+        <block wx:if="{{projects.length>0}}">
+          <project-card wx:for="{{projects}}" wx:for-item="project" project="{{project}}"></project-card>
+        </block>
+        <nodata wx:else="{{!loading}}"></nodata>
+
+      </scroll-view>
+    </swiper-item>
+</swiper>

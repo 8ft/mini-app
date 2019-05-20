@@ -46,7 +46,7 @@
 </view>
 
 
-<tabs under-line-ratio="{{.5}}" wx:if="{{blogInfo}}" tabs="{{['基础信息','文章('+blogInfo.articleNum+')','提问','回答']}}" active="{{tabIndex}}" bindchange="switchList"></tabs>
+<tabs under-line-ratio="{{.5}}" wx:if="{{blogInfo}}" tabs="{{['基础信息','文章('+blogInfo.articleNum+')','提问','回答']}}" margin="0" active="{{tabIndex}}" bindchange="switchList"></tabs>
 <view id="content">
   <block wx:if="{{tabIndex===0&&(user.userState===2||isMyself)}}">
     <view class="part">

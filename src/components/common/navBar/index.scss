@@ -8,7 +8,10 @@
       .iconfont{font-size:34rpx;color:black;line-height: 34rpx;}
     }
 
-    .nav-bar-title{flex:1;line-height:100rpx;font-size:36rpx;font-weight:500;color:#333;text-align:center;}
+    .nav-bar-content{width:100%;
+      .nav-bar-title{font-size:36rpx;font-weight:500;color:#333;text-align:center;}
+    }
+    
     &.transparent{background: transparent!important;
       .nav-bar-title{color:#fff;}
       .return{background:rgba(255,255,255,.7);

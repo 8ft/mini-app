@@ -1,5 +1,5 @@
 <nav-bar title="我的收藏" bindready="getNavHeight">
-  <tabs slot="addones" under-line-ratio="{{.8}}" tabs="{{['文章','问答','人才','服务','店铺']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
+  <tabs slot="addones" under-line-ratio="{{.8}}" tabs="{{['文章','问答','人才','服务','店铺']}}" margin="0" active="{{tabIndex}}" bindchange="tabChange"></tabs>
 </nav-bar>
 
 <swiper bindchange="onSwiperChange" current="{{tabIndex}}" duration="300" style="height:{{scrollViewHeight}}px;">

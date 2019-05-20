@@ -1,7 +1,7 @@
 @import '../../assets/wxss/var.scss';  
 
-.tabs{border:none!important;
-    .tab{font-size:34rpx!important;margin:0 33rpx;color:$gray!important;}
+.tabs{border:none!important;padding-left:44rpx;
+    .tab{font-size:34rpx!important;color:$gray!important;}
 }
 
 .types{width:100%;white-space:nowrap;box-sizing:border-box;background: #fff;}

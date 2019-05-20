@@ -3,9 +3,7 @@
 @import '../../../libs/towxml/style/theme/light.wxss';  
 
 .hidden{visibility: hidden;}
-.tabs{border:none!important;
-    .tab:nth-of-type(1){margin-left:220rpx;}
-}
+.tabs{border:none!important;padding-left:220rpx;}
 
 scroll-view{width:100%;}
 

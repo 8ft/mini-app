@@ -14,15 +14,23 @@ swiper{width:100%;height:350rpx;margin-bottom:28rpx;
    
 .part{padding:0 40rpx;}
 
-.blogs{width:100%;white-space:nowrap;margin-top:39rpx;
+.blogs{width:100%;height:160rpx;white-space:nowrap;margin-top:39rpx;
     navigator{display: inline-block;}
     image{width:280rpx;height: 160rpx;border-radius: 8rpx;margin-left: 30rpx;}
 }
 
-.title{display:flex;align-items:center;font-size:$xxl;color:$black;line-height:$xxl;margin:62rpx 0 17rpx;
+.title{display:flex;align-items:center;font-size:$xxl;color:$black;line-height:$xxl;margin:62rpx 0 17rpx;box-sizing:border-box;
     text{font-weight:600;}
-    &.fixed{position: fixed;top:0;left:0;z-index: $topFloor;background: red;}
     navigator{flex:1;text-align:right;font-size:$l;color:#A0A0A0;font-weight: 400;}}
+
+.projectTags{margin:27rpx 0 20rpx;height:80rpx;display: flex;align-items:center;padding:0 40rpx;
+    navigator{flex:1;text-align:right;font-size:$l;color:#A0A0A0;font-weight: 400;}}
+
+
+.tabs{border:none!important;
+    .tab{font-size:28rpx!important;color:$gray!important;}
+}
+
 
 
 

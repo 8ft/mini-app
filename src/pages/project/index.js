@@ -21,6 +21,26 @@ Page(app.observer({
    nomore: false
   },
 
+  onReady(){
+     
+  },
+
+  onPageScroll(e) {
+    const pTop=this.data.pTop
+    if(!pTop)return
+   
+    if(e.scrollTop>=pTop&&!this.data.unlockScroll){
+      this.setData({
+        unlockScroll: true
+      })
+    }else if(e.scrollTop>pTop){
+      wx.pageScrollTo({
+        scrollTop: pTop,
+        duration:0
+      })
+    }
+  },
+
   onShow(){
     this.props.stores.toRefresh.refresh('index',async(exist)=>{
       if(this.data.banners===null){
@@ -39,10 +59,6 @@ Page(app.observer({
     this.refresh()
   },
 
-  onReachBottom(){
-    this.getProjects()
-  },
-
   refresh(){
     this.data.pageIndex=1
     this.data.projects=[]
@@ -50,18 +66,14 @@ Page(app.observer({
     this.getProjects()
   },
 
-  onPageScroll(e) {
-    let sTop=e.scrollTop
-
-    if (sTop > 1563 && !this.data.fixTabs) {
-      this.setData({
-        fixTabs: true
-      })
-    } else if (sTop <= 1563 &&this.data.fixTabs) {
-      this.setData({
-        fixTabs: false
-      })
-    }
+  getNavHeight(e) {
+    const systemInfo = wx.getSystemInfoSync()
+    const ratio = systemInfo.windowWidth / 750
+    const swiperHeight = systemInfo.windowHeight - e.detail.height-54*ratio
+    this.setData({
+      navHeight:e.detail.height,
+      swiperHeight:swiperHeight
+    })
   },
 
   async getBlogs(){
@@ -115,6 +127,16 @@ Page(app.observer({
         })),
         pageIndex:pIndex,
         nomore:nomore
+      })
+    }
+
+    if(!this.data.pTop){
+      const query=this.createSelectorQuery()
+      query.select('#projectTags').boundingClientRect()
+      query.exec(res => {
+        this.setData({
+          pTop:res[0].top-this.data.navHeight
+        })
       })
     }
     wx.stopPullDownRefresh()

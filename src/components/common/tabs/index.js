@@ -3,19 +3,27 @@ Component({
     addGlobalClass: true,
   },
   properties: {
+    tabs: Array,
     active: {
       type: Number,
-      value:-1,
+      value: -1,
       observer(newVal, oldVal, changedPath) {
         wx.nextTick(() => {
           this._selectTab(newVal)
         })
       }
     },
-    tabs: Array,
     fixed: {
       type: Boolean,
       value: false
+    },
+    center: {
+      type: Boolean,
+      value: false
+    },
+    margin:{
+      type:Number,
+      value:34
     },
     underLineRatio: {
       type: Number,
@@ -28,7 +36,7 @@ Component({
   },
 
   lifetimes: {
-    attached () {
+    attached() {
       const animation = wx.createAnimation({
         duration: 300,
         timingFunction: 'ease',
@@ -36,32 +44,39 @@ Component({
       this.animation = animation
       this.windowWidth = wx.getSystemInfoSync().windowWidth
     },
-    ready () {
-      if(this.properties.active===-1){
+    ready() {
+      if (this.properties.active === -1) {
         this._selectTab(0)
       }
     }
   },
 
   methods: {
-    _tabClick (e) {
+    _tabClick(e) {
       let index = e.currentTarget.dataset.index
       if (index !== this.data.active) {
         this.setData({
-          active:index
+          active: index
         })
         this.triggerEvent('change', { index: index })
       }
     },
-    _selectTab (tabIndex) {
+    _selectTab(tabIndex) {
       const query = wx.createSelectorQuery().in(this)
-      query.select('#scrollView').scrollOffset()
+      query.select('#tabs').fields({
+        rect: true,
+        scrollOffset: true
+      })
       query.select(`#tab${tabIndex}`).boundingClientRect()
       query.exec(e => {
         const ratio = this.properties.underLineRatio
-        const width = e[1].width * ratio
-        const diff = e[1].width * (1 - ratio) / 2
-        const x = e[0].scrollLeft + e[1].left + diff
+        const scrollView = e[0]
+        const tab = e[1]
+
+        const width = tab.width * ratio
+        const diff = tab.width * (1 - ratio) / 2
+        const x = scrollView.scrollLeft + tab.left + diff - scrollView.left
+
         this.setData({
           animationData: this.animation.width(width).translateX(x).step().export(),
           scrollLeft: x - this.windowWidth / 2 + width / 2

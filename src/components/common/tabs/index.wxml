@@ -1,12 +1,19 @@
 
 
 <view class="tabs {{fixed?'fixed':''}}" style="top:{{top}};">
-  <scroll-view id="scrollView" scroll-x="true" scroll-left="{{scrollLeft}}" scroll-with-animation="{{true}}">
-    <view wx:for="{{tabs}}" bindtap="_tabClick" data-index="{{index}}" class="tab {{active===index?'active':''}}">
+  <scroll-view wx:if="{{!center}}" id="tabs" scroll-x="true" scroll-left="{{scrollLeft}}" scroll-with-animation="{{true}}">
+    <view wx:for="{{tabs}}" bindtap="_tabClick" data-index="{{index}}" class="tab {{active===index?'active':''}}" style="margin-right:{{margin}}rpx;">
       <view id="tab{{index}}">{{item}}</view>
     </view>
     <view id="tabUnderline" class='tab-underline' animation="{{animationData}}"></view>
   </scroll-view>
+
+  <view wx:if="{{center}}" id="tabs" class="center">
+    <view wx:for="{{tabs}}" bindtap="_tabClick" data-index="{{index}}" class="tab {{active===index?'active':''}}" style="margin-right:{{margin}}rpx;">
+      <view id="tab{{index}}">{{item}}</view>
+    </view>
+    <view id="tabUnderline" class='tab-underline' animation="{{animationData}}"></view>
+  </view>
 </view>
 
 <view wx:if="{{fixed}}" class="place-holder"></view>
