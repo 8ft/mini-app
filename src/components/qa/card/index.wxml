@@ -1,4 +1,4 @@
-<view class="qa {{appearance}}" data-url="/packageQa/pages/detail/index?id={{data.id}}&uid={{data.userId}}" bindtap="_goDetail">
+<view class="qa {{appearance}} custom-class" data-url="/packageQa/pages/detail/index?id={{data.id}}&uid={{data.userId}}" bindtap="_goDetail">
   <view class='title'><text class='reward' wx:if="{{data.rewardAmountYuan>0}}">￥{{data.rewardAmountYuan}}元</text><text>{{data.questionName}}</text></view>
   <view class="tags">
     <view class='skills'>

@@ -2,6 +2,7 @@ const app = getApp()
 const regeneratorRuntime = app.regeneratorRuntime
 
 Component({
+  externalClasses: ['custom-class'],
   properties: {
     data: {
       type: Object,

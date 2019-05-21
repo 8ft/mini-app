@@ -2,7 +2,7 @@
 
 page{background:#fff;}
 
-swiper{width:100%;height:350rpx;margin-bottom:28rpx;
+.banners{width:100%;height:350rpx;margin-bottom:28rpx;
     image{width:100%;height:100%;}}
 
 .types{display:flex;padding:0 10rpx;
@@ -12,7 +12,7 @@ swiper{width:100%;height:350rpx;margin-bottom:28rpx;
     }
 }
    
-.part{padding:0 40rpx;}
+.part{padding:0 30rpx;}
 
 .blogs{width:100%;height:160rpx;white-space:nowrap;margin-top:39rpx;
     navigator{display: inline-block;}
@@ -23,7 +23,7 @@ swiper{width:100%;height:350rpx;margin-bottom:28rpx;
     text{font-weight:600;}
     navigator{flex:1;text-align:right;font-size:$l;color:#A0A0A0;font-weight: 400;}}
 
-.projectTags{margin:27rpx 0 20rpx;height:80rpx;display: flex;align-items:center;padding:0 40rpx;
+.projectTags{margin-bottom:20rpx;height:80rpx;display: flex;align-items:center;padding:0 30rpx;
     navigator{flex:1;text-align:right;font-size:$l;color:#A0A0A0;font-weight: 400;}}
 
 
@@ -31,6 +31,15 @@ swiper{width:100%;height:350rpx;margin-bottom:28rpx;
     .tab{font-size:28rpx!important;color:$gray!important;}
 }
 
+.reset-qa-card{margin:0!important;padding: 40rpx 0 45rpx!important;}
 
 
+.broadcast{width:690rpx;height: 70rpx;margin:36rpx auto;background: #F8F8F8;padding:0 20rpx;display: flex;align-items: center;box-sizing:border-box;
+    .name{color:$black;font-size: 24rpx;display:inline-block;
+        &:nth-of-type(2){background: #FC5B30;color:#fff;padding:2rpx 5rpx;font-weight: 600;border-radius: 4rpx;margin:0 10rpx;}
+    }
 
+    swiper{flex:1;height: 22rpx;line-height:22rpx;font-size: 20rpx;display:inline-block;color:#FC5B30;
+        text{color:#777777;margin:0 10rpx;}
+    }
+}

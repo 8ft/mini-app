@@ -1,6 +1,6 @@
 <nav-bar title="巨牛汇" returnable="{{false}}" bindready="getNavHeight"></nav-bar>
 
-<swiper id="banner" wx:if="{{banners}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
+<swiper id="banner" class="banners" wx:if="{{banners.length>0}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
   <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>
     <image src="{{banner.iconImageUrl}}"></image>
   </swiper-item>
@@ -29,6 +29,20 @@
   </navigator>
 </view>
 
+<view class="broadcast">
+  <view class="name">巨牛汇</view>
+  <view class="name">快报</view>
+
+  <swiper bindchange="onBroadcastChange" duration="600" circular="{{true}}" vertical="{{true}}" autoplay="{{true}}" interval="{{3000}}">
+    <swiper-item >
+      XXXX<text>申请</text>微信小程序开发<text>成功，赚取赏金</text>￥1000元
+    </swiper-item>
+    <swiper-item >
+      XXXX<text>申请</text>微信小程序开发<text>成功，赚取赏金</text>￥1000元
+    </swiper-item>
+  </swiper>
+</view>
+
 <view class="part">
    <view class='title'>
     <text>博客</text>
@@ -40,23 +54,32 @@
 </scroll-view>
 
 
+<view class="part" style="border-bottom:15rpx solid #F2F2F2;">
+   <view class='title'>
+    <text>问答</text>
+    <navigator class='arrow-right' url="/packageBlog/pages/list/index?id=&index=0" hover-class="none">更多</navigator>
+  </view>
+  <qa-card wx:for="{{qas}}" appearance="default" custom-class="reset-qa-card" data="{{item}}"></qa-card>
+</view>
+
+
 <view id="projectTags" class="projectTags">
-  <tabs under-line-ratio="{{.5}}" tabs="{{['全部','开放','设计','文案/运营','产品']}}" active="{{tabIndex}}" bindchange="tabChange"></tabs>
+  <tabs under-line-ratio="{{.5}}" tabs="{{['全部','开发','设计','文案/运营','产品']}}" active="{{tabIndex}}" bindchange="onSwiperChange"></tabs>
   <navigator class='arrow-right' url='/packageProject/pages/list/index' hover-class="none">更多</navigator>
 </view>
 
 <swiper bindchange="onSwiperChange" current="{{tabIndex}}" duration="300" style="height:{{swiperHeight}}px;">
-  <swiper-item>
+  <swiper-item wx:for="{{projects}}">
       <scroll-view 
         class='projects' 
         style="height:{{swiperHeight}}px" 
         scroll-y="{{unlockScroll}}" 
-        bindscrolltolower="getBlogs"> 
+        bindscrolltolower="getProjects"> 
 
-        <block wx:if="{{projects.length>0}}">
-          <project-card wx:for="{{projects}}" wx:for-item="project" project="{{project}}"></project-card>
+        <block wx:if="{{item.list.length>0}}">
+          <project-card wx:for="{{item.list}}" wx:for-item="project" project="{{project}}"></project-card>
         </block>
-        <nodata wx:else="{{!loading}}"></nodata>
+        <nodata wx:elif="{{item.nomore&&!loading}}"></nodata>
 
       </scroll-view>
     </swiper-item>

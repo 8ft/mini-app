@@ -13,16 +13,40 @@ Page(app.observer({
   },
 
   data: {
-   banners:null,
-   blogs:null,
+   banners:[],
+   blogs:[],
+   qas:[],
+   tabIndex:0,
    types: ['全部','开发','设计','市场运营','产品'],
-   pageIndex: 1,
-   projects:[],
-   nomore: false
-  },
-
-  onReady(){
-     
+   projects:[
+    {
+      code:'',
+      list: [],
+      pageIndex: 1,
+      nomore: false
+    },{
+      code:'01',
+      list: [],
+      pageIndex: 1,
+      nomore: false
+    },{
+      code:'02',
+      list: [],
+      pageIndex: 1,
+      nomore: false
+    },{
+      code:'0301|0302',
+      list: [],
+      pageIndex: 1,
+      nomore: false
+    },{
+      code:'04',
+      list: [],
+      pageIndex: 1,
+      nomore: false
+    }
+   ],
+   loading:true
   },
 
   onPageScroll(e) {
@@ -30,23 +54,31 @@ Page(app.observer({
     if(!pTop)return
    
     if(e.scrollTop>=pTop&&!this.data.unlockScroll){
+      this.data.unlockScroll=true
       this.setData({
         unlockScroll: true
       })
-    }else if(e.scrollTop>pTop){
+
       wx.pageScrollTo({
         scrollTop: pTop,
         duration:0
       })
+
+    }else if(e.scrollTop+10<pTop&&this.data.unlockScroll){
+      this.data.unlockScroll=false
+      this.setData({
+        unlockScroll: false
+      })
     }
   },
 
-  onShow(){
+  async onShow(){
     this.props.stores.toRefresh.refresh('index',async(exist)=>{
-      if(this.data.banners===null){
-        this.getBanner()
-        this.getBlogs()
-        this.getProjects()
+      if(this.data.blogs.length===0){
+        await this.getBanner()
+        await this.getBlogs()
+        await this.getQa()
+        await this.getProjects()
       }else if(exist){
         this.refresh()
       }
@@ -56,14 +88,30 @@ Page(app.observer({
   onPullDownRefresh(){
     this.getBanner()
     this.getBlogs()
+    this.getQa()
     this.refresh()
   },
 
   refresh(){
-    this.data.pageIndex=1
-    this.data.projects=[]
-    this.data.nomore=false
+    this.data.project={
+      list: [],
+      pageIndex: 1,
+      nomore: false
+     }
     this.getProjects()
+  },
+
+  onSwiperChange(e) {
+    const index=e.detail.current||e.detail.index
+    if (index === this.data.tabIndex) return
+
+    this.setData({
+      tabIndex:index
+    })
+
+    if(this.data.projects[index].list.length===0){
+      this.getProjects()
+    }
   },
 
   getNavHeight(e) {
@@ -74,15 +122,6 @@ Page(app.observer({
       navHeight:e.detail.height,
       swiperHeight:swiperHeight
     })
-  },
-
-  async getBlogs(){
-    let res = await app.request.post('/blog/carouselConfig/getList')
-    if(res.code===0){
-      this.setData({
-        blogs: res.data.list
-      })
-    }
   },
 
   async getBanner(){
@@ -100,35 +139,77 @@ Page(app.observer({
     }
   },
 
+  async getBlogs(){
+    let res = await app.request.post('/blog/carouselConfig/getList')
+    if(res.code===0){
+      this.setData({
+        blogs: res.data.list
+      })
+    }
+  },
+
+  async getQa() {
+    this.setData({
+      loading:true
+    })
+
+    let res = await app.request.post('/qa/question/query/list', {
+      queryType:5,
+      questionState:'11|12',
+      pageIndex: 1,
+      pageSize:2
+    })
+
+    if (res.code === 0) {
+      this.setData({
+        qas:res.data.list.map((qa) => {
+            if(qa.skillTag){
+              qa.skillTag = qa.skillTag.split('|')
+            }
+            return qa
+          }),
+        loading:false
+      })
+    }
+  },
+
   async getProjects (){
-    let nomore = this.data.nomore
+    let data=this.data.projects[this.data.tabIndex]
+    let nomore = data.nomore
     if (nomore)return
 
-    let pIndex = this.data.pageIndex
+    this.setData({
+      loading:true
+    })
+
+    let pIndex = data.pageIndex
     let res = await app.request.post('/project/projectInfo/getList',{
+      projectType:data.code,
       pageIndex:pIndex,
       pageSize:10
     })
 
-    if (res.code === 0) {
-
-      if (res.data.page > pIndex){
-        pIndex++
-      }else{
-        nomore=true
-      }
-    
-      this.setData({
-        projects: this.data.projects.concat(res.data.list.map((project) => {
-          if(project.projectSkill){
-            project.projectSkill = project.projectSkill.split('|')
-          }
-          return project
-        })),
-        pageIndex:pIndex,
-        nomore:nomore
-      })
+    if (res.code !== 0) return
+    if (res.data.page > pIndex){
+      pIndex++
+    }else{
+      nomore=true
     }
+
+    data.list=data.list.concat(res.data.list.map((project) => {
+      if(project.projectSkill){
+        project.projectSkill = project.projectSkill.split('|')
+      }
+      return project
+    }))
+
+    data.pageIndex=pIndex
+    data.nomore=nomore
+  
+    this.setData({
+      [`projects[${this.data.tabIndex}]`]:data,
+      loading:false
+    })
 
     if(!this.data.pTop){
       const query=this.createSelectorQuery()

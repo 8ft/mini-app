@@ -1,6 +1,6 @@
 @import '../../../assets/wxss/var.scss'; 
 
-.project{position:relative;display:flex;align-items:center;padding:35rpx 0 36rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;
+.project{position:relative;display:flex;align-items:center;justify-content:center;padding:35rpx 0 36rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;
     &.mine{width:718rpx;margin:21rpx auto 0;border-radius: 20rpx;border-bottom: none;padding: 40rpx 0 40rpx 32rpx;}
 
     .info{width:530rpx;
