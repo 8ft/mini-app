@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "popup": "/components/common/popup/index",
+    "nodata":"/components/common/nodata/index",
+    "list-item": "/components/common/listItem/index",
+    "expert-card":"/components/expert/card/index",
+    "city":"/components/common/city/index"
+  }
+}

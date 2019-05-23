@@ -5,8 +5,8 @@
       <navigator class="back" open-type="navigateBack" hover-class="none">
         <text class="iconfont icon-fanhui" open-type="navigateBack" hover-class="none"></text>
       </navigator>
-      <navigator class="home" open-type="reLaunch" hover-class="none" url="/pages/project/index">
-        <text class="iconfont icon-xiaochengxufangzi" open-type="reLaunch" hover-class="none" url="/pages/project/index"></text>
+      <navigator class="home" open-type="reLaunch" hover-class="none" url="/pages/home/index">
+        <text class="iconfont icon-xiaochengxufangzi" open-type="reLaunch" hover-class="none" url="/pages/home/index"></text>
       </navigator>
     </view>
 

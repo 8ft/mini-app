@@ -11,19 +11,19 @@
     <image mode="aspectFill" src="/assets/img/icon/xm@3x.png"></image>
     <text>项目</text>
   </navigator>
-  <navigator url='/packageProject/pages/list/index?type=0' hover-class="none">
+  <navigator url='/pages/blogList/index?type=0' hover-class="none">
     <image mode="aspectFill" src="/assets/img/icon/bk@3x.png"></image>
     <text>博客</text>
   </navigator>
-  <navigator url='/packageProject/pages/list/index?type=1' hover-class="none">
+  <navigator url='/pages/qaList/index' hover-class="none">
     <image mode="aspectFill" src="/assets/img/icon/wd@3x.png"></image>
     <text>问答</text>
   </navigator>
-  <navigator url='/packageProject/pages/list/index?type=2' hover-class="none">
+  <navigator url='/pages/expertList/index' hover-class="none">
     <image mode="aspectFill" src="/assets/img/icon/rc@3x.png"></image>
     <text>人才库</text>
   </navigator>
-  <navigator url='/packageProject/pages/list/index?type=3' hover-class="none">
+  <navigator url='/pages/serviceList/index' hover-class="none">
     <image mode="aspectFill" src="/assets/img/icon/fw@3x.png"></image>
     <text>服务</text>
   </navigator>
@@ -34,11 +34,8 @@
   <view class="name">快报</view>
 
   <swiper bindchange="onBroadcastChange" duration="600" circular="{{true}}" vertical="{{true}}" autoplay="{{true}}" interval="{{3000}}">
-    <swiper-item >
-      XXXX<text>申请</text>微信小程序开发<text>成功，赚取赏金</text>￥1000元
-    </swiper-item>
-    <swiper-item >
-      XXXX<text>申请</text>微信小程序开发<text>成功，赚取赏金</text>￥1000元
+    <swiper-item wx:for="{{broadcastData}}" wx:key="{{item.id}}">
+        {{item.nickName}}<text>{{item.action}}</text>{{item.businessName}}<text>，{{item.result}}</text>{{item.businessFee}}
     </swiper-item>
   </swiper>
 </view>
@@ -46,7 +43,7 @@
 <view class="part">
    <view class='title'>
     <text>博客</text>
-    <navigator class='arrow-right' url="/packageBlog/pages/list/index?id=&index=0" hover-class="none">更多</navigator>
+    <navigator class='arrow-right' url="/pages/blogList/index?id=&index=0" hover-class="none">更多</navigator>
   </view>
 </view>
 <scroll-view class='blogs' scroll-x="true">
@@ -57,7 +54,7 @@
 <view class="part" style="border-bottom:15rpx solid #F2F2F2;">
    <view class='title'>
     <text>问答</text>
-    <navigator class='arrow-right' url="/packageBlog/pages/list/index?id=&index=0" hover-class="none">更多</navigator>
+    <navigator class='arrow-right' url="/pages/qaList/index" hover-class="none">更多</navigator>
   </view>
   <qa-card wx:for="{{qas}}" appearance="default" custom-class="reset-qa-card" data="{{item}}"></qa-card>
 </view>

@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "qa-card":"/components/qa/card/index",
+    "popup": "/components/common/popup/index",
+    "nodata":"/components/common/nodata/index",
+    "list-item": "/components/common/listItem/index"
+  }
+}

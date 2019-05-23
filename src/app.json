@@ -1,13 +1,17 @@
 {
   "pages": [
-    "pages/project/index",
+    "pages/home/index",
     "pages/work/index",
     "pages/publish/index",
     "pages/mine/index",
     "pages/user/wxLogin/index",
     "pages/user/bind/index",
     "pages/discover/index",
-    "pages/webview/index"
+    "pages/webview/index",
+    "pages/qaList/index",
+    "pages/expertList/index",
+    "pages/blogList/index",
+    "pages/serviceList/index"
   ],
   "subpackages": [
     {
@@ -57,7 +61,6 @@
       "root": "packageBlog",
       "name": "blog",
       "pages": [
-        "pages/list/index",
         "pages/detail/index"
       ]
     },
@@ -75,7 +78,6 @@
       "root": "packageExpert",
       "name": "expert",
       "pages": [
-        "pages/index/index",
         "pages/applicant/index",
         "pages/collection/index"
       ]
@@ -98,7 +100,7 @@
     }
   ],
   "preloadRule": {
-    "pages/project/index": {
+    "pages/home/index": {
       "network": "all",
       "packages": [
         "project"
@@ -144,8 +146,8 @@
     "selectedColor": "#000000",
     "list": [
       {
-        "text": "项目",
-        "pagePath": "pages/project/index",
+        "text": "首页",
+        "pagePath": "pages/home/index",
         "iconPath": "assets/img/tabbar/projects.png",
         "selectedIconPath": "assets/img/tabbar/projects_fill.png"
       },

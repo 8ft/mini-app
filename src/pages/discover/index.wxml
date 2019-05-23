@@ -19,7 +19,7 @@
                 </swiper-item>
             </swiper>
             <scroll-view class='types' scroll-x="true">
-                <navigator wx:for="{{types}}" url="/packageBlog/pages/list/index?id={{item.id}}&index={{index+1}}" hover-class="none">
+                <navigator wx:for="{{types}}" url="/pages/blogList/index?id={{item.id}}&index={{index+1}}" hover-class="none">
                     <view wx:if="{{item.id==='4'&&hasNew!==0}}" class="has-new"></view>
                     <image src="{{item.icon}}"></image>
                     <text>{{item.name}}</text>

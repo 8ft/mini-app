@@ -14,6 +14,7 @@ Page(app.observer({
 
   data: {
    banners:[],
+   broadcastData:null,
    blogs:[],
    qas:[],
    tabIndex:0,
@@ -74,8 +75,9 @@ Page(app.observer({
 
   async onShow(){
     this.props.stores.toRefresh.refresh('index',async(exist)=>{
-      if(this.data.blogs.length===0){
+      if(this.data.broadcastData===null){
         await this.getBanner()
+        await this.getBroadcast()
         await this.getBlogs()
         await this.getQa()
         await this.getProjects()
@@ -135,6 +137,15 @@ Page(app.observer({
           banner.iconImageUrl=banner.iconImageUrl.replace('http:','https:')
           return banner.menuType!=='view'
         })
+      })
+    }
+  },
+
+  async getBroadcast(){
+    let res = await app.request.post('/public/homeRotationInfo/getHomeRotationList')
+    if(res.code===0){
+      this.setData({
+        broadcastData:res.data
       })
     }
   },

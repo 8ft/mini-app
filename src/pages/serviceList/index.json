@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "popup": "/components/common/popup/index",
+    "nodata":"/components/common/nodata/index",
+    "list-item": "/components/common/listItem/index",
+    "service-card":"/components/service/card/index"
+  }
+}

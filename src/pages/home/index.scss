@@ -40,6 +40,7 @@ page{background:#fff;}
     }
 
     swiper{flex:1;height: 22rpx;line-height:22rpx;font-size: 20rpx;display:inline-block;color:#FC5B30;
-        text{color:#777777;margin:0 10rpx;}
+        view{overflow: hidden; text-overflow: ellipsis; white-space: nowrap;width:100%;}
+        text{display:inline;color:#777777;margin:0 10rpx;}
     }
 }

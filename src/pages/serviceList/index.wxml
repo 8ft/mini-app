@@ -1,0 +1,37 @@
+<nav-bar title="服务" bindready="getNavHeight"></nav-bar>
+
+<view class="filter-place-holder"></view>
+<view class='filter' style="top:{{navHeight}}px;">
+    <view class="filter-item {{activeFilter==='service_sortWay'?'on':''}}" data-name="service_sortWay" bindtap="selectFilter">
+        <text>{{service_sortWay.selected.text}}</text>
+        <view></view>
+    </view>
+    <view class="filter-item {{activeFilter==='service_types'?'on':''}}" data-name="service_types" bindtap="selectFilter">
+        <text>{{service_types.selected.dictName&&service_types.selected.dictName!=='不限'?service_types.selected.dictName:'服务分类'}}</text>
+        <view></view>
+    </view>
+</view>
+
+<popup active="{{activeFilter==='service_sortWay'}}" margin="{{80}}" bindhide='closePopup'>
+    <list-item wx:for="{{service_sortWay.list}}" data-item="{{item}}" data-type="service_sortWay" bindtap="filter" name="{{item.text}}" active="{{service_sortWay.selected.text===item.text}}"></list-item>
+</popup>
+<popup active="{{activeFilter==='service_types'}}" margin="{{80}}" bindhide='closePopup'>
+    <view class="job-types">
+        <view class="parent">
+            <list-item wx:for="{{service_types.list}}" data-code="{{item.dictValue}}" bindtap="scrollToServiceTypes" name="{{item.dictName}}"></list-item>
+        </view>
+        <scroll-view scroll-y="true" scroll-into-view="{{service_types.parent}}" scroll-with-animation="true">
+            <list-item data-item="{dictName:'不限',dictValue:''}" data-type="service_types" bindtap="filter" name="不限" active="{{!service_types.selected.dictValue}}"></list-item>
+            <view id="service{{item.dictValue}}" wx:for="{{service_types.list}}">
+                <list-item wx:for="{{item.dictList}}" wx:for-item="service" data-item="{{service}}" data-type="service_types" bindtap="filter" name="{{service.dictName}}" active="{{service_types.selected.dictValue===service.dictValue}}"></list-item>
+            </view>
+        </scroll-view>
+    </view>
+</popup>
+
+ <view class="services">
+    <block wx:if="{{services.list.length>0}}">
+        <service-card wx:for="{{services.list}}" data="{{item}}"></service-card>
+    </block>
+    <nodata wx:else></nodata>
+</view>
