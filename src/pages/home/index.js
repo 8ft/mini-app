@@ -135,7 +135,7 @@ Page(app.observer({
       this.setData({
         banners: res.data.filter(banner=>{
           banner.iconImageUrl=banner.iconImageUrl.replace('http:','https:')
-          return banner.menuType!=='view'
+          return banner.menuType!=='view' 
         })
       })
     }

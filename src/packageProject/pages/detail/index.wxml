@@ -2,9 +2,13 @@
 <nav-bar title="项目详情"></nav-bar>
 
 <!-- 状态栏 -->
-<block wx:if="{{!(detail.projectState==2&&detail.applyNum==0)}}">
+<!-- <block wx:if="{{!(detail.projectState==2&&detail.applyNum==0)}}">
   <project-status status="{{detail.projectState}}" character="{{character}}" remark="{{detail.remark}}"></project-status>
-</block>
+</block> -->
+
+
+  <project-status refundState="20" status="{{detail.projectState}}" character="publisher" remark="{{detail.remark}}" countDown="{{10}}"></project-status>
+
 
 <!-- 主要信息 -->
 <block wx:if="{{!inProgress}}">
@@ -93,87 +97,26 @@
 </view>
 
 
-<!-- 申请 -->
-<action-bar wx:if="{{detail.projectState==2&&character!=='publisher'}}">
-  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-  <button class='btn-two-third' bindtap='apply'>发送申请</button>
+<action-bar wx:if="{{!refundState&&actionBarBtns[detail.projectState][character]}}">
+  <button wx:if="{{actionBarBtns[detail.projectState][character].contact_small}}" class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
+  <button wx:if="{{actionBarBtns[detail.projectState][character].apply}}" class='btn-two-third' bindtap='apply'>发送申请</button>
+  <button wx:if="{{actionBarBtns[detail.projectState][character].fired}}" class='btn-two-third' bindtap="download">取消雇佣</button>
+  <button wx:if="{{actionBarBtns[detail.projectState][character].deal_with}}" class='btn-two-third' bindtap="download">立即处理</button>
+  <button wx:if="{{actionBarBtns[detail.projectState][character].firedOrPay}}" class='btn-two-third' bindtap="download">取消雇佣<text class='pay'>去付款</text></button>
+  <button wx:if="{{actionBarBtns[detail.projectState][character].submit}}" class='btn-two-third' bindtap="download">提交验收</button>
+  <button wx:if="{{actionBarBtns[detail.projectState][character].check}}" class='btn-two-third' bindtap="download">处理验收</button>
+  <button wx:if="{{actionBarBtns[detail.projectState][character].contact}}" class='btn-one' bindtap="download">联系TA</button>
+  <button wx:if="{{actionBarBtns[detail.projectState][character].edit}}" class='btn-one' bindtap="download">修改项目</button>
 </action-bar>
 
-<!-- 申请中 -->
-<action-bar wx:if="{{detail.projectState==4&&character==='applicant'}}">
-  <button class='btn-one' bindtap="download">联系TA</button>
+
+<action-bar wx:if="{{refundState&&detail.projectState!=12}}">
+  <button wx:if="{{actionBarBtns_refund[detail.refundState][character].contact_small}}" class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
+  <button wx:if="{{actionBarBtns_refund[detail.refundState][character].deal_with}}" class='btn-two-third' bindtap="download">处理退款</button>
+  <button wx:if="{{actionBarBtns_refund[detail.refundState][character].contact}}" class='btn-one' bindtap="download">联系TA</button>
 </action-bar>
 
-<!-- 项目申请未通过 -->
-<action-bar wx:if="{{detail.projectState==9&&character==='applicant'}}">
-  <button class='btn-one' bindtap="download">联系TA</button>
+<action-bar wx:if="{{refundState&&detail.projectState==12&&actionBarBtns_refund[detail.projectState][character]}}">
+  <button wx:if="{{actionBarBtns_refund[detail.refundState][character].edit}}" class='btn-one' bindtap="download">修改项目</button>
 </action-bar>
-
-<!-- 审核不通过 -->
-<action-bar wx:if="{{detail.projectState==3&&character==='publisher'}}">
-  <button class='btn-one' bindtap="download">修改项目</button>
-</action-bar>
-
-<!-- 发起雇佣 -->
-<action-bar wx:if="{{detail.projectState==5&&character==='publisher'}}">
-  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-  <button class='btn-two-third' bindtap="download">取消雇佣</button>
-</action-bar>
-
-<action-bar wx:if="{{detail.projectState==5&&character==='applicant'}}">
-  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-  <button class='btn-two-third' bindtap="download">立即处理</button>
-</action-bar>
-
-<!-- 确认合作,待付款 -->
-<action-bar  wx:if="{{detail.projectState==6&&character==='publisher'}}">
-  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-  <button class='btn-two-third' bindtap="download">取消雇佣<text class='pay'>去付款</text></button>
-</action-bar>
-
-<action-bar wx:if="{{detail.projectState==6&&character==='applicant'}}">
-  <button class='btn-one' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-</action-bar>
-
-<!-- 执行中 -->
-<action-bar wx:if="{{detail.projectState==8&&character==='publisher'}}">
-  <button class='btn-one' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-</action-bar>
-
-<action-bar wx:if="{{detail.projectState==8&&character==='applicant'}}">
-  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-  <button class='btn-two-third' bindtap="download">提交验收</button>
-</action-bar>
-
-<!-- 待验收 -->
-<action-bar wx:if="{{detail.projectState==10&&character==='publisher'}}">
-  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-  <button class='btn-two-third' bindtap="download">处理验收</button>
-</action-bar>
-
-<action-bar wx:if="{{detail.projectState==10&&character==='applicant'}}">
-  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-  <button class='btn-two-third' bindtap="download">提交验收</button>
-</action-bar>
-
-<!-- 验收不通过 -->
-<action-bar wx:if="{{detail.projectState==14&&character==='publisher'}}">
-  <button class='btn-one' bindtap="download">联系TA</button>
-</action-bar>
-
-<action-bar wx:if="{{detail.projectState==14&&character==='applicant'}}">
-  <button class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
-  <button class='btn-two-third' bindtap="download">立即处理</button>
-</action-bar>
-
-<!-- 合作完成 -->
-<action-bar wx:if="{{detail.projectState==11}}">
-  <button class='btn-one' bindtap="download">联系TA</button>
-</action-bar>
-
-<!-- 已关闭已下架 -->
-<action-bar wx:if="{{(detail.projectState==12||detail.projectState==13)&&character==='publisher'}}">
-  <button class='btn-one' bindtap="download">修改项目</button>
-</action-bar>
-
 

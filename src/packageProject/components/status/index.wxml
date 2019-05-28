@@ -1,6 +1,19 @@
-<!--components/project/status/index.wxml-->
-<view class="status {{status==13?'xiajia':''}}" wx:if="{{content[status][character]}}">
-  <view>{{content[status][character].title}}</view>
-  <text>{{status==13&&remark?remark:content[status][character].desc}}</text> 
+<view class="status {{status==13?'xiajia':''}}" wx:if="{{!refundState&&content[status][character]}}">
+  <view class="status-name">{{content[status][character].title}}</view>
+  <text class="status-desc">{{status==13&&remark?remark:content[status][character].desc}}</text> 
   <image src="../../assets/img/{{content[status][character].img}}.png"></image>
+</view>
+
+
+<view class="status" wx:if="{{refundState&&refundContent[refundState][character]}}">
+  <view class="status-name">{{refundContent[refundState][character].title}}
+    <block wx:if="{{refundState==20}}">
+        <view class="iconfont icon-shijian"></view>
+        <view class="countdown">退款倒计时：{{countDown}}</view>
+    </block>
+  </view>
+  <text class="status-desc">{{refundContent[refundState][character].desc}}</text> 
+  <text class="deal-with" wx:if="{{refundState==22&&character==='publisher'}}" bindtap="_download">前往处理></text>
+  <text class="deal-with" wx:if="{{refundState==33}}" bindtap="_download">查看结果>></text>
+  <image wx:if="{{refundContent[refundState][character].img}}" src="../../assets/img/{{refundContent[refundState][character].img}}.png"></image>
 </view>

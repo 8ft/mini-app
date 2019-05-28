@@ -6,6 +6,10 @@ Component({
       type:String,
       value:''
     },
+    refundState:{
+      type:String,
+      value:''
+    },
     character: {
       type: String,
       value: ''
@@ -13,6 +17,15 @@ Component({
     remark: {
       type: String,
       value: ''
+    },
+    countDown:{
+      type: Number,
+      value: 0,
+      observer(newVal, oldVal, changedPath) {
+        if(newVal>0){
+          this._countDown()
+        }
+      }
     }
   },
 
@@ -111,10 +124,91 @@ Component({
           img: 'zmzj'
         }
       }
+    },
+
+    //售后退款
+    refundContent:{
+      '20':{//退款中
+        'publisher': {
+          title: '退款中',
+          desc: '您已申请退款，等待专家处理',
+          img: ''
+        },
+        'applicant': {
+          title: '退款中',
+          desc: '项目方发起退款申请，若3天未处理将自动退款',
+          img: ''
+        }
+      },
+      '22':{//拒绝退款
+        'publisher': {
+          title: '专家拒绝退款',
+          desc: '您可以发起申诉获得帮助',
+          img: ''
+        },
+        'applicant': {
+          title: '拒绝退款',
+          desc: '您已拒绝项目方退款申请',
+          img: ''
+        }
+      },
+      '23':{//已退款（到账）
+        'publisher': {
+          title: '已关闭',
+          desc: '交易结束，平台已完成退款',
+          img: 'zxz'
+        },
+        'applicant': {
+          title: '已关闭',
+          desc: '交易结束，平台已完成退款',
+          img: 'zxz'
+        }
+      },
+      '30':{//申诉中
+        'publisher': {
+          title: '申诉中',
+          desc: '您已发起申诉，平台将在1-2个工作日内与您联系，请保持手机通畅！',
+          img: ''
+        }
+      },
+      '32':{//申诉中
+        'publisher': {
+          title: '驳回',
+          desc: '您发起的申述由于部分原因已被驳回',
+          img: ''
+        }
+      },
+      '33':{//申述已退款（到账）
+        'publisher': {
+          title: '已关闭',
+          desc: '您项目遇到的问题平台已处理',
+          img: 'zxz'
+        },
+        'applicant': {
+          title: '已关闭',
+          desc: '您项目遇到的问题平台已处理',
+          img: 'zxz'
+        }
+      }
     }
   },
 
   methods: {
+    _download () {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请前往应用市场搜索下载"巨牛汇APP"进行后续操作',
+        showCancel: false,
+        confirmText: '知道了'
+      })
+    },
 
+    _countDown(){
+      setTimeout(() => {
+          this.setData({
+            countDown:this.properties.countDown-1
+          })
+      }, 1000);
+    }
   }
 })
