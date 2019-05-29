@@ -23,7 +23,9 @@ Component({
       value: 0,
       observer(newVal, oldVal, changedPath) {
         if(newVal>0){
-          this._countDown()
+          this._countDown(newVal)
+        }else if(newVal===0){
+          this.triggerEvent('timeout')
         }
       }
     }
@@ -203,10 +205,17 @@ Component({
       })
     },
 
-    _countDown(){
+    _countDown(val){
       setTimeout(() => {
+          let newCountDown=val-1
+          let day=Math.floor(newCountDown/86400)
+          let hour=Math.floor(newCountDown%86400/3600)
+          let minute=Math.floor(newCountDown%86400%3600/60)
+
+          let str=`${day>0?day+'天':''}${hour>0?hour+'小时':''}${minute>0?minute+'分钟':''}`
           this.setData({
-            countDown:this.properties.countDown-1
+            countDown:newCountDown,
+            countDownFormat:str
           })
       }, 1000);
     }

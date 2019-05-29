@@ -92,6 +92,7 @@ Page({
     res.data.acceptanceTime = res.data.acceptanceTime.slice(0, -3).replace(/-/g, '.')
     res.data.acceptancePayTime = res.data.acceptancePayTime.slice(0, -3).replace(/-/g, '.')
 
+    res.data.businessState=20
     this.setData({
       detail: res.data,
       progress: progress[res.data.businessState] >= 0 ? progress[res.data.businessState] : -1

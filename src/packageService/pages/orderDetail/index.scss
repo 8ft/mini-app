@@ -44,9 +44,9 @@
 
 .status-done{background-image: linear-gradient(to right , #0D70FF, #5D9FFF);padding:30rpx;color:#fff;
     .info{font-size: 26rpx;line-height:74rpx;
-        text{font-size: 41rpx;}
+        .status-name{font-size: 41rpx;}
         text.iconfont{font-size: 26rpx;}
-        navigator{display:inline;color:#FFF000;}
+        .next{display:inline;color:#FFF000;}
     }
 }
 

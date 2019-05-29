@@ -7,7 +7,7 @@
 </block> -->
 
 
-  <project-status refundState="20" status="{{detail.projectState}}" character="publisher" remark="{{detail.remark}}" countDown="{{10}}"></project-status>
+  <project-status refundState="20" status="{{detail.projectState}}" character="publisher" remark="{{detail.remark}}" countDown="{{100000}}" bindtimeout="onTimeout"></project-status>
 
 
 <!-- 主要信息 -->

@@ -232,8 +232,7 @@ Page(app.observer({
         name: '全部标签',
         articleNum: blogInfo.data.articleNum,
         id: ''
-      },
-      loading:false
+      }
     })
 
     if (this.data.nodataHeight === 0) {

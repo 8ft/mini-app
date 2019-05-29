@@ -237,6 +237,11 @@ Page(app.observer({
     this.getDetail()
   },
 
+  onTimeout(){
+    this.props.stores.toRefresh.add('work')
+    this.getDetail()
+  },
+
   async getDetail() {
     let res = await app.request.post('/project/projectInfo/detail', {
       projectNo: this.data.no

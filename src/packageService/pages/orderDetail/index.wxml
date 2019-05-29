@@ -28,8 +28,9 @@
     </block>
     <block wx:if="{{detail.businessState===3}}">
         <view class="info">如果已收到服务，且对服务满意，你可以确认验收平台将打款给卖家。</view>
-        <view class="info">如果对本次服务不满意请与卖家协商解决，若有问题可申请 退款。</view>
+        <view class="info">如果对本次服务不满意请与卖家协商解决，若有问题可申请退款。</view>
     </block>
+    
 
     <view class="actions">
         <button class="action" data-action="delete" bindtap="update" wx:if="{{activeActions[detail.businessState].delete}}">删除</button>
@@ -42,12 +43,15 @@
 </view>
 
 <view wx:else class="status-done">
-    <view class="info">当前订单状态：<text>{{detail.businessStateName}}</text></view>
-    <view class="info" wx:if="{{detail.businessState===5}}">已关闭交易,<navigator open-type="reLaunch" hover-class="none" url="/pages/discover/index?page=3">点击选择其他心仪服务<text class="iconfont icon-xiayiye"></text></navigator></view>
+    <view class="info">当前订单状态：<text class="status-name">{{detail.businessStateName}}</text></view>
+    <view class="info" wx:if="{{detail.businessState===5}}">已关闭交易,<navigator class="next" open-type="reLaunch" hover-class="none" url="/pages/discover/index?page=3">点击选择其他心仪服务<text class="iconfont icon-xiayiye"></text></navigator></view>
     <view class="info" wx:if="{{detail.businessState===4}}">交易成功，平台已完成打款。 </view>
     <view class="info" wx:if="{{detail.businessState===10}}">请与卖家协商处理本次退款，若无法解决可拨打客服电话：0592-2226199或联系在线客服。</view>
-    <view class="info" wx:if="{{detail.businessState===12}}">若对该订单有疑问，可拨打客服电话：0592-2226199寻求更多帮助或联系在线客服。 </view>
-    <view class="info" wx:if="{{detail.businessState===11}}">交易结束，平台已完成退款。</view>
+    <view class="info" wx:if="{{detail.businessState===12}}">若对该订单有疑问，可拨打客服电话：0592-2226199寻求更多帮助或通过申诉通道获得帮助。  </view>
+    <view class="info" wx:if="{{detail.businessState===11||detail.businessState===21}}">交易结束，平台已完成退款。</view>
+
+    <view class="info" wx:if="{{detail.businessState===20}}">您已发起申诉，平台将在1-2个工作日内与您联系，请保持手机通畅！<text class="next" bindtap="download">查看详情<text class="iconfont icon-xiayiye"></text></text></view>
+    <view class="info" wx:if="{{detail.businessState===22}}">您发起的申述由于部分原因已被驳回<text class="next" bindtap="download">立即处理<text class="iconfont icon-xiayiye"></text></text></view>
 </view>
 
 <view class="order-infos refund" wx:if="{{detail.refundState!==0}}">
@@ -73,6 +77,7 @@
     </view>
     <view class="info action-bar" wx:if="{{detail.refundState===10||detail.refundState===12}}">
         <button class="action" bindtap="download">联系客服</button>
+        <button class="action" wx:if="{{detail.refundState===12}}" bindtap="download">发起申述</button>
     </view>
 </view>
 

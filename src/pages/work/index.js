@@ -141,7 +141,7 @@ Page(app.observer({
     const index = e.currentTarget.dataset.index
     if(this.data.tabIndex===0){
       this.setData({
-        'myPublish.currentState':index
+        'myPublish.currentState':index,
       })
     }else{
       this.setData({
@@ -152,11 +152,12 @@ Page(app.observer({
   },
 
   async getMyPublish(){
+    let myPublish = this.data.myPublish
+    if (myPublish.nomore || !this.props.stores.account.logged_in) return 
+
     this.setData({
       loading:true
     })
-    let myPublish = this.data.myPublish
-    if (myPublish.nomore || !this.props.stores.account.logged_in) return 
     let res = await app.request.post('/project/projectInfo/myProjectList', {
       relationType:'1|3',
       projectState: myPublish.states[myPublish.currentState].dictValue,
@@ -168,9 +169,7 @@ Page(app.observer({
     if (res.data.count > myPublish.pageIndex*this.data.pageSize){
       myPublish.pageIndex++
     }else{
-      this.setData({
-        'myPublish.nomore':true
-      })
+      myPublish.nomore=true
     }
 
     this.setData({
@@ -182,23 +181,27 @@ Page(app.observer({
         }
         return project
       })),
+      'myPublish.nomore':myPublish.nomore,
       loading:false
     })
   },
 
   async getMyApply(){
+    let myApply = this.data.myApply
+    if (myApply.nomore || !this.props.stores.account.logged_in) return
     this.setData({
       loading: true
     })
-    let myApply = this.data.myApply
-    if (myApply.nomore || !this.props.stores.account.logged_in) return
     let res = await app.request.post('/project/projectInfo/myProjectList', {
       relationType: 2,
       projectState: myApply.states[myApply.currentState].dictValue,
       pageIndex: myApply.pageIndex,
       pageSize: this.data.pageSize
     })
-    if (res.code !== 0) return
+    if (res.code !== 0) {
+      this.setData({ loading: true })
+      return
+    }
 
     if (res.data.count > myApply.pageIndex * this.data.pageSize) {
       myApply.pageIndex++

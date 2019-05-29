@@ -57,7 +57,10 @@ Page({
       queryTab: this.data.tabIndex,
       pageIndex: pIndex
     })
-    if (res.code !== 0) return
+    if (res.code !== 0) {
+      this.setData({ loading: true })
+      return
+    }
 
     if (res.data.page > pIndex) {
       pIndex++

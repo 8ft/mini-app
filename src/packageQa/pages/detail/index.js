@@ -271,7 +271,11 @@ Page(app.observer({
       questionId: this.data.id,
       viewNum:1
     })
-    if (detail.code !== 0) return
+    
+    if (detail.code !== 0) {
+      this.setData({ loading: false })
+      return
+    }
 
     detail.data.createTime = app.util.formatTime(detail.data.createTime, 'blogDetail')
     detail.data.skillTag = [detail.data.subTypeName].concat(detail.data.skillTag.split('|'))

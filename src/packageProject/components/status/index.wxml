@@ -9,7 +9,7 @@
   <view class="status-name">{{refundContent[refundState][character].title}}
     <block wx:if="{{refundState==20}}">
         <view class="iconfont icon-shijian"></view>
-        <view class="countdown">退款倒计时：{{countDown}}</view>
+        <view class="countdown" wx:if="{{countDownFormat}}">退款倒计时：{{countDownFormat}}</view>
     </block>
   </view>
   <text class="status-desc">{{refundContent[refundState][character].desc}}</text> 
