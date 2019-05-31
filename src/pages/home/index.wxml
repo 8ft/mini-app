@@ -1,4 +1,4 @@
-<nav-bar title="巨牛汇" returnable="{{false}}" bindready="getNavHeight"></nav-bar>
+<nav-bar title="{{hideNav?'':'巨牛汇'}}" returnable="{{false}}" transparent="{{hideNav}}" placeholder="{{false}}" bindready="getNavHeight"></nav-bar>
 
 <swiper id="banner" class="banners" wx:if="{{banners.length>0}}" indicator-dots="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" autoplay="true" circular="true">
   <swiper-item wx:for="{{banners}}" wx:for-item="banner" data-obj="{{banner}}" bindtap='bannerJump'>
@@ -35,7 +35,11 @@
 
   <swiper bindchange="onBroadcastChange" duration="600" circular="{{true}}" vertical="{{true}}" autoplay="{{true}}" interval="{{3000}}">
     <swiper-item wx:for="{{broadcastData}}" wx:key="{{item.id}}">
-        {{item.nickName}}<text>{{item.action}}</text>{{item.businessName}}<text>，{{item.result}}</text>{{item.businessFee}}
+        <text class="red">{{item.nickName}}</text>
+        <text>{{item.action}}</text>
+        <text class="red">{{item.businessName}}</text>
+        <text>，{{item.result}}</text>
+        <text class="red">{{item.businessFee}}</text>
     </swiper-item>
   </swiper>
 </view>

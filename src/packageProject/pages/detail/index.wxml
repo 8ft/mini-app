@@ -2,12 +2,9 @@
 <nav-bar title="项目详情"></nav-bar>
 
 <!-- 状态栏 -->
-<!-- <block wx:if="{{!(detail.projectState==2&&detail.applyNum==0)}}">
-  <project-status status="{{detail.projectState}}" character="{{character}}" remark="{{detail.remark}}"></project-status>
-</block> -->
-
-
-  <project-status refundState="20" status="{{detail.projectState}}" character="publisher" remark="{{detail.remark}}" countDown="{{100000}}" bindtimeout="onTimeout"></project-status>
+<block wx:if="{{!(detail.projectState==2&&detail.applyNum==0)}}">
+  <project-status status="{{detail.projectState}}" refundState="{{detail.refundState}}" character="publisher" remark="{{detail.remark}}" countDown="{{detail.refundInfo?detail.refundInfo.refundCountdown:0}}" bindtimeout="onTimeout"></project-status>
+</block>
 
 
 <!-- 主要信息 -->

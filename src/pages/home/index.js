@@ -13,8 +13,9 @@ Page(app.observer({
   },
 
   data: {
+   hideNav:true,
    banners:[],
-   broadcastData:null,
+   broadcastData:[],
    blogs:[],
    qas:[],
    tabIndex:0,
@@ -51,10 +52,21 @@ Page(app.observer({
   },
 
   onPageScroll(e) {
+    const sTop=e.scrollTop
+    if (sTop > 100 && this.data.hideNav === true) {
+      this.setData({
+        hideNav: false
+      })
+    } else if (sTop <= 100 && this.data.hideNav === false) {
+      this.setData({
+        hideNav: true
+      })
+    }
+
     const pTop=this.data.pTop
     if(!pTop)return
    
-    if(e.scrollTop>=pTop&&!this.data.unlockScroll){
+    if(sTop>=pTop&&!this.data.unlockScroll){
       this.data.unlockScroll=true
       this.setData({
         unlockScroll: true
@@ -65,7 +77,7 @@ Page(app.observer({
         duration:0
       })
 
-    }else if(e.scrollTop+10<pTop&&this.data.unlockScroll){
+    }else if(sTop+10<pTop&&this.data.unlockScroll){
       this.data.unlockScroll=false
       this.setData({
         unlockScroll: false
@@ -75,9 +87,9 @@ Page(app.observer({
 
   async onShow(){
     this.props.stores.toRefresh.refresh('index',async(exist)=>{
-      if(this.data.broadcastData===null){
+      if(this.data.broadcastData.length===0){
         await this.getBanner()
-        await this.getBroadcast()
+        this.getBroadcast()
         await this.getBlogs()
         await this.getQa()
         await this.getProjects()
@@ -142,11 +154,29 @@ Page(app.observer({
   },
 
   async getBroadcast(){
-    let res = await app.request.post('/public/homeRotationInfo/getHomeRotationList')
+    let res = await app.request.post('/public/homeRotationInfo/getHomeRotationList',{},false,true)
     if(res.code===0){
-      this.setData({
-        broadcastData:res.data
-      })
+      if(this.data.broadcastData.length===0){
+        this.setData({
+          broadcastData:res.data
+        })
+      }else{
+        this.data.broadcastData=res.data
+      }
+    }
+  },
+
+  onBroadcastChange(e){
+    const current=e.detail.current
+    const len=this.data.broadcastData.length
+    if(current>len-2){
+      this.getBroadcast()
+      setTimeout(()=>{
+        this.setData({
+          currentSwiperItem:0,
+          broadcastData:this.data.broadcastData
+        })
+      },3000)
     }
   },
 

@@ -35,12 +35,12 @@ page{background:#fff;}
 
 
 .broadcast{width:690rpx;height: 70rpx;margin:36rpx auto;background: #F8F8F8;padding:0 20rpx;display: flex;align-items: center;box-sizing:border-box;
-    .name{color:$black;font-size: 24rpx;display:inline-block;
+    .name{color:$black;font-size: 24rpx;display:inline-block;margin-right:10rpx;
         &:nth-of-type(2){background: #FC5B30;color:#fff;padding:2rpx 5rpx;font-weight: 600;border-radius: 4rpx;margin:0 10rpx;}
     }
 
-    swiper{flex:1;height: 22rpx;line-height:22rpx;font-size: 20rpx;display:inline-block;color:#FC5B30;
-        view{overflow: hidden; text-overflow: ellipsis; white-space: nowrap;width:100%;}
-        text{display:inline;color:#777777;margin:0 10rpx;}
+    swiper{flex:1;height: 22rpx;line-height:22rpx;font-size: 20rpx;display:inline-block;
+        text{display:inline-block;color:#777777;margin-right:10rpx;vertical-align: middle;}
+        .red{color:#FC5B30;max-width: 100rpx;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
     }
 }
