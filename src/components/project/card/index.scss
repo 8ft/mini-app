@@ -1,7 +1,7 @@
 @import '../../../assets/wxss/var.scss'; 
 
 .project{position:relative;display:flex;align-items:center;justify-content:center;padding:35rpx 0 36rpx;border-bottom:$border;color:$gray;background: #fff;box-sizing:border-box;
-    &.mine{width:718rpx;margin:21rpx auto 0;border-radius: 20rpx;border-bottom: none;padding: 40rpx 0 40rpx 32rpx;}
+    &.mine{width:718rpx;margin:21rpx auto 0;display:block;border-radius: 20rpx;border-bottom: none;padding: 40rpx 0 40rpx 32rpx;}
 
     .info{width:530rpx;
         .title{display:flex;width:100%; align-items: center;
@@ -16,7 +16,7 @@
         
     }
 
-    .apply{width:140rpx;text-align:center;
+    .apply{width:140rpx;text-align:center;display:block;
         button{font-size:$l;width:140rpx;height:60rpx;line-height:60rpx;background:$darkBlue;border-radius:6px;color:#fff;margin-bottom:20rpx;}
         button.myself{background:$orange;}
         .hot{font-size:$s;line-height:$s;color:#bbb;}

@@ -33,5 +33,5 @@
     <block wx:if="{{services.list.length>0}}">
         <service-card wx:for="{{services.list}}" data="{{item}}"></service-card>
     </block>
-    <nodata wx:else></nodata>
+    <nodata wx:elif="{{!loading}}"></nodata>
 </view>

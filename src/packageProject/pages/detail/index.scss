@@ -31,9 +31,9 @@
     text{color:#fc5b32;}
     &.paid::after{content:'资金担保';display:inline-block;margin-left:9rpx;width:100rpx;height:30rpx;line-height:30rpx;background:rgba(2,177,142,.1);color:#02b18e;font-size:20rpx;text-align:center;border-radius:15rpx;vertical-align:middle;}}
 
-.cooperation-info{height:110rpx;display:flex;align-items:center;
+.cooperation-info{height:110rpx;display:flex;align-items:center;margin-top:60rpx;
     .avatar{width:80rpx;height:80rpx;border-radius:50%;margin-right:12rpx;}
-    .name{font-size:$l;color:$black;line-height:$l;margin-bottom:10rpx;padding:0;}
+    .name{font-size:$l;color:$black;line-height:$l;margin-bottom:10rpx;padding:0;font-weight: 500;}
     .icon{width:84rpx;height:33rpx;}
     .right{flex:1;text-align:right;line-height:110rpx;}
     .icon-phone{width:20rpx;height:$s;margin-right:6rpx;display:inline-block;}}

@@ -9,6 +9,7 @@
                 &.icon-yishoucang{color:$red;}}}}
 
     .title{font-weight:500;font-size:34rpx;color:black;
+        image{display:inline-block;vertical-align: middle;width:24rpx;height:28rpx;margin-right:8rpx;}
         text{vertical-align: middle;}
         .reward{padding:0 15rpx;line-height:35rpx;background: #FFC034;color:#fff;border-radius:99rpx;font-size: $s;margin-right: 16rpx;font-weight: 600;vertical-align: middle;}
     }

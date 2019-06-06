@@ -96,6 +96,41 @@ Page({
       detail: res.data,
       progress: progress[res.data.businessState] >= 0 ? progress[res.data.businessState] : -1
     })
+
+    if(res.data.refundCountdown>0){
+      this.countDown(res.data.refundCountdown)
+    }
+  },
+
+  countDown(val){
+    setTimeout(() => {
+        
+        let newCountDown=val-1
+        if(newCountDown>0){
+          let day=Math.floor(newCountDown/86400)
+          let hour=Math.floor(newCountDown%86400/3600)
+          let minute=Math.floor(newCountDown%86400%3600/60)
+  
+          let str=`${day>0?day+'天':''}${hour>0?hour+'小时':''}${minute>0?minute+'分钟':''}`
+
+          let updatingData={
+            'detail.refundCountdown':newCountDown
+          }
+
+          if(this.data.countDownFormat!==str){
+            updatingData.countDownFormat=str
+          }
+          
+          this.setData(updatingData)
+          this.countDown(newCountDown)
+        }else{
+          this.setData({
+            countDownFormat:''
+          })
+          wx.setStorageSync('update_order', true)
+          this.getDetail()
+        }
+    }, 1000);
   },
 
   download: app.download

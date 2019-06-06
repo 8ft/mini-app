@@ -16,10 +16,8 @@ Page({
   },
 
   onLoad (options) {
-    const systemInfo=wx.getSystemInfoSync()
     let cache = app.globalData.publishDataCache.desc
     this.setData({
-      height: systemInfo.windowHeight * 750 / systemInfo.windowWidth - 300,
       content: cache.content.replace(/(^[\s\r\n]*)|([\s\r\n]*$)/g, ""),
       inputLen: cache.inputLen||-1,
       conLen: cache.conLen||0,
@@ -33,6 +31,14 @@ Page({
       this.data.batchNo=''
     }
     app.globalData.publishDataCache.desc = this.data
+  },
+
+  getNavHeight(e) {
+    const systemInfo = wx.getSystemInfoSync()
+    const ratio = systemInfo.windowWidth / 750
+    this.setData({
+      height: systemInfo.windowHeight - e.detail.height-300*ratio
+    })
   },
 
   input(e){

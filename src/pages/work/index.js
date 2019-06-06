@@ -1,5 +1,5 @@
 const app = getApp()
-const regeneratorRuntime=app.regeneratorRuntime
+const regeneratorRuntime = app.regeneratorRuntime
 
 
 Page(app.observer({
@@ -8,12 +8,12 @@ Page(app.observer({
   },
 
   data: {
-    swiperHeight:0,
-    tabIndex:0,
+    swiperHeight: 0,
+    tabIndex: 0,
 
-    pageSize:10,
-    loading:true,
-    myPublish:{
+    pageSize: 10,
+    loading: true,
+    myPublish: {
       states: [
         {
           dictName: '全部',
@@ -45,15 +45,15 @@ Page(app.observer({
         },
         {
           dictName: '已关闭',
-          dictValue: '12'
+          dictValue: '12|23|33'
         },
         {
           dictName: '已下架',
           dictValue: '13'
         }
       ],
-      currentState:0,
-      projects:[],
+      currentState: 0,
+      projects: [],
       pageIndex: 1,
       nomore: false
     },
@@ -80,28 +80,26 @@ Page(app.observer({
     }
   },
 
-  onShow(){
-    if(!this.props.stores.account.logged_in)return 
-    this.props.stores.toRefresh.refresh('work',(exist)=>{
-      if (this.data.swiperHeight===0){
+  onShow() {
+    this.props.stores.toRefresh.refresh('work', (exist) => {
+      if (this.data.swiperHeight === 0) {
         this.getMyPublish()
-      }else if(exist){
+      } else if (exist) {
         this.refresh()
       }
     })
   },
 
-  refresh(){
-    if(this.data.loading)return
+  refresh() {
     if (this.data.tabIndex === 0) {
-      this.data.myPublish.pageIndex=1
-      this.data.myPublish.nomore=false
-      this.data.myPublish.projects=[]
+      this.data.myPublish.pageIndex = 1
+      this.data.myPublish.nomore = false
+      this.data.myPublish.projects = []
       this.getMyPublish()
     } else {
-      this.data.myApply.pageIndex=1
-      this.data.myApply.nomore=false
-      this.data.myApply.projects=[]
+      this.data.myApply.pageIndex = 1
+      this.data.myApply.nomore = false
+      this.data.myApply.projects = []
       this.getMyApply()
     }
   },
@@ -111,8 +109,8 @@ Page(app.observer({
     const ratio = systemInfo.windowWidth / 750
     const swiperHeight = systemInfo.windowHeight - e.detail.height
     this.setData({
-      swiperHeight:swiperHeight,
-      scrollViewHeight: swiperHeight- 80 * ratio
+      swiperHeight: swiperHeight,
+      scrollViewHeight: swiperHeight - 80 * ratio
     })
   },
 
@@ -130,20 +128,20 @@ Page(app.observer({
       tabIndex: index
     })
 
-    if (index === 0 && this.data.myPublish.projects.length===0) {
+    if (index === 0 && this.data.myPublish.projects.length === 0) {
       this.getMyPublish()
-    } else if (index === 1 && this.data.myApply.projects.length===0) {
+    } else if (index === 1 && this.data.myApply.projects.length === 0) {
       this.getMyApply()
-    } 
+    }
   },
 
-  switchState(e){
+  switchState(e) {
     const index = e.currentTarget.dataset.index
-    if(this.data.tabIndex===0){
+    if (this.data.tabIndex === 0) {
       this.setData({
-        'myPublish.currentState':index,
+        'myPublish.currentState': index,
       })
-    }else{
+    } else {
       this.setData({
         'myApply.currentState': index
       })
@@ -151,42 +149,42 @@ Page(app.observer({
     this.refresh()
   },
 
-  async getMyPublish(){
+  async getMyPublish() {
     let myPublish = this.data.myPublish
-    if (myPublish.nomore || !this.props.stores.account.logged_in) return 
+    if (myPublish.nomore || !this.props.stores.account.logged_in) return
 
     this.setData({
-      loading:true
+      loading: true
     })
     let res = await app.request.post('/project/projectInfo/myProjectList', {
-      relationType:'1|3',
+      relationType: '1|3',
       projectState: myPublish.states[myPublish.currentState].dictValue,
       pageIndex: myPublish.pageIndex,
-      pageSize:this.data.pageSize
+      pageSize: this.data.pageSize
     })
-    if (res.code !== 0)return 
+    if (res.code !== 0) return
 
-    if (res.data.count > myPublish.pageIndex*this.data.pageSize){
+    if (res.data.count > myPublish.pageIndex * this.data.pageSize) {
       myPublish.pageIndex++
-    }else{
-      myPublish.nomore=true
+    } else {
+      myPublish.nomore = true
     }
 
     this.setData({
       'myPublish.pageIndex': myPublish.pageIndex,
-      'myPublish.projects':myPublish.projects.concat(res.data.list.map(project => {
+      'myPublish.projects': myPublish.projects.concat(res.data.list.map(project => {
         project.createTime = project.createTime.split(' ')[0].replace(/-/g, '.')
-        if(project.projectSkill){
+        if (project.projectSkill) {
           project.projectSkill = project.projectSkill.split('|')
         }
         return project
       })),
-      'myPublish.nomore':myPublish.nomore,
-      loading:false
+      'myPublish.nomore': myPublish.nomore,
+      loading: false
     })
   },
 
-  async getMyApply(){
+  async getMyApply() {
     let myApply = this.data.myApply
     if (myApply.nomore || !this.props.stores.account.logged_in) return
     this.setData({
@@ -215,30 +213,13 @@ Page(app.observer({
       'myApply.pageIndex': myApply.pageIndex,
       'myApply.projects': myApply.projects.concat(res.data.list.map(project => {
         project.createTime = project.createTime.split(' ')[0].replace(/-/g, '.')
-        if(project.projectSkill){
+        if (project.projectSkill) {
           project.projectSkill = project.projectSkill.split('|')
         }
         return project
       })),
-      loading:false
+      loading: false
     })
   }
-
-  ,
-  touchstart(e){
-    console.log(e)
-  }, 
-  touchend(e){
-    this.setData({
-      showLoading:true
-    })
-    setTimeout(()=>{
-      this.setData({
-        showLoading:false
-      })
-    },1000)
-    console.log(e)
-  }
-  
 
 }))

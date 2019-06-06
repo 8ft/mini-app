@@ -13,7 +13,7 @@
     <text class='read' wx:if="{{project.relationType}}">{{project.projectCycle}}完成</text>
   </view>
 
-  <badge wx:if="{{project.relationType}}" val="{{project.projectStateCn}}" bg="{{bg[project.projectState===5?(project.projectState+project.relationType):project.projectState]}}"></badge>
+  <badge wx:if="{{project.relationType}}" val="{{project.projectStateCn==='已退款'?'已关闭':project.projectStateCn}}" bg="{{bg[project.projectState===5?(project.projectState+project.relationType):project.projectState]}}"></badge>
   <view class="other-info" wx:if="{{project.relationType}}">{{project.relationType==='2'?'已申请:'+project.applyNum+'人':project.createTime+'发布'}}</view>
 
   <view class='apply' wx:if="{{!project.relationType}}">

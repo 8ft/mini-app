@@ -5,7 +5,7 @@
     scroll-view{width:100%;white-space:nowrap;overflow: hidden;}
     .tab{display:inline-block;text-align:center;font-weight:400;font-size:$l;color:$lightBlack;height:34rpx;line-height:34rpx;padding-bottom:14rpx;
         view{display: inline-block;}
-        &.active{color:$black!important;font-weight:600;font-weight: 600;font-size: 34rpx;}
+        &.active{color:$black!important;font-weight:600;font-weight: 600;font-size: 34rpx!important;}
     }
     .tab-underline{width:0;height:6rpx;background:$darkBlue;}
 

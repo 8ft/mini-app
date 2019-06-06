@@ -76,13 +76,13 @@ Page(app.observer({
   },
 
   async formSubmit (e) {
-    if (!this.data.desc) {
-      wx.showToast({
-        title: '请输入需求描述',
-        icon: 'none'
-      })
-      return
-    }
+    // if (!this.data.desc) {
+    //   wx.showToast({
+    //     title: '请输入需求描述',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
 
     let data=e.detail.value
     if(!data.phone&&!data.wechat){
@@ -123,7 +123,7 @@ Page(app.observer({
    
     let res = await app.request.post('/store/productOrderInfo/addProductOrder', {
       productId: this.data.id,
-      requirements: this.data.desc,
+      requirements: this.data.desc||'',
       deliveryDays: data.dayCost,
       price:data.price,
       linkMobile: data.phone||'',

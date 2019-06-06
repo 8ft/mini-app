@@ -183,7 +183,7 @@ Page(app.observer({
         applicant: null,
         viewer: null
       },
-      '31': {//退款申述成功（同意退款，钱未到账）
+      '31': {//退款申诉成功（同意退款，钱未到账）
         publisher: null,
         applicant: null,
         viewer: {
@@ -191,7 +191,7 @@ Page(app.observer({
           'apply': true
         }
       },
-      '32': {//退款申述失败（专家方refundState返回状态22）
+      '32': {//退款申诉失败（专家方refundState返回状态22）
         publisher: null,
         applicant: null,
         viewer: {
@@ -199,7 +199,7 @@ Page(app.observer({
           'apply': true
         }
       },
-      '33': {//申述已退款（到账）
+      '33': {//申诉已退款（到账）
         publisher: {
           'edit': true
         },
@@ -254,7 +254,7 @@ Page(app.observer({
       applyUsers = null,
       applyInfo = null,
       cooperation = null,
-      inProgress = ['5', '6', '8', '10', '11', '14'].includes(data.projectState)
+      inProgress = ['5', '6', '8', '10', '11', '14','23','33'].includes(data.projectState)
 
     if (inProgress) cooperation = await this.getCooperation(data.id)
 

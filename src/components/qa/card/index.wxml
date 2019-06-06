@@ -1,5 +1,12 @@
 <view class="qa {{appearance}} custom-class" data-url="/packageQa/pages/detail/index?id={{data.id}}&uid={{data.userId}}" bindtap="_goDetail">
-  <view class='title'><text class='reward' wx:if="{{data.rewardAmountYuan>0}}">￥{{data.rewardAmountYuan}}元</text><text>{{data.questionName}}</text></view>
+  
+  <view class='title'>
+    <image wx:if="{{appearance==='hot'}}" mode="aspectFill" src="/assets/img/icon/hot.png"></image>
+    <text class='reward' wx:if="{{data.rewardAmountYuan>0}}">￥{{data.rewardAmountYuan}}元</text><text>{{data.questionName}}</text>
+  </view>
+
+
+
   <view class="tags">
     <view class='skills'>
       <label class='type'>{{data.subTypeName}}</label>
@@ -7,6 +14,8 @@
     </view>
     <view wx:if="{{activeUI_by_status[data.questionState].status&&activeUI_by_appearance[appearance].status}}" class="status">{{data.questionStateName}}</view>
   </view>
+
+
 
   <view class="other-info" wx:if="{{!(appearance==='myQuestions'&&data.answerUsers.length===0)}}">
     <block wx:if="{{data.answerUsers.length>0}}">
@@ -27,9 +36,10 @@
     <view wx:if="{{activeUI_by_appearance[appearance].delete}}" class="del" catchtap="_delete">删除</view>
   </view>
 
+
+
    <view wx:if="{{appearance==='collection'}}" class="collect" catchtap="_collect">
       <text class="iconfont icon-{{data.collectFlag=='1'?'yishoucang':'shoucang1'}}"></text>
       {{data.collectFlag=='1'?'已收藏':'收藏'}}
     </view>
-
 </view>

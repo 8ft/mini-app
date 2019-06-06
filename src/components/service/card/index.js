@@ -1,5 +1,5 @@
 const app = getApp()
-const regeneratorRuntime=app.regeneratorRuntime
+const regeneratorRuntime = app.regeneratorRuntime
 
 const actions = {
   delete: {
@@ -35,7 +35,12 @@ Component({
       3: { refund: true, comfirm: true },//待验收
       4: { delete: true, rate: true },//已完成
       5: { delete: true },//已关闭
-      11: { delete: true }//已退款
+      11: { delete: true },//已退款
+
+      12: { appeal: true },//拒绝退款
+      20: { appealDetail: true },//退款申述中（售后退款状态）
+      21: { delete: true, appealDetail: true },//已关闭/退款申述成功（售后退款状态）
+      22: { appealDetail: true, appeal: true },//退款申述失败（售后退款状态）
     }
   },
 

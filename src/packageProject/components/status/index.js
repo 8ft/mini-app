@@ -7,8 +7,8 @@ Component({
       value:''
     },
     refundState:{
-      type:String,
-      value:''
+      type:Number,
+      value:0
     },
     character: {
       type: String,
@@ -139,7 +139,7 @@ Component({
         'applicant': {
           title: '退款中',
           desc: '项目方发起退款申请，若3天未处理将自动退款',
-          img: ''
+          img: 'tk'
         }
       },
       '22':{//拒绝退款
@@ -158,12 +158,12 @@ Component({
         'publisher': {
           title: '已关闭',
           desc: '交易结束，平台已完成退款',
-          img: 'zxz'
+          img: 'tk'
         },
         'applicant': {
           title: '已关闭',
           desc: '交易结束，平台已完成退款',
-          img: 'zxz'
+          img: ''
         }
       },
       '30':{//申诉中
@@ -177,19 +177,19 @@ Component({
         'publisher': {
           title: '驳回',
           desc: '您发起的申述由于部分原因已被驳回',
-          img: ''
+          img: 'tk'
         }
       },
-      '33':{//申述已退款（到账）
+      '33':{//申诉已退款（到账）
         'publisher': {
           title: '已关闭',
           desc: '您项目遇到的问题平台已处理',
-          img: 'zxz'
+          img: 'tk'
         },
         'applicant': {
           title: '已关闭',
           desc: '您项目遇到的问题平台已处理',
-          img: 'zxz'
+          img: ''
         }
       }
     }

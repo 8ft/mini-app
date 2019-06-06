@@ -1,7 +1,7 @@
-<nav-bar title="项目描述"></nav-bar>
+<nav-bar title="项目描述" bindready="getNavHeight"></nav-bar>
 
 <view class="desc">
-  <textarea maxlength="{{inputLen}}" disabled="{{demoShow}}" bindinput="input" value="{{content}}" style="height:{{height}}rpx;"></textarea>
+  <textarea maxlength="{{inputLen}}" disabled="{{demoShow}}" bindinput="input" value="{{content}}" style="height:{{height}}px;"></textarea>
   <text class='placeholder' wx:if="{{content.length<=0}}">详细描述你的项目需求以及对人员的期望，让专家更全面了解你的需求。(50-5000字之间)\n例如：\n1、项目描述\n2、主要功能点\n3、参考产品\n4、人员要求\n5、如需补充说明可以添加3张图片</text>
 </view>
 

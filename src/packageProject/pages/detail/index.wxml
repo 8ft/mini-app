@@ -3,7 +3,7 @@
 
 <!-- 状态栏 -->
 <block wx:if="{{!(detail.projectState==2&&detail.applyNum==0)}}">
-  <project-status status="{{detail.projectState}}" refundState="{{detail.refundState}}" character="publisher" remark="{{detail.remark}}" countDown="{{detail.refundInfo?detail.refundInfo.refundCountdown:0}}" bindtimeout="onTimeout"></project-status>
+  <project-status status="{{detail.projectState}}" refundState="{{detail.refundState}}" character="{{character}}" remark="{{detail.remark}}" countDown="{{detail.refundInfo?detail.refundInfo.refundCountdown:0}}" bindtimeout="onTimeout"></project-status>
 </block>
 
 
@@ -94,7 +94,7 @@
 </view>
 
 
-<action-bar wx:if="{{!refundState&&actionBarBtns[detail.projectState][character]}}">
+<action-bar wx:if="{{detail.refundState<=0&&actionBarBtns[detail.projectState][character]}}">
   <button wx:if="{{actionBarBtns[detail.projectState][character].contact_small}}" class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
   <button wx:if="{{actionBarBtns[detail.projectState][character].apply}}" class='btn-two-third' bindtap='apply'>发送申请</button>
   <button wx:if="{{actionBarBtns[detail.projectState][character].fired}}" class='btn-two-third' bindtap="download">取消雇佣</button>
@@ -107,13 +107,13 @@
 </action-bar>
 
 
-<action-bar wx:if="{{refundState&&detail.projectState!=12}}">
+<action-bar wx:if="{{detail.refundState>0&&detail.projectState<23}}">
   <button wx:if="{{actionBarBtns_refund[detail.refundState][character].contact_small}}" class='btn-one-third white' bindtap="download"><text class='iconfont icon-lianxi'></text>联系TA</button>
   <button wx:if="{{actionBarBtns_refund[detail.refundState][character].deal_with}}" class='btn-two-third' bindtap="download">处理退款</button>
   <button wx:if="{{actionBarBtns_refund[detail.refundState][character].contact}}" class='btn-one' bindtap="download">联系TA</button>
 </action-bar>
 
-<action-bar wx:if="{{refundState&&detail.projectState==12&&actionBarBtns_refund[detail.projectState][character]}}">
+<action-bar wx:if="{{detail.refundState>0&&detail.projectState==12&&actionBarBtns_refund[detail.projectState][character]}}">
   <button wx:if="{{actionBarBtns_refund[detail.refundState][character].edit}}" class='btn-one' bindtap="download">修改项目</button>
 </action-bar>
 

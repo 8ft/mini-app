@@ -33,7 +33,7 @@
   <view class="name">巨牛汇</view>
   <view class="name">快报</view>
 
-  <swiper bindchange="onBroadcastChange" duration="600" circular="{{true}}" vertical="{{true}}" autoplay="{{true}}" interval="{{3000}}">
+  <swiper bindchange="onBroadcastChange" duration="600" circular="{{true}}" vertical="{{true}}" autoplay="{{autoplay}}" interval="{{3000}}">
     <swiper-item wx:for="{{broadcastData}}" wx:key="{{item.id}}">
         <text class="red">{{item.nickName}}</text>
         <text>{{item.action}}</text>
@@ -60,12 +60,12 @@
     <text>问答</text>
     <navigator class='arrow-right' url="/pages/qaList/index" hover-class="none">更多</navigator>
   </view>
-  <qa-card wx:for="{{qas}}" appearance="default" custom-class="reset-qa-card" data="{{item}}"></qa-card>
+  <qa-card wx:for="{{qas}}" appearance="hot" custom-class="reset-qa-card" data="{{item}}"></qa-card>
 </view>
 
 
 <view id="projectTags" class="projectTags">
-  <tabs under-line-ratio="{{.5}}" tabs="{{['全部','开发','设计','文案/运营','产品']}}" active="{{tabIndex}}" bindchange="onSwiperChange"></tabs>
+  <tabs under-line-ratio="{{.5}}" tabs="{{types}}" active="{{tabIndex}}" bindchange="onSwiperChange"></tabs>
   <navigator class='arrow-right' url='/packageProject/pages/list/index' hover-class="none">更多</navigator>
 </view>
 

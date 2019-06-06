@@ -16,10 +16,11 @@ Page(app.observer({
    hideNav:true,
    banners:[],
    broadcastData:[],
+   autoplay:true,
    blogs:[],
    qas:[],
    tabIndex:0,
-   types: ['全部','开发','设计','市场运营','产品'],
+   types: ['全部','开发','设计','市场/运营','产品'],
    projects:[
     {
       code:'',
@@ -37,7 +38,7 @@ Page(app.observer({
       pageIndex: 1,
       nomore: false
     },{
-      code:'0301|0302',
+      code:'03',
       list: [],
       pageIndex: 1,
       nomore: false
@@ -89,7 +90,7 @@ Page(app.observer({
     this.props.stores.toRefresh.refresh('index',async(exist)=>{
       if(this.data.broadcastData.length===0){
         await this.getBanner()
-        this.getBroadcast()
+        await this.getBroadcast()
         await this.getBlogs()
         await this.getQa()
         await this.getProjects()
@@ -97,6 +98,12 @@ Page(app.observer({
         this.refresh()
       }
     })
+  },
+
+  onHide(){
+   this.setData({
+    autoplay:false
+   })
   },
 
   onPullDownRefresh(){
@@ -116,7 +123,7 @@ Page(app.observer({
   },
 
   onSwiperChange(e) {
-    const index=e.detail.current||e.detail.index
+    const index=e.detail.current===undefined?e.detail.index:e.detail.current
     if (index === this.data.tabIndex) return
 
     this.setData({
@@ -163,6 +170,12 @@ Page(app.observer({
       }else{
         this.data.broadcastData=res.data
       }
+
+      if(!this.data.autoplay){
+        this.setData({
+          autoplay:true
+         })
+      }
     }
   },
 
@@ -171,7 +184,7 @@ Page(app.observer({
     const len=this.data.broadcastData.length
     if(current>len-2){
       this.getBroadcast()
-      setTimeout(()=>{
+      this.timeout=setTimeout(()=>{
         this.setData({
           currentSwiperItem:0,
           broadcastData:this.data.broadcastData

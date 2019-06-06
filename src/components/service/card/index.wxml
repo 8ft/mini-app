@@ -56,8 +56,8 @@
       <button class="action" data-url="/packageService/pages/refund/index?id={{data.id}}" catchtap="_jump" wx:if="{{activeActions[data.businessState].refund}}">申请退款</button>
       <button class="action" data-url="/packageService/pages/rate/index?id={{data.id}}" catchtap="_jump" wx:if="{{activeActions[data.businessState].rate&&!data.appraiseFlag}}">评价</button>
       <button class="action" data-action="comfirm" catchtap="_update" wx:if="{{activeActions[data.businessState].comfirm}}">确认验收</button>
-      <button class="action" catchtap="_download" wx:if="{{data.businessState==12}}">发起申述</button>
-      <button class="action" catchtap="_download" wx:if="{{data.businessState==20}}">申述详情</button>
+      <button class="action" catchtap="_download" wx:if="{{activeActions[data.businessState].appeal}}">发起申诉</button>
+      <button class="action" catchtap="_download" wx:if="{{activeActions[data.businessState].appealDetail}}">申诉详情</button>
     </view>
 </navigator>
 
