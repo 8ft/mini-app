@@ -84,6 +84,7 @@ Page({
 
     res.data.refundRejectTime = res.data.refundRejectTime.slice(0, -3).replace(/-/g, '.')
     res.data.refundApplyTime = res.data.refundApplyTime.slice(0, -3).replace(/-/g, '.')
+    res.data.refundComplainInfo.updateTime = res.data.refundComplainInfo.updateTime.slice(0, -3).replace(/-/g, '.')
     res.data.refundTime = res.data.refundTime.slice(0, -3).replace(/-/g, '.')
     res.data.createTime = res.data.createTime.slice(0, -3).replace(/-/g, '.')
     res.data.cancelTime = res.data.cancelTime.slice(0, -3).replace(/-/g, '.')

@@ -158,7 +158,7 @@ Component({
         'publisher': {
           title: '已关闭',
           desc: '交易结束，平台已完成退款',
-          img: 'tk'
+          img: ''
         },
         'applicant': {
           title: '已关闭',

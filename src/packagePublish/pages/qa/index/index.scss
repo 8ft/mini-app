@@ -31,4 +31,8 @@ page{background:#fff;}
         &:nth-of-type(4n){margin-right: 0;}
         &.selected{color:#fff;background: $darkBlue;border-color:$darkBlue;}
     }
+    input{position:relative;font-size:$m;display: inline-block;width:153rpx;height:61rpx;line-height: 61rpx;border:1px solid #CDCDCD;box-sizing:border-box;padding:0 10rpx 0 40rpx; vertical-align: middle;
+        &::before{content: '￥';position: absolute;width:40rpx;line-height:61rpx;text-align: center;left:0;top:0;}
+    
+    }
 }

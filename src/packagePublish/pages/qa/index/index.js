@@ -12,6 +12,7 @@ Page(app.observer({
 
     reward:0,
     selectedReward:0,
+    showInput:false,
     rewards:[0,5,10,15,20,50,100,200],
     selectedTags:[]
   },
@@ -106,8 +107,28 @@ Page(app.observer({
     const val=e.currentTarget.dataset.val
     if(val===this.data.selectedReward)return
     this.setData({
-      selectedReward:val
+      selectedReward:val,
+      showInput:false
     })
+  },
+
+  showInput(){
+    if(this.data.showInput)return
+    this.setData({
+      selectedReward:'',
+      showInput:true
+    })
+  },
+
+  input (e) {
+    let val = parseInt(e.detail.value)
+    if(val<1){
+      return ''
+    }else{
+      this.setData({
+        selectedReward:val
+      })
+    }
   },
 
   setReward(){
@@ -118,7 +139,6 @@ Page(app.observer({
   },
 
   selectTag(e){
-    
     const index=e.currentTarget.dataset.index
     const val=this.data.objectMultiArray[1][this.data.multiIndex[1]].dictValue
 

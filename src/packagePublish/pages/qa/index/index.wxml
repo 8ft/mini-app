@@ -39,6 +39,8 @@
     <view class="title">悬赏能快速解决问题</view>
     <view class="tip">由你选出最佳答案，答题者获得相应的报酬</view>
     <text class="{{selectedReward===item?'selected':''}}" wx:for="{{rewards}}" data-val="{{item}}" bindtap="selectReward">￥{{item}}</text>
+    <text class="{{showInput?'selected':''}}" bindtap="showInput">自定义</text>
+    <input wx:if="{{showInput}}" focus="{{showInput}}" type="number" maxlength='4' bindinput="input"></input>
     <view class="iconfont icon-guanbi1" bindtap="closeRewardBox"></view>
   </view>
   <action-bar position="absolute">
