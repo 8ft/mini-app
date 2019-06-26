@@ -3,7 +3,17 @@ Component({
     addGlobalClass: true,
   },
   properties: {
-    tabs: Array,
+    tabs: {
+      type: Array,
+      value:[],
+      observer(newVal, oldVal, changedPath) {
+        if(newVal.indexOf('问答')>-1){
+          this.setData({
+            showNew:!wx.getStorageSync('hideNew')
+          })
+        }
+      }
+    },
     active: {
       type: Number,
       value: -1,
@@ -55,9 +65,14 @@ Component({
     _tabClick(e) {
       let index = e.currentTarget.dataset.index
       if (index !== this.data.active) {
-        this.setData({
+        let data={
           active: index
-        })
+        }
+        if(this.data.showNew){
+          data.showNew=false
+          wx.setStorageSync('hideNew',true)
+        }
+        this.setData(data)
         this.triggerEvent('change', { index: index })
       }
     },

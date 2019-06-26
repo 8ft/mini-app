@@ -121,14 +121,25 @@ Page(app.observer({
   },
 
   input (e) {
-    let val = parseInt(e.detail.value)
-    if(val<1){
-      return ''
-    }else{
-      this.setData({
-        selectedReward:val
-      })
+    let val=e.detail.value
+    if(val==='')return
+
+    if(val<1||!/^\d/.test(val)){
+      val=''
+    }else if(val>=10000){
+      val=this.data.selectedReward
+    }else if(/\./.test(val)){
+      let len=val.match(/\./g).length
+      if(len>1||val.split('.')[1].length>2){
+        val=this.data.selectedReward
+      }
     }
+
+    this.setData({
+      selectedReward:val
+    })
+
+    return val
   },
 
   setReward(){

@@ -3,8 +3,9 @@
 .tabs{width:100%;border-bottom:$border;background:#fff;position: relative;
     &.fixed{position:fixed;top:0;left:0;right:0;z-index:$topFloor;}
     scroll-view{width:100%;white-space:nowrap;overflow: hidden;}
-    .tab{display:inline-block;text-align:center;font-weight:400;font-size:$l;color:$lightBlack;height:34rpx;line-height:34rpx;padding-bottom:14rpx;
-        view{display: inline-block;}
+    .tab{display:inline-block;text-align:center;font-weight:400;font-size:$l;color:$lightBlack;height:34rpx;line-height:34rpx;padding:10rpx 0 14rpx;
+        view{display: inline-block;position: relative;}
+        .new{position:absolute;top:-7rpx;right:-25rpx;width:27rpx;line-height: 27rpx;color:#fff;background: #FC5B31;border-radius:99rpx 99rpx 99rpx 0;font-size: $s;text-align: center;}
         &.active{color:$black!important;font-weight:600;font-weight: 600;font-size: 34rpx!important;}
     }
     .tab-underline{width:0;height:6rpx;background:$darkBlue;}
